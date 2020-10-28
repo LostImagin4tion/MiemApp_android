@@ -46,7 +46,7 @@ dependencies {
     implementation("com.google.android.material:material:1.2.1")
     implementation("androidx.constraintlayout:constraintlayout:2.0.2")
     testImplementation("junit:junit:4.13.1")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
+    androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
     // MoxyX
@@ -80,5 +80,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.8.1")
     implementation("com.squareup.retrofit2:converter-gson:2.8.1")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+
+    // Google Auth
+    implementation("com.google.android.gms:play-services-auth:18.1.0")
 
 }

@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">MIEMApp</string>
+    <string name="app_name">MIEM App</string>
+
+    <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
+
+    <string name="login_button_text">Login with Google</string>
+    <string name="login_error">An error occurred during login</string>
 </resources>
