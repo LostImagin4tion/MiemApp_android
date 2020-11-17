@@ -75,6 +75,7 @@ class DataModule {
                 request()
                     .newBuilder()
                     .addHeader("Connection", "close")
+                    .addHeader("User-Agent", "Miem App") // used on sever side
                     .build()
             )
         }
