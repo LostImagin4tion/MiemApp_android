@@ -1,7 +1,7 @@
 package ru.hse.miem.miemapp.domain.repositories
 
-import io.reactivex.Single
+import io.reactivex.Completable
 
 interface IAuthRepository {
-    fun auth(authCode: String): Single<String>
+    fun auth(authCode: String): Completable
 }

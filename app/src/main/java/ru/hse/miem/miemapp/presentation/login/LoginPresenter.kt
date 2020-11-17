@@ -28,13 +28,8 @@ class LoginPresenter @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = {
-                    Log.i("Auth", it)
-                    viewState.navigateToMainScreen()
-                },
-                onError = {
-                    Log.e("Auth", it.stackTraceToString())
-                }
+                onComplete = viewState::afterLogin,
+                onError = { Log.e("Auth", it.stackTraceToString()) }
             )
         compositeDisposable.add(disposable)
     }

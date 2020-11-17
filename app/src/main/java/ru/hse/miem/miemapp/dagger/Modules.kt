@@ -15,6 +15,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.repositories.AuthRepository
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
@@ -69,16 +70,21 @@ class DataModule {
             .build()
 
     @Provides
-    fun provideInterceptor() = Interceptor {
+    fun provideInterceptor(session: Session) = Interceptor {
         it.run {
             proceed(
                 request()
                     .newBuilder()
                     .addHeader("Connection", "close")
                     .addHeader("User-Agent", "Miem App") // used on sever side
+                    .addHeader("x-auth-token", session.token)
                     .build()
             )
         }
     }
+
+    @Provides
+    @Singleton
+    fun provideSession() = Session()
 
 }

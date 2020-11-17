@@ -58,11 +58,8 @@ class LoginFragment : MvpAppCompatFragment(), LoginView {
         }
     }
 
-    override fun navigateToMainScreen() {
-        (activity as MainActivity).let {
-            it.supportFragmentManager.popBackStack()
-            // it.setupBottomNavigationBar()
-        }
+    override fun afterLogin() {
+        (activity as MainActivity).afterLogin()
     }
 
     override fun login() {

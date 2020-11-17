@@ -11,7 +11,7 @@ interface LoginView : MvpView {
     fun login()
 
     @StateStrategyType(OneExecutionStateStrategy::class)
-    fun navigateToMainScreen()
+    fun afterLogin()
 
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun showLoginButton()
