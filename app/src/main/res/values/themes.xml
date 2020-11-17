@@ -8,10 +8,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/semi_transparent</item>
         <!-- Customize your theme here. -->
+        <item name="colorControlNormal">@color/gray</item>
     </style>
 
     <!-- swap colorAccent with colorPrimary-->
     <style name="InverseAccent" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="BadgeStyle" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

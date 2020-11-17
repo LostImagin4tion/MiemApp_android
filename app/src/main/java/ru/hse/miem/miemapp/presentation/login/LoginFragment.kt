@@ -88,7 +88,7 @@ class LoginFragment : MvpAppCompatFragment(), LoginView {
                     loginPresenter.onLogged(it)
                 }
             } catch (e: ApiException) {
-                Log.e("Login", e.message)
+                Log.e("Login", e.message.toString())
                 showLoginButton()
             }
         }

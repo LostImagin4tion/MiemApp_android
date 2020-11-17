@@ -23,10 +23,10 @@
         android:visibility="gone"
         android:background="@android:color/white"
         android:theme="@style/Theme.AppCompat.Light"
-        app:itemIconTint="@color/colorPrimary"
+        app:itemIconTint="@color/bottom_nav_item_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"
+        app:labelVisibilityMode="unlabeled"
         tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
