@@ -21,8 +21,15 @@ class ProfilePresenter @Inject constructor(
         val disposable = profileRepository.getMyProfile()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .map {
+                viewState.setupProfile(it)
+                it
+            }
+            .observeOn(Schedulers.io())
+            .flatMap { profileRepository.getProjects(it.id) }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = viewState::setupProfile,
+                onSuccess = viewState::setupProjects,
                 onError = {
                     Log.w(javaClass.simpleName, it.stackTraceToString())
                     viewState.showError()

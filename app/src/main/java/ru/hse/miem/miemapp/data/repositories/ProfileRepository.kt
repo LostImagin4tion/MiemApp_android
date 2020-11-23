@@ -6,6 +6,7 @@ import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.StudentProfileResponse
 import ru.hse.miem.miemapp.data.api.TeacherProfileResponse
 import ru.hse.miem.miemapp.domain.entities.Profile
+import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
 import javax.inject.Inject
 
@@ -25,6 +26,18 @@ class ProfileRepository @Inject constructor(
     } else {
         cabinetApi.studentProfile(id).studentToProfile()
     }
+
+    override fun getProjects(userId: Long) = cabinetApi.userStatistic(userId)
+        .map {
+            it.data.myProjects.map {
+                ProjectBasic(
+                    id = it.id,
+                    number = it.number,
+                    name = it.name,
+                    members = it.students
+                )
+            }
+        }
 
     private fun Single<StudentProfileResponse>.studentToProfile() = map {
         val main = it.data[0].main

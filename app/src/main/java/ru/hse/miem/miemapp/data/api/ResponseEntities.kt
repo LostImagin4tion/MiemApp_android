@@ -41,3 +41,18 @@ data class TeacherProfileResponse(
         val email: String
     )
 }
+
+data class StatisticResponse(
+    val data: Data
+) {
+    data class Data(
+        val myProjects: List<Project>
+    ) {
+        data class Project(
+            val id: Long,
+            val name: String,
+            val number: Long,
+            val students: Int
+        )
+    }
+}

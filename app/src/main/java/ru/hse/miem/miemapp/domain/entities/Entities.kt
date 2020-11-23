@@ -9,3 +9,10 @@ data class Profile(
     val occupation: String,
     val avatarUrl: String
 )
+
+data class ProjectBasic(
+    val id: Long,
+    val number: Long,
+    val name: String,
+    val members: Int
+)

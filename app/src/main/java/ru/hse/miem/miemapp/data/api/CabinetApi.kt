@@ -16,10 +16,12 @@ interface CabinetApi {
         fun getAvatarUrl(userId: Long) = "$CABINET_BASE_URL$publicApi/user/$userId/avatar"
     }
 
-    // auth endpoint
     @POST("vue/google")
     fun auth(@Body authRequest: AuthRequest): Single<AuthResponse>
 
+    /**
+     * Profile related endpoints
+     **/
     @GET("$api/student_profile")
     fun myStudentProfile(): Single<StudentProfileResponse>
 
@@ -32,5 +34,7 @@ interface CabinetApi {
     @GET("$publicApi/teacher_profile/{id}")
     fun teacherProfile(@Path("id") id: Long): Single<TeacherProfileResponse>
 
+    @GET("$publicApi/student_statistics/{id}")
+    fun userStatistic(@Path("id") id: Long): Single<StatisticResponse>
 
 }

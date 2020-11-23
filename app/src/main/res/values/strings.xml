@@ -10,4 +10,8 @@
 
     <string name="student_badge">Student</string>
     <string name="teacher_badge">Teacher</string>
+    <string name="projects_title">Projects</string>
+    <string name="projects_no_info">No information about user projects</string>
+
+    <string name="project_members">Members: %d</string>
 </resources>

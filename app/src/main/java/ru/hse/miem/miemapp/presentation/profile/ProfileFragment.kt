@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Profile
+import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.common.BaseFragment
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
 
     @ProvidePresenter
     fun provideProfilePresenter() = profilePresenter
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,7 +41,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         userOccupation.text = occupation
     }
 
+    override fun setupProjects(projects: List<ProjectBasic>) {
+        userProjectsLoader.visibility = View.GONE
+
+        if (projects.isNotEmpty()) {
+            projectsList.adapter = ProjectsAdapter(projects)
+        } else {
+            userNoProjectInfo.visibility = View.VISIBLE
+        }
+    }
+
     override fun showError() {
+        userProjectsLoader.visibility = View.GONE
+        userNoProjectInfo.visibility = View.VISIBLE
         Toast.makeText(requireContext(), R.string.common_error_message, Toast.LENGTH_SHORT).show()
     }
 }
