@@ -6,6 +6,7 @@ import dagger.Component
 import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragment
+import ru.hse.miem.miemapp.presentation.project.ProjectFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -22,4 +23,5 @@ interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(loginFragment: LoginFragment)
     fun inject(profileFragment: ProfileFragment)
+    fun inject(projectFragment: ProjectFragment)
 }

@@ -11,5 +11,60 @@
         android:id="@+id/fragmentProfile"
         android:name="ru.hse.miem.miemapp.presentation.profile.ProfileFragment"
         android:label="Profile fragment"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+
+        <argument
+            android:name="userId"
+            app:argType="long"
+            app:nullable="false"
+            android:defaultValue="-1L"/>
+
+        <argument
+            android:name="isTeacher"
+            app:argType="boolean"
+            app:nullable="false"
+            android:defaultValue="false"/>
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProject"
+            app:destination="@id/fragmentProject">
+
+            <argument
+                android:name="projectId"
+                app:argType="long"
+                app:nullable="false"/>
+
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProject"
+        android:name="ru.hse.miem.miemapp.presentation.project.ProjectFragment"
+        android:label="Project fragment"
+        tools:layout="@layout/fragment_project">
+
+        <argument
+            android:name="projectId"
+            app:argType="long"
+            app:nullable="false"/>
+
+        <action
+            android:id="@+id/action_fragmentProject_to_fragmentProfile"
+            app:destination="@id/fragmentProfile">
+
+            <argument
+                android:name="userId"
+                app:argType="long"
+                app:nullable="false"
+                android:defaultValue="-1L"/>
+
+            <argument
+                android:name="isTeacher"
+                app:argType="boolean"
+                app:nullable="false"
+                android:defaultValue="false"/>
+
+        </action>
+
+    </fragment>
 </navigation>

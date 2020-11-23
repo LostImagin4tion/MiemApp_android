@@ -19,8 +19,10 @@ import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.repositories.AuthRepository
 import ru.hse.miem.miemapp.data.repositories.ProfileRepository
+import ru.hse.miem.miemapp.data.repositories.ProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
+import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import javax.inject.Singleton
 
 @Module
@@ -54,6 +56,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindIProfileRepository(profileRepository: ProfileRepository): IProfileRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindIProjectRepository(projectRepository: ProjectRepository): IProjectRepository
 }
 
 @Module(includes = [GoogleModule::class])
@@ -92,5 +98,4 @@ class DataModule {
     @Provides
     @Singleton
     fun provideSession() = Session()
-
 }

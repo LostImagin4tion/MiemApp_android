@@ -21,7 +21,7 @@ interface CabinetApi {
 
     /**
      * Profile related endpoints
-     **/
+     */
     @GET("$api/student_profile")
     fun myStudentProfile(): Single<StudentProfileResponse>
 
@@ -36,5 +36,17 @@ interface CabinetApi {
 
     @GET("$publicApi/student_statistics/{id}")
     fun userStatistic(@Path("id") id: Long): Single<StatisticResponse>
+
+    /**
+     * Project related endpoints
+     */
+    @GET("$publicApi/project/header/{id}")
+    fun projectHeader(@Path("id") id: Long): Single<ProjectHeaderResponse>
+
+    @GET("$publicApi/project/body/{id}")
+    fun projectBody(@Path("id") id: Long): Single<ProjectBodyResponse>
+
+    @GET("$publicApi/project/students/{id}")
+    fun projectMembers(@Path("id") id: Long): Single<ProjectMembersResponse>
 
 }

@@ -12,6 +12,13 @@
     <string name="teacher_badge">Teacher</string>
     <string name="projects_title">Projects</string>
     <string name="projects_no_info">No information about user projects</string>
-
     <string name="project_members">Members: %d</string>
+
+    <string name="project_type">Project #%d, %s (%s)</string>
+    <string name="project_team">Team</string>
+    <string name="project_basic_info">Basic info</string>
+    <string name="project_objective">Project objective</string>
+    <string name="project_annotation">Annotation</string>
+    <string name="project_links">Links</string>
+    <string name="project_member_name">%s %s</string>
 </resources>
