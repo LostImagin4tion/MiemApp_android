@@ -3,6 +3,11 @@
 
     <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
 
+    <string name="common_error_message">An error was occurred. Check connection or try again later</string>
+
     <string name="login_button_text">Login with Google</string>
     <string name="login_error">An error occurred during login</string>
+
+    <string name="student_badge">Student</string>
+    <string name="teacher_badge">Teacher</string>
 </resources>

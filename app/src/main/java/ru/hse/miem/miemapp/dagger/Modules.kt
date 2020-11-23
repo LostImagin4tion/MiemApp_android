@@ -18,7 +18,9 @@ import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.repositories.AuthRepository
+import ru.hse.miem.miemapp.data.repositories.ProfileRepository
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
+import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
 import javax.inject.Singleton
 
 @Module
@@ -48,6 +50,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindIAuthRepository(authRepository: AuthRepository): IAuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindIProfileRepository(profileRepository: ProfileRepository): IProfileRepository
 }
 
 @Module(includes = [GoogleModule::class])
@@ -76,7 +82,7 @@ class DataModule {
                 request()
                     .newBuilder()
                     .addHeader("Connection", "close")
-                    .addHeader("User-Agent", "Miem App") // used on sever side
+                    .addHeader("User-Agent", "Miem App") // used on server side
                     .addHeader("x-auth-token", session.token)
                     .build()
             )
