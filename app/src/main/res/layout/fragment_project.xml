@@ -67,7 +67,7 @@
                 android:layout_marginBottom="16dp"
                 android:textColor="@color/link_color"
                 android:textStyle="bold"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textIsSelectable="true"
                 tools:text="617@miem.hse.ru"/>
 
@@ -77,7 +77,7 @@
                 android:layout_marginBottom="4dp"
                 android:text="@string/project_team"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -97,7 +97,7 @@
                 android:text="@string/project_basic_info"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                 android:text="@string/project_objective"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/projectObjective"
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Lorem ipsum dolor sit amet"/>
 
             <TextView
@@ -122,7 +122,7 @@
                 android:text="@string/project_annotation"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="18sp"/>
 
             <TextView
                 android:id="@+id/projectAnnotation"
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16sp"
                 android:textColor="@android:color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 tools:text="Lorem ipsum dolor sit amet"/>
 
             <TextView
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="4dp"
                 android:text="@string/project_links"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <androidx.recyclerview.widget.RecyclerView

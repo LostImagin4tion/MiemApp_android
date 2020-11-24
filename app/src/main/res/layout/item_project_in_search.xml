@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
             android:textSize="18sp"
             android:textColor="@android:color/black"
             tools:text="Za warudo toki wo tomare"/>
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="@android:color/black"
             tools:text="Руководитель: ДИО"/>
 
@@ -78,7 +78,7 @@
             android:id="@+id/projectType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="@android:color/black"
             tools:text="Тип: Прогр-аппарат."/>
 

@@ -30,9 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MiemApplication).appComponent.inject(this)
-
+        setTheme(R.style.Theme_MIEMApp)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.setBackgroundDrawableResource(R.drawable.splash_screen)
 
         if (savedInstanceState == null) { // not screen rotation or something like this
             signInClient.silentSignIn().addOnCompleteListener {

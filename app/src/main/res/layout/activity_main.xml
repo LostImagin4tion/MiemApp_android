@@ -23,6 +23,7 @@
         android:background="@android:color/white"
         android:theme="@style/Theme.AppCompat.Light"
         app:itemIconTint="@color/bottom_nav_item_color"
+        app:itemIconSize="@dimen/bottom_navigation_icon_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_nav_menu"
         app:labelVisibilityMode="unlabeled"
