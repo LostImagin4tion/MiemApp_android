@@ -109,3 +109,22 @@ data class ProjectMembersResponse(
         )
     }
 }
+
+
+/**
+ * Search related
+ */
+data class ProjectsAllResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val id: Long,
+        val number: Long?,
+        val vacancies: Int,
+        val nameRus: String,
+        val typeDesc: String,
+        val statusId: Int,
+        val statusDesc: String,
+        val head: String
+    )
+}

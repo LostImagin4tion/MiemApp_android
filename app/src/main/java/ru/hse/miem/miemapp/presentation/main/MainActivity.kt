@@ -30,10 +30,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MiemApplication).appComponent.inject(this)
-        setTheme(R.style.Theme_MIEMApp)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         if (savedInstanceState == null) { // not screen rotation or something like this
             signInClient.silentSignIn().addOnCompleteListener {
@@ -70,13 +69,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun afterLogin() {
+        window.setBackgroundDrawableResource(R.drawable.solid_color_primary)
+
         supportFragmentManager.beginTransaction()
             .remove(loginFragment)
             .commit()
 
         bottomNavigation.visibility = View.VISIBLE
         bottomNavigation.setupWithNavController(
-            navGraphIds = listOf(R.navigation.nav_profile),
+            navGraphIds = listOf(R.navigation.nav_profile, R.navigation.nav_search),
             fragmentManager = supportFragmentManager,
             containerId = R.id.navHost,
             intent = intent,

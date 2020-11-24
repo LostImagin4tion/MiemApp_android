@@ -13,8 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MIEMApp">
         <activity
-            android:name=".presentation.main.MainActivity"
-            android:theme="@style/ThemeLauncher">
+            android:name=".presentation.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

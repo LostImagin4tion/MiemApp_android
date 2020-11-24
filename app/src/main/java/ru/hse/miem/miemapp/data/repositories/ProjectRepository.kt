@@ -30,7 +30,7 @@ class ProjectRepository @Inject constructor(
 
             ProjectExtended(
                 id = header.id,
-                number = header.number,
+                number = header.number ?: header.id,
                 type = header.typeLabel,
                 source = header.sourceLabel,
                 isActive = header.statusValue == 2, // yep, status is just a number

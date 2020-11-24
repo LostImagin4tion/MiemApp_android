@@ -7,6 +7,7 @@ import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragment
 import ru.hse.miem.miemapp.presentation.project.ProjectFragment
+import ru.hse.miem.miemapp.presentation.search.SearchFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -24,4 +25,5 @@ interface AppComponent {
     fun inject(loginFragment: LoginFragment)
     fun inject(profileFragment: ProfileFragment)
     fun inject(projectFragment: ProjectFragment)
+    fun inject(searchFragment: SearchFragment)
 }

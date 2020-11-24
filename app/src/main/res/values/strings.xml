@@ -23,4 +23,9 @@
     <string name="project_annotation">Annotation</string>
     <string name="project_links">Links</string>
     <string name="project_member_name">%s %s</string>
+
+    <string name="project_vacancies">%d vacancy(s)</string>
+    <string name="project_head">Head: %s</string>
+    <string name="project_type_item">Type: %s</string>
+    <string name="search_hint">Search by name, number, head or type</string>
 </resources>

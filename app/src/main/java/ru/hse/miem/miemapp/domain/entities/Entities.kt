@@ -10,6 +10,7 @@ data class Profile(
     val avatarUrl: String
 )
 
+// displayed in profile
 data class ProjectBasic(
     val id: Long,
     val number: Long,
@@ -17,6 +18,7 @@ data class ProjectBasic(
     val members: Int
 )
 
+// displayed in project screen
 data class ProjectExtended(
     val id: Long,
     val number: Long,
@@ -45,3 +47,15 @@ data class ProjectExtended(
         val url: String
     )
 }
+
+// displayed in search
+data class ProjectInSearch(
+    val id: Long,
+    val number: Long,
+    val name: String,
+    val type: String,
+    val state: String,
+    val isActive: Boolean,
+    val vacancies: Int,
+    val head: String
+)
