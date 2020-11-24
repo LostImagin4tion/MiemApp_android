@@ -72,8 +72,8 @@ data class ProjectHeaderResponse(
 ) {
     data class Data(
         val id: Long,
-        val number: Long,
-        val googleGroup: String,
+        val number: Any?, // here's workaround because api developers are stupid as fuck and sometimes return boolean in number filed
+        val googleGroup: String?,
         val typeLabel: String,
         val sourceLabel: String,
         val statusLabel: String,
@@ -88,8 +88,8 @@ data class ProjectBodyResponse(
 ) {
     data class Data(
         val id: Long,
-        val target: String,
-        val annotation: String
+        val target: String?,
+        val annotation: String?
     )
 }
 
@@ -104,7 +104,7 @@ data class ProjectMembersResponse(
             val id: Long,
             val first_name: String,
             val last_name: String,
-            val dep: String,
+            val dep: String?,
             val role: String
         )
     }

@@ -67,12 +67,21 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
         }
     }
 
+    private var isProjectsSetuped = false
+
     override fun setupProjects(projects: List<ProjectInSearch>) {
+        if (isProjectsSetuped) return
         projectsList.adapter = ProjectsAdapter(projects) {
             val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
             findNavController().navigate(action)
         }
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
+        isProjectsSetuped = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        isProjectsSetuped = false
     }
 }

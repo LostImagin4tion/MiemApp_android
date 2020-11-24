@@ -22,7 +22,7 @@ class ProjectRepository @Inject constructor(
                         id = it.id,
                         firstName = it.first_name,
                         lastName = it.last_name,
-                        isTeacher = it.dep.isNotEmpty(),
+                        isTeacher = it.dep?.isNotEmpty() ?: false,
                         role = it.role,
                         avatarUrl = CabinetApi.getAvatarUrl(it.id)
                     )
@@ -30,15 +30,15 @@ class ProjectRepository @Inject constructor(
 
             ProjectExtended(
                 id = header.id,
-                number = header.number ?: header.id,
+                number = header.number.toString().toLongOrNull() ?: header.id,
                 type = header.typeLabel,
                 source = header.sourceLabel,
                 isActive = header.statusValue == 2, // yep, status is just a number
                 name = header.nameRus,
                 state = header.statusLabel,
-                email = header.googleGroup,
-                objective = body.target,
-                annotation = body.annotation,
+                email = header.googleGroup ?: "$id@miem.hse.ru",
+                objective = body.target ?: "",
+                annotation = body.annotation ?: "",
                 members = members,
                 links = listOf(ProjectExtended.Link("Trello", header.trello))
             )
