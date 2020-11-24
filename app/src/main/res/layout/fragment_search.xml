@@ -12,42 +12,47 @@
         android:layout_height="60dp"
         android:layout_gravity="center" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/searchContent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/searchInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/common_fragment_margin"
+                    android:layout_marginEnd="@dimen/common_fragment_margin"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/text_input_bg"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/projectsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginEnd="14dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:orientation="vertical"
-            android:paddingTop="14dp">
+            android:visibility="invisible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_project_in_search"
+            tools:visibility="visible" />
+    </LinearLayout>
 
-            <EditText
-                android:id="@+id/searchInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/text_input_bg"
-                android:layout_marginBottom="8dp"
-                android:hint="@string/search_hint"
-                android:inputType="text"
-                android:imeOptions="actionSearch"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/projectsList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="invisible"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_project_in_search"
-                tools:visibility="visible"/>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
