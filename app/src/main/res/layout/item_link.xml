@@ -5,8 +5,8 @@
     android:id="@+id/linkTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="2dp"
+    android:layout_marginBottom="4dp"
     android:textSize="16sp"
     android:textStyle="bold"
-    android:textColor="@color/colorAccent"
+    android:textColor="@color/link_color"
     tools:text="GitLab"/>

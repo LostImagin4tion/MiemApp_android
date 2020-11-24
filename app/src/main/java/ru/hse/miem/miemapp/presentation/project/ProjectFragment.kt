@@ -1,9 +1,10 @@
 package ru.hse.miem.miemapp.presentation.project
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -12,8 +13,9 @@ import kotlinx.android.synthetic.main.fragment_project.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
-import ru.hse.miem.miemapp.presentation.common.BaseFragment
+import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import javax.inject.Inject
+
 
 class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
 
@@ -33,6 +35,14 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         projectPresenter.onCreate(args.projectId)
+        projectEmail.setOnClickListener {
+            startActivity(
+                Intent.createChooser(
+                    Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", projectEmail.text.toString(), null)),
+                    getString(R.string.send_mail_dialog_title)
+                )
+            )
+        }
     }
 
     override fun setupProject(project: ProjectExtended) = project.run {
@@ -48,9 +58,8 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
             findNavController().navigate(action)
         }
         linksList.adapter = LinksAdapter(links)
-    }
 
-    override fun showError() {
-        Toast.makeText(requireContext(), R.string.common_error_message, Toast.LENGTH_SHORT).show()
+        projectLoader.visibility = View.GONE
+        projectContent.visibility = View.VISIBLE
     }
 }

@@ -5,6 +5,8 @@
 
     <string name="common_error_message">An error was occurred. Check connection or try again later</string>
 
+    <string name="send_mail_dialog_title">Send email</string>
+
     <string name="login_button_text">Login with Google</string>
     <string name="login_error">An error occurred during login</string>
 

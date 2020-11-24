@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.tasks.RuntimeExecutionException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -23,17 +24,30 @@ class MainActivity : AppCompatActivity() {
     lateinit var signInClient: GoogleSignInClient
     @Inject
     lateinit var authRepository: IAuthRepository
+
     private var authDisposable: Disposable? = null
     private val loginFragment = LoginFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MiemApplication).appComponent.inject(this)
+        setTheme(R.style.Theme_MIEMApp)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        signInClient.silentSignIn().addOnCompleteListener {
-            it.result?.serverAuthCode?.also { silentLogin(it) } ?: startLogin()
+
+        if (savedInstanceState == null) { // not screen rotation or something like this
+            signInClient.silentSignIn().addOnCompleteListener {
+                try {
+                    it.result?.serverAuthCode?.also { silentLogin(it) } ?: startLogin()
+                } catch (e: RuntimeExecutionException) { // api exception
+                    Log.w(javaClass.simpleName, e.stackTraceToString())
+                    startLogin()
+                }
+            }
+        } else {
+            afterLogin()
         }
+
     }
 
     private fun startLogin() {
@@ -67,7 +81,6 @@ class MainActivity : AppCompatActivity() {
             containerId = R.id.navHost,
             intent = intent,
         )
-
     }
 
     override fun onStop() {

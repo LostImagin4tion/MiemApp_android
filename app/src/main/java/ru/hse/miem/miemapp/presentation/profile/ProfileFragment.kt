@@ -1,9 +1,10 @@
 package ru.hse.miem.miemapp.presentation.profile
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -15,7 +16,7 @@ import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
-import ru.hse.miem.miemapp.presentation.common.BaseFragment
+import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
@@ -41,6 +42,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         } else {
             profilePresenter.onCreate(args.userId, args.isTeacher)
         }
+        userEmail.setOnClickListener {
+            startActivity(
+                Intent.createChooser(
+                    Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", userEmail.text.toString(), null)),
+                    getString(R.string.send_mail_dialog_title)
+                )
+            )
+        }
     }
 
     override fun setupProfile(profile: Profile) = profile.run {
@@ -51,8 +60,11 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
             .load(avatarUrl)
             .apply(RequestOptions().circleCrop())
             .into(userAvatar)
-        userMail.text = email
+        userEmail.text = email
         userOccupation.text = occupation
+
+        profileLoader.visibility = View.GONE
+        profileContent.visibility = View.VISIBLE
     }
 
     override fun setupProjects(projects: List<ProjectBasic>) {
@@ -66,11 +78,5 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
         }
-    }
-
-    override fun showError() {
-        userProjectsLoader.visibility = View.GONE
-        userNoProjectInfo.visibility = View.VISIBLE
-        Toast.makeText(requireContext(), R.string.common_error_message, Toast.LENGTH_SHORT).show()
     }
 }
