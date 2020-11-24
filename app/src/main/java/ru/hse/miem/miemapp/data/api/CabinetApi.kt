@@ -49,6 +49,9 @@ interface CabinetApi {
     @GET("$publicApi/project/students/{id}")
     fun projectMembers(@Path("id") id: Long): Single<ProjectMembersResponse>
 
+    @GET("$publicApi/git_statistics/project/{id}")
+    fun gitStatistics(@Path("id") id: Long): Single<GitStatisticsResponse>
+
     /**
      * Search related endpoints
      */

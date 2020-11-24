@@ -27,6 +27,11 @@ class ProjectRepository @Inject constructor(
                         avatarUrl = CabinetApi.getAvatarUrl(it.id)
                     )
                 }
+            val gitRepositories = cabinetApi.gitStatistics(id)
+                .blockingGet()
+                .data.getOrNull(0)
+                ?.summary
+                ?.map { ProjectExtended.Link(name = it.project, url = it.link) } ?: emptyList()
 
             ProjectExtended(
                 id = header.id,
@@ -40,7 +45,7 @@ class ProjectRepository @Inject constructor(
                 objective = body.target ?: "",
                 annotation = body.annotation ?: "",
                 members = members,
-                links = listOf(ProjectExtended.Link("Trello", header.trello))
+                links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories
             )
         }
 

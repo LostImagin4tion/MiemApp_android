@@ -110,6 +110,18 @@ data class ProjectMembersResponse(
     }
 }
 
+data class GitStatisticsResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val summary: List<GitData>
+    ) {
+        data class GitData(
+            val project: String,
+            val link: String
+        )
+    }
+}
 
 /**
  * Search related
