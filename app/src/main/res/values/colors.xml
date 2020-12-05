@@ -11,4 +11,7 @@
     <color name="project_active">#6FCF97</color>
     <color name="project_inactive">#F2C94C</color>
     <color name="project_vacancies_badge">#CE93D8</color>
+
+    <color name="red">#E53935</color>
+    <color name="red_dark">#C62828</color>
 </resources>
