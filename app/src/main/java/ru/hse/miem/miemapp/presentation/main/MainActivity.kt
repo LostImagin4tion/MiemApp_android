@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation.visibility = View.VISIBLE
         bottomNavigation.setupWithNavController(
-            navGraphIds = listOf(R.navigation.nav_profile, R.navigation.nav_search, R.navigation.nav_settings),
+            navGraphIds = listOf(R.navigation.nav_profile, R.navigation.nav_search, R.navigation.nav_settings, R.navigation.nav_apps),
             fragmentManager = supportFragmentManager,
             containerId = R.id.navHost,
             intent = intent,

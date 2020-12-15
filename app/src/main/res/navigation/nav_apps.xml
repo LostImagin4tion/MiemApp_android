@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/apps"
+    app:startDestination="@id/fragmentApps">
+
+    <fragment
+        android:id="@+id/fragmentApps"
+        android:name="ru.hse.miem.miemapp.presentation.apps.AppsFragment"
+        android:label="Apps fragment"
+        tools:layout="@layout/fragment_apps"/>
+
+</navigation>

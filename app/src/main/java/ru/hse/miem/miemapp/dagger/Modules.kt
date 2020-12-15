@@ -11,6 +11,7 @@ import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -73,35 +74,36 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideCabinetApi(client: OkHttpClient): CabinetApi = Retrofit.Builder()
+    fun provideCabinetApi(session: Session): CabinetApi = Retrofit.Builder()
             .baseUrl(CabinetApi.CABINET_BASE_URL)
-            .client(client)
+            .client(NetworkUtils.createOkHttpClient { addHeader("x-auth-token", session.token) })
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(CabinetApi::class.java)
 
     @Provides
-    fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .retryOnConnectionFailure(true)
-            .build()
+    @Singleton
+    fun provideSession() = Session()
+}
 
-    @Provides
-    fun provideInterceptor(session: Session) = Interceptor {
+object NetworkUtils {
+
+    fun createOkHttpClient(settings: Request.Builder.() -> Unit): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(createInterceptor(settings))
+        .retryOnConnectionFailure(true)
+        .build()
+
+    private fun createInterceptor(settings: Request.Builder.() -> Unit) = Interceptor {
         it.run {
             proceed(
                 request()
                     .newBuilder()
                     .addHeader("Connection", "close")
                     .addHeader("User-Agent", "Miem App") // used on server side
-                    .addHeader("x-auth-token", session.token)
+                    .apply { settings() }
                     .build()
             )
         }
     }
-
-    @Provides
-    @Singleton
-    fun provideSession() = Session()
 }
