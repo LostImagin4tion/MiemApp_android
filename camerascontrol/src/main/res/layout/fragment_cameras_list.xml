@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".presentation.cameras.CamerasListFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/camerasListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            tools:listitem="@layout/camera"/>
+
+    <ProgressBar
+            android:id="@+id/loadingProgressList"
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/colorPrimary"/>
+</FrameLayout>

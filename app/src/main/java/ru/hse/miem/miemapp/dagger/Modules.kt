@@ -1,6 +1,7 @@
 package ru.hse.miem.miemapp.dagger
 
 import android.app.Application
+import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -12,6 +13,7 @@ import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okio.Buffer
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -96,14 +98,21 @@ object NetworkUtils {
 
     private fun createInterceptor(settings: Request.Builder.() -> Unit) = Interceptor {
         it.run {
+            val requestBody = Buffer().also {
+                request().body?.writeTo(it)
+            }.readUtf8()
+            Log.d("OkHttp/Request", "${request()} $requestBody")
+
             proceed(
                 request()
                     .newBuilder()
+                    .apply { settings() }
                     .addHeader("Connection", "close")
                     .addHeader("User-Agent", "Miem App") // used on server side
-                    .apply { settings() }
                     .build()
-            )
+            ).apply {
+                Log.i("OkHttp/Response", "$this ${peekBody(Long.MAX_VALUE).string()}")
+            }
         }
     }
 }

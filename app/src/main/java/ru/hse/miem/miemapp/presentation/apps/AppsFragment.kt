@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_apps.*
+import ru.hse.miem.miemapp.BuildConfig
 import ru.hse.miem.miemapp.R
 
 class AppsFragment : Fragment() {
@@ -28,9 +29,12 @@ class AppsFragment : Fragment() {
 
         appsList.adapter = AppsAdapter(listOf(
             AppItem(
-                icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_search)!!,
+                icon = ContextCompat.getDrawable(
+                    requireContext(),
+                    resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".camerascontrol")
+                )!!,
                 name = getString(R.string.title_camerascontrol),
-                activityClassName = "ru.hse.miem.miemcam.CamerasActivity"
+                activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
             )
         ))
     }

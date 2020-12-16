@@ -53,6 +53,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
+    // TODO migrate to v2
     // MoxyX
     val moxyVersion = "1.7.0"
     implementation("tech.schoolhelper:moxy-x:$moxyVersion")
@@ -88,5 +89,8 @@ dependencies {
 
     // Google Auth
     implementation("com.google.android.gms:play-services-auth:19.0.0")
+
+    // OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.2.1")
 
 }
