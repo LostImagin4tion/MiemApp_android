@@ -22,10 +22,21 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("./keystores/release.keystore")
+            storePassword = "d9ZDgA-K!8CHzamme%4Sm2=^sSxe7!B-"
+            keyAlias = "release"
+            keyPassword = "d9ZDgA-K!8CHzamme%4Sm2=^sSxe7!B-"
+        }
+    }
+
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
