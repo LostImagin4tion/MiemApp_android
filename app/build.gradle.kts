@@ -64,12 +64,11 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
 
-    // TODO migrate to v2
     // MoxyX
-    val moxyVersion = "1.7.0"
-    implementation("tech.schoolhelper:moxy-x:$moxyVersion")
-    implementation("tech.schoolhelper:moxy-x-androidx:$moxyVersion")
-    kapt("tech.schoolhelper:moxy-x-compiler:$moxyVersion")
+    val moxyVersion = "2.2.1"
+    implementation("com.github.moxy-community:moxy:$moxyVersion")
+    implementation("com.github.moxy-community:moxy-androidx:$moxyVersion")
+    kapt("com.github.moxy-community:moxy-compiler:$moxyVersion")
 
     // Android Jetpack Navigation
     val navigationVersion = "2.3.1"

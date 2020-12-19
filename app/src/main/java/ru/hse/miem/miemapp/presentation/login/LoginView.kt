@@ -1,21 +1,13 @@
 package ru.hse.miem.miemapp.presentation.login
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.MvpView
+import moxy.viewstate.strategy.alias.AddToEndSingle
+import moxy.viewstate.strategy.alias.OneExecution
 
 interface LoginView : MvpView {
 
-    @StateStrategyType(OneExecutionStateStrategy::class)
-    fun login()
-
-    @StateStrategyType(OneExecutionStateStrategy::class)
-    fun afterLogin()
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun showLoginButton()
-
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun hideLoginButton()
+    @OneExecution fun login()
+    @OneExecution fun afterLogin()
+    @AddToEndSingle fun showLoginButton()
+    @AddToEndSingle fun hideLoginButton()
 }

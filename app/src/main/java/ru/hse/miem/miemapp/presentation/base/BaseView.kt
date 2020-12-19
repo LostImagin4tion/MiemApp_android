@@ -1,10 +1,8 @@
 package ru.hse.miem.miemapp.presentation.base
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.MvpView
+import moxy.viewstate.strategy.alias.OneExecution
 
 interface BaseView : MvpView {
-    @StateStrategyType(OneExecutionStateStrategy::class)
-    fun showError()
+    @OneExecution fun showError()
 }
