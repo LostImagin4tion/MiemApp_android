@@ -36,6 +36,9 @@ interface MainApi : Api {
   @POST("login")
   fun login(@Body loginRequest: LoginRequest): Single<LoginResponse>
 
+  @GET("login_token")
+  fun loginToken(): Completable
+
   @GET("return_cams")
   fun getCams(): Single<List<Camera>>
 

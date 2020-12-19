@@ -1,12 +1,17 @@
 package ru.hse.miem.miemcam.presentation.main
 
 import androidx.fragment.app.Fragment
+import io.reactivex.android.schedulers.AndroidSchedulers
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import moxy.viewstate.strategy.alias.AddToEndSingle
+import moxy.viewstate.strategy.alias.OneExecution
 import ru.hse.miem.miemcam.CameraSession
+import ru.hse.miem.miemcam.domain.repositories.IAuthRepository
 import ru.hse.miem.miemcam.presentation.cameras.CamerasListFragment
 import ru.hse.miem.miemcam.presentation.control.ControlPanelFragment
 import ru.hse.miem.miemcam.presentation.record.RecordFragment
@@ -28,11 +33,13 @@ interface CamerasView : MvpView {
   @AddToEndSingle fun setMoreVisibility(isVisible: Boolean)
   @AddToEndSingle fun updateMenuItems()
   @AddToEndSingle fun selectMoreNavigation()
+  @OneExecution fun showError()
 }
 
 @InjectViewState
 class CamerasPresenter @Inject constructor(
-  private val cameraSession: CameraSession
+  private val cameraSession: CameraSession,
+  private val authRepository: IAuthRepository
 ): MvpPresenter<CamerasView>() {
   private lateinit var controlPanelFragment: ControlPanelFragment
   private lateinit var camerasListFragment: CamerasListFragment
@@ -93,7 +100,18 @@ class CamerasPresenter @Inject constructor(
     viewState.setMoreVisibility(isMoreOpened)
   }
 
-  fun startUp() {
+  fun onStart() {
+    val disposable = authRepository.loginToken()
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeBy(
+        onComplete = ::startUp,
+        onError = { viewState.showError() }
+      )
+    compositeDisposable.add(disposable)
+  }
+
+  private fun startUp() {
     controlPanelFragment =
       ControlPanelFragment { viewState.setActionBarLabel("MIEMCam") }
 

@@ -62,4 +62,8 @@ abstract class RepositoryModule {
   @CamerasScope
   @Binds
   abstract fun bindsIVmixRepository(vmixRepository: VmixRepository): IVmixRepository
+
+  @CamerasScope
+  @Binds
+  abstract fun bindsIAuthRepository(authRepository: AuthRepository): IAuthRepository
 }

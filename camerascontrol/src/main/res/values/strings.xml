@@ -58,4 +58,6 @@
     <string name="error">Произошла ошибка</string>
     <string name="request_record_response">Когда запись будет готова, на указанную почту придет письмо</string>
     <string name="incorrect_host">Некорректный адрес хоста</string>
+
+    <string name="no_access_error">Произошла ошибка. Возможно, у вас нет прав</string>
 </resources>

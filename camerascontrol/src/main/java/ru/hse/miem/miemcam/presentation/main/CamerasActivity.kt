@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.core.animation.doOnEnd
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -67,7 +68,7 @@ class CamerasActivity : MvpAppCompatActivity(), CamerasView {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        camerasPresenter.startUp()
+        camerasPresenter.onStart()
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -204,6 +205,10 @@ class CamerasActivity : MvpAppCompatActivity(), CamerasView {
 
     override fun selectMoreNavigation() {
         navigation.menu.findItem(R.id.navigation_more).isChecked = true
+    }
+
+    override fun showError() {
+        Toast.makeText(this, R.string.no_access_error, Toast.LENGTH_SHORT).show()
     }
 
     private fun setUpActionBar() {
