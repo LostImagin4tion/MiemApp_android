@@ -1,74 +1,134 @@
-var pc = null;
+var ws = new WebSocket('wss://media.auditory.ru:8443/player');
+var video;
+var webRtcPeer;
+var state = null;
+var isSeekable = false;
+var currentVideoUrl;
 
-function start(server_link) {
-
-    Android.setLoading("true");
-    var config = {
-        sdpSemantics: 'unified-plan'
-    };
-
-    config.iceServers = [{urls: ['stun:stun.l.google.com:19302']}];
-    pc = new RTCPeerConnection(config);
-    // connect audio / video
-    let video = document.getElementById('video');
-    video.addEventListener("loadedmetadata", function() {
-        let maxZoom = document.body.offsetHeight / document.getElementById('video').offsetHeight;
-        Android.setMaxZoom(maxZoom);
-        Android.setLoading("false")
-    });
-    pc.addEventListener('track', function(evt) {
-        if (evt.track.kind == 'video') {
-            video.srcObject = evt.streams[0];
-        } else {
-            document.getElementById('audio').srcObject = evt.streams[0];
-        }
-
-    });
-    negotiate(server_link);
+window.onload = function() {
+	video = document.getElementById('video');
 }
 
-function negotiate(server_link) {
-    Android.log("i", "negotiate " + server_link);
-    pc.addTransceiver('video', {direction: 'recvonly'});
-    pc.addTransceiver('audio', {direction: 'recvonly'});
-    return pc.createOffer().then(function(offer) {
-        return pc.setLocalDescription(offer);
-    }).then(function() {
-        return new Promise(function(resolve) {
-            if (pc.iceGatheringState === 'complete') {
-                resolve();
-            } else {
-                function checkState() {
-                    if (pc.iceGatheringState === 'complete') {
-                        pc.removeEventListener('icegatheringstatechange', checkState);
-                        resolve();
-                    }
-                }
-                pc.addEventListener('icegatheringstatechange', checkState);
-            }
-        });
-    }).then(function() {
-        var offer = pc.localDescription;
-        return fetch(server_link, {
-            body: JSON.stringify({
-                sdp: offer.sdp,
-                type: offer.type,
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST'
-        });
-    }).then(function(response) {
-        return response.json();
-    }).then(function(answer) {
-        return pc.setRemoteDescription(answer);
-    }).catch(function(e) {
-        Android.setLoading("false");
-        Android.log("e", "catch" + e);
-    });
+window.onbeforeunload = function() {
+	ws.close();
+}
+
+ws.onmessage = function(message) {
+	var parsedMessage = JSON.parse(message.data);
+	Android.log('i', 'Received message: ' + message.data);
+
+	switch (parsedMessage.id) {
+	case 'startResponse':
+		startResponse(parsedMessage);
+		break;
+	case 'error':
+		onError('Error message from server: ' + parsedMessage.message);
+		break;
+	case 'playEnd':
+		break;
+	case 'videoInfo':
+		break;
+	case 'iceCandidate':
+		webRtcPeer.addIceCandidate(parsedMessage.candidate, function(error) {
+			if (error)
+				return Android.log('e', 'Error adding candidate: ' + error);
+		});
+		break;
+	case 'seek':
+		Android.log('i', parsedMessage.message);
+		break;
+	case 'position':
+		break;
+	case 'iceCandidate':
+		break;
+	default:
+		onError('Unrecognized message', parsedMessage);
+	}
+}
+
+function start(videoUrl) {
+    Android.log('i', videoUrl);
+    currentVideoUrl = videoUrl;
+
+    Android.setLoading(true);
+
+	Android.log('i', 'Creating WebRtcPeer and generating local sdp offer ...');
+
+	// Video and audio by default
+	var userMediaConstraints = {
+		audio : true,
+		video : true
+	}
+	var options = {
+		remoteVideo : video,
+		mediaConstraints : userMediaConstraints,
+		onicecandidate : onIceCandidate
+	}
+
+	Android.log('i', 'User media constraints' + userMediaConstraints);
+
+	webRtcPeer = new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly(options,
+			function(error) {
+				if (error)
+					return console.error(error);
+				webRtcPeer.generateOffer(onOffer);
+			});
+}
+
+function onOffer(error, offerSdp) {
+	if (error)
+		return Android.log('e', 'Error generating the offer');
+	Android.log('i', 'Invoking SDP offer callback function ' + location.host);
+
+	var message = {
+		id : 'start',
+		sdpOffer : offerSdp,
+		videourl : currentVideoUrl
+	}
+	sendMessage(message);
+}
+
+function onError(error) {
+	console.error(error);
+}
+
+function onIceCandidate(candidate) {
+	Android.log('i', 'Local candidate' + JSON.stringify(candidate));
+
+	var message = {
+		id : 'onIceCandidate',
+		candidate : candidate
+	}
+	sendMessage(message);
+}
+
+function startResponse(message) {
+	Android.log('i', 'SDP answer received from server. Processing ...');
+
+	webRtcPeer.processAnswer(message.sdpAnswer, function(error) {
+		if (error)
+			return console.error(error);
+
+		Android.setLoading(false)
+	});
+}
+
+function sendMessage(message) {
+	var jsonMessage = JSON.stringify(message);
+	Android.log('i', 'Sending message: ' + jsonMessage);
+	ws.send(jsonMessage);
 }
 
 function stop() {
-    pc.close();
+	Android.log('i', 'Stopping video ...');
+	if (webRtcPeer) {
+		webRtcPeer.dispose();
+		webRtcPeer = null;
+
+		var message = {
+			id : 'stop'
+		}
+		sendMessage(message);
+	}
+	Android.setLoading(false);
 }

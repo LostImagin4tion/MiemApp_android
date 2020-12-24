@@ -72,7 +72,7 @@ class CamerasListPresenter @Inject constructor(
         onComplete = {
           cameraSession.apply {
             pickedRoom = camera.room
-            pickedCamera = camera.uid
+            pickedCamera = camera.rtsp
           }
           viewState.apply {
             setToolbarLabel(camera.name)

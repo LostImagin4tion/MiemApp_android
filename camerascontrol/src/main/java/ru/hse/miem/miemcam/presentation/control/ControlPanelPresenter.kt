@@ -1,6 +1,5 @@
 package ru.hse.miem.miemcam.presentation.control
 
-import android.net.Uri
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -23,7 +22,7 @@ import javax.inject.Inject
 interface ControlPanelView : MvpView {
   @AddToEndSingle fun changeIsEnabledFocusAutoBtn(isEnabled: Boolean)
   @AddToEndSingle fun changeIsEnabledFocusManualBtn(isEnabled: Boolean)
-  @AddToEndSingle fun startStream(uri: Uri)
+  @AddToEndSingle fun startStream(uri: String)
   @AddToEndSingle fun releaseCamera()
 
   @OneExecution fun showError()
@@ -104,9 +103,9 @@ class ControlPanelPresenter @Inject constructor(
   }
 
   fun startStream() {
-    val camera = cameraSession.pickedCamera
-    if (camera.isNotEmpty()) {
-      viewState.startStream(Uri.parse("https://media.auditory.ru:443/media/$camera"))
+    val cameraStream = cameraSession.pickedCamera
+    if (cameraStream.isNotEmpty()) {
+      viewState.startStream(cameraStream)
     }
   }
 

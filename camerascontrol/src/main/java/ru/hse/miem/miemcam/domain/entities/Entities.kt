@@ -1,15 +1,13 @@
 package ru.hse.miem.miemcam.domain.entities
 
-// import kotlinx.serialization.Serializable
 
-// @Serializable
 data class Camera(
   val uid: String,
   val name: String,
-  val room: String
+  val room: String,
+  val rtsp: String
 )
 
-// @Serializable
 data class Lesson(
   val auditorium: String,
   val lessonNumberStart: Int,
@@ -24,14 +22,12 @@ data class Lesson(
   val lecturer: String
 )
 
-// @Serializable
 data class Preset(
   val id: String,
   val name: String,
   val color: ArrayList<Int>
 )
 
-// @Serializable
 data class VmixState(
   val overlay1: String?,
   val overlay2: String?,

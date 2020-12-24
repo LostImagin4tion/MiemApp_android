@@ -87,8 +87,8 @@ class ControlPanelFragment(
     }
   }
 
-  override fun startStream(uri: Uri) {
-    webRTCPlayer.openVideoUrl(uri.toString())
+  override fun startStream(uri: String) {
+    webRTCPlayer.openVideoUrl(uri)
   }
 
   override fun releaseCamera() {
