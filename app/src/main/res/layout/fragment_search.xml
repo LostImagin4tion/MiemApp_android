@@ -43,6 +43,7 @@
                         android:hint="@string/search_hint"
                         android:imeOptions="actionSearch"
                         android:inputType="text"
+                        android:ellipsize="end"
                         tools:ignore="RtlSymmetry" />
 
                     <ImageButton
