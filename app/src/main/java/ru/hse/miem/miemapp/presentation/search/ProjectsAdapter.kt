@@ -10,23 +10,33 @@ import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
 import java.util.*
 
 class ProjectsAdapter(
-    private val projects: List<ProjectInSearch>,
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<ProjectsAdapter.ProjectViewHolder>() {
 
+    private var projects: List<ProjectInSearch> = emptyList()
     private var displayedProjects = projects
 
-    fun performSearch(condition: String) {
+    fun performSearch(condition: String, filters: SearchFilters) {
         fun String.matchesCondition() = toLowerCase(Locale.getDefault()).matches(Regex(".*$condition.*"))
 
         displayedProjects = projects.filter {
-            it.name.matchesCondition() ||
-            it.head.matchesCondition() ||
-            it.type.matchesCondition() ||
-            it.number.toString().matchesCondition() ||
-            condition.isEmpty() || condition.isBlank()
-        }
+                it.name.matchesCondition() ||
+                it.head.matchesCondition() ||
+                it.number.toString().matchesCondition() ||
+                condition.isEmpty() || condition.isBlank()
+            }
+            .filter { !filters.isAvailableVacancies || it.vacancies > 0 }
+            .filter { filters.projectsType == 0 || it.type == filters.projectsTypeName } // filter if not default
+
         notifyDataSetChanged()
+    }
+
+    fun update(projects: List<ProjectInSearch>) {
+        this.projects = projects
+        if (displayedProjects.isEmpty()) {
+            displayedProjects = this.projects
+            notifyDataSetChanged()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {

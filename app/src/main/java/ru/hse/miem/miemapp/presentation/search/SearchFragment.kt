@@ -28,6 +28,11 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
     fun provideSearchPresenter() = searchPresenter
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private val projectsAdapter = ProjectsAdapter {
+        val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
+        findNavController().navigate(action)
+    }
+    private val filters = SearchFilters()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,47 +54,74 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
             return
         }
 
+        projectsList.adapter = projectsAdapter
+
         searchInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchLoader.visibility = View.VISIBLE
-                projectsList.visibility = View.GONE
-
-                (projectsList.adapter as ProjectsAdapter?)?.performSearch(
-                    searchInput.text
-                        .toString()
-                        .toLowerCase(Locale.getDefault())
-                        .trim()
-                )
-
-                searchLoader.visibility = View.GONE
-                projectsList.visibility = View.VISIBLE
+                filterResults()
                 true
             } else {
                 false
             }
         }
+
         bottomSheetBehavior = BottomSheetBehavior.from(filtersLayout)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                    restoreFilters()
+                }
+            }
+        })
 
         filterButton.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        searchPresenter.onCreate()
+        showResultsButton.setOnClickListener {
+            filterResults()
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        }
 
+        searchPresenter.onCreate()
+    }
+
+    private fun filterResults() {
+        filters.projectsType = projectTypesSelector.selectedItemPosition
+        filters.projectsTypeName = projectTypesSelector.selectedItem as String
+
+        filters.isAvailableVacancies = withVacanciesCheckbox.isChecked
+
+        (projectsList.adapter as ProjectsAdapter?)?.performSearch(
+            searchInput.text
+                .toString()
+                .toLowerCase(Locale.getDefault())
+                .trim(),
+            filters
+        )
+    }
+
+    private fun restoreFilters() {
+        projectTypesSelector.setSelection(filters.projectsType)
+        withVacanciesCheckbox.isChecked = filters.isAvailableVacancies
     }
 
 
     override fun setupProjects(projects: List<ProjectInSearch>) {
-        projectsList.adapter = ProjectsAdapter(projects) {
-            val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
-            findNavController().navigate(action)
-        }
+        projectsAdapter.update(projects)
+
+        val defaultFilterValue = getString(R.string.search_filters_selector_default)
+        projectTypesSelector.adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.item_dropdown_simple,
+            listOf(defaultFilterValue) + projects.map { it.type }.toSet().toList()
+        )
+
+        restoreFilters()
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
-
-        ArrayAdapter(requireContext(), R.layout.item_dropdown_simple,  projects.map { it.type }.toSet().toList()).also {
-            projectTypesSelector.adapter = it
-        }
     }
 }

@@ -28,7 +28,7 @@
     <string name="project_vacancies">%d vacancy(s)</string>
     <string name="project_head">Head: %s</string>
     <string name="project_type_item">Type: %s</string>
-    <string name="search_hint">Search by name, number, head or type</string>
+    <string name="search_hint">Search by name, number or head</string>
 
     <string name="search_filters_title">Filters</string>
     <string name="search_filters_pr_type">Project type</string>
