@@ -26,7 +26,8 @@ class ProjectsAdapter(
                 condition.isEmpty() || condition.isBlank()
             }
             .filter { !filters.isAvailableVacancies || it.vacancies > 0 }
-            .filter { filters.projectsType == 0 || it.type == filters.projectsTypeName } // filter if not default
+            .filter { filters.projectType == 0 || it.type == filters.projectTypeName } // filter if not default
+            .filter { filters.projectState == 0 || it.state == filters.projectStateName }
 
         notifyDataSetChanged()
     }

@@ -5,4 +5,5 @@
     android:layout_height="match_parent"
     android:textColor="@android:color/black"
     android:textSize="16sp"
-    android:padding="6dp"/>
+    android:padding="6dp"
+    android:ellipsize="marquee"/>

@@ -23,19 +23,58 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="@string/search_filters_pr_type"
-        android:textSize="14sp"/>
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/projectTypesSelector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/spinner_background"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/search_filters_pr_type"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/projectTypeSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/spinner_background" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/search_filters_pr_state"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/projectStateSelector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/spinner_background" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/withVacanciesCheckbox"

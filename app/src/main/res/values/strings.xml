@@ -32,6 +32,7 @@
 
     <string name="search_filters_title">Filters</string>
     <string name="search_filters_pr_type">Project type</string>
+    <string name="search_filters_pr_state">Project state</string>
     <string name="search_filters_selector_default">Any</string>
     <string name="search_filters_with_vacancies">With vacancies</string>
     <string name="search_filters_show_results">Show results</string>

@@ -90,8 +90,11 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
     }
 
     private fun filterResults() {
-        filters.projectsType = projectTypesSelector.selectedItemPosition
-        filters.projectsTypeName = projectTypesSelector.selectedItem as String
+        filters.projectType = projectTypeSelector.selectedItemPosition
+        filters.projectTypeName = projectTypeSelector.selectedItem as String
+
+        filters.projectState = projectStateSelector.selectedItemPosition
+        filters.projectStateName = projectStateSelector.selectedItem as String
 
         filters.isAvailableVacancies = withVacanciesCheckbox.isChecked
 
@@ -105,7 +108,8 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
     }
 
     private fun restoreFilters() {
-        projectTypesSelector.setSelection(filters.projectsType)
+        projectTypeSelector.setSelection(filters.projectType)
+        projectStateSelector.setSelection(filters.projectState)
         withVacanciesCheckbox.isChecked = filters.isAvailableVacancies
     }
 
@@ -114,10 +118,15 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
         projectsAdapter.update(projects)
 
         val defaultFilterValue = getString(R.string.search_filters_selector_default)
-        projectTypesSelector.adapter = ArrayAdapter(
+        projectTypeSelector.adapter = ArrayAdapter(
             requireContext(),
             R.layout.item_dropdown_simple,
             listOf(defaultFilterValue) + projects.map { it.type }.toSet().toList()
+        )
+        projectStateSelector.adapter = ArrayAdapter(
+            requireContext(),
+            R.layout.item_dropdown_simple,
+            listOf(defaultFilterValue) + projects.map { it.state }.toSet().toList()
         )
 
         restoreFilters()
