@@ -14,34 +14,51 @@
         android:layout_gravity="center" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.Toolbar
+            <Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/searchInput"
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/common_fragment_margin"
-                    android:layout_marginEnd="@dimen/common_fragment_margin"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/text_input_bg"
-                    android:hint="@string/search_hint"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text" />
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal">
 
-            </androidx.appcompat.widget.Toolbar>
+                    <EditText
+                        android:id="@+id/searchInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingEnd="32dp"
+                        android:background="@drawable/text_input_bg"
+                        android:hint="@string/search_hint"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        tools:ignore="RtlSymmetry" />
+
+                    <ImageButton
+                        android:id="@+id/filterButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_filter"
+                        android:layout_gravity="center_vertical|end"
+                        tools:ignore="ContentDescription" />
+
+                </FrameLayout>
+
+            </Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/projectsList"
@@ -54,6 +71,9 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_project_in_search"
             tools:visibility="visible" />
+
     </LinearLayout>
+
+    <include layout="@layout/layout_bottom_filters"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

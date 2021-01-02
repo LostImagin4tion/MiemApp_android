@@ -18,6 +18,7 @@
     <!-- swap colorAccent with colorPrimary-->
     <style name="InverseAccent" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorAccent</item>
     </style>
 
     <style name="BadgeStyle" parent="TextAppearance.AppCompat.Medium">

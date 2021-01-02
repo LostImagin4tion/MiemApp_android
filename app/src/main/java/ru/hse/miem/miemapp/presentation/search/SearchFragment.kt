@@ -4,10 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
@@ -24,6 +27,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
     @ProvidePresenter
     fun provideSearchPresenter() = searchPresenter
 
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,7 +49,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
             return
         }
 
-        searchPresenter.onCreate()
         searchInput.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchLoader.visibility = View.VISIBLE
@@ -65,23 +68,28 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
                 false
             }
         }
+        bottomSheetBehavior = BottomSheetBehavior.from(filtersLayout)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        filterButton.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        searchPresenter.onCreate()
+
     }
 
-    private var isProjectsSetuped = false
 
     override fun setupProjects(projects: List<ProjectInSearch>) {
-        if (isProjectsSetuped) return
         projectsList.adapter = ProjectsAdapter(projects) {
             val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
             findNavController().navigate(action)
         }
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
-        isProjectsSetuped = true
-    }
 
-    override fun onPause() {
-        super.onPause()
-        isProjectsSetuped = false
+        ArrayAdapter(requireContext(), R.layout.item_dropdown_simple,  projects.map { it.type }.toSet().toList()).also {
+            projectTypesSelector.adapter = it
+        }
     }
 }
