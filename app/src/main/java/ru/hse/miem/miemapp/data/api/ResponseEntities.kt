@@ -72,7 +72,7 @@ data class ProjectHeaderResponse(
 ) {
     data class Data(
         val id: Long,
-        val number: Any?, // here's workaround because api developers are stupid as fuck and sometimes return boolean in number filed
+        val number: Any?, // here's workaround because api developers are stupid af and sometimes return boolean in number field
         val googleGroup: String?,
         val typeLabel: String,
         val sourceLabel: String,
@@ -108,6 +108,19 @@ data class ProjectMembersResponse(
             val role: String
         )
     }
+}
+
+data class ProjectVacanciesResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val vacancy_id: Long,
+        val role: String,
+        val count: Int,
+        val booked: Boolean,
+        val disciplines: List<String>,
+        val additionally: List<String>
+    )
 }
 
 data class GitStatisticsResponse(

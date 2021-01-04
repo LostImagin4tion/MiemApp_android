@@ -27,6 +27,19 @@ class ProjectRepository @Inject constructor(
                         avatarUrl = CabinetApi.getAvatarUrl(it.id)
                     )
                 }
+            val vacancies = cabinetApi.projectVacancies(id)
+                .blockingGet()
+                .data
+                .filter { !it.booked } // if vacancy is active
+                .map{
+                    ProjectExtended.Vacancy(
+                        id = it.vacancy_id,
+                        role = it.role,
+                        required = it.disciplines.joinToString(separator = "\n"),
+                        recommended = it.additionally.joinToString(separator = "\n"),
+                        count = it.count
+                    )
+                }
             val gitRepositories = cabinetApi.gitStatistics(id)
                 .blockingGet()
                 .data.getOrNull(0)
@@ -45,7 +58,8 @@ class ProjectRepository @Inject constructor(
                 objective = body.target ?: "",
                 annotation = body.annotation ?: "",
                 members = members,
-                links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories
+                links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories,
+                vacancies = vacancies
             )
         }
 

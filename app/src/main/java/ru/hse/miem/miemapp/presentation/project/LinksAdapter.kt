@@ -10,7 +10,9 @@ import kotlinx.android.synthetic.main.item_link.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
 
-class LinksAdapter(private val links: List<ProjectExtended.Link>) : RecyclerView.Adapter<LinksAdapter.LinkViewHolder>() {
+class LinksAdapter(
+    private val links: List<ProjectExtended.Link>
+) : RecyclerView.Adapter<LinksAdapter.LinkViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LinkViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_link, parent, false)

@@ -31,7 +31,8 @@ data class ProjectExtended(
     val objective: String,
     val annotation: String,
     val members: List<Member>,
-    val links: List<Link>
+    val links: List<Link>,
+    val vacancies: List<Vacancy>
 ) {
     data class Member(
         val id: Long,
@@ -45,6 +46,14 @@ data class ProjectExtended(
     data class Link(
         val name: String,
         val url: String
+    )
+
+    data class Vacancy(
+        val id: Long,
+        val role: String,
+        val required: String,
+        val recommended: String,
+        val count: Int
     )
 }
 

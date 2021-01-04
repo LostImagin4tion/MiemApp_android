@@ -57,7 +57,18 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
             val action = ProjectFragmentDirections.actionFragmentProjectToFragmentProfile(id, isTeacher)
             findNavController().navigate(action)
         }
-        linksList.adapter = LinksAdapter(links)
+
+        if (links.isNotEmpty()) {
+            linksList.adapter = LinksAdapter(links)
+            linksNoData.visibility = View.GONE
+            linksList.visibility = View.VISIBLE
+        }
+
+        if (vacancies.isNotEmpty()) {
+            vacanciesList.adapter = VacanciesAdapter(vacancies)
+            vacanciesNoData.visibility = View.GONE
+            vacanciesList.visibility = View.VISIBLE
+        }
 
         projectLoader.visibility = View.GONE
         projectContent.visibility = View.VISIBLE
