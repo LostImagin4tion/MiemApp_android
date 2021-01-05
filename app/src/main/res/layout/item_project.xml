@@ -47,9 +47,7 @@
             android:layout_marginBottom="6dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Участников: 3"
-            app:drawableStartCompat="@drawable/ic_group"
-            android:drawablePadding="4dp"/>
+            tools:text="Участников: 3"/>
 
     </LinearLayout>
 
