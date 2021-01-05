@@ -59,7 +59,8 @@ class ProjectRepository @Inject constructor(
                 annotation = body.annotation ?: "",
                 members = members,
                 links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories,
-                vacancies = vacancies
+                vacancies = vacancies,
+                url = CabinetApi.getProjectUrl(id)
             )
         }
 

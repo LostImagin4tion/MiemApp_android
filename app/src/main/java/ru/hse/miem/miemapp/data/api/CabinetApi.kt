@@ -14,6 +14,7 @@ interface CabinetApi {
         private const val publicApi = "public-api"
 
         fun getAvatarUrl(userId: Long) = "$CABINET_BASE_URL$publicApi/user/$userId/avatar"
+        fun getProjectUrl(projectId: Long) = "$CABINET_BASE_URL#/project/$projectId"
     }
 
     @POST("vue/google")

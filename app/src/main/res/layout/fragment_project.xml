@@ -188,8 +188,22 @@
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_project_vacancy"
-                tools:itemCount="5"
+                tools:itemCount="2"
                 tools:visibility="visible"/>
+
+            <Button
+                android:id="@+id/projectOpenInBrowserButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:textAllCaps="false"
+                android:text="@string/project_open_in_browser"
+                android:textColor="@color/colorAccent"
+                android:drawableEnd="@drawable/ic_open_in_browser"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="2dp"
+                app:cornerRadius="8dp"/>
 
         </LinearLayout>
 

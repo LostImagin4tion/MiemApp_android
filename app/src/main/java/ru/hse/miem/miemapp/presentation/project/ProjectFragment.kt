@@ -70,6 +70,10 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
             vacanciesList.visibility = View.VISIBLE
         }
 
+        projectOpenInBrowserButton.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        }
+
         projectLoader.visibility = View.GONE
         projectContent.visibility = View.VISIBLE
     }

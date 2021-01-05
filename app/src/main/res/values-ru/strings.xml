@@ -28,6 +28,7 @@
     <string name="project_vacancy_required">Обязательно</string>
     <string name="project_vacancy_recommended">Желательно</string>
     <string name="project_vacancy_apply">Записаться</string>
+    <string name="project_open_in_browser">Открыть в браузере</string>
 
     <string name="project_vacancies">%d вакансий(я)</string>
     <string name="project_head">Руководитель: %s</string>

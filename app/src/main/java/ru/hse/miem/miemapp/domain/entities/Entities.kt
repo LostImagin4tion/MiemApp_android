@@ -32,7 +32,8 @@ data class ProjectExtended(
     val annotation: String,
     val members: List<Member>,
     val links: List<Link>,
-    val vacancies: List<Vacancy>
+    val vacancies: List<Vacancy>,
+    val url: String
 ) {
     data class Member(
         val id: Long,
