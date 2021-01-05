@@ -31,6 +31,7 @@
     <string name="project_vacancy_recommended">Recommended</string>
     <string name="project_vacancy_apply">Apply</string>
     <string name="project_open_in_browser">Open in browser</string>
+    <string name="projected_embedded_image_error">(Embedded images are not supported!)</string>
 
     <string name="project_vacancies">%d vacancy(s)</string>
     <string name="project_head">Head: %s</string>

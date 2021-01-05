@@ -51,8 +51,11 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         projectState.text = state
         projectState.setBackgroundResource(if (isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
         projectEmail.text = email
-        projectObjective.text = objective
-        projectAnnotation.text = annotation
+
+        val imageRegex = Regex("!\\[.+]\\(data:image/.+\\)")
+        projectObjective.text = objective.replace(imageRegex, getString(R.string.projected_embedded_image_error))
+        projectAnnotation.text = annotation.replace(imageRegex, getString(R.string.projected_embedded_image_error))
+
         membersList.adapter = MembersAdapter(members) { id, isTeacher ->
             val action = ProjectFragmentDirections.actionFragmentProjectToFragmentProfile(id, isTeacher)
             findNavController().navigate(action)

@@ -29,6 +29,7 @@
     <string name="project_vacancy_recommended">Желательно</string>
     <string name="project_vacancy_apply">Записаться</string>
     <string name="project_open_in_browser">Открыть в браузере</string>
+    <string name="projected_embedded_image_error">(Встроенные картинки не поддерживаются!)</string>
 
     <string name="project_vacancies">%d вакансий(я)</string>
     <string name="project_head">Руководитель: %s</string>

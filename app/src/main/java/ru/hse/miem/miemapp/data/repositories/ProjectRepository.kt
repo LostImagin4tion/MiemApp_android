@@ -20,8 +20,8 @@ class ProjectRepository @Inject constructor(
                 .map {
                     ProjectExtended.Member(
                         id = it.id,
-                        firstName = it.first_name,
-                        lastName = it.last_name,
+                        firstName = it.first_name ?: it.name,
+                        lastName = it.last_name ?: "",
                         isTeacher = it.dep?.isNotEmpty() ?: false,
                         role = it.role,
                         avatarUrl = CabinetApi.getAvatarUrl(it.id)
