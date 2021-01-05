@@ -16,8 +16,12 @@
     <string name="teacher_badge">Преподаватель</string>
     <string name="projects_title">Проекты</string>
     <string name="project_members">Участники: %d</string>
+    <string name="project_type">Тип: %s</string>
+    <string name="project_state">Статус: %s</string>
+    <string name="project_role">Роль: %s</string>
+    <string name="project_hours">Часы: %d</string>
 
-    <string name="project_type">Проект #%d, %s (%s)</string>
+    <string name="project_type_and_number">Проект #%d, %s (%s)</string>
     <string name="project_team">Команда</string>
     <string name="project_basic_info">Общая информация</string>
     <string name="project_objective">Цель проекта</string>

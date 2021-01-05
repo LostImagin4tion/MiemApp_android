@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.domain.entities.MyProjectBasic
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
@@ -72,6 +73,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
 
         if (projects.isNotEmpty()) {
             projectsList.adapter = ProjectsAdapter(projects) {
+                val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
+                findNavController().navigate(action)
+            }
+        } else {
+            userNoProjectInfo.visibility = View.VISIBLE
+        }
+    }
+
+    override fun setupMyProjects(projects: List<MyProjectBasic>) {
+        userProjectsLoader.visibility = View.GONE
+
+        if (projects.isNotEmpty()) {
+            projectsList.adapter = MyProjectsAdapter(projects) {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
             }

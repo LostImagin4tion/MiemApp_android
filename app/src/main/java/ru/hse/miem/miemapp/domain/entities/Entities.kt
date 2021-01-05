@@ -18,6 +18,19 @@ data class ProjectBasic(
     val members: Int
 )
 
+// displayed in my profile
+data class MyProjectBasic(
+    val id: Long,
+    val number: Long,
+    val name: String,
+    val members: Int,
+    val hours: Int,
+    val head: String,
+    val type: String,
+    val role: String,
+    val state: String
+)
+
 // displayed in project screen
 data class ProjectExtended(
     val id: Long,

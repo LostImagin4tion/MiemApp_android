@@ -5,6 +5,7 @@ import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.StudentProfileResponse
 import ru.hse.miem.miemapp.data.api.TeacherProfileResponse
+import ru.hse.miem.miemapp.domain.entities.MyProjectBasic
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
@@ -35,6 +36,23 @@ class ProfileRepository @Inject constructor(
                     number = it.number,
                     name = it.name,
                     members = it.students
+                )
+            }
+        }
+
+    override fun getMyProjects() = cabinetApi.myUserStatistic()
+        .map {
+            it.data.projects.data.map {
+                MyProjectBasic(
+                    id = it.project_id,
+                    number = it.number,
+                    name = it.project_name,
+                    members = it.team.size,
+                    hours = it.userHours,
+                    head = it.leader,
+                    type = it.type,
+                    role = it.role,
+                    state = it.state
                 )
             }
         }

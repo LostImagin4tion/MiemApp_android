@@ -63,6 +63,30 @@ data class StatisticResponse(
     }
 }
 
+data class MyStatisticResponse(
+    val data: Data
+) {
+    data class Data(
+        val projects: Projects
+    ) {
+        data class Projects(
+            val data: List<ProjectData>
+        ) {
+            data class ProjectData(
+                val project_id: Long,
+                val project_name: String,
+                val number: Long,
+                val team: List<String>,
+                val leader: String,
+                val state: String,
+                val type: String,
+                val role: String,
+                val userHours: Int
+            )
+        }
+    }
+}
+
 
 /**
  * Project related

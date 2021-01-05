@@ -38,6 +38,9 @@ interface CabinetApi {
     @GET("$publicApi/student_statistics/{id}")
     fun userStatistic(@Path("id") id: Long): Single<StatisticResponse>
 
+    @GET("$api/student/projects/and/applications/my")
+    fun myUserStatistic(): Single<MyStatisticResponse>
+
     /**
      * Project related endpoints
      */

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/item_project_side_line"
+        android:layout_marginEnd="6dp"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/projectNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            tools:text="617"/>
+
+        <TextView
+            android:id="@+id/projectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif-medium"
+            tools:text="Андроид приложение МИЭМ"/>
+
+        <TextView
+            android:id="@+id/projectState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Статус: Рабочий"
+            app:drawableStartCompat="@drawable/ic_hourglass_bottom"
+            android:drawablePadding="4dp"/>
+
+        <TextView
+            android:id="@+id/projectType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Тип: Прогр."
+            app:drawableStartCompat="@drawable/ic_computer"
+            android:drawablePadding="4dp"/>
+
+        <TextView
+            android:id="@+id/projectHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Руководитель: Королев Королев Королев"
+            app:drawableStartCompat="@drawable/ic_profile"
+            android:drawablePadding="4dp"/>
+
+        <TextView
+            android:id="@+id/projectRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Роль: Разработчик"
+            app:drawableStartCompat="@drawable/ic_work"
+            android:drawablePadding="4dp"/>
+
+        <TextView
+            android:id="@+id/projectMembers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Участников: 3"
+            app:drawableStartCompat="@drawable/ic_group"
+            android:drawablePadding="4dp"/>
+
+        <TextView
+            android:id="@+id/projectHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            tools:text="Часы: 42"
+            app:drawableStartCompat="@drawable/ic_clock"
+            android:drawablePadding="4dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

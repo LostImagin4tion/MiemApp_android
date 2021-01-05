@@ -46,7 +46,7 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
     }
 
     override fun setupProject(project: ProjectExtended) = project.run {
-        projectType.text = getString(R.string.project_type).format(number, type, source)
+        projectType.text = getString(R.string.project_type_and_number).format(number, type, source)
         projectName.text = name
         projectState.text = state
         projectState.setBackgroundResource(if (isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
