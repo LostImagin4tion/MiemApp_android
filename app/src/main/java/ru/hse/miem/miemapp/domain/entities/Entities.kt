@@ -7,7 +7,8 @@ data class Profile(
     val lastName: String,
     val email: String,
     val occupation: String,
-    val avatarUrl: String
+    val avatarUrl: String,
+    val chatUrl: String
 )
 
 // displayed in profile

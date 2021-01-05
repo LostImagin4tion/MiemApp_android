@@ -27,7 +27,6 @@
         app:layout_constraintGuide_percent="0.5"/>
 
 
-    <!-- do not replace drawableLeft with drawableStart, it doesn't work -->
     <Button
         android:id="@+id/googleSignInButton"
         android:layout_width="wrap_content"
@@ -35,7 +34,9 @@
         android:textColor="@android:color/black"
         android:text="@string/login_button_text"
         android:textAllCaps="false"
-        android:drawableLeft="@drawable/google_logo"
+        app:icon="@drawable/google_logo"
+        app:iconTintMode="add"
+        app:iconTint="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginGuideline"

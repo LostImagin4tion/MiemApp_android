@@ -16,6 +16,7 @@
 
     <string name="student_badge">Student</string>
     <string name="teacher_badge">Teacher</string>
+    <string name="profile_go_to_chat">Go to chat</string>
     <string name="projects_title">Projects</string>
     <string name="project_members">Members:</string>
     <string name="project_type">Type:</string>

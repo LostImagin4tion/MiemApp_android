@@ -67,7 +67,8 @@ class ProfileRepository @Inject constructor(
             lastName = main.name.split(" ")[0],
             email = main.email,
             occupation = main.group,
-            avatarUrl = CabinetApi.getAvatarUrl(main.studentId)
+            avatarUrl = CabinetApi.getAvatarUrl(main.studentId),
+            chatUrl = main.chatLink
         )
     }
 
@@ -80,7 +81,8 @@ class ProfileRepository @Inject constructor(
             lastName = main.name.split(" ")[0],
             email = main.email,
             occupation = main.department,
-            avatarUrl = CabinetApi.getAvatarUrl(main.teacherId)
+            avatarUrl = CabinetApi.getAvatarUrl(main.teacherId),
+            chatUrl = CabinetApi.DEFAULT_CHAT_LINK
         )
     }
 }

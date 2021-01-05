@@ -14,6 +14,7 @@
 
     <string name="student_badge">Студент</string>
     <string name="teacher_badge">Преподаватель</string>
+    <string name="profile_go_to_chat">Перейти в чат</string>
     <string name="projects_title">Проекты</string>
     <string name="project_members">Участники:</string>
     <string name="project_type">Тип:</string>

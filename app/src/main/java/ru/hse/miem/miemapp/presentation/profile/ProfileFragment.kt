@@ -64,6 +64,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         userEmail.text = email
         userOccupation.text = occupation
 
+        goToChatButton.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
+        }
+
         profileLoader.visibility = View.GONE
         profileContent.visibility = View.VISIBLE
     }

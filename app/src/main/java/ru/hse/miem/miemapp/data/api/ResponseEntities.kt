@@ -29,7 +29,8 @@ data class StudentProfileResponse(
         val name: String,
         val group: String,
         val email: String,
-        val direction: String
+        val direction: String,
+        val chatLink: String
     )
 }
 

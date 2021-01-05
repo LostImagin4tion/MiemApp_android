@@ -91,7 +91,7 @@
                 android:id="@+id/userEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="16dp"
                 android:textColor="@color/link_color"
                 android:textSize="16sp"
                 android:drawablePadding="8dp"
@@ -104,13 +104,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:layout_marginBottom="12dp"
                 android:textColor="@android:color/black"
                 android:textSize="16sp"
                 android:drawablePadding="8dp"
                 android:textIsSelectable="true"
                 app:drawableStartCompat="@drawable/ic_school_hat"
                 tools:text="Department of Computer Engineering" />
+
+            <Button
+                android:id="@+id/goToChatButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/profile_go_to_chat"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                app:icon="@drawable/ic_chat"
+                app:iconTint="@color/colorAccent"
+                app:strokeColor="@color/colorAccent"
+                app:strokeWidth="2dp"
+                app:cornerRadius="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
