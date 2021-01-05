@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_project_in_search.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
+import ru.hse.miem.miemapp.presentation.TextViewUtils.makeNameValueString
 import java.util.*
 
 class ProjectsAdapter(
@@ -61,8 +62,8 @@ class ProjectsAdapter(
                 projectVacancies.visibility = View.VISIBLE
                 projectVacancies.text = context.getString(R.string.project_vacancies).format(project.vacancies)
             }
-            projectType.text = context.getString(R.string.project_type_item).format(project.type)
-            projectHead.text = context.getString(R.string.project_head).format(project.head)
+            projectType.text = makeNameValueString(R.string.project_type, project.type)
+            projectHead.text = makeNameValueString(R.string.project_head, project.head)
 
             setOnClickListener { navigateToProject(project.id) }
         }

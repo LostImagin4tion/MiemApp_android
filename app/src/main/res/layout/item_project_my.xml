@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             tools:text="Тип: Прогр."/>
 
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             tools:text="Руководитель: Королев Королев Королев"/>
 
@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             tools:text="Роль: Разработчик"/>
 
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             tools:text="Участников: 3"/>
 
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textColor="@android:color/black"
             tools:text="Часы: 42"/>
 

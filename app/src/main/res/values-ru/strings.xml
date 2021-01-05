@@ -21,7 +21,7 @@
     <string name="project_state">Статус:</string>
     <string name="project_role">Роль:</string>
     <string name="project_hours">Часы:</string>
-    <string name="project_head_card">Руководитель:</string>
+    <string name="project_head">Руководитель:</string>
 
     <string name="project_type_and_number">Проект #%d, %s (%s)</string>
     <string name="project_team">Команда</string>
@@ -38,10 +38,7 @@
     <string name="projected_embedded_image_error">(Встроенные картинки не поддерживаются!)</string>
 
     <string name="project_vacancies">%d вакансий(я)</string>
-    <string name="project_head">Руководитель: %s</string>
-    <string name="project_type_item">Тип: %s</string>
     <string name="search_hint">Поиск по названию, номеру, руководителю</string>
-
     <string name="search_filters_title">Фильтры</string>
     <string name="search_filters_pr_type">Тип проекта</string>
     <string name="search_filters_pr_state">Статус проекта</string>

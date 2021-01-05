@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:background="@color/colorAccent"
-            android:padding="12dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/vacancyName"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:fontFamily="sans-serif-medium"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 tools:text="Android developer" />
 
             <Space
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 tools:text="1" />
 
         </LinearLayout>
@@ -53,14 +53,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:text="@string/project_vacancy_required"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="@color/colorAccent"
                 android:fontFamily="sans-serif-medium"/>
 
@@ -69,16 +68,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textColor="@android:color/black"
                 tools:text="Write code"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:text="@string/project_vacancy_recommended"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 android:textColor="@color/colorAccent"
                 android:fontFamily="sans-serif-medium"/>
 
@@ -86,8 +84,8 @@
                 android:id="@+id/vacancyRecommended"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:textSize="16sp"
+                android:layout_marginBottom="8dp"
+                android:textSize="15sp"
                 android:textColor="@android:color/black"
                 tools:text="Write code"/>
 
