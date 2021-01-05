@@ -44,12 +44,11 @@
             android:id="@+id/projectState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
+            android:layout_marginBottom="4dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Статус: Рабочий"
-            app:drawableStartCompat="@drawable/ic_hourglass_bottom"
-            android:drawablePadding="4dp"/>
+            tools:text="Рабочий"
+            tools:background="@drawable/project_badge_active_bg"/>
 
         <TextView
             android:id="@+id/projectType"
@@ -58,9 +57,7 @@
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Тип: Прогр."
-            app:drawableStartCompat="@drawable/ic_computer"
-            android:drawablePadding="4dp"/>
+            tools:text="Тип: Прогр."/>
 
         <TextView
             android:id="@+id/projectHead"
@@ -69,9 +66,7 @@
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Руководитель: Королев Королев Королев"
-            app:drawableStartCompat="@drawable/ic_profile"
-            android:drawablePadding="4dp"/>
+            tools:text="Руководитель: Королев Королев Королев"/>
 
         <TextView
             android:id="@+id/projectRole"
@@ -80,9 +75,7 @@
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Роль: Разработчик"
-            app:drawableStartCompat="@drawable/ic_work"
-            android:drawablePadding="4dp"/>
+            tools:text="Роль: Разработчик"/>
 
         <TextView
             android:id="@+id/projectMembers"
@@ -91,9 +84,7 @@
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Участников: 3"
-            app:drawableStartCompat="@drawable/ic_group"
-            android:drawablePadding="4dp"/>
+            tools:text="Участников: 3"/>
 
         <TextView
             android:id="@+id/projectHours"
@@ -102,9 +93,7 @@
             android:layout_marginBottom="6dp"
             android:textSize="16sp"
             android:textColor="@android:color/black"
-            tools:text="Часы: 42"
-            app:drawableStartCompat="@drawable/ic_clock"
-            android:drawablePadding="4dp"/>
+            tools:text="Часы: 42"/>
 
     </LinearLayout>
 

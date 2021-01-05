@@ -52,7 +52,8 @@ class ProfileRepository @Inject constructor(
                     head = it.leader,
                     type = it.type,
                     role = it.role,
-                    state = it.state
+                    state = it.state,
+                    isActive = it.statusId == 2
                 )
             }
         }

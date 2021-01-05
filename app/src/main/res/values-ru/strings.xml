@@ -15,11 +15,12 @@
     <string name="student_badge">Студент</string>
     <string name="teacher_badge">Преподаватель</string>
     <string name="projects_title">Проекты</string>
-    <string name="project_members">Участники: %d</string>
-    <string name="project_type">Тип: %s</string>
-    <string name="project_state">Статус: %s</string>
-    <string name="project_role">Роль: %s</string>
-    <string name="project_hours">Часы: %d</string>
+    <string name="project_members">Участники:</string>
+    <string name="project_type">Тип:</string>
+    <string name="project_state">Статус:</string>
+    <string name="project_role">Роль:</string>
+    <string name="project_hours">Часы:</string>
+    <string name="project_head_card">Руководитель:</string>
 
     <string name="project_type_and_number">Проект #%d, %s (%s)</string>
     <string name="project_team">Команда</string>

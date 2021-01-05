@@ -81,7 +81,8 @@ data class MyStatisticResponse(
                 val state: String,
                 val type: String,
                 val role: String,
-                val userHours: Int
+                val userHours: Int,
+                val statusId: Int
             )
         }
     }

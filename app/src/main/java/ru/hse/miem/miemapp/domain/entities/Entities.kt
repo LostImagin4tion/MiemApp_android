@@ -28,7 +28,8 @@ data class MyProjectBasic(
     val head: String,
     val type: String,
     val role: String,
-    val state: String
+    val state: String,
+    val isActive: Boolean
 )
 
 // displayed in project screen

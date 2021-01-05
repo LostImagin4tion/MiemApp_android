@@ -17,11 +17,12 @@
     <string name="student_badge">Student</string>
     <string name="teacher_badge">Teacher</string>
     <string name="projects_title">Projects</string>
-    <string name="project_members">Members: %d</string>
-    <string name="project_type">Type: %s</string>
-    <string name="project_state">Status: %s</string>
-    <string name="project_role">Role: %s</string>
-    <string name="project_hours">Hours: %d</string>
+    <string name="project_members">Members:</string>
+    <string name="project_type">Type:</string>
+    <string name="project_state">Status:</string>
+    <string name="project_role">Role:</string>
+    <string name="project_hours">Hours:</string>
+    <string name="project_head_card">Head:</string>
 
     <string name="project_type_and_number">Project #%d, %s (%s)</string>
     <string name="project_team">Team</string>
