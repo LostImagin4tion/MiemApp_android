@@ -4,3 +4,4 @@
 ## Сборка
 Дебаг версия - `./graldew :app:packageDebugUniversalApk`  
 Релиз версия - `./gradlew :app:packageReleaseUniversalApk`
+tinder
