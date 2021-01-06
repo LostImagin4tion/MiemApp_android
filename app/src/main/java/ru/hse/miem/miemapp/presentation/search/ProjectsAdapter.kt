@@ -17,6 +17,8 @@ class ProjectsAdapter(
     private var projects: List<ProjectInSearch> = emptyList()
     private var displayedProjects = projects
 
+    val hasData get() = projects.isNotEmpty()
+
     fun performSearch(condition: String, filters: SearchFilters) {
         fun String.matchesCondition() = toLowerCase(Locale.getDefault()).matches(Regex(".*$condition.*"))
 

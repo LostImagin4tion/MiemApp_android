@@ -194,10 +194,17 @@ private fun BottomNavigationView.setupItemReselected(
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
                 as NavHostFragment
         val navController = selectedFragment.navController
+
         // Pop the back stack to the start destination of the current navController graph
-        navController.popBackStack(
-            navController.graph.startDestination, false
-        )
+//        navController.popBackStack(
+//            navController.graph.startDestination, false
+//        )
+        // ^^^ how it was (sometimes this didn't work properly)
+
+        // so i rewrote it
+        if (selectedFragment.childFragmentManager.backStackEntryCount > 0) {
+            navController.graph = navController.graph // resetting graph leads to reloading
+        }
     }
 }
 

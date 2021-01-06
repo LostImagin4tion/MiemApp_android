@@ -28,7 +28,9 @@ class MyProjectsAdapter(
     class MyProjectViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(project: MyProjectBasic, navigateToProject: (Long) -> Unit) = itemView.apply {
             projectNumber.text = project.number.toString()
-            projectName.text = project.name
+
+            // because name for my project contains its number
+            projectName.text = project.name.replace(project.number.toString(), "").trim()
 
             projectState.text = project.state
             projectState.setBackgroundResource(if (project.isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
