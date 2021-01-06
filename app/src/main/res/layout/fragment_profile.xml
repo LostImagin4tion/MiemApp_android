@@ -139,6 +139,7 @@
                 android:id="@+id/userNoProjectInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
                 android:text="@string/no_data"
                 android:visibility="gone"
                 tools:visibility="visible"/>
@@ -156,6 +157,47 @@
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_project"/>
+
+            <LinearLayout
+                android:id="@+id/userApplications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:text="@string/applications_title"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/userNoApplicationsInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/no_data"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+                <ProgressBar
+                    android:id="@+id/userApplicationsLoader"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="center_horizontal"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/applicationsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_application"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 

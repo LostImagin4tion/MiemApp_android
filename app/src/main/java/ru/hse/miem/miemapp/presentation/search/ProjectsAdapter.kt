@@ -58,7 +58,7 @@ class ProjectsAdapter(
         fun bind(project: ProjectInSearch, navigateToProject: (Long) -> Unit) = itemView.apply {
             projectNumber.text = project.number.toString()
             projectName.text = project.name
-            projectState.setBackgroundResource(if (project.isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
+            projectState.setBackgroundResource(if (project.isActive) R.drawable.badge_active_bg else R.drawable.badge_inactive_bg)
             projectState.text = project.state
             project.vacancies.takeIf { it > 0 }?.let {
                 projectVacancies.visibility = View.VISIBLE

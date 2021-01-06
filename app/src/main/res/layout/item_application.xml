@@ -41,12 +41,13 @@
             tools:text="Андроид приложение МИЭМ"/>
 
         <TextView
-            android:id="@+id/projectState"
+            android:id="@+id/applicationState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
-            tools:text="Рабочий"
+            tools:text="Подтверждена"
             tools:background="@drawable/badge_active_bg"/>
 
         <TextView
@@ -77,22 +78,26 @@
             tools:text="Роль: Разработчик"/>
 
         <TextView
-            android:id="@+id/projectMembers"
+            android:id="@+id/applicationStudentComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
             android:textColor="@android:color/black"
-            tools:text="Участников: 3"/>
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Комментарий студента:\nКомментарий"/>
 
         <TextView
-            android:id="@+id/projectHours"
+            android:id="@+id/applicationHeadComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginBottom="2dp"
             android:textSize="15sp"
             android:textColor="@android:color/black"
-            tools:text="Часы: 42"/>
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Комментарий руководителя:\nКомментарий" />
 
     </LinearLayout>
 

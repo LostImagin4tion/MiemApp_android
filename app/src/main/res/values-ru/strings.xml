@@ -23,6 +23,13 @@
     <string name="project_hours">Часы:</string>
     <string name="project_head">Руководитель:</string>
 
+    <string name="applications_title">Заявки</string>
+    <string name="application_state_waiting">Ожидает подтверждения</string>
+    <string name="application_state_approved">Подтверждена</string>
+    <string name="application_state_declined">Отклонена</string>
+    <string name="application_head_comment">Комментарий руководителя:</string>
+    <string name="application_my_comment">Мой комментарий:</string>
+
     <string name="project_type_and_number">Проект #%d, %s (%s)</string>
     <string name="project_team">Команда</string>
     <string name="project_basic_info">Общая информация</string>

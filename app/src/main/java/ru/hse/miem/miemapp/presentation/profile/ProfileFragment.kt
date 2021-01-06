@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.MyProjectBasic
+import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
@@ -41,6 +41,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         if (isMyProfile) {
             profilePresenter.onCreate()
         } else {
+            userApplications.visibility = View.GONE
             profilePresenter.onCreate(args.userId, args.isTeacher)
         }
         userEmail.setOnClickListener {
@@ -85,7 +86,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         }
     }
 
-    override fun setupMyProjects(projects: List<MyProjectBasic>) {
+    override fun setupMyProjects(projects: List<MyProjectsAndApplications.MyProjectBasic>) {
         userProjectsLoader.visibility = View.GONE
 
         if (projects.isNotEmpty()) {
@@ -95,6 +96,19 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
             }
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
+        }
+    }
+
+    override fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>) {
+        userApplicationsLoader.visibility = View.GONE
+
+        if (applications.isNotEmpty()) {
+            applicationsList.adapter = MyApplicationsAdapter(applications) {
+                val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
+                findNavController().navigate(action)
+            }
+        } else {
+            userNoApplicationsInfo.visibility = View.VISIBLE
         }
     }
 }

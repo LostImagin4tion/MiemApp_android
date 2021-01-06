@@ -5,7 +5,7 @@ import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.StudentProfileResponse
 import ru.hse.miem.miemapp.data.api.TeacherProfileResponse
-import ru.hse.miem.miemapp.domain.entities.MyProjectBasic
+import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
@@ -40,10 +40,10 @@ class ProfileRepository @Inject constructor(
             }
         }
 
-    override fun getMyProjects() = cabinetApi.myUserStatistic()
+    override fun getMyProjects(): Single<MyProjectsAndApplications> = cabinetApi.myUserStatistic()
         .map {
-            it.data.projects.data.map {
-                MyProjectBasic(
+            val projects = it.data.projects.data.map {
+                MyProjectsAndApplications.MyProjectBasic(
                     id = it.project_id,
                     number = it.number,
                     name = it.project_name,
@@ -56,6 +56,23 @@ class ProfileRepository @Inject constructor(
                     isActive = it.statusId == 2
                 )
             }
+
+            val applications = it.data.applications.data.map {
+                MyProjectsAndApplications.MyApplication(
+                    id = it.id,
+                    projectId = it.project_id,
+                    projectNumber = it.project_name.split(" ")[0].toLong(),
+                    projectName = it.project_name,
+                    projectType = it.type,
+                    role = it.role,
+                    head = it.leader,
+                    status = MyProjectsAndApplications.MyApplication.Status.valueOf(it.status),
+                    studentComment = it.studentComment,
+                    headComment = it.leaderComment
+                )
+            }
+
+            MyProjectsAndApplications(projects, applications)
         }
 
     private fun Single<StudentProfileResponse>.studentToProfile() = map {

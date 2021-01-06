@@ -67,7 +67,10 @@ class ProfilePresenter @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = viewState::setupMyProjects,
+                onSuccess = {
+                    viewState.setupMyProjects(it.projects)
+                    viewState.setupMyApplications(it.applications)
+                },
                 onError = {
                     Log.w(javaClass.simpleName, it.stackTraceToString())
                     viewState.showError()

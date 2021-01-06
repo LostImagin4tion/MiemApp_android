@@ -16,12 +16,17 @@ object TextViewUtils {
 
     /**
      * Performs concatenation of name and value, coloring and making name medium
-     * @return Name (medium, colored): Value
+     * @return Name (medium, colored)<sep>Value
      */
-    fun View.makeNameValueString(@StringRes nameId: Int, value: String, @ColorRes colorId: Int = R.color.colorPrimaryDark) = SpannableStringBuilder()
+    fun View.makeNameValueString(
+        @StringRes nameId: Int,
+        value: String,
+        @ColorRes colorId: Int = R.color.colorPrimaryDark,
+        sep: String = " "
+    ) = SpannableStringBuilder()
         .color(resources.getColor(colorId)) {
             inSpans(TypefaceSpan("sans-serif-medium")) { append(context.getString(nameId)) }
         }
-        .append(" ")
+        .append(sep)
         .append(value)
 }

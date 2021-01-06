@@ -49,7 +49,7 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         projectType.text = getString(R.string.project_type_and_number).format(number, type, source)
         projectName.text = name
         projectState.text = state
-        projectState.setBackgroundResource(if (isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
+        projectState.setBackgroundResource(if (isActive) R.drawable.badge_active_bg else R.drawable.badge_inactive_bg)
         projectEmail.text = email
 
         val imageRegex = Regex("!\\[.+]\\(data:image/.+\\)")

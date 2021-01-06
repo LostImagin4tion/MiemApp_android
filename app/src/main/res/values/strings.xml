@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MIEM App</string>
-    <string name="title_camerascontrol">Camera\'s control</string>
+    <string name="title_camerascontrol">Cameras control</string>
 
     <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
 
@@ -24,6 +24,13 @@
     <string name="project_role">Role:</string>
     <string name="project_hours">Hours:</string>
     <string name="project_head">Head:</string>
+
+    <string name="applications_title">Applications</string>
+    <string name="application_state_waiting">Waiting for approval</string>
+    <string name="application_state_approved">Approved</string>
+    <string name="application_state_declined">Declined</string>
+    <string name="application_head_comment">Head comment:</string>
+    <string name="application_my_comment">My comment:</string>
 
     <string name="project_type_and_number">Project #%d, %s (%s)</string>
     <string name="project_team">Team</string>
