@@ -29,6 +29,11 @@ class VacanciesAdapter(
             vacancyCount.text = vacancy.count.toString()
             vacancyRequired.text = vacancy.required.takeIf { it.isNotEmpty() } ?: resources.getString(R.string.no_data)
             vacancyRecommended.text = vacancy.recommended.takeIf { it.isNotEmpty() } ?: resources.getString(R.string.no_data)
+
+            if (vacancy.isApplied) {
+                vacancyApply.visibility = View.GONE
+                vacancyApplied.visibility = View.VISIBLE
+            }
         }
     }
 

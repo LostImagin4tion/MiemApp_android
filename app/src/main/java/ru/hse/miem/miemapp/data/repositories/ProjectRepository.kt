@@ -37,7 +37,8 @@ class ProjectRepository @Inject constructor(
                         role = it.role,
                         required = it.disciplines.joinToString(separator = "\n"),
                         recommended = it.additionally.joinToString(separator = "\n"),
-                        count = it.count
+                        count = it.count,
+                        isApplied = it.applied
                     )
                 }
             val gitRepositories = cabinetApi.gitStatistics(id)
@@ -63,5 +64,11 @@ class ProjectRepository @Inject constructor(
                 url = CabinetApi.getProjectUrl(id)
             )
         }
+
+    // https://cabinet.miem.hse.ru/api/student/application/add to apply for vacancy
+    // {
+    //   about_me: "text",
+    //   vacancy_id: id
+    // }
 
 }

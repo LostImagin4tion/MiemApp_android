@@ -162,6 +162,7 @@ data class ProjectVacanciesResponse(
         val role: String,
         val count: Int,
         val booked: Boolean,
+        val applied: Boolean,
         val disciplines: List<String>,
         val additionally: List<String>
     )

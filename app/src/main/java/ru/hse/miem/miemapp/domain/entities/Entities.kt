@@ -96,7 +96,8 @@ data class ProjectExtended(
         val role: String,
         val required: String,
         val recommended: String,
-        val count: Int
+        val count: Int,
+        val isApplied: Boolean
     )
 }
 

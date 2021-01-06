@@ -102,4 +102,6 @@ class ProfileRepository @Inject constructor(
             chatUrl = CabinetApi.DEFAULT_CHAT_LINK
         )
     }
+
+    // https://cabinet.miem.hse.ru/api/student/application/confirm student_confirm = 2 to cancel application
 }

@@ -98,6 +98,21 @@
                 android:textAllCaps="false"
                 android:backgroundTint="@color/colorAccent"/>
 
+            <TextView
+                android:id="@+id/vacancyApplied"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/project_vacancy_applied"
+                android:textColor="@color/green"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:drawablePadding="2dp"
+                app:drawableStartCompat="@drawable/ic_check_circle"
+                app:drawableTint="@color/green"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
         </LinearLayout>
 
     </LinearLayout>

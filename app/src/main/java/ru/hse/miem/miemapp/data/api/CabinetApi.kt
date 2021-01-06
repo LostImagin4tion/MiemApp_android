@@ -54,7 +54,7 @@ interface CabinetApi {
     @GET("$publicApi/project/students/{id}")
     fun projectMembers(@Path("id") id: Long): Single<ProjectMembersResponse>
 
-    @GET("$publicApi/project/vacancies/{id}")
+    @GET("$api/project/vacancies/{id}")
     fun projectVacancies(@Path("id") id: Long): Single<ProjectVacanciesResponse>
 
     @GET("$publicApi/git_statistics/project/{id}")
