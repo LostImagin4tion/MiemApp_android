@@ -1,6 +1,7 @@
 package ru.hse.miem.miemapp.data.repositories
 
 import ru.hse.miem.miemapp.data.api.CabinetApi
+import ru.hse.miem.miemapp.data.api.VacancyApplyRequest
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
 import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import javax.inject.Inject
@@ -65,10 +66,5 @@ class ProjectRepository @Inject constructor(
             )
         }
 
-    // https://cabinet.miem.hse.ru/api/student/application/add to apply for vacancy
-    // {
-    //   about_me: "text",
-    //   vacancy_id: id
-    // }
-
+    override fun applyForVacancy(vacancyId: Long, aboutMe: String) = cabinetApi.applyForVacancy(VacancyApplyRequest(aboutMe, vacancyId))
 }

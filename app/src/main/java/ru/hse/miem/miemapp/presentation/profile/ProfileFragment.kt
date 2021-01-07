@@ -81,6 +81,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
             }
+            userNoProjectInfo.visibility = View.GONE
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
         }
@@ -94,6 +95,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
             }
+            userNoProjectInfo.visibility = View.GONE
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
         }
@@ -107,6 +109,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
             }
+            userNoApplicationsInfo.visibility = View.GONE
         } else {
             userNoApplicationsInfo.visibility = View.VISIBLE
         }

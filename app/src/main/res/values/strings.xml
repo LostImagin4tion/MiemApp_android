@@ -44,6 +44,9 @@
     <string name="project_vacancy_recommended">Recommended</string>
     <string name="project_vacancy_apply">Apply</string>
     <string name="project_vacancy_applied">Applied</string>
+    <string name="project_vacancy_about_me_hint">Describe yourself</string>
+    <string name="project_vacancy_submit">Submit</string>
+    <string name="project_vacancy_cancel">Cancel</string>
     <string name="project_open_in_browser">Open in browser</string>
     <string name="projected_embedded_image_error">(Embedded images are not supported!)</string>
 

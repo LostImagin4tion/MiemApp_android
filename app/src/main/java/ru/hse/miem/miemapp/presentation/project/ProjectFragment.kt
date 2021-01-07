@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import moxy.presenter.InjectPresenter
@@ -45,6 +47,27 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.apply {
+            // yep, deprecated, but alternative requires API 30
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.apply {
+            hideKeyboard()
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+        }
+    }
+
+    private fun hideKeyboard() {
+        val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(requireView().windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
     override fun setupProject(project: ProjectExtended) = project.run {
         projectType.text = getString(R.string.project_type_and_number).format(number, type, source)
         projectName.text = name
@@ -68,7 +91,11 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         }
 
         if (vacancies.isNotEmpty()) {
-            vacanciesList.adapter = VacanciesAdapter(vacancies)
+            vacanciesList.adapter = VacanciesAdapter(
+                vacancies,
+                hideKeyboard = ::hideKeyboard,
+                submitVacancy = projectPresenter::onSubmitVacancyApplication
+            )
             vacanciesNoData.visibility = View.GONE
             vacanciesList.visibility = View.VISIBLE
         }

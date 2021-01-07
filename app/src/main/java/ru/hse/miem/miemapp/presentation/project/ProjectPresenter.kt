@@ -1,6 +1,7 @@
 package ru.hse.miem.miemapp.presentation.project
 
 import android.util.Log
+import io.reactivex.Completable
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,6 +31,14 @@ class ProjectPresenter @Inject constructor(
             )
         compositeDisposable.add(disposable)
     }
+
+    fun onSubmitVacancyApplication(vacancyId: Long, aboutMe: String): Completable = projectRepository.applyForVacancy(vacancyId, aboutMe)
+           .subscribeOn(Schedulers.io())
+           .observeOn(AndroidSchedulers.mainThread())
+           .doOnError {
+               Log.w(javaClass.simpleName, it.stackTraceToString())
+               viewState.showError()
+           }
 
     override fun onDestroy() {
         super.onDestroy()

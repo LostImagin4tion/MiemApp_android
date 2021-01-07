@@ -1,5 +1,6 @@
 package ru.hse.miem.miemapp.data.api
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -59,6 +60,9 @@ interface CabinetApi {
 
     @GET("$publicApi/git_statistics/project/{id}")
     fun gitStatistics(@Path("id") id: Long): Single<GitStatisticsResponse>
+
+    @POST("$api/student/application/add")
+    fun applyForVacancy(@Body request: VacancyApplyRequest): Completable
 
     /**
      * Search related endpoints
