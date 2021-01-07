@@ -104,11 +104,16 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
     override fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>) {
         userApplicationsLoader.visibility = View.GONE
 
-        if (applications.isNotEmpty()) {
-            applicationsList.adapter = MyApplicationsAdapter(applications) {
+        applicationsList.adapter = MyApplicationsAdapter(
+            applications,
+            navigateToProject = {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
-            }
+            },
+            withdrawApplication = profilePresenter::onWithdrawApplication,
+            approveApplication = profilePresenter::onApproveApplication
+        )
+        if (applications.isNotEmpty()) {
             userNoApplicationsInfo.visibility = View.GONE
         } else {
             userNoApplicationsInfo.visibility = View.VISIBLE

@@ -98,6 +98,50 @@
             tools:visibility="visible"
             tools:text="Комментарий руководителя:\nКомментарий" />
 
+        <ProgressBar
+            android:id="@+id/applicationConfirmLoader"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <LinearLayout
+            android:id="@+id/applicationButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/vacancyWithdraw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/application_withdraw"
+                android:textAllCaps="false"
+                android:textColor="@color/red"
+                app:strokeColor="@color/red"
+                app:strokeWidth="2dp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/vacancyApprove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/application_approve"
+                android:textAllCaps="false"
+                android:textColor="@color/green"
+                android:visibility="gone"
+                app:strokeColor="@color/green"
+                app:strokeWidth="2dp"
+                tools:ignore="ButtonStyle"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

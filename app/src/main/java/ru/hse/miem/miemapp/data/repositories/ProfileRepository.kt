@@ -1,7 +1,9 @@
 package ru.hse.miem.miemapp.data.repositories
 
+import io.reactivex.Completable
 import io.reactivex.Single
 import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.data.api.ApplicationConfirmRequest
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.StudentProfileResponse
 import ru.hse.miem.miemapp.data.api.TeacherProfileResponse
@@ -40,7 +42,7 @@ class ProfileRepository @Inject constructor(
             }
         }
 
-    override fun getMyProjects(): Single<MyProjectsAndApplications> = cabinetApi.myUserStatistic()
+    override fun getMyProjectsAndApplications(): Single<MyProjectsAndApplications> = cabinetApi.myUserStatistic()
         .map {
             val projects = it.data.projects.data.map {
                 MyProjectsAndApplications.MyProjectBasic(
@@ -103,5 +105,17 @@ class ProfileRepository @Inject constructor(
         )
     }
 
-    // https://cabinet.miem.hse.ru/api/student/application/confirm student_confirm = 2 to cancel application
+    override fun applicationWithdraw(applicationId: Long) = applicationConfirm(applicationId, StudentConfirmAction.WITHDRAW)
+
+    override fun applicationApprove(applicationId: Long) = applicationConfirm(applicationId, StudentConfirmAction.APPROVE)
+
+    private fun applicationConfirm(applicationId: Long, action: StudentConfirmAction) = cabinetApi
+        .applicationConfirm(ApplicationConfirmRequest(applicationId, action.status))
+
+    private enum class StudentConfirmAction(val status: Int) {
+        WITHDRAW(2),
+        APPROVE(1), // TODO check if this is right
+    }
+
+
 }

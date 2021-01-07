@@ -31,6 +31,8 @@
     <string name="application_state_declined">Declined</string>
     <string name="application_head_comment">Head comment:</string>
     <string name="application_my_comment">My comment:</string>
+    <string name="application_withdraw">Withdraw</string>
+    <string name="application_approve">Approve</string>
 
     <string name="project_type_and_number">Project #%d, %s (%s)</string>
     <string name="project_team">Team</string>

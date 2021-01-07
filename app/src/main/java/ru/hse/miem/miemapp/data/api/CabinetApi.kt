@@ -43,6 +43,9 @@ interface CabinetApi {
     @GET("$api/student/projects/and/applications/my")
     fun myUserStatistic(): Single<MyStatisticResponse>
 
+    @POST("$api/student/application/confirm")
+    fun applicationConfirm(@Body request: ApplicationConfirmRequest): Completable
+
     /**
      * Project related endpoints
      */

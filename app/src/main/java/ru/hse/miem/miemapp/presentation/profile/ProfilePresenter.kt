@@ -1,21 +1,18 @@
 package ru.hse.miem.miemapp.presentation.profile
 
-import android.util.Log
 import moxy.InjectViewState
-import moxy.MvpPresenter
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
+import ru.hse.miem.miemapp.presentation.base.BasePresenter
 import javax.inject.Inject
 
 @InjectViewState
 class ProfilePresenter @Inject constructor(
     private val profileRepository: IProfileRepository,
     private val session: Session
-) : MvpPresenter<ProfileView>() {
+) : BasePresenter<ProfileView>() {
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -25,8 +22,7 @@ class ProfilePresenter @Inject constructor(
             } else {
                 profileRepository.getMyProfile()
             }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .proceedRequest()
             .subscribeBy(
                 onSuccess = {
                     viewState.setupProfile(it)
@@ -39,10 +35,7 @@ class ProfilePresenter @Inject constructor(
                         loadProjects(it.id)
                     }
                 },
-                onError = {
-                    Log.w(javaClass.simpleName, it.stackTraceToString())
-                    viewState.showError()
-                }
+                onError = ::proceedError
             )
 
         compositeDisposable.add(disposable)
@@ -50,32 +43,40 @@ class ProfilePresenter @Inject constructor(
 
     private fun loadProjects(userId: Long) {
         val disposable = profileRepository.getProjects(userId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .proceedRequest()
             .subscribeBy(
                 onSuccess = viewState::setupProjects,
-                onError = {
-                    Log.w(javaClass.simpleName, it.stackTraceToString())
-                    viewState.showError()
-                }
+                onError = ::proceedError
             )
         compositeDisposable.add(disposable)
     }
 
     private fun loadMyProjects() {
-        val disposable = profileRepository.getMyProjects()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        val disposable = profileRepository.getMyProjectsAndApplications()
+            .proceedRequest()
             .subscribeBy(
                 onSuccess = {
                     viewState.setupMyProjects(it.projects)
                     viewState.setupMyApplications(it.applications)
                 },
-                onError = {
-                    Log.w(javaClass.simpleName, it.stackTraceToString())
-                    viewState.showError()
-                }
+                onError = ::proceedError
             )
+        compositeDisposable.add(disposable)
+    }
+
+    fun onApproveApplication(applicationId: Long) {
+        val disposable = profileRepository.applicationApprove(applicationId)
+            .proceedRequest()
+            .doFinally { loadMyProjects() }
+            .subscribeBy(::proceedError)
+        compositeDisposable.add(disposable)
+    }
+
+    fun onWithdrawApplication(applicationId: Long) {
+        val disposable = profileRepository.applicationWithdraw(applicationId)
+            .proceedRequest()
+            .doFinally { loadMyProjects() }
+            .subscribeBy(::proceedError)
         compositeDisposable.add(disposable)
     }
 

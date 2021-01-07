@@ -11,7 +11,9 @@ import ru.hse.miem.miemapp.presentation.TextViewUtils.makeNameValueString
 
 class MyApplicationsAdapter(
     private val projects: List<MyProjectsAndApplications.MyApplication>,
-    private val navigateToProject: (Long) -> Unit
+    private val navigateToProject: (Long) -> Unit,
+    private val withdrawApplication: (Long) -> Unit,
+    private val approveApplication: (Long) -> Unit
 ) : RecyclerView.Adapter<MyApplicationsAdapter.MyApplicationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyApplicationViewHolder {
@@ -20,13 +22,18 @@ class MyApplicationsAdapter(
     }
 
     override fun onBindViewHolder(holder: MyApplicationViewHolder, position: Int) {
-        holder.bind(projects[position], navigateToProject)
+        holder.bind(projects[position], navigateToProject, withdrawApplication, approveApplication)
     }
 
     override fun getItemCount() = projects.size
 
     class MyApplicationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(application: MyProjectsAndApplications.MyApplication, navigateToProject: (Long) -> Unit) = itemView.apply {
+        fun bind(
+            application: MyProjectsAndApplications.MyApplication,
+            navigateToProject: (Long) -> Unit,
+            withdrawApplication: (Long) -> Unit,
+            approveApplication: (Long) -> Unit
+        ) = itemView.apply {
             projectNumber.text = application.projectNumber.toString()
 
             // because name for my project contains its number
@@ -53,6 +60,19 @@ class MyApplicationsAdapter(
             }
 
             setOnClickListener { navigateToProject(application.projectId) }
+            vacancyWithdraw.setOnClickListener {
+                showLoader()
+                withdrawApplication(application.id)
+            }
+            vacancyApprove.setOnClickListener {
+                showLoader()
+                approveApplication(application.id)
+            }
+        }
+
+        private fun View.showLoader() {
+            applicationButtons.visibility = View.GONE
+            applicationConfirmLoader.visibility = View.VISIBLE
         }
     }
 }
