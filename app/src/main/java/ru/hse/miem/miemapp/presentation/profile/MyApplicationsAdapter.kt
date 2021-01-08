@@ -44,6 +44,15 @@ class MyApplicationsAdapter(
                     setText(R.string.application_state_waiting)
                     setBackgroundResource(R.drawable.badge_inactive_bg)
                 }
+                MyProjectsAndApplications.MyApplication.Status.DECLINED -> applicationState.apply {
+                    setText(R.string.application_state_declined)
+                    setBackgroundResource(R.drawable.badge_closed_bg)
+                }
+                MyProjectsAndApplications.MyApplication.Status.APPROVED -> {
+                    applicationState.setText(R.string.application_state_approved)
+                    applicationState.setBackgroundResource(R.drawable.badge_active_bg)
+                    vacancyApprove.visibility = View.VISIBLE
+                }
             }
 
             projectType.text = makeNameValueString(R.string.project_type, application.projectType)

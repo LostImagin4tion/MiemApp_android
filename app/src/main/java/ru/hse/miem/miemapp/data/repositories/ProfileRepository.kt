@@ -1,6 +1,5 @@
 package ru.hse.miem.miemapp.data.repositories
 
-import io.reactivex.Completable
 import io.reactivex.Single
 import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.ApplicationConfirmRequest
@@ -59,7 +58,7 @@ class ProfileRepository @Inject constructor(
                 )
             }
 
-            val applications = it.data.applications.data.map {
+            val applications = (it.data.applications.data + it.data.approved_applications.data).map {
                 MyProjectsAndApplications.MyApplication(
                     id = it.id,
                     projectId = it.project_id,
@@ -114,7 +113,7 @@ class ProfileRepository @Inject constructor(
 
     private enum class StudentConfirmAction(val status: Int) {
         WITHDRAW(2),
-        APPROVE(1), // TODO check if this is right
+        APPROVE(1);
     }
 
 

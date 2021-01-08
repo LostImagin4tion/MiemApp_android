@@ -50,7 +50,9 @@ data class MyProjectsAndApplications(
         val headComment: String?
     ) {
         enum class Status(val status: Int) {
-            WAITING(0);
+            WAITING(0),
+            APPROVED(1),
+            DECLINED(2);
 
             companion object {
                 fun valueOf(status: Int) = values().find { it.status == status }

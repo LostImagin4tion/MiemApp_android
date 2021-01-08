@@ -69,7 +69,8 @@ data class MyStatisticResponse(
 ) {
     data class Data(
         val projects: Projects,
-        val applications: Applications
+        val applications: Applications,
+        val approved_applications: Applications
     ) {
         data class Projects(
             val data: List<ProjectData>
