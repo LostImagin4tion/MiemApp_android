@@ -73,6 +73,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         profileContent.visibility = View.VISIBLE
     }
 
+    override fun showUnauthorizedProfile() {
+        profileLoader.visibility = View.GONE
+        profileContent.visibility = View.VISIBLE
+        profileInfo.visibility = View.GONE
+    }
+
     override fun setupProjects(projects: List<ProjectBasic>) {
         userProjectsLoader.visibility = View.GONE
 

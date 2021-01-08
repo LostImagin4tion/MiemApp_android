@@ -155,7 +155,8 @@ data class ProjectMembersResponse(
 }
 
 data class ProjectVacanciesResponse(
-    val data: List<Data>
+    val data: List<Data>,
+    val code: Int
 ) {
     data class Data(
         val vacancy_id: Long,

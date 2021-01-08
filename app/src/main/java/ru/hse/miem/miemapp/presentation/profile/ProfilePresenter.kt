@@ -35,7 +35,10 @@ class ProfilePresenter @Inject constructor(
                         loadProjects(it.id)
                     }
                 },
-                onError = ::proceedError
+                onError = {
+                    proceedError(it)
+                    viewState.showUnauthorizedProfile()
+                }
             )
 
         compositeDisposable.add(disposable)

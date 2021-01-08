@@ -12,6 +12,7 @@ interface CabinetApi {
     companion object {
         const val CABINET_BASE_URL = "https://cabinet.miem.hse.ru/"
         const val DEFAULT_CHAT_LINK = "https://chat.miem.hse.ru/"
+        const val SUCCESS_CODE_PREFIX = 20
         private const val api = "api"
         private const val publicApi = "public-api"
 
@@ -60,6 +61,9 @@ interface CabinetApi {
 
     @GET("$api/project/vacancies/{id}")
     fun projectVacancies(@Path("id") id: Long): Single<ProjectVacanciesResponse>
+
+    @GET("$publicApi/project/vacancies/{id}")
+    fun projectVacanciesPublic(@Path("id") id: Long): Single<ProjectVacanciesResponse>
 
     @GET("$publicApi/git_statistics/project/{id}")
     fun gitStatistics(@Path("id") id: Long): Single<GitStatisticsResponse>

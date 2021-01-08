@@ -6,13 +6,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import okio.Buffer
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -76,27 +79,56 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideCabinetApi(session: Session): CabinetApi = Retrofit.Builder()
-            .baseUrl(CabinetApi.CABINET_BASE_URL)
-            .client(NetworkUtils.createOkHttpClient { addHeader("x-auth-token", session.token) })
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(CabinetApi::class.java)
+    fun provideCabinetApi(session: Session, gson: Gson): CabinetApi = Retrofit.Builder()
+        .baseUrl(CabinetApi.CABINET_BASE_URL)
+        .client(
+            NetworkUtils.createOkHttpClient(
+                requestSettings = { addHeader("x-auth-token", session.token) },
+                responseSettings = {
+                    val body = peekBody(Long.MAX_VALUE).string()
+
+                    /*
+                    If error was occurred with response we want to see an exception.
+                    However, api returns code 200 even for invalid requests (of course, it's very stupid).
+                    So here's a workaround for detecting error response
+                     */
+                    gson.fromJson(body, JsonObject::class.java)
+                        .get("code")
+                        ?.asInt
+                        ?.takeIf { it / 1000 > CabinetApi.SUCCESS_CODE_PREFIX }
+                        ?.let { throw IllegalAccessException("Unauthorized") }
+                }
+            )
+        )
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .build()
+        .create(CabinetApi::class.java)
 
     @Provides
     @Singleton
     fun provideSession() = Session()
+
+    @Provides
+    fun providesGson() = GsonBuilder()
+        .serializeNulls()
+        .create()
 }
 
 object NetworkUtils {
 
-    fun createOkHttpClient(settings: Request.Builder.() -> Unit): OkHttpClient = OkHttpClient.Builder()
-        .addInterceptor(createInterceptor(settings))
+    fun createOkHttpClient(
+        requestSettings: Request.Builder.() -> Unit = {},
+        responseSettings: Response.() -> Unit = {}
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(createInterceptor(requestSettings, responseSettings))
         .retryOnConnectionFailure(true)
         .build()
 
-    private fun createInterceptor(settings: Request.Builder.() -> Unit) = Interceptor {
+    private fun createInterceptor(
+        requestSettings: Request.Builder.() -> Unit = {},
+        responseSettings: Response.() -> Unit = {}
+    ) = Interceptor {
         it.run {
             val requestBody = Buffer().also {
                 request().body?.writeTo(it)
@@ -106,12 +138,13 @@ object NetworkUtils {
             proceed(
                 request()
                     .newBuilder()
-                    .apply { settings() }
+                    .apply { requestSettings() }
                     .addHeader("Connection", "close")
                     .addHeader("User-Agent", "Miem App") // used on server side
                     .build()
             ).apply {
                 Log.i("OkHttp/Response", "$this ${peekBody(Long.MAX_VALUE).string()}")
+                responseSettings()
             }
         }
     }

@@ -29,6 +29,7 @@ class ProjectRepository @Inject constructor(
                     )
                 }
             val vacancies = cabinetApi.projectVacancies(id)
+                .onErrorResumeNext { cabinetApi.projectVacanciesPublic(id) }
                 .blockingGet()
                 .data
                 .filter { !it.booked } // if vacancy is active

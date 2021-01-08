@@ -3,17 +3,20 @@
     <string name="app_name">MIEM App</string>
     <string name="title_camerascontrol">Управление камерами</string>
 
-    <string name="common_error_message">Произошла ошибка. Проверьте соединение или попробуйте позже</string>
+    <string name="common_error_message">Произошла ошибка. Проверьте, что вы авторизованы и соединение стабильно</string>
 
     <string name="no_data">Нет информации</string>
 
     <string name="send_mail_dialog_title">Отправить письмо</string>
 
     <string name="login_button_text">Войти через Google</string>
+    <string name="login_without_auth_button_text">Продолжить без авторизации</string>
     <string name="login_error">Произошла ошибка при логине</string>
 
     <string name="student_badge">Студент</string>
     <string name="teacher_badge">Преподаватель</string>
+    <string name="unauthorized_badge">Неавторизован</string>
+    <string name="unauthorized_name">Аноним</string>
     <string name="profile_go_to_chat">Перейти в чат</string>
     <string name="projects_title">Проекты</string>
     <string name="project_members">Участники:</string>

@@ -27,21 +27,38 @@
         app:layout_constraintGuide_percent="0.5"/>
 
 
-    <Button
-        android:id="@+id/googleSignInButton"
+    <LinearLayout
+        android:id="@+id/loginButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:text="@string/login_button_text"
-        android:textAllCaps="false"
-        app:icon="@drawable/google_logo"
-        app:iconTintMode="add"
-        app:iconTint="@android:color/transparent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/loginGuideline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="RtlHardcoded" />
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/googleSignInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="@string/login_button_text"
+            android:textAllCaps="false"
+            app:icon="@drawable/google_logo"
+            app:iconTintMode="add"
+            app:iconTint="@android:color/transparent"/>
+
+        <Button
+            android:id="@+id/withoutAuthButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:text="@string/login_without_auth_button_text"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/colorPrimary"/>
+
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/loginProgress"
@@ -65,7 +82,7 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/googleSignInButton"
+        app:layout_constraintTop_toBottomOf="@id/loginButtons"
         tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

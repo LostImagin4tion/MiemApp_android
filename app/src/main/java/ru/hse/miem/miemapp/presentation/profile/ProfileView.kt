@@ -11,4 +11,5 @@ interface ProfileView : BaseView {
     @AddToEndSingle fun setupProjects(projects: List<ProjectBasic>)
     @AddToEndSingle fun setupMyProjects(projects: List<MyProjectsAndApplications.MyProjectBasic>)
     @AddToEndSingle fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>)
+    @AddToEndSingle fun showUnauthorizedProfile()
 }

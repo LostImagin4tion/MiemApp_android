@@ -43,9 +43,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
 
         loginProgress.visibility = View.INVISIBLE
         googleSignInButton.visibility = View.VISIBLE
-        googleSignInButton.setOnClickListener {
-            loginPresenter.onClickLoginButton()
-        }
+        googleSignInButton.setOnClickListener { loginPresenter.onClickLoginButton() }
+        withoutAuthButton.setOnClickListener { afterLogin() }
     }
 
     override fun afterLogin() {
@@ -57,14 +56,14 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
         startActivityForResult(intent, REQUEST_CODE_SIGN_IN)
     }
 
-    override fun showLoginButton() {
+    override fun showLoginButtons() {
         loginProgress.visibility = View.INVISIBLE
-        googleSignInButton.visibility = View.VISIBLE
+        loginButtons.visibility = View.VISIBLE
         loginErrorText.visibility = View.VISIBLE
     }
 
-    override fun hideLoginButton() {
-        googleSignInButton.visibility = View.INVISIBLE
+    override fun hideLoginButtons() {
+        loginButtons.visibility = View.INVISIBLE
         loginErrorText.visibility = View.INVISIBLE
         loginProgress.visibility = View.VISIBLE
     }
@@ -79,7 +78,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
                 }
             } catch (e: ApiException) {
                 Log.e("Login", e.message.toString())
-                showLoginButton()
+                showLoginButtons()
             }
         }
     }

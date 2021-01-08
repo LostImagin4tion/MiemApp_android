@@ -1,13 +1,12 @@
 package ru.hse.miem.miemapp.presentation.login
 
-import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.OneExecution
+import ru.hse.miem.miemapp.presentation.base.BaseView
 
-interface LoginView : MvpView {
-
+interface LoginView : BaseView {
     @OneExecution fun login()
     @OneExecution fun afterLogin()
-    @AddToEndSingle fun showLoginButton()
-    @AddToEndSingle fun hideLoginButton()
+    @AddToEndSingle fun showLoginButtons()
+    @AddToEndSingle fun hideLoginButtons()
 }
