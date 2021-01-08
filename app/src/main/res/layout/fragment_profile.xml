@@ -10,177 +10,143 @@
         android:id="@+id/profileLoader"
         android:layout_width="@dimen/loader_size"
         android:layout_height="@dimen/loader_size"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/profileContent"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/profileSwipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        tools:visibility="visible">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/profileContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/common_fragment_margin"
-            android:layout_marginEnd="@dimen/common_fragment_margin"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/common_fragment_margin">
+            android:visibility="invisible"
+            tools:visibility="visible">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:id="@+id/userAvatar"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginEnd="20dp"
-                    android:src="@drawable/default_profile_avatar" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/common_fragment_margin"
+                android:layout_marginEnd="@dimen/common_fragment_margin"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/common_fragment_margin">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:orientation="vertical">
+                    android:layout_gravity="start"
+                    android:gravity="center_vertical">
 
-                    <TextView
-                        android:id="@+id/userRole"
+                    <ImageView
+                        android:id="@+id/userAvatar"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginEnd="20dp"
+                        android:src="@drawable/default_profile_avatar" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:background="@drawable/profile_badge_bg"
-                        android:textAppearance="@style/BadgeStyle"
-                        android:text="@string/unauthorized_badge" />
+                        android:gravity="start"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/userFirstName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:text="@string/unauthorized_name" />
+                        <TextView
+                            android:id="@+id/userRole"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:background="@drawable/profile_badge_bg"
+                            android:text="@string/unauthorized_badge"
+                            android:textAppearance="@style/BadgeStyle" />
 
-                    <TextView
-                        android:id="@+id/userLastName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:textColor="@android:color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:text="@string/unauthorized_name" />
+                        <TextView
+                            android:id="@+id/userFirstName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@string/unauthorized_name"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/userLastName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@string/unauthorized_name"
+                            android:textColor="@android:color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/profileInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/userEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:drawablePadding="8dp"
-                    android:textColor="@color/link_color"
-                    android:textIsSelectable="true"
-                    android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_email"
-                    tools:text="mail@miem.hse.ru" />
-
-                <TextView
-                    android:id="@+id/userOccupation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:drawablePadding="8dp"
-                    android:textColor="@android:color/black"
-                    android:textIsSelectable="true"
-                    android:textSize="16sp"
-                    app:drawableStartCompat="@drawable/ic_school_hat"
-                    tools:text="Department of Computer Engineering" />
-
-                <Button
-                    android:id="@+id/goToChatButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="12dp"
-                    android:text="@string/profile_go_to_chat"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorAccent"
-                    app:cornerRadius="8dp"
-                    app:icon="@drawable/ic_chat"
-                    app:iconTint="@color/colorAccent"
-                    app:strokeColor="@color/colorAccent"
-                    app:strokeWidth="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="6dp"
-                    android:text="@string/projects_title"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/userNoProjectInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="@string/no_data"
-                    android:visibility="gone"
-                    tools:visibility="visible" />
-
-                <ProgressBar
-                    android:id="@+id/userProjectsLoader"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_horizontal" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/projectsList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_project" />
-
                 <LinearLayout
-                    android:id="@+id/userApplications"
+                    android:id="@+id/profileInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/userEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:drawablePadding="8dp"
+                        android:textColor="@color/link_color"
+                        android:textIsSelectable="true"
+                        android:textSize="16sp"
+                        app:drawableStartCompat="@drawable/ic_email"
+                        tools:text="mail@miem.hse.ru" />
+
+                    <TextView
+                        android:id="@+id/userOccupation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:drawablePadding="8dp"
+                        android:textColor="@android:color/black"
+                        android:textIsSelectable="true"
+                        android:textSize="16sp"
+                        app:drawableStartCompat="@drawable/ic_school_hat"
+                        tools:text="Department of Computer Engineering" />
+
+                    <Button
+                        android:id="@+id/goToChatButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/profile_go_to_chat"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorAccent"
+                        app:cornerRadius="8dp"
+                        app:icon="@drawable/ic_chat"
+                        app:iconTint="@color/colorAccent"
+                        app:strokeColor="@color/colorAccent"
+                        app:strokeWidth="2dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="6dp"
-                        android:text="@string/applications_title"
+                        android:text="@string/projects_title"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/userNoApplicationsInfo"
+                        android:id="@+id/userNoProjectInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
@@ -189,24 +155,66 @@
                         tools:visibility="visible" />
 
                     <ProgressBar
-                        android:id="@+id/userApplicationsLoader"
+                        android:id="@+id/userProjectsLoader"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center_horizontal" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/applicationsList"
+                        android:id="@+id/projectsList"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_application" />
+                        tools:listitem="@layout/item_project" />
+
+                    <LinearLayout
+                        android:id="@+id/userApplications"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="@string/applications_title"
+                            android:textColor="@android:color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/userNoApplicationsInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="@string/no_data"
+                            android:visibility="gone"
+                            tools:visibility="visible" />
+
+                        <ProgressBar
+                            android:id="@+id/userApplicationsLoader"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/applicationsList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_application" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
-        </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

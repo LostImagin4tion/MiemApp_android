@@ -38,12 +38,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (isMyProfile) {
-            profilePresenter.onCreate()
-        } else {
-            userApplications.visibility = View.GONE
-            profilePresenter.onCreate(args.userId, args.isTeacher)
-        }
+        initProfile()
         userEmail.setOnClickListener {
             startActivity(
                 Intent.createChooser(
@@ -51,6 +46,17 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                     getString(R.string.send_mail_dialog_title)
                 )
             )
+        }
+        profileSwipeRefreshLayout.setColorSchemeColors(resources.getColor(R.color.colorAccent))
+        profileSwipeRefreshLayout.setOnRefreshListener(::initProfile)
+    }
+
+    private fun initProfile() {
+        if (isMyProfile) {
+            profilePresenter.onCreate()
+        } else {
+            userApplications.visibility = View.GONE
+            profilePresenter.onCreate(args.userId, args.isTeacher)
         }
     }
 
@@ -71,6 +77,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
 
         profileLoader.visibility = View.GONE
         profileContent.visibility = View.VISIBLE
+        profileSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showUnauthorizedProfile() {
