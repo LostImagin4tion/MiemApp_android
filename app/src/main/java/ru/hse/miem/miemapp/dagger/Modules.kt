@@ -143,7 +143,7 @@ object NetworkUtils {
                     .addHeader("User-Agent", "Miem App") // used on server side
                     .build()
             ).apply {
-                Log.i("OkHttp/Response", "$this ${peekBody(Long.MAX_VALUE).string()}")
+                Log.d("OkHttp/Response", "$this ${peekBody(Long.MAX_VALUE).string()}")
                 responseSettings()
             }
         }
