@@ -48,7 +48,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    dynamicFeatures = mutableSetOf(":camerascontrol")
+    dynamicFeatures = mutableSetOf(":camerascontrol", ":tinder")
 }
 
 dependencies {
