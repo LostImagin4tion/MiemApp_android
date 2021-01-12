@@ -18,7 +18,6 @@ import okhttp3.Request
 import okhttp3.Response
 import okio.Buffer
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.data.Session
@@ -101,7 +100,6 @@ class DataModule {
             )
         )
         .addConverterFactory(GsonConverterFactory.create(gson))
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build()
         .create(CabinetApi::class.java)
 

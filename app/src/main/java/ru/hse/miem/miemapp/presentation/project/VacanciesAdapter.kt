@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import io.reactivex.Completable
-import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.item_project_vacancy.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
@@ -13,7 +11,7 @@ import ru.hse.miem.miemapp.domain.entities.ProjectExtended
 class VacanciesAdapter(
     private val vacancies: List<ProjectExtended.Vacancy>,
     private val hideKeyboard: () -> Unit,
-    private val submitVacancy: (vacancyId: Long, aboutMe: String) -> Completable
+    private val submitVacancy: (vacancyId: Long, aboutMe: String, onComplete: () -> Unit, onError: () -> Unit) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyHolder {
@@ -31,7 +29,7 @@ class VacanciesAdapter(
         fun bind(
             vacancy: ProjectExtended.Vacancy,
             hideKeyboard: () -> Unit,
-            submitVacancy: (vacancyId: Long, aboutMe: String) -> Completable
+            submitVacancy: (vacancyId: Long, aboutMe: String, onComplete: () -> Unit, onError: () -> Unit) -> Unit
         ) = itemView.apply {
             vacancyName.text = vacancy.role
             vacancyCount.text = vacancy.count.toString()
@@ -60,12 +58,18 @@ class VacanciesAdapter(
                 vacancyApplicationForm.visibility = View.GONE
                 vacancySubmitLoader.visibility = View.VISIBLE
 
-                submitVacancy(vacancy.id, vacancyApplicationAboutMe.text.trim().toString())
-                    .doFinally { vacancySubmitLoader.visibility = View.GONE }
-                    .subscribeBy(
-                        onComplete = { vacancyApplied.visibility = View.VISIBLE },
-                        onError = { vacancyApplicationForm.visibility = View.VISIBLE }
-                    )
+                submitVacancy(
+                    vacancy.id,
+                    vacancyApplicationAboutMe.text.trim().toString(),
+                    { // onComplete
+                        vacancySubmitLoader.visibility = View.GONE
+                        vacancyApplied.visibility = View.VISIBLE
+                    },
+                    { // onError
+                        vacancySubmitLoader.visibility = View.GONE
+                        vacancyApplicationForm.visibility = View.VISIBLE
+                    }
+                )
             }
 
         }

@@ -1,7 +1,5 @@
 package ru.hse.miem.miemapp.data.api
 
-import io.reactivex.Completable
-import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -21,60 +19,60 @@ interface CabinetApi {
     }
 
     @POST("vue/google")
-    fun auth(@Body authRequest: AuthRequest): Single<AuthResponse>
+    suspend fun auth(@Body authRequest: AuthRequest): AuthResponse
 
     /**
      * Profile related endpoints
      */
     @GET("$api/student_profile")
-    fun myStudentProfile(): Single<StudentProfileResponse>
+    suspend fun myStudentProfile(): StudentProfileResponse
 
     @GET("$api/student_profile")
-    fun myTeacherProfile(): Single<TeacherProfileResponse>
+    suspend fun myTeacherProfile(): TeacherProfileResponse
 
     @GET("$publicApi/student_profile/{id}")
-    fun studentProfile(@Path("id") id: Long): Single<StudentProfileResponse>
+    suspend fun studentProfile(@Path("id") id: Long): StudentProfileResponse
 
     @GET("$publicApi/teacher_profile/{id}")
-    fun teacherProfile(@Path("id") id: Long): Single<TeacherProfileResponse>
+    suspend fun teacherProfile(@Path("id") id: Long): TeacherProfileResponse
 
     @GET("$publicApi/student_statistics/{id}")
-    fun userStatistic(@Path("id") id: Long): Single<StatisticResponse>
+    suspend fun userStatistic(@Path("id") id: Long): StatisticResponse
 
     @GET("$api/student/projects/and/applications/my")
-    fun myUserStatistic(): Single<MyStatisticResponse>
+    suspend fun myUserStatistic(): MyStatisticResponse
 
     @POST("$api/student/application/confirm")
-    fun applicationConfirm(@Body request: ApplicationConfirmRequest): Completable
+    suspend fun applicationConfirm(@Body request: ApplicationConfirmRequest)
 
     /**
      * Project related endpoints
      */
     @GET("$publicApi/project/header/{id}")
-    fun projectHeader(@Path("id") id: Long): Single<ProjectHeaderResponse>
+    suspend fun projectHeader(@Path("id") id: Long): ProjectHeaderResponse
 
     @GET("$publicApi/project/body/{id}")
-    fun projectBody(@Path("id") id: Long): Single<ProjectBodyResponse>
+    suspend fun projectBody(@Path("id") id: Long): ProjectBodyResponse
 
     @GET("$publicApi/project/students/{id}")
-    fun projectMembers(@Path("id") id: Long): Single<ProjectMembersResponse>
+    suspend fun projectMembers(@Path("id") id: Long): ProjectMembersResponse
 
     @GET("$api/project/vacancies/{id}")
-    fun projectVacancies(@Path("id") id: Long): Single<ProjectVacanciesResponse>
+    suspend fun projectVacancies(@Path("id") id: Long): ProjectVacanciesResponse
 
     @GET("$publicApi/project/vacancies/{id}")
-    fun projectVacanciesPublic(@Path("id") id: Long): Single<ProjectVacanciesResponse>
+    suspend fun projectVacanciesPublic(@Path("id") id: Long): ProjectVacanciesResponse
 
     @GET("$publicApi/git_statistics/project/{id}")
-    fun gitStatistics(@Path("id") id: Long): Single<GitStatisticsResponse>
+    suspend fun gitStatistics(@Path("id") id: Long): GitStatisticsResponse
 
     @POST("$api/student/application/add")
-    fun applyForVacancy(@Body request: VacancyApplyRequest): Completable
+    suspend fun applyForVacancy(@Body request: VacancyApplyRequest)
 
     /**
      * Search related endpoints
      */
     @GET("$publicApi/projects")
-    fun allProjects(): Single<ProjectsAllResponse>
+    suspend fun allProjects(): ProjectsAllResponse
 
 }

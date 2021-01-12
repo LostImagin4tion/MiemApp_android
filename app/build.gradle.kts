@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk7", kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", kotlinVersion))
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -64,6 +64,10 @@ dependencies {
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2")
 
     // MoxyX
     val moxyVersion = "2.2.1"
@@ -81,10 +85,6 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
-    // RxKotlin
-    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-
     // Dagger 2
     val daggerVersion = "2.19"
     implementation("com.google.dagger:dagger-android:$daggerVersion")
@@ -96,7 +96,6 @@ dependencies {
     val retrofitVersion = "2.8.1"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
 
     // Google Auth
     implementation("com.google.android.gms:play-services-auth:19.0.0")

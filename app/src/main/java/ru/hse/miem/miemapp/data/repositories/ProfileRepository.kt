@@ -1,6 +1,6 @@
 package ru.hse.miem.miemapp.data.repositories
 
-import io.reactivex.Single
+import kotlinx.coroutines.async
 import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.ApplicationConfirmRequest
 import ru.hse.miem.miemapp.data.api.CabinetApi
@@ -17,68 +17,92 @@ class ProfileRepository @Inject constructor(
     private val session: Session
 ) : IProfileRepository {
 
-    override fun getMyProfile() = if (session.isStudent) {
-        cabinetApi.myStudentProfile().studentToProfile()
-    } else {
-        cabinetApi.myTeacherProfile().teacherToProfile()
+
+    override suspend fun getMyProfile() = withIO {
+        if (session.isStudent) {
+            cabinetApi.myStudentProfile().studentToProfile()
+        } else {
+            cabinetApi.myTeacherProfile().teacherToProfile()
+        }
     }
 
-    override fun getProfileById(id: Long, isTeacher: Boolean) = if(isTeacher) {
-        cabinetApi.teacherProfile(id).teacherToProfile()
-    } else {
-        cabinetApi.studentProfile(id).studentToProfile()
+    override suspend fun getProfileById(id: Long, isTeacher: Boolean) = withIO {
+        if (isTeacher) {
+            cabinetApi.teacherProfile(id).teacherToProfile()
+        } else {
+            cabinetApi.studentProfile(id).studentToProfile()
+        }
     }
 
-    override fun getProjects(userId: Long) = cabinetApi.userStatistic(userId)
-        .map {
-            it.data.myProjects.map {
-                ProjectBasic(
-                    id = it.id,
-                    number = it.number,
-                    name = it.name,
-                    members = it.students
-                )
-            }
+    override suspend fun getProjects(userId: Long) = withIO {
+        cabinetApi.userStatistic(userId).data.myProjects.map {
+            ProjectBasic(
+                id = it.id,
+                number = it.number,
+                name = it.name,
+                members = it.students
+            )
         }
+    }
 
-    override fun getMyProjectsAndApplications(): Single<MyProjectsAndApplications> = cabinetApi.myUserStatistic()
-        .map {
-            val projects = it.data.projects.data.map {
-                MyProjectsAndApplications.MyProjectBasic(
-                    id = it.project_id,
-                    number = it.number,
-                    name = it.project_name,
-                    members = it.team.size,
-                    hours = it.userHours,
-                    head = it.leader,
-                    type = it.type,
-                    role = it.role,
-                    state = it.state,
-                    isActive = it.statusId == 2
-                )
+
+    override suspend fun getMyProjectsAndApplications() = withIO {
+        cabinetApi.myUserStatistic().let {
+            val projects = async {
+                it.data.projects.data.map {
+                    MyProjectsAndApplications.MyProjectBasic(
+                        id = it.project_id,
+                        number = it.number,
+                        name = it.project_name,
+                        members = it.team.size,
+                        hours = it.userHours,
+                        head = it.leader,
+                        type = it.type,
+                        role = it.role,
+                        state = it.state,
+                        isActive = it.statusId == 2
+                    )
+                }
             }
 
-            val applications = (it.data.applications.data + it.data.approved_applications.data).map {
-                MyProjectsAndApplications.MyApplication(
-                    id = it.id,
-                    projectId = it.project_id,
-                    projectNumber = it.project_name.split(" ")[0].toLong(),
-                    projectName = it.project_name,
-                    projectType = it.type,
-                    role = it.role,
-                    head = it.leader,
-                    status = MyProjectsAndApplications.MyApplication.Status.valueOf(it.status),
-                    studentComment = it.studentComment,
-                    headComment = it.leaderComment
-                )
+            val applications = async {
+                (it.data.applications.data + it.data.approved_applications.data).map {
+                    MyProjectsAndApplications.MyApplication(
+                        id = it.id,
+                        projectId = it.project_id,
+                        projectNumber = it.project_name.split(" ")[0].toLong(),
+                        projectName = it.project_name,
+                        projectType = it.type,
+                        role = it.role,
+                        head = it.leader,
+                        status = MyProjectsAndApplications.MyApplication.Status.valueOf(it.status),
+                        studentComment = it.studentComment,
+                        headComment = it.leaderComment
+                    )
+                }
             }
 
-            MyProjectsAndApplications(projects, applications)
+            MyProjectsAndApplications(projects.await(), applications.await())
         }
+    }
 
-    private fun Single<StudentProfileResponse>.studentToProfile() = map {
-        val main = it.data[0].main
-        Profile(
+
+    override suspend fun applicationWithdraw(applicationId: Long) = applicationConfirm(applicationId, StudentConfirmAction.WITHDRAW)
+
+    override suspend fun applicationApprove(applicationId: Long) = applicationConfirm(applicationId, StudentConfirmAction.APPROVE)
+
+    private suspend fun applicationConfirm(applicationId: Long, action: StudentConfirmAction) = withIO {
+        cabinetApi.applicationConfirm(ApplicationConfirmRequest(applicationId, action.status))
+    }
+
+    private enum class StudentConfirmAction(val status: Int) {
+        WITHDRAW(2),
+        APPROVE(1);
+    }
+
+    private fun StudentProfileResponse.studentToProfile(): Profile {
+        val main = data[0].main
+        return Profile(
             id = main.studentId,
             isTeacher = false,
             firstName = main.name.split(" ")[1],
@@ -90,9 +114,9 @@ class ProfileRepository @Inject constructor(
         )
     }
 
-    private fun Single<TeacherProfileResponse>.teacherToProfile() = map {
-        val main = it.data[0].main
-        Profile(
+    private fun TeacherProfileResponse.teacherToProfile(): Profile {
+        val main = data[0].main
+        return Profile(
             id = main.teacherId,
             isTeacher = true,
             firstName = main.name.split(" ")[1],
@@ -103,18 +127,4 @@ class ProfileRepository @Inject constructor(
             chatUrl = CabinetApi.DEFAULT_CHAT_LINK
         )
     }
-
-    override fun applicationWithdraw(applicationId: Long) = applicationConfirm(applicationId, StudentConfirmAction.WITHDRAW)
-
-    override fun applicationApprove(applicationId: Long) = applicationConfirm(applicationId, StudentConfirmAction.APPROVE)
-
-    private fun applicationConfirm(applicationId: Long, action: StudentConfirmAction) = cabinetApi
-        .applicationConfirm(ApplicationConfirmRequest(applicationId, action.status))
-
-    private enum class StudentConfirmAction(val status: Int) {
-        WITHDRAW(2),
-        APPROVE(1);
-    }
-
-
 }

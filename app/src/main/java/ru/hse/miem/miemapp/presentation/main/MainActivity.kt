@@ -6,11 +6,10 @@ import android.util.Log
 import android.view.View
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.RuntimeExecutionException
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
@@ -18,14 +17,14 @@ import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.setupWithNavController
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope {
+    override val coroutineContext = Dispatchers.Main
 
     @Inject
     lateinit var signInClient: GoogleSignInClient
     @Inject
     lateinit var authRepository: IAuthRepository
 
-    private var authDisposable: Disposable? = null
     private val loginFragment = LoginFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,17 +55,13 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun silentLogin(authCode: String) {
-        authDisposable = authRepository.auth(authCode)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onError = {
-                    Log.w("Auth", it.stackTraceToString())
-                    startLogin()
-                },
-                onComplete = ::afterLogin
-            )
+    private fun silentLogin(authCode: String) = launch {
+        try {
+            authRepository.auth(authCode)
+            afterLogin()
+        } catch (e: Exception) {
+            Log.w("Auth", e.stackTraceToString())
+        }
     }
 
     fun afterLogin() {
@@ -83,10 +78,5 @@ class MainActivity : AppCompatActivity() {
             containerId = R.id.navHost,
             intent = intent,
         )
-    }
-
-    override fun onStop() {
-        super.onStop()
-        authDisposable?.dispose()
     }
 }
