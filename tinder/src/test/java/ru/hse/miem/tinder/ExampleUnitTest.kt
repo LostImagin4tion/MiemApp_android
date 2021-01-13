@@ -1,4 +1,4 @@
-package com.example.tinder
+package ru.hse.miem.tinder
 
 import org.junit.Test
 
