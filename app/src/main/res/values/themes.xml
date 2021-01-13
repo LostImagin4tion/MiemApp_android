@@ -11,7 +11,7 @@
         <!-- Customize your theme here. -->
         <item name="colorControlNormal">@color/gray</item>
     </style>
-    
+
     <style name="Theme.Launcher" parent="Theme.MIEMApp">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
@@ -27,4 +27,13 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="Theme.MIEMApp.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MIEMApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MIEMApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
