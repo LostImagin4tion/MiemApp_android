@@ -2,7 +2,7 @@ package ru.hse.miem.tinder.dagger
 
 import dagger.Component
 import ru.hse.miem.miemapp.dagger.AppComponent
-import ru.hse.miem.tinder.TinderActivity
+import ru.hse.miem.tinder.presentation.main.TinderActivity
 import javax.inject.Scope
 
 @Tinder

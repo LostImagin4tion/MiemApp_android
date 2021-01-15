@@ -1,9 +1,10 @@
-package ru.hse.miem.tinder
+package ru.hse.miem.tinder.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import ru.hse.miem.miemapp.MiemApplication
+import ru.hse.miem.tinder.R
 import ru.hse.miem.tinder.dagger.DaggerTinderComponent
 import ru.hse.miem.tinder.dagger.TinderComponent
 
