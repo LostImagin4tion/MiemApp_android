@@ -44,12 +44,12 @@ dependencies {
     testImplementation("junit:junit:4.13.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.3.0")
-
-    // MoxyX
-    val moxyVersion = "2.2.1"
-    implementation("com.github.moxy-community:moxy:$moxyVersion")
-    implementation("com.github.moxy-community:moxy-androidx:$moxyVersion")
-    kapt("com.github.moxy-community:moxy-compiler:$moxyVersion")
+//
+//    // MoxyX
+//    val moxyVersion = "2.2.1"
+//    implementation("com.github.moxy-community:moxy:$moxyVersion")
+//    implementation("com.github.moxy-community:moxy-androidx:$moxyVersion")
+//    kapt("com.github.moxy-community:moxy-compiler:$moxyVersion")
 
     // Dagger 2
     val daggerVersion = "2.19"
@@ -58,13 +58,13 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
     kaptAndroidTest("com.google.dagger:dagger-compiler:$daggerVersion")
 
-    // RxKotlin
-    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
-    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-
-    // Retrofit 2
-    val retrofitVersion = "2.8.1"
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+//    // RxKotlin
+//    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
+//    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+//
+//    // Retrofit 2
+//    val retrofitVersion = "2.8.1"
+//    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+//    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+//    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
 }

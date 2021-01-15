@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -60,6 +61,7 @@ class CamerasActivity : MvpAppCompatActivity(), CamerasView {
 
         camerasComponent.inject(this)
         setTheme(R.style.CamerasControlTheme)
+        Log.d("MyLogs", "ok")
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_cameras)
