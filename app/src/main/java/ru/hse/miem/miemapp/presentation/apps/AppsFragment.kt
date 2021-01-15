@@ -39,9 +39,9 @@ class AppsFragment : Fragment() {
             AppItem(
                 icon = ContextCompat.getDrawable(
                     requireContext(),
-                    resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".camerascontrol")
+                    resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".tinder")
                 )!!,
-                name = getString(R.string.title_camerascontrol),
+                name = getString(R.string.title_tinder),
                 activityClassName = "ru.hse.miem.tinder.presentation.main.TinderActivity"
             )
         ))

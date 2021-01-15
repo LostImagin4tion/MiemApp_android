@@ -8,7 +8,7 @@
         dist:instant="false"
         dist:title="@string/title_tinder">
         <dist:delivery>
-            <dist:on-demand />
+            <dist:install-time />
         </dist:delivery>
 
         <dist:fusing dist:include="true" />
@@ -17,9 +17,8 @@
     <application>
         <activity
             android:name=".presentation.main.TinderActivity"
-            android:label="@string/title_activity_main"
             android:theme="@style/Theme.MIEMApp.NoActionBar"
-            tools:ignore="DuplicateActivity" />
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
