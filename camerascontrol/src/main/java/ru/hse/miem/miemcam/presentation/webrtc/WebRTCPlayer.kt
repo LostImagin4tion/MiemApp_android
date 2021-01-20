@@ -46,14 +46,16 @@ class WebRTCPlayer: Fragment() {
     webRtcDisplay.loadUrl("file:///android_asset/index.html")
   }
 
-  fun openVideoUrl(url: String) {
-    webRtcDisplay.loadUrl("javascript:start('$url')")
+  fun openVideoUrl(url: String): Unit = webRtcDisplay.let {
+    it.onResume()
+    it.loadUrl("javascript:start('$url')")
   }
 
-  fun stopVideo() {
-    webRtcDisplay.loadUrl("javascript:stop()")
-    webRtcDisplay.visibility = View.INVISIBLE
+  fun stopVideo(): Unit = webRtcDisplay.let {
+    it.loadUrl("javascript:stop()")
+    it.visibility = View.INVISIBLE
     webRtcLoadingProgress.visibility = View.INVISIBLE
+    it.onPause()
   }
 }
 
