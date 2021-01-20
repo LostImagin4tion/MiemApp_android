@@ -8,7 +8,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -83,20 +82,7 @@ class DataModule {
         .client(
             NetworkUtils.createOkHttpClient(
                 requestSettings = { addHeader("x-auth-token", session.token) },
-                responseSettings = {
-                    val body = peekBody(Long.MAX_VALUE).string()
-
-                    /*
-                    If error was occurred with response we want to see an exception.
-                    However, api returns code 200 even for invalid requests (of course, it's very stupid).
-                    So here's a workaround for detecting error response
-                     */
-                    gson.fromJson(body, JsonObject::class.java)
-                        .get("code")
-                        ?.asInt
-                        ?.takeIf { it / 1000 > CabinetApi.SUCCESS_CODE_PREFIX }
-                        ?.let { throw IllegalAccessException("Unauthorized") }
-                }
+                responseSettings = {}
             )
         )
         .addConverterFactory(GsonConverterFactory.create(gson))

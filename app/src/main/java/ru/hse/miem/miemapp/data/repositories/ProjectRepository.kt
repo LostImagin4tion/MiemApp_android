@@ -35,7 +35,14 @@ class ProjectRepository @Inject constructor(
 
             val vacancies = async {
                 try {
-                    cabinetApi.projectVacancies(id)
+                    cabinetApi.projectVacancies(id).also {
+                        /*
+                    If error was occurred with response we want to see an exception.
+                    However, api returns code 200 even for invalid requests (of course, it's very stupid).
+                    So here's a workaround for detecting error response
+                     */
+                        it.data!!
+                    }
                 } catch (e: Exception) {
                     cabinetApi.projectVacanciesPublic(id)
                 }

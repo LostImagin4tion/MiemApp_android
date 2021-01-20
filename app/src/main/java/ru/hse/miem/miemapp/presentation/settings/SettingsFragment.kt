@@ -10,6 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import javax.inject.Inject
 
@@ -17,6 +18,9 @@ class SettingsFragment : Fragment() {
 
     @Inject
     lateinit var signInClient: GoogleSignInClient
+
+    @Inject
+    lateinit var session: Session
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,15 +36,18 @@ class SettingsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        buttonLogout.setOnClickListener {
-            signInClient.signOut().addOnCompleteListener {
-                (activity as MainActivity).apply {
-                    val intent = intent
-                    finish()
-                    startActivity(intent)
-                }
+        buttonLogout.setOnClickListener { logout() }
+
+    }
+
+    private fun logout() {
+        signInClient.signOut().addOnCompleteListener {
+            session.reset()
+            (activity as MainActivity).apply {
+                val intent = intent
+                finish()
+                startActivity(intent)
             }
         }
-
     }
 }
