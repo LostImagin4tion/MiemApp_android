@@ -4,6 +4,7 @@ var webRtcPeer;
 var state = null;
 var isSeekable = false;
 var currentVideoUrl;
+var isWebSocketOpe
 
 window.onload = function() {
 	video = document.getElementById('video');
@@ -11,6 +12,11 @@ window.onload = function() {
 
 window.onbeforeunload = function() {
 	ws.close();
+}
+
+ws.onopen = function(message) {
+	Android.log('i' ,'Websocket ready to work. Now allowed to start translation');
+	startStream(currentVideoUrl);
 }
 
 ws.onmessage = function(message) {
@@ -25,8 +31,8 @@ ws.onmessage = function(message) {
 		onError('Error message from server: ' + parsedMessage.message);
 		break;
 	case 'playEnd':
-		break;
 	case 'videoInfo':
+	    Android.setLoading(false) // received successfully
 		break;
 	case 'iceCandidate':
 		webRtcPeer.addIceCandidate(parsedMessage.candidate, function(error) {
@@ -49,9 +55,17 @@ ws.onmessage = function(message) {
 function start(videoUrl) {
     Android.log('i', videoUrl);
     currentVideoUrl = videoUrl;
-
     Android.setLoading(true);
 
+    // if WebSocket is already open - start instantly
+    if (ws.readyState == WebSocket.OPEN) {
+        startStream(currentVideoUrl);
+    } else {
+        Android.log('i', "Waiting for WebSocket to open");
+    }
+}
+
+function startStream(videoUrl) {
 	Android.log('i', 'Creating WebRtcPeer and generating local sdp offer ...');
 
 	// Video and audio by default
@@ -108,8 +122,6 @@ function startResponse(message) {
 	webRtcPeer.processAnswer(message.sdpAnswer, function(error) {
 		if (error)
 			return console.error(error);
-
-		Android.setLoading(false)
 	});
 }
 
