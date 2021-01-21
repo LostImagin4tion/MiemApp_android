@@ -16,7 +16,7 @@ android {
         applicationId = "ru.hse.miem.miemapp"
         minSdkVersion(22)
         targetSdkVersion(30)
-        versionCode(2)
+        versionCode(3)
         versionName = "1.1"
         project.base.archivesBaseName = "MiemApp-$versionName"
 
