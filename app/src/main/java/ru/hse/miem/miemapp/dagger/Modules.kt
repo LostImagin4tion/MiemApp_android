@@ -11,6 +11,8 @@ import com.google.gson.GsonBuilder
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import io.noties.markwon.Markwon
+import io.noties.markwon.image.glide.GlideImagesPlugin
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -97,6 +99,15 @@ class DataModule {
     fun providesGson() = GsonBuilder()
         .serializeNulls()
         .create()
+}
+
+@Module
+class MiscModule {
+
+    @Provides
+    fun provideMarkwon(application: Application) = Markwon.builder(application)
+        .usePlugin(GlideImagesPlugin.create(application))
+        .build()
 }
 
 object NetworkUtils {

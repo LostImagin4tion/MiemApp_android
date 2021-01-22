@@ -13,7 +13,7 @@ import ru.hse.miem.miemapp.presentation.settings.SettingsFragment
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [GoogleModule::class, RepositoryModule::class, DataModule::class])
+@Component(modules = [GoogleModule::class, RepositoryModule::class, DataModule::class, MiscModule::class])
 interface AppComponent {
 
     @Component.Builder

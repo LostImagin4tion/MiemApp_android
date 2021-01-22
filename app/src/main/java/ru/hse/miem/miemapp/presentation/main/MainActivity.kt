@@ -2,6 +2,7 @@ package ru.hse.miem.miemapp.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
@@ -18,16 +19,20 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) { // not screen rotation or something like this
             bottomNavigation.setupWithNavController(
                 navGraphIds = listOf(
+                    R.navigation.nav_profile, // keep first!!
                     R.navigation.nav_search,
                     R.navigation.nav_settings,
                     R.navigation.nav_apps,
-                    R.navigation.nav_profile // keep nav_profile last
                 ),
                 fragmentManager = supportFragmentManager,
                 containerId = R.id.navHost,
                 intent = intent,
                 fragmentsBarGone = listOf(R.id.fragmentLogin)
             )
+
+            bottomNavigation.post {
+                bottomNavigation.visibility = View.GONE
+            }
         }
     }
 }

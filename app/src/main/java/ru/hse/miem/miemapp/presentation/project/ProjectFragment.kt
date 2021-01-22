@@ -9,6 +9,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import io.noties.markwon.Markwon
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_project.*
@@ -29,6 +30,9 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
     fun provideProjectPresenter() = projectPresenter
 
     private val args: ProjectFragmentArgs by navArgs()
+
+    @Inject
+    lateinit var markwon: Markwon
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -75,9 +79,8 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         projectState.setBackgroundResource(if (isActive) R.drawable.badge_active_bg else R.drawable.badge_inactive_bg)
         projectEmail.text = email
 
-        val imageRegex = Regex("!\\[.+]\\(data:image/.+\\)")
-        projectObjective.text = objective.replace(imageRegex, getString(R.string.projected_embedded_image_error))
-        projectAnnotation.text = annotation.replace(imageRegex, getString(R.string.projected_embedded_image_error))
+        markwon.setMarkdown(projectObjective, objective)
+        markwon.setMarkdown(projectAnnotation, annotation)
 
         membersList.adapter = MembersAdapter(members) { id, isTeacher ->
             val action = ProjectFragmentDirections.actionFragmentProjectToFragmentProfile(id, isTeacher)

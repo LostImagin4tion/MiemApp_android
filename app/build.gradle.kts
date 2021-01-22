@@ -104,4 +104,9 @@ dependencies {
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.2.1")
 
+    // Markdown
+    val markdownVersion = "4.6.1"
+    implementation("io.noties.markwon:core:$markdownVersion")
+    implementation("io.noties.markwon:image-glide:$markdownVersion")
+
 }
