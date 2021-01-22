@@ -3,9 +3,11 @@ package ru.hse.miem.miemapp.presentation.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.NavHostFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.setupWithNavController
 
 class MainActivity : AppCompatActivity() {
@@ -35,4 +37,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager.fragments.find { it is NavHostFragment } as NavHostFragment?
+        navHostFragment?.childFragmentManager?.fragments?.first()?.let {
+            if (it is OnBackPressListener) {
+                if (!it.onBackPressed()) super.onBackPressed()
+            } else {
+                super.onBackPressed()
+            }
+        } ?: run {
+            super.onBackPressed()
+        }
+
+    }
+
 }
