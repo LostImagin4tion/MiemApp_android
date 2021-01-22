@@ -75,9 +75,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
         }
 
+        if (isTeacher) {
+            userApplications.visibility = View.GONE
+        }
+
         profileLoader.visibility = View.GONE
         profileContent.visibility = View.VISIBLE
         profileSwipeRefreshLayout.isRefreshing = false
+
     }
 
     override fun showUnauthorizedProfile() {

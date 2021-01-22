@@ -27,7 +27,7 @@ interface CabinetApi {
     @GET("$api/student_profile")
     suspend fun myStudentProfile(): StudentProfileResponse
 
-    @GET("$api/student_profile")
+    @GET("$api/teacher_profile")
     suspend fun myTeacherProfile(): TeacherProfileResponse
 
     @GET("$publicApi/student_profile/{id}")
