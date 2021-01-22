@@ -81,8 +81,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
 
         profileLoader.visibility = View.GONE
         profileContent.visibility = View.VISIBLE
-        profileSwipeRefreshLayout.isRefreshing = false
+        profileInfo.visibility = View.VISIBLE
 
+        profileSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showUnauthorizedProfile() {

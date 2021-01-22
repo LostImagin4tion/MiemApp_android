@@ -4,8 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/profile"
-    app:startDestination="@id/fragmentProfile">
+    app:startDestination="@id/fragmentLogin">
     <!-- nav graph id must be same as bottom menu item id-->
+
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="ru.hse.miem.miemapp.presentation.login.LoginFragment"
+        android:label="Login fragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentProfile"
+            app:destination="@id/fragmentProfile"
+            app:popUpTo="@id/fragmentLogin"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
     <fragment
         android:id="@+id/fragmentProfile"
