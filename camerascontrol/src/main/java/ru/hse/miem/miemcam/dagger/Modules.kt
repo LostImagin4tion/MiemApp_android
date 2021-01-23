@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.dagger.NetworkUtils
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemcam.CameraSession
 import ru.hse.miem.miemcam.data.api.*
 import ru.hse.miem.miemcam.data.repositories.*

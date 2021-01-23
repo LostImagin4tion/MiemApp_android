@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:fontFamily="sans-serif-medium"
             tools:text="Андроид приложение МИЭМ"/>
 
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Тип: Прогр."/>
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Руководитель: Королев Королев Королев"/>
 
         <TextView
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Роль: Разработчик"/>
 
         <TextView
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:visibility="gone"
             tools:visibility="visible"
             tools:text="Комментарий студента:\nКомментарий"/>
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:visibility="gone"
             tools:visibility="visible"
             tools:text="Комментарий руководителя:\nКомментарий" />

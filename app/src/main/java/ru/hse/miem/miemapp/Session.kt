@@ -1,4 +1,4 @@
-package ru.hse.miem.miemapp.data
+package ru.hse.miem.miemapp
 
 class Session {
     @Volatile var token: String = ""

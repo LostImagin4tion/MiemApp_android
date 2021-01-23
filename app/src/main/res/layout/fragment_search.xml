@@ -52,6 +52,7 @@
                         android:layout_height="24dp"
                         android:layout_marginEnd="6dp"
                         android:src="@drawable/ic_filter"
+                        android:background="@null"
                         android:layout_gravity="center_vertical|end"
                         tools:ignore="ContentDescription" />
 

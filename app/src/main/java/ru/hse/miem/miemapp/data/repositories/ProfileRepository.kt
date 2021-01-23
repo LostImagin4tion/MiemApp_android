@@ -1,7 +1,7 @@
 package ru.hse.miem.miemapp.data.repositories
 
 import kotlinx.coroutines.async
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.data.api.ApplicationConfirmRequest
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.StudentProfileResponse

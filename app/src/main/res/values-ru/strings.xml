@@ -62,4 +62,10 @@
     <string name="search_filters_show_results">Показать результаты</string>
 
     <string name="logout">Выйти</string>
+    <string name="settings_theme">Тема</string>
+    <string-array name="available_themes">
+        <item>Светлая</item>
+        <item>Темная</item>
+        <item>Системная</item>
+    </string-array>
 </resources>

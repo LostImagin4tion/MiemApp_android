@@ -3,7 +3,7 @@ package ru.hse.miem.miemapp.data.repositories
 import android.util.Base64
 import android.util.Log
 import com.google.gson.Gson
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.data.api.AuthRequest
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository

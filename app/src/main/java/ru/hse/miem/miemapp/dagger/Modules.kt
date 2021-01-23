@@ -21,7 +21,7 @@ import okio.Buffer
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.repositories.AuthRepository
 import ru.hse.miem.miemapp.data.repositories.ProfileRepository

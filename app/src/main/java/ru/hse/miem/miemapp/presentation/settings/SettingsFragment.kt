@@ -10,7 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import javax.inject.Inject
 

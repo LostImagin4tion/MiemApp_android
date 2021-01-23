@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:fontFamily="sans-serif-medium"
             tools:text="Андроид приложение МИЭМ"/>
 
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Участников: 3"/>
 
     </LinearLayout>

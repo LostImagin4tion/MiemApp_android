@@ -64,4 +64,10 @@
     <string name="search_filters_show_results">Show results</string>
 
     <string name="logout">Log out</string>
+    <string name="settings_theme">Theme</string>
+    <string-array name="available_themes">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System</item>
+    </string-array>
 </resources>

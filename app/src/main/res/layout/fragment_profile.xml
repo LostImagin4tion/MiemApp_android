@@ -71,7 +71,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="@string/unauthorized_name"
-                            android:textColor="@android:color/black"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -83,7 +83,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="@string/unauthorized_name"
-                            android:textColor="@android:color/black"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -129,7 +129,7 @@
                         android:layout_marginTop="6dp"
                         android:layout_marginBottom="12dp"
                         android:drawablePadding="8dp"
-                        android:textColor="@android:color/black"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textIsSelectable="true"
                         android:textSize="16sp"
                         app:drawableStartCompat="@drawable/ic_school_hat"
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="6dp"
                         android:text="@string/projects_title"
-                        android:textColor="@android:color/black"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -180,7 +180,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="6dp"
                             android:text="@string/applications_title"
-                            android:textColor="@android:color/black"
+                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 

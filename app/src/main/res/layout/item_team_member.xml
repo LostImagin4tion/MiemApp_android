@@ -24,7 +24,7 @@
             android:id="@+id/memberName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:text="Денис Королев"/>
@@ -33,7 +33,7 @@
             android:id="@+id/memberRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="15sp"
             tools:text="Руководитель"/>
 

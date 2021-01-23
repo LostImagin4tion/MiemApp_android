@@ -44,7 +44,7 @@
             android:id="@+id/googleSignInButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:text="@string/login_button_text"
             android:textAllCaps="false"
             app:icon="@drawable/google_logo"
@@ -55,7 +55,7 @@
             android:id="@+id/withoutAuthButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="?android:attr/textColorPrimary"
             android:text="@string/login_without_auth_button_text"
             android:textAllCaps="false"
             app:backgroundTint="@color/colorPrimary"/>

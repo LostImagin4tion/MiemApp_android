@@ -35,7 +35,7 @@
             android:layout_marginBottom="4dp"
             android:fontFamily="sans-serif-medium"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Za warudo toki wo tomare"/>
 
         <LinearLayout
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/text_accent_color"
                 tools:background="@drawable/badge_active_bg"
                 tools:text="Рабочий"/>
 
@@ -57,7 +57,7 @@
                 android:id="@+id/projectVacancies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/text_accent_color"
                 android:visibility="gone"
                 android:background="@drawable/project_badge_vacancies"
                 tools:text="3 вакансии"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Руководитель: ДИО"/>
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Тип: Прогр-аппарат."/>
 
     </LinearLayout>

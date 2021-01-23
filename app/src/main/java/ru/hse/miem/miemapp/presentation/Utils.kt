@@ -21,7 +21,7 @@ object TextViewUtils {
     fun View.makeNameValueString(
         @StringRes nameId: Int,
         value: String,
-        @ColorRes colorId: Int = R.color.colorPrimaryDark,
+        @ColorRes colorId: Int = R.color.colorAccentDark,
         sep: String = " "
     ) = SpannableStringBuilder()
         .color(resources.getColor(colorId)) {
