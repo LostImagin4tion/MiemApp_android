@@ -55,6 +55,9 @@
         android:label="Project fragment"
         tools:layout="@layout/fragment_project">
 
+        <deepLink
+            app:uri="cabinet.miem.hse.ru/#/project/{projectId}"/>
+
         <argument
             android:name="projectId"
             app:argType="long"

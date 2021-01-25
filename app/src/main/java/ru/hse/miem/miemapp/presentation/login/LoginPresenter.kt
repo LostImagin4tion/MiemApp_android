@@ -6,6 +6,7 @@ import com.google.android.gms.tasks.RuntimeExecutionException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
 import ru.hse.miem.miemapp.presentation.base.BasePresenter
 import timber.log.Timber
@@ -14,17 +15,22 @@ import javax.inject.Inject
 @InjectViewState
 class LoginPresenter @Inject constructor(
     private val authRepository: IAuthRepository,
-    private val signInClient: GoogleSignInClient
+    private val signInClient: GoogleSignInClient,
+    private val session: Session
 ) : BasePresenter<LoginView>(), CoroutineScope {
     override val coroutineContext = Dispatchers.Main
 
     fun onCreate() {
-        signInClient.silentSignIn().addOnCompleteListener {
-            try {
-                it.result?.serverAuthCode?.also(::onLogged) ?: viewState.showLoginForm()
-            } catch (e: RuntimeExecutionException) { // api exception
-                Timber.w(e.stackTraceToString())
-                viewState.showLoginForm()
+        if (session.token.isNotEmpty()) {
+            viewState.afterLogin()
+        } else {
+            signInClient.silentSignIn().addOnCompleteListener {
+                try {
+                    it.result?.serverAuthCode?.also(::onLogged) ?: viewState.showLoginForm()
+                } catch (e: RuntimeExecutionException) { // api exception
+                    Timber.w(e.stackTraceToString())
+                    viewState.showLoginForm()
+                }
             }
         }
     }

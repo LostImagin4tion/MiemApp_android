@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -15,6 +16,7 @@ import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
@@ -50,11 +52,13 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
     }
 
     override fun afterLogin() {
-        findNavController().apply {
-            navigate(R.id.action_fragmentLogin_to_fragmentProfile)
-            graph.startDestination = R.id.fragmentProfile
+        (requireActivity() as MainActivity).let {
+            findNavController().apply {
+                it.intentUri?.also(::navigate) ?: navigate(R.id.action_fragmentLogin_to_fragmentProfile)
+                it.window.setBackgroundDrawableResource(R.drawable.solid_color_primary)
+                graph.startDestination = R.id.fragmentProfile
+            }
         }
-        requireActivity().window.setBackgroundDrawableResource(R.drawable.solid_color_primary)
     }
 
     override fun login(signInIntent: Intent) {
@@ -82,7 +86,7 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
                     loginPresenter.onLogged(it.serverAuthCode!!)
                 }
             } catch (e: ApiException) {
-                Log.e("Login", e.message.toString())
+                Timber.e(e.message.toString())
                 showLoginButtons()
             }
         }

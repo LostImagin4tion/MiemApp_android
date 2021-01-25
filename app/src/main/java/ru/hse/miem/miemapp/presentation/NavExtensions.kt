@@ -140,8 +140,8 @@ fun BottomNavigationView.setupWithNavController(
     // Optional: on item reselected, pop back stack to the destination of the graph
     setupItemReselected(graphIdToTagMap, fragmentManager)
 
-    // Handle deep link
-    setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
+    // Handle deep link (no)
+    // setupDeepLinks(navGraphIds, fragmentManager, containerId, intent)
 
     // Finally, ensure that we update our BottomNavigationView when the back stack changes
     fragmentManager.addOnBackStackChangedListener {
@@ -160,29 +160,30 @@ fun BottomNavigationView.setupWithNavController(
     return selectedNavController
 }
 
-private fun BottomNavigationView.setupDeepLinks(
-    navGraphIds: List<Int>,
-    fragmentManager: FragmentManager,
-    containerId: Int,
-    intent: Intent
-) {
-    navGraphIds.forEachIndexed { index, navGraphId ->
-        val fragmentTag = getFragmentTag(index)
-
-        // Find or create the Navigation host fragment
-        val navHostFragment = obtainNavHostFragment(
-            fragmentManager,
-            fragmentTag,
-            navGraphId,
-            containerId
-        )
-        // Handle Intent
-        if (navHostFragment.navController.handleDeepLink(intent)
-            && selectedItemId != navHostFragment.navController.graph.id) {
-            this.selectedItemId = navHostFragment.navController.graph.id
-        }
-    }
-}
+// unused, we use our custom implementation
+//private fun BottomNavigationView.setupDeepLinks(
+//    navGraphIds: List<Int>,
+//    fragmentManager: FragmentManager,
+//    containerId: Int,
+//    intent: Intent
+//) {
+//    navGraphIds.forEachIndexed { index, navGraphId ->
+//        val fragmentTag = getFragmentTag(index)
+//
+//        // Find or create the Navigation host fragment
+//        val navHostFragment = obtainNavHostFragment(
+//            fragmentManager,
+//            fragmentTag,
+//            navGraphId,
+//            containerId
+//        )
+//        // Handle Intent
+//        if (navHostFragment.navController.handleDeepLink(intent)
+//            && selectedItemId != navHostFragment.navController.graph.id) {
+//            this.selectedItemId = navHostFragment.navController.graph.id
+//        }
+//    }
+//}
 
 private fun BottomNavigationView.setupItemReselected(
     graphIdToTagMap: SparseArray<String>,
