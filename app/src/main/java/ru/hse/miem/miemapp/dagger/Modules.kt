@@ -1,7 +1,6 @@
 package ru.hse.miem.miemapp.dagger
 
 import android.app.Application
-import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -31,6 +30,7 @@ import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
 import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.ISearchRepository
+import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -128,7 +128,8 @@ object NetworkUtils {
             val requestBody = Buffer().also {
                 request().body?.writeTo(it)
             }.readUtf8()
-            Log.d("OkHttp/Request", "${request()} $requestBody")
+            Timber.tag("OkHttp/Request")
+            Timber.d("${request()} $requestBody")
 
             proceed(
                 request()
@@ -138,7 +139,8 @@ object NetworkUtils {
                     .addHeader("User-Agent", "Miem App") // used on server side
                     .build()
             ).apply {
-                Log.d("OkHttp/Response", "$this ${peekBody(Long.MAX_VALUE).string()}")
+                Timber.tag("OkHttp/Response")
+                Timber.d("$this ${peekBody(Long.MAX_VALUE).string()}")
                 responseSettings()
             }
         }

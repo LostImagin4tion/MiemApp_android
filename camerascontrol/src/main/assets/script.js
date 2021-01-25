@@ -91,7 +91,7 @@ function startStream(videoUrl) {
 
 function onOffer(error, offerSdp) {
 	if (error)
-		return Android.log('e', 'Error generating the offer');
+		return Android.log('e', 'Error generating the offer ' + error);
 	Android.log('i', 'Invoking SDP offer callback function ' + location.host);
 
 	var message = {

@@ -22,6 +22,13 @@ allprojects {
     }
 }
 
+// TODO add common dependencies file
+subprojects {
+    extra.apply {
+        set("timber", "com.jakewharton.timber:timber:4.7.1")
+    }
+}
+
 
 tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)

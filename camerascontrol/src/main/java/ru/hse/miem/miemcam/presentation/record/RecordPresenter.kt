@@ -1,6 +1,5 @@
 package ru.hse.miem.miemcam.presentation.record
 
-import android.util.Log
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -13,6 +12,7 @@ import io.reactivex.schedulers.Schedulers
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemcam.domain.repositories.IRecordRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 interface RecordView : MvpView {
@@ -58,7 +58,7 @@ class RecordPresenter @Inject constructor(
       .subscribeBy(
         onSuccess = ::onRoomsReceived,
         onError = {
-          Log.e("Records", it.stackTraceToString())
+          Timber.e(it.stackTraceToString())
           viewState.showError()
         }
       )

@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION as kotlinVersion
-
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -53,7 +51,7 @@ android {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8", kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", rootProject.extra["kotlinVersion"] as String))
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -108,5 +106,7 @@ dependencies {
     val markdownVersion = "4.6.1"
     implementation("io.noties.markwon:core:$markdownVersion")
     implementation("io.noties.markwon:image-glide:$markdownVersion")
+
+    implementation(project.extra["timber"] as String)
 
 }

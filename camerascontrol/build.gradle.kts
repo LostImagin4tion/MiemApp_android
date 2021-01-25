@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion.VERSION as kotlinVersion
-
 plugins {
     id("com.android.dynamic-feature")
     id("kotlin-android")
@@ -31,7 +29,7 @@ android {
 dependencies {
     implementation(project(":app"))
 
-    implementation(kotlin("stdlib-jdk7", kotlinVersion))
+    implementation(kotlin("stdlib-jdk7", rootProject.extra["kotlinVersion"] as String))
 
     implementation("androidx.core:core-ktx:1.3.2")
     implementation("androidx.appcompat:appcompat:1.2.0")
@@ -65,4 +63,6 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+
+    implementation(project.extra["timber"] as String)
 }

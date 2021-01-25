@@ -9,6 +9,7 @@ import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.setupWithNavController
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,6 +1,5 @@
 package ru.hse.miem.miemapp.presentation.login
 
-import android.util.Log
 import moxy.InjectViewState
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.RuntimeExecutionException
@@ -9,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
 import ru.hse.miem.miemapp.presentation.base.BasePresenter
+import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
@@ -23,7 +23,7 @@ class LoginPresenter @Inject constructor(
             try {
                 it.result?.serverAuthCode?.also(::onLogged) ?: viewState.showLoginForm()
             } catch (e: RuntimeExecutionException) { // api exception
-                Log.w(javaClass.simpleName, e.stackTraceToString())
+                Timber.w(e.stackTraceToString())
                 viewState.showLoginForm()
             }
         }
@@ -39,7 +39,7 @@ class LoginPresenter @Inject constructor(
             authRepository.auth(authCode)
             viewState.afterLogin()
         } catch (e: Exception) {
-            Log.e("Auth", e.stackTraceToString())
+            Timber.e(e.stackTraceToString())
         }
     }
 
