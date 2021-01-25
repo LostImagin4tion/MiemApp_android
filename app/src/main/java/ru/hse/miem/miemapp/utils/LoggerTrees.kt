@@ -10,6 +10,11 @@ import java.util.*
 
 class FileLoggingTree(private val basePath: String, private val minPriority: Int) : DebugTree() {
 
+    var currentFile: File? = null
+        private set
+
+    private var currentFileWriter: FileWriter? = null
+
     override fun isLoggable(tag: String?, priority: Int) = priority >= minPriority
 
     @SuppressLint("LogNotTimber")
@@ -26,19 +31,20 @@ class FileLoggingTree(private val basePath: String, private val minPriority: Int
             val fileName = "$fileNameTimeStamp.log"
 
             // Create file
-            val file: File? = generateFile(basePath, fileName)
+            currentFile?.takeIf { it.name == fileName } ?: run {
+                currentFile = generateFile(basePath, fileName)
+                currentFileWriter = FileWriter(currentFile, true)
+            }
 
             // If file created or exists save logs
-            if (file != null) {
-                val writer = FileWriter(file, true)
-                writer.append(logTimeStamp)
+            currentFileWriter?.let {
+                it.append(logTimeStamp)
                     .append(" : ")
                     .append(tag)
                     .append(" - ")
                     .append(message)
                     .append("\n\n")
-                writer.flush()
-                writer.close()
+                it.flush()
             }
         } catch (e: Exception) {
             Log.e(
@@ -53,9 +59,12 @@ class FileLoggingTree(private val basePath: String, private val minPriority: Int
         return super.createStackElementTag(element) + " - " + element.lineNumber
     }
 
+    protected fun finalize() {
+        currentFileWriter?.close()
+    }
+
     companion object {
         private val LOG_TAG = FileLoggingTree::class.java.simpleName
-
         /*  Helper method to create file*/
 
         private fun generateFile(path: String, fileName: String): File? {

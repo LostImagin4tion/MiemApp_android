@@ -87,7 +87,7 @@ class JSInterface(
     Timber.tag("WebRTCPlayer")
     when (lvl) {
       "i" -> Timber.i(log)
-      "e" -> Timber.e( log)
+      "e" -> Timber.e(log)
     }
   }
 

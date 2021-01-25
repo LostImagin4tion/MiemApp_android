@@ -70,4 +70,5 @@
         <item>Dark</item>
         <item>System</item>
     </string-array>
+    <string name="submit_report">Report problem</string>
 </resources>

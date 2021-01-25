@@ -68,4 +68,5 @@
         <item>Темная</item>
         <item>Системная</item>
     </string-array>
+    <string name="submit_report">Рассказать о проблеме</string>
 </resources>
