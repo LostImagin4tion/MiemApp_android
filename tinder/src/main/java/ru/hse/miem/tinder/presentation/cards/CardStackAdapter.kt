@@ -38,19 +38,23 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var image: ImageView = itemView.findViewById(R.id.item_image)
-        var nama: TextView = itemView.findViewById(R.id.item_name)
-        var usia: TextView = itemView.findViewById(R.id.item_age)
-        var kota: TextView = itemView.findViewById(R.id.item_city)
+        var type: TextView = itemView.findViewById(R.id.item_type)
+        var name: TextView = itemView.findViewById(R.id.item_name)
+        var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
+        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
+        var leader: TextView = itemView.findViewById(R.id.item_leader)
 
         fun setData(data: ItemModel){
             Picasso.get()
-                .load(data.getImage())
+                .load(data.image)
                 .fit()
                 .centerCrop()
                 .into(image);
-            nama.setText(data.getNama())
-            usia.setText(data.getUsia())
-            kota.setText(data.getKota())
+            type.setText(data.type)
+            name.setText(data.name)
+            vacancy.setText(data.vacancy)
+            requirements.setText(data.requirements)
+            leader.setText(data.leader)
         }
     }
 

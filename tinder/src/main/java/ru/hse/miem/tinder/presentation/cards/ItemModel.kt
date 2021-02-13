@@ -1,23 +1,19 @@
 package ru.hse.miem.tinder.presentation.cards
 
 class ItemModel() {
-    private var image: Int = 0
-    private var nama: String = ""
-    private var usia: String = ""
-    private var kota: String = ""
+    var image: Int = 0
+    var type: String = ""
+    var name: String = ""
+    var vacancy: String = ""
+    var requirements: String = ""
+    var leader: String = ""
 
-    constructor(_image: Int, _nama: String, _usia: String, _kota: String) : this() {
+    constructor(_image: Int, _type: String, _name: String, _vacancy: String,_requirements: String,_leader: String) : this() {
         image = _image
-        nama = _nama
-        usia = _usia
-        kota = _kota
+        type= _type
+        name = _name
+        vacancy = _vacancy
+        requirements = _requirements
+        leader = _leader
     }
-
-    public fun getImage(): Int = image;
-
-    public fun getNama(): String = nama;
-
-    public fun getUsia(): String = usia;
-
-    public fun getKota(): String = kota;
 }

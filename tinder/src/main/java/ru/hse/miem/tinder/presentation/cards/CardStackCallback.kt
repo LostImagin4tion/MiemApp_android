@@ -18,7 +18,7 @@ class CardStackCallback(_old: List<ItemModel>, _baru: List<ItemModel>): DiffUtil
 
     @Override
     public override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old.get(oldItemPosition).getImage() == baru.get(newItemPosition).getImage();
+        return old.get(oldItemPosition).image == baru.get(newItemPosition).image;
     }
 
     @Override

@@ -49,12 +49,14 @@ class TinderActivity : AppCompatActivity() {
         manager.setMaxDegree(20.0f)
         manager.setDirections(Direction.FREEDOM)
         manager.setCanScrollHorizontal(true)
+        manager.setCanScrollVertical(false)
         manager.setSwipeableMethod(SwipeableMethod.Manual)
         manager.setOverlayInterpolator(LinearInterpolator ())
         adapter = CardStackAdapter(addList())
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator ()
+
 
     }
 
@@ -80,17 +82,19 @@ class TinderActivity : AppCompatActivity() {
 //            Log.d("MyLogs", "OK2")
 //            items.add(ItemModel(R.drawable.sample1, projects[n].name, projects[n].name, projects[n].name))
 //        }
-        items.add(ItemModel (R.drawable.sample1, "Markonah", "24", "Jember"))
-        items.add(ItemModel (R.drawable.sample2, "Marpuah", "20", "Malang"))
-        items.add(ItemModel (R.drawable.sample3, "Sukijah", "27", "Jonggol"))
-        items.add(ItemModel (R.drawable.sample4, "Markobar", "19", "Bandung"))
-        items.add(ItemModel (R.drawable.sample5, "Marmut", "25", "Hutan"))
-
-        items.add(ItemModel (R.drawable.sample1, "Markonah", "24", "Jember"))
-        items.add(ItemModel (R.drawable.sample2, "Marpuah", "20", "Malang"))
-        items.add(ItemModel (R.drawable.sample3, "Sukijah", "27", "Jonggol"))
-        items.add(ItemModel (R.drawable.sample4, "Markobar", "19", "Bandung"))
-        items.add(ItemModel (R.drawable.sample5, "Marmut", "25", "Hutan"))
+        items.add(ItemModel (R.drawable.sample1, "Проект #617, Программный (ДКИ)\n", "Мобильное приложение МИЭМ: Android",
+            "Разработчик мобильного приложения (Android)", "Android, Java, Kotlin","Королев Денис"))
+        items.add(ItemModel (R.drawable.sample2, "Проект #19111, Программный (ДКИ)", "Мобильное приложение МИЭМ: сервер",
+            "back-end разработчик","Python, API","Королев Денис"))
+//        items.add(ItemModel (R.drawable.sample3, "Sukijah", "27", "Jonggol"))
+//        items.add(ItemModel (R.drawable.sample4, "Markobar", "19", "Bandung"))
+//        items.add(ItemModel (R.drawable.sample5, "Marmut", "25", "Hutan"))
+//
+//        items.add(ItemModel (R.drawable.sample1, "Markonah", "24", "Jember"))
+//        items.add(ItemModel (R.drawable.sample2, "Marpuah", "20", "Malang"))
+//        items.add(ItemModel (R.drawable.sample3, "Sukijah", "27", "Jonggol"))
+//        items.add(ItemModel (R.drawable.sample4, "Markobar", "19", "Bandung"))
+//        items.add(ItemModel (R.drawable.sample5, "Marmut", "25", "Hutan"))
         return items
     }
 
