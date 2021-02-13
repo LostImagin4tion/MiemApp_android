@@ -58,13 +58,21 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:$daggerVersion")
     kaptAndroidTest("com.google.dagger:dagger-compiler:$daggerVersion")
 
-//    // RxKotlin
-//    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
-//    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
-//
-//    // Retrofit 2
-//    val retrofitVersion = "2.8.1"
-//    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-//    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-//    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+    // RxKotlin
+    implementation("io.reactivex.rxjava2:rxkotlin:2.4.0")
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
+
+    // Retrofit 2
+    val retrofitVersion = "2.8.1"
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.5.0")
+
+    // CardStackView
+    val cardVersion = "2.3.4"
+    implementation("com.yuyakaido.android:card-stack-view:${cardVersion}")
+
+    // Picasso(Удалить)
+
+    implementation ("com.squareup.picasso:picasso:2.71828")
 }
