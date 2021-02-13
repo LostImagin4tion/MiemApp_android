@@ -82,10 +82,18 @@ class TinderActivity : AppCompatActivity() {
 //            Log.d("MyLogs", "OK2")
 //            items.add(ItemModel(R.drawable.sample1, projects[n].name, projects[n].name, projects[n].name))
 //        }
-        items.add(ItemModel (R.drawable.sample1, "Проект #617, Программный (ДКИ)\n", "Мобильное приложение МИЭМ: Android",
+        items.add(ItemModel (R.drawable.sample1, "Проект #617, Программный (ДКИ)", "Мобильное приложение МИЭМ: Android",
             "Разработчик мобильного приложения (Android)", "Android, Java, Kotlin","Королев Денис"))
         items.add(ItemModel (R.drawable.sample2, "Проект #19111, Программный (ДКИ)", "Мобильное приложение МИЭМ: сервер",
             "back-end разработчик","Python, API","Королев Денис"))
+        items.add(ItemModel (R.drawable.sample3, "Проект #616, Программный (ДКИ)", "Мобильное приложение МИЭМ: IOS-версия",
+            "Разработчик мобильного приложения (IOS)","Swift","Федоров Тимофей"))
+        items.add(ItemModel (R.drawable.sample4, "Проект #218, Программный (внешние)",
+            "Разработка глоссария физических терминов для мультилингваперевода задач по физике различной сложности для иностранных слушателей подготовительных отделений",
+            "Аналитик/ разработчик","C/C++, Python","Гузенкова Александра"))
+        items.add(ItemModel (R.drawable.sample5, "Проект #207, Программно-аппаратный (ДЭИ)",
+            "Программно-аппаратный комплекс проведения входного контроля источников вторичного электропитания ",
+            "программист","C/C++, Python","Королев Павел"))
 //        items.add(ItemModel (R.drawable.sample3, "Sukijah", "27", "Jonggol"))
 //        items.add(ItemModel (R.drawable.sample4, "Markobar", "19", "Bandung"))
 //        items.add(ItemModel (R.drawable.sample5, "Marmut", "25", "Hutan"))
