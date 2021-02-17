@@ -1,4 +1,4 @@
-package ru.hse.miem.tinder.presentation.cards
+package ru.hse.miem.miemapp.presentation.tinder
 
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import ru.hse.miem.tinder.R
+import ru.hse.miem.miemapp.R
 
 class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
@@ -22,7 +22,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     @Override
     public override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.item_card, parent, false)
+        val view = inflater.inflate(R.layout.item_cards, parent, false)
         return ViewHolder(view)
     }
 
@@ -37,7 +37,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image: ImageView = itemView.findViewById(R.id.item_imag)
+        var image: ImageView = itemView.findViewById(R.id.item_image)
         var type: TextView = itemView.findViewById(R.id.item_type)
         var name: TextView = itemView.findViewById(R.id.item_name)
         var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)

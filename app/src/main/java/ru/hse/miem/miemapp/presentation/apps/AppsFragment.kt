@@ -42,7 +42,7 @@ class AppsFragment : Fragment() {
                     resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".tinder")
                 )!!,
                 name = getString(R.string.title_tinder),
-                activityClassName = "ru.hse.miem.tinder.presentation.main.TinderActivity"
+                activityClassName = "ru.hse.miem.miemapp.presentation.tinder.ProjectsActivity"
             )
         ))
     }

@@ -103,4 +103,11 @@ dependencies {
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.2.1")
 
+    // CardStackView
+    val cardVersion = "2.3.4"
+    implementation("com.yuyakaido.android:card-stack-view:${cardVersion}")
+
+    // Picasso(Удалить)
+
+    implementation ("com.squareup.picasso:picasso:2.71828")
 }
