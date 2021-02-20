@@ -35,15 +35,15 @@ class AppsFragment : Fragment() {
                 )!!,
                 name = getString(R.string.title_camerascontrol),
                 activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
-            ),
-            AppItem(
-                icon = ContextCompat.getDrawable(
-                    requireContext(),
-                    resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".tinder")
-                )!!,
-                name = getString(R.string.title_tinder),
-                activityClassName = "ru.hse.miem.miemapp.presentation.tinder.ProjectsActivity"
             )
+//            AppItem(
+//                icon = ContextCompat.getDrawable(
+//                    requireContext(),
+//                    resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".tinder")
+//                )!!,
+//                name = getString(R.string.title_tinder),
+//                activityClassName = "ru.hse.miem.miemapp.presentation.tinder.TinderFragment"
+//            )
         ))
     }
 
