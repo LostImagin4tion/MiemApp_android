@@ -51,4 +51,6 @@
     <string name="logout">Log out</string>
     <string name="title_tinder">Проектный тиндер</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="tinder_button_back">BACK</string>
+    <string name="tinder_button_view_all">VIEW ALL</string>
 </resources>
