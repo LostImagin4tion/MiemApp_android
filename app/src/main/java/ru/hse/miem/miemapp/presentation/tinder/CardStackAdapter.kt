@@ -1,5 +1,6 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
+import android.util.Log
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
@@ -32,16 +33,16 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     }
 
     @Override
-    public override fun getItemCount(): Int {
+    override fun getItemCount(): Int {
         return items.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var image: ImageView = itemView.findViewById(R.id.item_image)
+//        var image: ImageView = itemView.findViewById(R.id.item_image)
         var type: TextView = itemView.findViewById(R.id.item_type)
         var name: TextView = itemView.findViewById(R.id.item_name)
         var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
-        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
+//        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
         var leader: TextView = itemView.findViewById(R.id.item_leader)
 
         fun setData(data: ItemModel){
@@ -49,11 +50,11 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
                 .load(data.image)
                 .fit()
                 .centerCrop()
-                .into(image);
+//                .into(image);
             type.setText(data.type)
             name.setText(data.name)
             vacancy.setText(data.vacancy)
-            requirements.setText(data.requirements)
+//            requirements.setText(data.requirements)
             leader.setText(data.leader)
         }
     }

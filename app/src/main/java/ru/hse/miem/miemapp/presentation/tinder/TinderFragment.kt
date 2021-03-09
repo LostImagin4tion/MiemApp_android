@@ -1,46 +1,30 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import ru.hse.miem.miemapp.data.repositories.ProjectRepository
-
-
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.yuyakaido.android.cardstackview.*
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_project.*
 import kotlinx.android.synthetic.main.fragment_tinder.*
-import kotlinx.android.synthetic.main.layout_bottom_filters.*
-import moxy.MvpPresenter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
-import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
-import ru.hse.miem.miemapp.presentation.project.*
-import ru.hse.miem.miemapp.presentation.search.ProjectsAdapter
-import ru.hse.miem.miemapp.presentation.search.SearchFilters
-import ru.hse.miem.miemapp.presentation.search.SearchView
 import java.util.*
 import javax.inject.Inject
 
-class TinderFragment : BaseFragment(R.layout.fragment_tinder), SearchView, ProjectView {
+class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
 
     private lateinit var projectVacancies: List<ProjectExtended.Vacancy>
 
     private lateinit var adapter: CardStackAdapter
     private lateinit var manager: CardStackLayoutManager
+
+    lateinit var items: ArrayList<ItemModel>
 
     companion object {
         fun newInstance() = TinderFragment()
@@ -59,61 +43,66 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), SearchView, Proje
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        items = arrayListOf()
         presenter.onCreate()
+        Log.d("AddsMyLogs", "2")
     }
 
     override fun setupProjects(projects: List<ProjectInSearch>) {
         if (projects.isEmpty()){
-            Log.d("TinderMyLogs", "Empty")
+            Log.d("MyLogs", "Empty")
         }else{
-            Log.d("TinderMyLogs", "NotEmpty")
+            Log.d("MyLogs", "NotEmpty")
         }
 
-        val items: ArrayList<ItemModel> = arrayListOf()
+//        items = arrayListOf()
 
         for (i in projects.indices) {
 
             if (projects[i].vacancies > 0){
 
-                Log.d("TinderMyLogs", "Yes")
+                Log.d("MyLogs", "Yes")
 
-                lateinit var projectPresenter: ProjectPresenter
+                Log.d("tinder", i.toString() + " " + projects[i].id)
 
-                projectPresenter.onCreate(617)
-
-//                Log.d("TinderMyLogs", projectVacancies.size.toString())
-
-                items.add(
-                    ItemModel(
-                        R.drawable.sample1,
-                        projects[i].type,
-                        projects[i].name,
-                        "Разработчик мобильного приложения (Android)",
-                        "Android, Java, Kotlin",
-                        "Королев Денис"
-                    )
-                )
+                presenter.infoProject(projects[i].id)
             }else{
-                Log.d("TinderMyLogs", "No")
+                Log.d("MyLogs", "No")
             }
         }
+
+        Log.d("AddsMyLogs", "1")
+
+    }
+
+    override fun setupProject(project: ProjectExtended){
+        for (i in project.vacancies.indices) {
+            if (project.vacancies[i].role.isEmpty()){
+                Log.d("InfoMyLogs", "(((")
+            }
+            items.add(
+                ItemModel(
+                    R.drawable.sample1,
+                    project.type,
+                    project.name,
+                    project.vacancies[i].role,
+                    "",
+                    ""
+                )
+            )
+            Log.d("InfoMyLogs", i.toString() + " " + project.vacancies[i].role)
+        }
+        Log.d("AddsMyLogs", "0")
+        smt()
+    }
+
+    fun smt(){
 
         adapter = CardStackAdapter(items)
 
         val cardStackView: CardStackView = card_stack_view
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator ()
-
-    }
-
-    override fun setupProject(project: ProjectExtended) = project.run {
-//        projectType.text = getString(R.string.project_type_and_number).format(number, type, source)
-//        projectName.text = name
-//        projectState.text = state
-//        projectState.setBackgroundResource(if (isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
-//        projectEmail.text = email
-        Log.d("TinderMyLogs", "HUI")
-        projectVacancies = project.vacancies
     }
 
 }

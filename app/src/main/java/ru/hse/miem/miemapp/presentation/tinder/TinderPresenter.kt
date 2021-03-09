@@ -6,21 +6,20 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import moxy.MvpPresenter
-import ru.hse.miem.miemapp.data.repositories.ProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.ISearchRepository
-import ru.hse.miem.miemapp.presentation.project.ProjectView
-import ru.hse.miem.miemapp.presentation.search.SearchView
 import javax.inject.Inject
 
 class TinderPresenter @Inject constructor(
     private val searchRepository: ISearchRepository,
     private val projectRepository: IProjectRepository
-) : MvpPresenter<SearchView>() {
+) : MvpPresenter<InfoView>() {
 
     private val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable1 = CompositeDisposable()
 
     fun onCreate() {
+        Log.d("TinderMyLogs", "Create")
         val disposable = searchRepository.getAllProjects()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -37,17 +36,22 @@ class TinderPresenter @Inject constructor(
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
+        compositeDisposable1.dispose()
     }
 
-    fun infoProject(projectId: Long) = projectRepository.getProjectById(projectId)
-//    {
-//        val tinderFragment: TinderFragment
-//        val disposable = projectRepository.getProjectById(projectId)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeBy(
-//                onSuccess =
-//            )
-//        compositeDisposable.add(disposable)
-//    }
+    fun infoProject(projectId: Long)
+    {
+        Log.d("TinderMyLogs", "Info")
+        val disposable = projectRepository.getProjectById(projectId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = viewState::setupProject,
+                onError = {
+                    Log.w(javaClass.simpleName, it.stackTraceToString())
+                    viewState.showError()
+                }
+            )
+        compositeDisposable1.add(disposable)
+    }
 }
