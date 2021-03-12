@@ -21,7 +21,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     @NonNull
     @Override
-    public override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_cards, parent, false)
         return ViewHolder(view)
@@ -57,14 +57,6 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 //            requirements.setText(data.requirements)
             leader.setText(data.leader)
         }
-    }
-
-    public fun getItems(): List<ItemModel>{
-        return items
-    }
-
-    public fun setItems(_items: List<ItemModel>){
-        items = _items
     }
 
 }
