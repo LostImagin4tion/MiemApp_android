@@ -13,11 +13,13 @@ import ru.hse.miem.miemapp.R
 
 class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
-    private lateinit var items: List<ItemModel>
+    private var items: List<ItemModel> = emptyList()
 
     constructor(_items: List<ItemModel>): this(){
         items = _items
     }
+
+    val hadData get() = items.isNotEmpty()
 
     @NonNull
     @Override
@@ -56,6 +58,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
             vacancy.setText(data.vacancy)
 //            requirements.setText(data.requirements)
             leader.setText(data.leader)
+
         }
     }
 

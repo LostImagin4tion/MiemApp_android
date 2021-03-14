@@ -18,17 +18,8 @@ import java.util.*
 import javax.inject.Inject
 
 class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
-
-    private lateinit var projectVacancies: List<ProjectExtended.Vacancy>
-
-    private lateinit var adapter: CardStackAdapter
-    private lateinit var manager: CardStackLayoutManager
-
-    lateinit var items: ArrayList<ItemModel>
-
-    companion object {
-        fun newInstance() = TinderFragment()
-    }
+    private var adapter: CardStackAdapter = CardStackAdapter()
+    private var items: ArrayList<ItemModel> = arrayListOf()
 
     @Inject
     @InjectPresenter
@@ -43,9 +34,17 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        items = arrayListOf()
+        Log.d("ItIsHere", "1")
+
+        if (items.isNotEmpty()) {
+            Log.d("ItIsHere", items.size.toString())
+        }
+
+        if (adapter.hadData){
+            tinderLoader.visibility = View.GONE
+        }
+
         presenter.onCreate()
-        Log.d("AddsMyLogs", "2")
     }
 
     override fun setupProjects(projects: List<ProjectInSearch>) {
@@ -55,57 +54,61 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             Log.d("MyLogs", "NotEmpty")
         }
 
-//        items = arrayListOf()
-
         for (i in projects.indices) {
-
             if (projects[i].vacancies > 0){
-
                 Log.d("MyLogs", "Yes")
-
-                Log.d("tinder", i.toString() + " " + projects[i].id)
-
                 presenter.infoProject(projects[i].id)
             }else{
                 Log.d("MyLogs", "No")
             }
         }
-
-        Log.d("AddsMyLogs", "1")
-
     }
 
     override fun setupProject(project: ProjectExtended){
-        for (i in project.vacancies.indices) {
-            if (project.vacancies[i].role.isEmpty()){
-                Log.d("InfoMyLogs", "(((")
-            }
+        if (items.size == 0) {
             items.add(
                 ItemModel(
+                    R.drawable.sample2,
+                    "",
+                    "Добро пожаловать в проектный тиндер",
+                    "",
+                    "",
+                    ""
+                )
+            )
+            items.add(
+                ItemModel(
+                    R.drawable.sample2,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                )
+            )
+        }
+        for (i in project.vacancies.indices) {
+            items.add(items.size-1,
+                ItemModel(
                     R.drawable.sample1,
-                    project.type,
+                    "#" + project.id + " " + project.type,
                     project.name,
                     project.vacancies[i].role,
                     "",
                     ""
                 )
             )
-            Log.d("InfoMyLogs", i.toString() + " " + project.vacancies[i].role)
+            Log.d("InfoMyLogs", i.toString() + " " + project.state + " " + project.vacancies[i].role)
         }
-        Log.d("AddsMyLogs", "0")
         smt()
     }
 
     fun smt(){
-
         adapter = CardStackAdapter(items)
         val cardStackView: CardStackView = card_stack_view
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator ()
     }
 
-    override fun showError() {
-
-    }
-
+    override fun showError() {}
 }
