@@ -99,10 +99,13 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     fun smt(){
 
         adapter = CardStackAdapter(items)
-
         val cardStackView: CardStackView = card_stack_view
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator ()
+    }
+
+    override fun showError() {
+
     }
 
 }
