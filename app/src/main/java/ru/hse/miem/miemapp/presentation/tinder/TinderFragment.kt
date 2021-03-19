@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.fragment_tinder.*
@@ -17,9 +18,12 @@ import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import java.util.*
 import javax.inject.Inject
 
+
 class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     private var adapter: CardStackAdapter = CardStackAdapter()
     private var items: ArrayList<ItemModel> = arrayListOf()
+    private val listener = CardStackCallback()
+    private lateinit var manager: CardStackLayoutManager
 
     @Inject
     @InjectPresenter
@@ -42,6 +46,13 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
 
         if (adapter.hadData){
             tinderLoader.visibility = View.GONE
+        }
+
+        viewAll.setOnClickListener {
+            if (listener.likeVacancy.size > 3){
+                Log.d("LogTinderAct", adapter.screenItems[1].vacancy)
+            }
+            Log.d("LogTinderAct", listener.likeVacancy.size.toString())
         }
 
         presenter.onCreate()
@@ -88,24 +99,35 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             )
         }
         for (i in project.vacancies.indices) {
-            items.add(items.size-1,
+            items.add(
+                items.size - 1,
                 ItemModel(
                     R.drawable.sample1,
                     "#" + project.id + " " + project.type,
                     project.name,
                     project.vacancies[i].role,
-                    "",
+                    project.vacancies[i].recommended + " " + project.vacancies[i].required,
                     ""
                 )
             )
-            Log.d("InfoMyLogs", i.toString() + " " + project.state + " " + project.vacancies[i].role)
+            Log.d(
+                "InfoMyLogs",
+                i.toString() + " " + project.state + " " + project.vacancies[i].role
+            )
         }
         smt()
     }
 
     fun smt(){
+        manager = CardStackLayoutManager(this.requireContext(), listener)
+        manager.setStackFrom(StackFrom.None)
+        manager.setDirections(Direction.FREEDOM)
+        manager.setCanScrollHorizontal(true)
+        manager.setSwipeableMethod(SwipeableMethod.Manual)
+        manager.setOverlayInterpolator(LinearInterpolator())
         adapter = CardStackAdapter(items)
         val cardStackView: CardStackView = card_stack_view
+        cardStackView.layoutManager = manager;
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator ()
     }

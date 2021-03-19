@@ -1,28 +1,49 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
+import android.R
+import android.util.ArraySet
+import android.util.Log
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
+import androidx.collection.arraySetOf
 import androidx.recyclerview.widget.DiffUtil
+import com.yuyakaido.android.cardstackview.CardStackListener
+import com.yuyakaido.android.cardstackview.Direction
+import java.lang.Exception
+import java.util.ArrayList
 
-class CardStackCallback(_old: List<ItemModel>, _baru: List<ItemModel>): DiffUtil.Callback() {
-    var old: List<ItemModel> = _old
-    var baru: List<ItemModel> = _baru
 
-    @Override
-    public override fun getOldListSize(): Int{
-        return old.size
+class CardStackCallback: CardStackListener {
+    val likeVacancy: ArrayList<Int> = arrayListOf()
+    var pos: Int = 0
+    private val TAG = "LogTinderAct"
+
+    override fun onCardDragging(direction: Direction, ratio: Float) {
+        Log.d(TAG, "onCardDragging: d=" + direction.name + " ratio=" + ratio)
     }
 
-    @Override
-    public override fun getNewListSize(): Int{
-        return baru.size
+    override fun onCardSwiped(direction: Direction) {
+        Log.d(TAG, "onCardSwiped: " )
+        if (direction == Direction.Right){
+            likeVacancy.add(pos)
+        }
     }
 
-    @Override
-    public override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old.get(oldItemPosition).image == baru.get(newItemPosition).image;
+    override fun onCardRewound() {
+        Log.d(TAG, "onCardRewound: " )
     }
 
-    @Override
-    public override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old.get(oldItemPosition) == baru.get(newItemPosition);
+    override fun onCardCanceled() {
+        Log.d(TAG, "onCardRewound: ")
+    }
+
+    override fun onCardAppeared(view: View, position: Int) {
+        Log.d(TAG, "onCardAppeared: $position")
+        pos = position
+    }
+
+    override fun onCardDisappeared(view: View, position: Int) {
+        Log.d(TAG, "onCardAppeared: $position")
     }
 }
