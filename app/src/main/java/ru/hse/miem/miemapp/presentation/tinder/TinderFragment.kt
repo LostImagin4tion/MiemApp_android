@@ -46,8 +46,8 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
                 ItemModel(
                     R.drawable.sample2,
                     "",
-                    "Добро пожаловать в проектный тиндер",
-                    "",
+                    "Добро пожаловать в проектный тиндер\n\nСвайп вправо, если понравилась вакансия",
+                    "Свайп влево, если нет",
                     "",
                     ""
                 )
@@ -132,7 +132,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     fun smt(){
         manager = CardStackLayoutManager(this.requireContext(), listener)
         manager.setStackFrom(StackFrom.None)
-        manager.setDirections(Direction.FREEDOM)
+        manager.setDirections(Direction.HORIZONTAL)
         manager.setCanScrollHorizontal(true)
         manager.setSwipeableMethod(SwipeableMethod.Manual)
         manager.setOverlayInterpolator(LinearInterpolator())
