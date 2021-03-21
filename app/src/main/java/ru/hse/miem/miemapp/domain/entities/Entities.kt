@@ -84,3 +84,12 @@ data class ProjectInSearch(
     val vacancies: Int,
     val head: String
 )
+
+data class Vacancies(
+    val vacancy_id: Long,
+    val project_id: Long,
+    val project_name_rus: String,
+    val vacancy_role: String,
+    val vacancy_disciplines: List<String>,
+    val vacancy_additionally: List<String>
+)

@@ -50,8 +50,8 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
         var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
 //        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
         var leader: TextView = itemView.findViewById(R.id.item_leader)
-        var text1: Button = itemView.findViewById(R.id.text1)
-        var text2: Button = itemView.findViewById(R.id.text2)
+        var text1: Button = itemView.findViewById(R.id.tag1)
+        var text2: Button = itemView.findViewById(R.id.tag2)
 
         fun setData(data: ItemModel){
             Picasso.get()

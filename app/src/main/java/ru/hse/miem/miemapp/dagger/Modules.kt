@@ -20,14 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.data.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
-import ru.hse.miem.miemapp.data.repositories.AuthRepository
-import ru.hse.miem.miemapp.data.repositories.ProfileRepository
-import ru.hse.miem.miemapp.data.repositories.ProjectRepository
-import ru.hse.miem.miemapp.data.repositories.SearchRepository
-import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
-import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
-import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
-import ru.hse.miem.miemapp.domain.repositories.ISearchRepository
+import ru.hse.miem.miemapp.data.repositories.*
+import ru.hse.miem.miemapp.domain.repositories.*
 import javax.inject.Singleton
 
 @Module
@@ -69,6 +63,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindISearchRepository(searchRepository: SearchRepository): ISearchRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindIVacancyRepository(vacancyRepository: VacancyRepository): IVacancyRepository
 }
 
 @Module(includes = [GoogleModule::class])

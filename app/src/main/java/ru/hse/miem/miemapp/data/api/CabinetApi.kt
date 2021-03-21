@@ -66,4 +66,7 @@ interface CabinetApi {
     @GET("$publicApi/projects")
     fun allProjects(): Single<ProjectsAllResponse>
 
+    @GET("$publicApi/vacancy/list")
+    fun allVacancies():Single<VacanciesAllResponse>
+
 }

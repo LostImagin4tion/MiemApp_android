@@ -8,10 +8,11 @@ import io.reactivex.schedulers.Schedulers
 import moxy.MvpPresenter
 import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.ISearchRepository
+import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
 import javax.inject.Inject
 
 class TinderPresenter @Inject constructor(
-    private val searchRepository: ISearchRepository,
+    private val vacancyRepository: IVacancyRepository,
     private val projectRepository: IProjectRepository
 ) : MvpPresenter<InfoView>() {
 
@@ -20,11 +21,11 @@ class TinderPresenter @Inject constructor(
 
     fun onCreate() {
         Log.d("TinderMyLogs", "Create")
-        val disposable = searchRepository.getAllProjects()
+        val disposable = vacancyRepository.getAllVacancies()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
-                onSuccess = viewState::setupProjects,
+                onSuccess = viewState::setupVacancies,
                 onError = {
                     Log.w(javaClass.simpleName, it.stackTraceToString())
                     viewState.showError()
@@ -39,19 +40,19 @@ class TinderPresenter @Inject constructor(
         compositeDisposable1.dispose()
     }
 
-    fun infoProject(projectId: Long)
-    {
-        Log.d("TinderMyLogs", "Info")
-        val disposable = projectRepository.getProjectById(projectId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onSuccess = viewState::setupProject,
-                onError = {
-                    Log.w(javaClass.simpleName, it.stackTraceToString())
-                    viewState.showError()
-                }
-            )
-        compositeDisposable1.add(disposable)
-    }
+//    fun infoProject(projectId: Long)
+//    {
+//        Log.d("TinderMyLogs", "Info")
+//        val disposable = projectRepository.getProjectById(projectId)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeBy(
+//                onSuccess = viewState::setupProject,
+//                onError = {
+//                    Log.w(javaClass.simpleName, it.stackTraceToString())
+//                    viewState.showError()
+//                }
+//            )
+//        compositeDisposable1.add(disposable)
+//    }
 }
