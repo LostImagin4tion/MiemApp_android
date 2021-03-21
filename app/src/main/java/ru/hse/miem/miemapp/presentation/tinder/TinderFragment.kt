@@ -46,8 +46,8 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
                 ItemModel(
                     R.drawable.sample2,
                     "",
-                    "Добро пожаловать в проектный тиндер\n\nСвайп вправо, если понравилась вакансия",
-                    "Свайп влево, если нет",
+                    "Добро пожаловать в проектный тиндер",
+                    "",
                     "",
                     ""
                 )
@@ -82,67 +82,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         presenter.onCreate()
     }
 
-
-
-
-//    override fun setupProjects(projects: List<ProjectInSearch>) {
-//        for (i in projects.indices) {
-//            if (projects[i].vacancies > 0){
-//                Log.d("MyLogs", "Yes")
-////                presenter.infoProject(projects[i].id)
-//                items.add(
-//                    items.size - 1,
-//                    ItemModel(
-//                        R.drawable.sample1,
-//                        "#" + projects[i].id + " " + projects[i].number,
-//                        projects[i].name,
-//                        "",
-//                        "",
-//                        ""
-//                    )
-//                )
-//            }else{
-//                Log.d("MyLogs", "No")
-//            }
-//        }
-//        smt()
-//    }
-//
-//    override fun setupProject(project: ProjectExtended){
-//        for (i in project.vacancies.indices) {
-//            items.add(
-//                items.size - 1,
-//                ItemModel(
-//                    R.drawable.sample1,
-//                    "#" + project.id + " " + project.type,
-//                    project.name,
-//                    project.vacancies[i].role,
-//                    project.vacancies[i].recommended + " " + project.vacancies[i].required,
-//                    ""
-//                )
-//            )
-//            Log.d(
-//                "InfoMyLogs",
-//                i.toString() + " " + project.state + " " + project.vacancies[i].role
-//            )
-//        }
-//        smt()
-//    }
-
-    fun smt(){
-        manager = CardStackLayoutManager(this.requireContext(), listener)
-        manager.setStackFrom(StackFrom.None)
-        manager.setDirections(Direction.HORIZONTAL)
-        manager.setCanScrollHorizontal(true)
-        manager.setSwipeableMethod(SwipeableMethod.Manual)
-        manager.setOverlayInterpolator(LinearInterpolator())
-        adapter = CardStackAdapter(items)
-        val cardStackView: CardStackView = card_stack_view
-        cardStackView.layoutManager = manager;
-        cardStackView.adapter = adapter
-        cardStackView.itemAnimator = DefaultItemAnimator ()
-    }
-
     override fun setupVacancies(projects: List<Vacancies>) {
         for (item in projects){
             items.add(items.size - 1,
@@ -156,7 +95,21 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
                 )
             )
         }
-        smt()
+        filling()
+    }
+
+    fun filling(){
+        manager = CardStackLayoutManager(this.requireContext(), listener)
+        manager.setStackFrom(StackFrom.None)
+        manager.setDirections(Direction.FREEDOM)
+        manager.setCanScrollHorizontal(true)
+        manager.setSwipeableMethod(SwipeableMethod.Manual)
+        manager.setOverlayInterpolator(LinearInterpolator())
+        adapter = CardStackAdapter(items)
+        val cardStackView: CardStackView = card_stack_view
+        cardStackView.layoutManager = manager;
+        cardStackView.adapter = adapter
+        cardStackView.itemAnimator = DefaultItemAnimator ()
     }
 
     override fun showError() {
