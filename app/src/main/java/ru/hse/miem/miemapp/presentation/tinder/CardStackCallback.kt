@@ -17,6 +17,7 @@ import java.util.ArrayList
 class CardStackCallback: CardStackListener {
     val likeVacancy: ArrayList<Int> = arrayListOf()
     var pos: Int = 0
+    private var sorting = Sorting()
     private val TAG = "LogTinderAct"
 
     override fun onCardDragging(direction: Direction, ratio: Float) {
@@ -25,9 +26,10 @@ class CardStackCallback: CardStackListener {
 
     override fun onCardSwiped(direction: Direction) {
 //        Log.d(TAG, "onCardSwiped: " )
-        if (direction == Direction.Right){
+        if (direction == Direction.Right && pos != 0){
             likeVacancy.add(pos)
         }
+        sorting.plus()
     }
 
     override fun onCardRewound() {

@@ -12,12 +12,10 @@ import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
 import javax.inject.Inject
 
 class TinderPresenter @Inject constructor(
-    private val vacancyRepository: IVacancyRepository,
-    private val projectRepository: IProjectRepository
+    private val vacancyRepository: IVacancyRepository
 ) : MvpPresenter<InfoView>() {
 
     private val compositeDisposable = CompositeDisposable()
-    private val compositeDisposable1 = CompositeDisposable()
 
     fun onCreate() {
         Log.d("TinderMyLogs", "Create")
@@ -37,22 +35,5 @@ class TinderPresenter @Inject constructor(
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
-        compositeDisposable1.dispose()
     }
-
-//    fun infoProject(projectId: Long)
-//    {
-//        Log.d("TinderMyLogs", "Info")
-//        val disposable = projectRepository.getProjectById(projectId)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeBy(
-//                onSuccess = viewState::setupProject,
-//                onError = {
-//                    Log.w(javaClass.simpleName, it.stackTraceToString())
-//                    viewState.showError()
-//                }
-//            )
-//        compositeDisposable1.add(disposable)
-//    }
 }
