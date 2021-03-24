@@ -14,11 +14,8 @@ import kotlinx.android.synthetic.main.item_project_in_search.view.*
 import kotlinx.android.synthetic.main.item_project_in_search.view.projectName
 import kotlinx.android.synthetic.main.item_vacancy_in_viewall.view.*
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
-import ru.hse.miem.miemapp.domain.entities.TinderVacancies
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.tagsList
-import ru.hse.miem.miemapp.presentation.TextViewUtils.makeNameValueString
 import java.util.*
 
 class ViewAllAdapter(

@@ -14,15 +14,13 @@ import ru.hse.miem.miemapp.domain.entities.ItemModel
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
-class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
+class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
-    private var sorting = Sorting
+    private var sorting = Sorting()
 
     var items: List<ItemModel> = emptyList()
-
-    constructor(_items: List<ItemModel>) : this() {
-        Log.d("tinder", "Constructor " + sorting.position)
-        items = _items
+    constructor(_items: List<ItemModel>): this(){
+        items = sorting.sort(_items)
     }
 
     val hadData get() = items.isNotEmpty()
@@ -48,12 +46,11 @@ class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sorting: Sorting = Sorting()
 
-        //        var image: ImageView = itemView.findViewById(R.id.item_image)
+//        var image: ImageView = itemView.findViewById(R.id.item_image)
         var type: TextView = itemView.findViewById(R.id.item_type)
         var name: TextView = itemView.findViewById(R.id.item_name)
         var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
-
-        //        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
+//        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
         var leader: TextView = itemView.findViewById(R.id.item_leader)
         var text1: Button = itemView.findViewById(R.id.tag1)
         var text2: Button = itemView.findViewById(R.id.tag2)

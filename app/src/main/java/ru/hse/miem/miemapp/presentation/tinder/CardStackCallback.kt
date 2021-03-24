@@ -15,7 +15,9 @@ import java.util.ArrayList
 
 
 class CardStackCallback: CardStackListener {
-    public val likeVacancy: ArrayList<Int> = arrayListOf()
+    companion object {
+        val likeVacancy: ArrayList<Int> = arrayListOf()
+    }
     var pos: Int = 0
     private var sorting = Sorting()
     private val TAG = "LogTinderAct"

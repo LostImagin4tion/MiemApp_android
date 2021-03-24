@@ -49,10 +49,10 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
 
 
     // TO-DO
-    private val viewAllAdapter = ViewAllAdapter {
-        val action = TinderFragmentDirections.actionFragmentTinderToFragmentViewAll(listener.likeVacancy)
-        findNavController().navigate(action)
-    }
+//    private val viewAllAdapter = ViewAllAdapter {
+//        val action = TinderFragmentDirections.actionFragmentTinderToFragmentViewAll(listener.likeVacancy)
+//        findNavController().navigate(action)
+//    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -61,20 +61,14 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        sorting.clear()
         load()
-
-        Log.d("TinderMyLogs", "ViewCreated")
-
-        Log.d("tinderLogs", sorting.getRoles().toString())
 
         if (adapter.hadData){
             tinderLoader.visibility = View.GONE
         }
 
         viewAll.setOnClickListener {
-            Log.d("LogTinderAct", listener.likeVacancy.size.toString())
+            Log.d("LogTinderAct", CardStackCallback.likeVacancy.size.toString())
         }
 
         presenter.onCreate()
@@ -133,15 +127,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         cardStackView.itemAnimator = DefaultItemAnimator ()
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d("tinder", "Stop")
-        Sorting.position = listener.pos
-        Log.d("tinderLogs", Sorting.roles.toString())
-        save()
-        sorting.clear()
-    }
-
     private fun load(){
         sorting.clear()
         dbManager.openDb()
@@ -149,21 +134,32 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             sorting.add(item.key, item.value)
         }
         dbManager.closeDb()
+        Log.d("tinderLogs", "Load: " + sorting.getRoles().toString())
     }
 
     private fun save(){
         dbManager.openDb()
-        for (item in listener.likeVacancy){
+        for (item in CardStackCallback.likeVacancy){
             if (item < items.size) {
                 sorting.add(items[item].vacancy)
             }else{
                 break
             }
         }
+        Log.d("tinderLogs", "Save: " + sorting.getRoles().toString())
+        CardStackCallback.likeVacancy.clear()
         for (item in Sorting.roles){
             dbManager.insertDb(item.key, item.value)
         }
         dbManager.closeDb()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("tinder", "Stop")
+        Sorting.position = listener.pos
+        Log.d("tinderLogs", "onStop: " + Sorting.roles.toString())
+        save()
         sorting.clear()
     }
 

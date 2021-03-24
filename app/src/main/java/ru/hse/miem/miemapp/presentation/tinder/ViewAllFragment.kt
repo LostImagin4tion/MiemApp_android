@@ -42,7 +42,7 @@ class ViewAllFragment : BaseFragment(R.layout.fragment_viewall), ViewAllView {
     fun provideViewAllPresenter() = viewAllPresenter
 
     // TO-DO
-    private val args: TinderFragmentArgs by navArgs()
+//    private val args: TinderFragmentArgs by navArgs()
 
     private val viewAllAdapter = ViewAllAdapter {
         val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
@@ -66,12 +66,12 @@ class ViewAllFragment : BaseFragment(R.layout.fragment_viewall), ViewAllView {
 
     override fun setupLovedVacancies(vacancies: List<Vacancies>) {
         var trueVacancies : List<Vacancies> = emptyList()
-        val lovedVacancies = args
-        for (vacancy in vacancies)
-            if vacancy.project_id =
-    // to-do
-
-        ViewAllAdapter.update(trueVacancies)
+//        val lovedVacancies = args
+//        for (vacancy in vacancies)
+//            if vacancy.project_id =
+//    // to-do
+//
+//        ViewAllAdapter.update(trueVacancies)
 
 
         viewAllLoader.visibility = View.GONE
