@@ -15,10 +15,15 @@ import java.util.ArrayList
 
 
 class CardStackCallback: CardStackListener {
-    val likeVacancy: ArrayList<Int> = arrayListOf()
+    public val likeVacancy: ArrayList<Int> = arrayListOf()
     var pos: Int = 0
     private var sorting = Sorting()
     private val TAG = "LogTinderAct"
+
+//    fun getLikedVacancies() : ArrayList<Int>{
+//        if (likeVacancy.size !=0){
+//            return likeVacancy
+//    }
 
     override fun onCardDragging(direction: Direction, ratio: Float) {
 //        Log.d(TAG, "onCardDragging: d=" + direction.name + " ratio=" + ratio)

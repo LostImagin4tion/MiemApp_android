@@ -1,5 +1,7 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
+import androidx.navigation.fragment.findNavController
+
 import android.content.ContentValues
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -9,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.yuyakaido.android.cardstackview.*
 import kotlinx.android.synthetic.main.fragment_tinder.*
@@ -16,10 +19,13 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.domain.entities.ItemModel
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
+import ru.hse.miem.miemapp.presentation.search.ProjectsAdapter
+import ru.hse.miem.miemapp.presentation.search.SearchFragmentDirections
 import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
 import java.io.File
 import java.util.*
@@ -39,7 +45,14 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     lateinit var presenter: TinderPresenter
 
     @ProvidePresenter
-    fun provideSearchPresenter() = presenter
+    fun provideTinderPresenter() = presenter
+
+
+    // TO-DO
+    private val viewAllAdapter = ViewAllAdapter {
+        val action = TinderFragmentDirections.actionFragmentTinderToFragmentViewAll(listener.likeVacancy)
+        findNavController().navigate(action)
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

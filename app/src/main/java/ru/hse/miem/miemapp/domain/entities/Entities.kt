@@ -93,3 +93,15 @@ data class Vacancies(
     val vacancy_disciplines: List<String>,
     val vacancy_additionally: List<String>
 )
+data class ItemModel (
+    var image: Int,
+    var type: String,
+    var name: String,
+    var vacancy: String,
+    var requirements: String,
+    var leader: String
+)
+
+val tagsList = listOf("c++","python","kotlin","java","arduino", "quartus", "html",
+    "PHP", "android", "design", "git", "linux", "js", "c/c++","c#", "sql", "sqlite","docker",
+    "css", "js", "ux", "ui", "raspberry", "backend","frontend")

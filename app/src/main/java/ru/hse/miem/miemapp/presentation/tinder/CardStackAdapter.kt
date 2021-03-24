@@ -10,14 +10,17 @@ import android.widget.Button
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.domain.entities.ItemModel
+import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
-class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
+class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     private var sorting = Sorting
 
     var items: List<ItemModel> = emptyList()
-    constructor(_items: List<ItemModel>): this(){
+
+    constructor(_items: List<ItemModel>) : this() {
         Log.d("tinder", "Constructor " + sorting.position)
         items = _items
     }
@@ -26,7 +29,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     @NonNull
     @Override
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_cards, parent, false)
         return ViewHolder(view)
@@ -45,11 +48,12 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sorting: Sorting = Sorting()
 
-//        var image: ImageView = itemView.findViewById(R.id.item_image)
+        //        var image: ImageView = itemView.findViewById(R.id.item_image)
         var type: TextView = itemView.findViewById(R.id.item_type)
         var name: TextView = itemView.findViewById(R.id.item_name)
         var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
-//        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
+
+        //        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
         var leader: TextView = itemView.findViewById(R.id.item_leader)
         var text1: Button = itemView.findViewById(R.id.tag1)
         var text2: Button = itemView.findViewById(R.id.tag2)
@@ -57,11 +61,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
         var text4: Button = itemView.findViewById(R.id.tag4)
         var text5: Button = itemView.findViewById(R.id.tag5)
         var text6: Button = itemView.findViewById(R.id.tag6)
-        private val tagsList = listOf("c++","python","kotlin","java","arduino", "quartus", "html",
-            "PHP", "android", "design", "git", "linux", "js", "c/c++","c#", "sql", "sqlite","docker",
-            "css", "js", "ux", "ui", "raspberry", "backend","frontend")
-
-        fun setData(data: ItemModel){
+        fun setData(data: ItemModel) {
             Picasso.get()
                 .load(data.image)
                 .fit()
@@ -74,21 +74,21 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
             leader.text = data.leader
 
             val buttons = arrayListOf(text1, text2, text3, text4, text5, text6)
-            buttons.forEach{
-               it.visibility = View.GONE
+            buttons.forEach {
+                it.visibility = View.GONE
             }
 
-            var tags : ArrayList<String> = arrayListOf()
+            var tags: ArrayList<String> = arrayListOf()
             for (temp_tag in tagsList) {
-                if (data.requirements.indexOf(temp_tag, ignoreCase = true) != -1){
+                if (data.requirements.indexOf(temp_tag, ignoreCase = true) != -1) {
                     tags.add(temp_tag)
                 }
-                if (tags.size == 6){
+                if (tags.size == 6) {
                     break
                 }
             }
 
-            for (i in tags.indices){
+            for (i in tags.indices) {
                 buttons[i].visibility = View.VISIBLE
                 buttons[i].text = tags[i]
             }

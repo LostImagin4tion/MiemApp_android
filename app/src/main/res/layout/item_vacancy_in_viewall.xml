@@ -19,7 +19,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/item_type"
+            android:id="@+id/projectId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
@@ -31,7 +31,7 @@
             tools:text="617 Исследователльский кто" />
 
         <TextView
-            android:id="@+id/item_name"
+            android:id="@+id/projectName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
@@ -43,7 +43,7 @@
             tools:text="Приложекние миэм дада" />
 
         <TextView
-            android:id="@+id/item_vacancy"
+            android:id="@+id/vacancyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -101,7 +101,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/item_leader"
+            android:id="@+id/projectLeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
