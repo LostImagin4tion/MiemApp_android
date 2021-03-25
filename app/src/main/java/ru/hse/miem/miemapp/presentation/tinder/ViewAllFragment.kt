@@ -2,6 +2,7 @@ package ru.hse.miem.miemapp.presentation.tinder
 
 import android.content.Context
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.update
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -69,8 +70,8 @@ class ViewAllFragment : BaseFragment(R.layout.fragment_viewall), ViewAllView {
 //        val lovedVacancies = args
 //        for (vacancy in vacancies)
 //            if vacancy.project_id =
-//    // to-do
-//
+    // to-do
+
 //        ViewAllAdapter.update(trueVacancies)
 
 

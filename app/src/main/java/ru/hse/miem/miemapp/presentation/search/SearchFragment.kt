@@ -76,6 +76,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
+        tinderButton.setOnClickListener {
+            findNavController().navigate(R.id.fragmentTinder)
+        }
+
         searchPresenter.onCreate()
     }
 

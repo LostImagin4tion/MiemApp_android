@@ -1,6 +1,5 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import android.util.Log
 import ru.hse.miem.miemapp.domain.entities.ItemModel
 import java.util.ArrayList
 

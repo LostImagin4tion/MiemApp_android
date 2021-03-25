@@ -1,6 +1,5 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView

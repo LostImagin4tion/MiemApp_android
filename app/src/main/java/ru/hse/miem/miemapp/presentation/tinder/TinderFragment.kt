@@ -1,12 +1,6 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import androidx.navigation.fragment.findNavController
-
-import android.content.ContentValues
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,14 +14,9 @@ import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ItemModel
-import ru.hse.miem.miemapp.domain.entities.ProjectExtended
-import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
-import ru.hse.miem.miemapp.presentation.search.ProjectsAdapter
-import ru.hse.miem.miemapp.presentation.search.SearchFragmentDirections
 import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
-import java.io.File
 import java.util.*
 import javax.inject.Inject
 
@@ -50,7 +39,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
 
     // TO-DO
 //    private val viewAllAdapter = ViewAllAdapter {
-//        val action = TinderFragmentDirections.actionFragmentTinderToFragmentViewAll(listener.likeVacancy)
+//        val action = TinderFragmentDirections.actionFragmentSearchToFragmentVacancies(it)
 //        findNavController().navigate(action)
 //    }
 
@@ -68,7 +57,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         }
 
         viewAll.setOnClickListener {
-            Log.d("LogTinderAct", CardStackCallback.likeVacancy.size.toString())
+            findNavController().navigate(R.id.fragmentVacancies)
         }
 
         presenter.onCreate()
@@ -122,7 +111,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         manager.setOverlayInterpolator(LinearInterpolator())
         adapter = CardStackAdapter(items.drop(Sorting.count))
         val cardStackView: CardStackView = card_stack_view
-        cardStackView.layoutManager = manager;
+        cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator ()
     }

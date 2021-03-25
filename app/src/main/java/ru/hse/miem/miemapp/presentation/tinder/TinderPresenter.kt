@@ -6,8 +6,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import moxy.MvpPresenter
-import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
-import ru.hse.miem.miemapp.domain.repositories.ISearchRepository
 import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
 import javax.inject.Inject
 
