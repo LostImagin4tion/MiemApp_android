@@ -1,4 +1,4 @@
-package ru.hse.miem.miemapp.presentation.tinder
+package ru.hse.miem.miemapp.presentation.vacancies
 
 import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.OneExecution

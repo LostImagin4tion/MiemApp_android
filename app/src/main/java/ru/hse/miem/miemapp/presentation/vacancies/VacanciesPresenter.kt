@@ -8,9 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
-import ru.hse.miem.miemapp.presentation.tinder.ViewAllView
 import javax.inject.Inject
 
 @InjectViewState

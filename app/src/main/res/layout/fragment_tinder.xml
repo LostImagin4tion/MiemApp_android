@@ -8,17 +8,6 @@
     android:backgroundTint="@color/colorAccent"
     android:foregroundTint="#FBF6F6">
 
-    <ProgressBar
-        android:id="@+id/tinderLoader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:indeterminateTint="#FFFFFF"
-        android:progressTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/card_stack_view" />
-
     <com.yuyakaido.android.cardstackview.CardStackView
         android:id="@+id/card_stack_view"
         android:layout_width="0dp"

@@ -3,20 +3,12 @@ package ru.hse.miem.miemapp.presentation.vacancies
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import com.yuyakaido.android.cardstackview.*
-import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_tinder.*
-import kotlinx.android.synthetic.main.item_project_in_search.view.*
-import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
-import ru.hse.miem.miemapp.presentation.search.*
-import ru.hse.miem.miemapp.presentation.tinder.ViewAllView
-import java.util.*
 import javax.inject.Inject
 
 class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView {

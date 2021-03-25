@@ -15,7 +15,7 @@ class DbManager(context: Context) {
 
     fun insertDb(role: String, amount: Int){
         val values = ContentValues().apply {
-            put(TinderDbClass.COLUMN_NAME_ROLE, role)
+            put(TinderDbClass.COLUMN_NAME_TITLE, role)
             put(TinderDbClass.COLUMN_NAME_COUNT, amount)
         }
 
@@ -27,7 +27,7 @@ class DbManager(context: Context) {
         val cursor = db?.query(TinderDbClass.TABLE_NAME, null, null, null, null, null, null)
 
         while (cursor?.moveToNext()!!){
-            val role = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_ROLE))
+            val role = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_TITLE))
             val amount = cursor.getInt(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_COUNT))
             data[role] = amount
         }

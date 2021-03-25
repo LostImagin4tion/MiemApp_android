@@ -45,10 +45,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         load()
 
-        if (adapter.hadData){
-            tinderLoader.visibility = View.GONE
-        }
-
         viewAll.setOnClickListener {
             findNavController().navigate(R.id.fragmentVacancies)
         }
@@ -72,7 +68,8 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
                 ItemModel(
                     R.drawable.sample2,
                     "",
-                    "",
+                    "На данный момент Вы просмотрели\n" +
+                            "все доступные вакансии",
                     "",
                     "",
                     ""
@@ -117,6 +114,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         }
         dbManager.closeDb()
         Log.d("tinderLogs", "Load: " + sorting.getRoles().toString())
+        Log.d("tinderLogs", "LoadCat: " + Sorting.categories.toString())
     }
 
     private fun save(){
@@ -129,8 +127,13 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             }
         }
         Log.d("tinderLogs", "Save: " + sorting.getRoles().toString())
+
+        Log.d("tinderLogs", "SaveCat: " + Sorting.categories.toString())
         CardStackCallback.likeVacancy.clear()
         for (item in Sorting.roles){
+            dbManager.insertDb(item.key, item.value)
+        }
+        for (item in Sorting.categories){
             dbManager.insertDb(item.key, item.value)
         }
         dbManager.closeDb()
@@ -141,6 +144,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         Log.d("tinder", "Stop")
         Sorting.position = listener.pos
         Log.d("tinderLogs", "onStop: " + Sorting.roles.toString())
+        Log.d("tinderLogs", "StopCat: " + Sorting.categories.toString())
         save()
         sorting.clear()
     }

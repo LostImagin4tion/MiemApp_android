@@ -1,11 +1,13 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
 import ru.hse.miem.miemapp.domain.entities.ItemModel
+import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
 class Sorting {
     companion object {
         var roles: MutableMap<String, Int> = mutableMapOf()
+        var categories: MutableMap<String, Int> = mutableMapOf()
         var position: Int = 0
         var count: Int = 0
     }
@@ -16,7 +18,12 @@ class Sorting {
 
     private fun getAmount(role: String): Int = roles[role]!!
 
+    private fun getCount(category: String): Int = categories[category]!!
+
     fun add(role: String, amount: Int){
+        if (role in tagsList){
+            categories[role] = amount
+        }
         roles[role] = amount
     }
 
@@ -28,12 +35,31 @@ class Sorting {
         }
     }
 
+    fun add(item: ItemModel){
+        if (roles.contains(item.vacancy)){
+            roles[item.vacancy] = getAmount(item.vacancy) + 1
+        }else{
+            roles[item.vacancy] = 1
+        }
+
+        for (temp_tag in tagsList) {
+            if (item.requirements.indexOf(temp_tag, ignoreCase = true) != -1) {
+                if (categories.contains(temp_tag)){
+                    categories[temp_tag] = getCount(temp_tag) + 1
+                }else{
+                    categories[temp_tag] = 1
+                }
+            }
+        }
+    }
+
     fun getRoles(): MutableMap<String, Int>{
         return roles
     }
 
     fun clear(){
         roles.clear()
+        categories.clear()
     }
 
     fun sort(items: List<ItemModel>): ArrayList<ItemModel> {
