@@ -19,7 +19,7 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     var items: List<VacancyCard> = emptyList()
     constructor(_items: List<VacancyCard>): this(){
-        items = sorting.sort(_items)
+        items = _items
     }
 
     val hadData get() = items.isNotEmpty()

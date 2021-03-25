@@ -110,7 +110,7 @@
         <action
             android:id="@+id/action_fragmentVacancies_to_fragmentProject"
             app:destination="@id/fragmentProject">
-m
+
             <argument
                 android:name="projectId"
                 app:argType="long"

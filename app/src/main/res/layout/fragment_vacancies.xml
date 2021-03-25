@@ -13,23 +13,17 @@
         android:layout_height="60dp"
         android:layout_gravity="center" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vacancyList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_vacancy_in_viewall"
+        tools:visibility="visible" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/projectsList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="14dp"
-            android:orientation="vertical"
-            android:visibility="invisible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_vacancy_in_viewall"
-            tools:visibility="visible" />
-
-    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

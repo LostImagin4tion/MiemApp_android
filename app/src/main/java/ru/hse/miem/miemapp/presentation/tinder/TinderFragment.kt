@@ -46,6 +46,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         load()
 
         viewAll.setOnClickListener {
+            save()
             findNavController().navigate(R.id.fragmentVacancies)
         }
 
@@ -57,8 +58,9 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             items.add(
                 VacancyCard(
                     "",
-                    "Добро пожаловать в проектный тиндер\n\nСвайп вправо, если понравилась вакансия",
-                    "Свайп влево - нет",
+                    "Добро пожаловать в проектный тиндер\n\nСвайп вправо, если понравилась вакансия\n" +
+                            "Свайп влево - нет",
+                    "",
                     ""
                 )
             )
@@ -93,7 +95,9 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         manager.setCanScrollHorizontal(true)
         manager.setSwipeableMethod(SwipeableMethod.Manual)
         manager.setOverlayInterpolator(LinearInterpolator())
-        adapter = CardStackAdapter(items.drop(Sorting.count))
+//        items.drop(Sorting.count)
+        items = sorting.sort(items)
+        adapter = CardStackAdapter(items)
         val cardStackView: CardStackView = card_stack_view
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter

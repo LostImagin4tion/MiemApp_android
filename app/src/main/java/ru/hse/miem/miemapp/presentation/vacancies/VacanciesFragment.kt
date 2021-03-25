@@ -40,10 +40,10 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        projectsList.adapter = vacanciesAdapter
+        vacancyList.adapter = vacanciesAdapter
         if (vacanciesAdapter.hasData) {
             viewAllLoader.visibility = View.GONE
-            projectsList.visibility = View.VISIBLE
+            vacancyList.visibility = View.VISIBLE
         }
 
         vacanciesPresenter.onCreate()
@@ -57,19 +57,14 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView
 //
 //            trueVacancies.add(temp)
 //        }
-        for (item in Sorting.likeVacancies) {
 
-            Log.d("vacancy",item.vacancy_role )
-            Log.d("vacancy",item.project_id )
-            Log.d("vacancy",item.project_name_rus )
-            Log.d("vacancy",item.requirements )
-        }
+        Log.d("vacancy", Sorting.likeVacancies.toString())
 
         vacanciesAdapter.update(Sorting.likeVacancies)
 
 
         viewAllLoader.visibility = View.GONE
-        projectsList.visibility = View.VISIBLE
+        vacancyList.visibility = View.VISIBLE
     }
 
     override fun showError() {}

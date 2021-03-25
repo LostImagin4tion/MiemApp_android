@@ -23,12 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
-            android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:textStyle="bold"
-            tools:text="617 Исследователльский кто" />
+            tools:text="617" />
 
         <TextView
             android:id="@+id/projectTitle"
@@ -43,7 +42,7 @@
             tools:text="Приложекние миэм дада" />
 
         <TextView
-            android:id="@+id/vacancyName"
+            android:id="@+id/vacancyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -61,7 +60,7 @@
             android:layout_marginBottom="4dp">
 
             <Button
-                android:id="@+id/tag1"
+                android:id="@+id/t1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -73,7 +72,7 @@
                 app:strokeWidth="2dp" />
 
             <Button
-                android:id="@+id/tag2"
+                android:id="@+id/t2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -87,7 +86,7 @@
                 app:strokeWidth="2dp" />
 
             <Button
-                android:id="@+id/tag3"
+                android:id="@+id/t3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,16 +98,6 @@
                 app:strokeWidth="2dp" />
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/projectLeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@android:color/black"
-            android:textSize="13sp"
-            tools:text="Руководитель: королев кто" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

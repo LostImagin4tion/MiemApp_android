@@ -11,13 +11,14 @@ import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
+import ru.hse.miem.miemapp.presentation.tinder.Sorting
 import java.util.ArrayList
 
 class VacanciesAdapter (
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
-    private var vacancies: List<VacancyCard> = emptyList()
+    private var vacancies: List<VacancyCard> = Sorting.likeVacancies
 
     val hasData get() = vacancies.isNotEmpty()
 
@@ -28,7 +29,7 @@ class VacanciesAdapter (
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_project_vacancy, parent, false)
+            .inflate(R.layout.item_vacancy_in_viewall, parent, false)
         return VacancyViewHolder(view)
     }
 
@@ -40,17 +41,17 @@ class VacanciesAdapter (
 
     class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(vacancy: VacancyCard, navigateToProject: (Long) -> Unit) = itemView.apply {
-            Log.d("vacancy",vacancy.project_id)
+            Log.d("vacancy","bind " + vacancy.project_id)
             projectId.text = vacancy.project_id
             projectTitle.text = vacancy.project_name_rus
-            vacancyName.text = vacancy.vacancy_role
+            vacancyTitle.text = vacancy.vacancy_role
 
-            val buttons = arrayListOf(tag1, tag2, tag3)
+            val buttons = arrayListOf(t1, t2, t3)
             buttons.forEach {
                 it.visibility = View.GONE
             }
 
-            var tags: ArrayList<String> = arrayListOf()
+            val tags: ArrayList<String> = arrayListOf()
             for (temp_tag in tagsList) {
                 if ((vacancy.requirements).indexOf(temp_tag, ignoreCase = true) != -1) {
                     tags.add(temp_tag)
@@ -65,8 +66,7 @@ class VacanciesAdapter (
                 buttons[i].text = tags[i]
 
             }
-            setOnClickListener { navigateToProject(java.lang.Long.parseLong(vacancy.project_id)) }
+            setOnClickListener { navigateToProject(vacancy.project_id.drop(1).toLong()) }
         }
     }
-
 }

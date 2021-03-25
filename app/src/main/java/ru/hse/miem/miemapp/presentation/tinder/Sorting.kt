@@ -31,7 +31,9 @@ class Sorting {
     }
 
     fun add(role: String){
-        if (roles.contains(role)){
+        if (role == ""){
+
+        }else if (roles.contains(role)){
             roles[role] = getAmount(role) + 1
         }else{
             roles[role] = 1
@@ -63,12 +65,17 @@ class Sorting {
     fun clear(){
         roles.clear()
         categories.clear()
+        likeIndexes.clear()
     }
 
     fun sort(items: List<VacancyCard>): ArrayList<VacancyCard> {
         val sortItems: ArrayList<VacancyCard> = arrayListOf()
+        var c = count
 
-        for (i in 1..items.size-2){
+        if (c == 0){
+            c = 1
+        }
+        for (i in c..items.size-2){
             if (!roles.keys.contains(items[i].vacancy_role)){
                 sortItems.add(items[i])
             }else{
@@ -84,8 +91,11 @@ class Sorting {
                 }
             }
         }
-        sortItems.add(0, items[0])
-        sortItems.add(items[items.size-1])
+
+        if (count == 0) {
+            sortItems.add(0, items[0])
+            sortItems.add(items[items.size - 1])
+        }
         return sortItems
     }
 }
