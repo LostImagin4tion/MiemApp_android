@@ -1,5 +1,6 @@
 package ru.hse.miem.miemapp.presentation.vacancies
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import kotlinx.android.synthetic.main.item_project_in_search.view.*
 import kotlinx.android.synthetic.main.item_vacancy_in_viewall.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
@@ -15,17 +17,13 @@ class VacanciesAdapter (
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
-    private var vacancies: List<Vacancies> = emptyList()
-    private var displayedVacancies = vacancies
+    private var vacancies: List<VacancyCard> = emptyList()
 
     val hasData get() = vacancies.isNotEmpty()
 
-    fun update(projects: List<Vacancies>) {
+    fun update(projects: List<VacancyCard>) {
         this.vacancies = projects
-        if (displayedVacancies.isEmpty()) {
-            displayedVacancies = this.vacancies
-            notifyDataSetChanged()
-        }
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyViewHolder {
@@ -35,14 +33,15 @@ class VacanciesAdapter (
     }
 
     override fun onBindViewHolder(holder: VacancyViewHolder, position: Int) {
-        holder.bind(displayedVacancies[position], navigateToProject)
+        holder.bind(vacancies[position], navigateToProject)
     }
 
-    override fun getItemCount() = displayedVacancies.size
+    override fun getItemCount() = vacancies.size
 
     class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(vacancy: Vacancies, navigateToProject: (Long) -> Unit) = itemView.apply {
-            projectId.text = vacancy.project_id.toString()
+        fun bind(vacancy: VacancyCard, navigateToProject: (Long) -> Unit) = itemView.apply {
+            Log.d("vacancy",vacancy.project_id)
+            projectId.text = vacancy.project_id
             projectTitle.text = vacancy.project_name_rus
             vacancyName.text = vacancy.vacancy_role
 
@@ -53,7 +52,7 @@ class VacanciesAdapter (
 
             var tags: ArrayList<String> = arrayListOf()
             for (temp_tag in tagsList) {
-                if ((vacancy.vacancy_disciplines.toString() + vacancy.vacancy_additionally).indexOf(temp_tag, ignoreCase = true) != -1) {
+                if ((vacancy.requirements).indexOf(temp_tag, ignoreCase = true) != -1) {
                     tags.add(temp_tag)
                 }
                 if (tags.size == 3) {
@@ -65,12 +64,8 @@ class VacanciesAdapter (
                 buttons[i].visibility = View.VISIBLE
                 buttons[i].text = tags[i]
 
-
-//                projectLeader.text = vacancy.projectLeader
-
-
-                setOnClickListener { navigateToProject(vacancy.project_id) }
             }
+            setOnClickListener { navigateToProject(java.lang.Long.parseLong(vacancy.project_id)) }
         }
     }
 

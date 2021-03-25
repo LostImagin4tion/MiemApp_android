@@ -93,13 +93,11 @@ data class Vacancies(
     val vacancy_disciplines: List<String>,
     val vacancy_additionally: List<String>
 )
-data class ItemModel (
-    var image: Int,
-    var type: String,
-    var name: String,
-    var vacancy: String,
-    var requirements: String,
-    var leader: String
+data class VacancyCard (
+    var project_id: String,
+    var project_name_rus: String,
+    var vacancy_role: String,
+    var requirements: String
 )
 
 val tagsList = listOf("c++","python","kotlin","java","arduino", "quartus", "html",

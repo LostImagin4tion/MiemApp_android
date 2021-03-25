@@ -1,6 +1,7 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import ru.hse.miem.miemapp.domain.entities.ItemModel
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
+import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
@@ -10,6 +11,8 @@ class Sorting {
         var categories: MutableMap<String, Int> = mutableMapOf()
         var position: Int = 0
         var count: Int = 0
+        var likeIndexes: ArrayList<Int> = arrayListOf()
+        var likeVacancies: ArrayList<VacancyCard> = arrayListOf()
     }
 
     fun plus(){
@@ -35,23 +38,23 @@ class Sorting {
         }
     }
 
-    fun add(item: ItemModel){
-        if (roles.contains(item.vacancy)){
-            roles[item.vacancy] = getAmount(item.vacancy) + 1
-        }else{
-            roles[item.vacancy] = 1
-        }
-
-        for (temp_tag in tagsList) {
-            if (item.requirements.indexOf(temp_tag, ignoreCase = true) != -1) {
-                if (categories.contains(temp_tag)){
-                    categories[temp_tag] = getCount(temp_tag) + 1
-                }else{
-                    categories[temp_tag] = 1
-                }
-            }
-        }
-    }
+//    fun add(item: VacancyCard){
+//        if (roles.contains(item.vacancy)){
+//            roles[item.vacancy] = getAmount(item.vacancy) + 1
+//        }else{
+//            roles[item.vacancy] = 1
+//        }
+//
+//        for (temp_tag in tagsList) {
+//            if (item.requirements.indexOf(temp_tag, ignoreCase = true) != -1) {
+//                if (categories.contains(temp_tag)){
+//                    categories[temp_tag] = getCount(temp_tag) + 1
+//                }else{
+//                    categories[temp_tag] = 1
+//                }
+//            }
+//        }
+//    }
 
     fun getRoles(): MutableMap<String, Int>{
         return roles
@@ -62,16 +65,16 @@ class Sorting {
         categories.clear()
     }
 
-    fun sort(items: List<ItemModel>): ArrayList<ItemModel> {
-        val sortItems: ArrayList<ItemModel> = arrayListOf()
+    fun sort(items: List<VacancyCard>): ArrayList<VacancyCard> {
+        val sortItems: ArrayList<VacancyCard> = arrayListOf()
 
         for (i in 1..items.size-2){
-            if (!roles.keys.contains(items[i].vacancy)){
+            if (!roles.keys.contains(items[i].vacancy_role)){
                 sortItems.add(items[i])
             }else{
                 val size = sortItems.size
                 for (j in sortItems.indices){
-                    if (roles.keys.contains(sortItems[j].vacancy) && roles[items[i].vacancy]!! > roles[sortItems[j].vacancy]!!){
+                    if (roles.keys.contains(sortItems[j].vacancy_role) && roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!){
                         sortItems.add(j, items[i])
                         break
                     }

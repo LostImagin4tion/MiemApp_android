@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.ItemModel
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
@@ -17,8 +17,8 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     private var sorting = Sorting()
 
-    var items: List<ItemModel> = emptyList()
-    constructor(_items: List<ItemModel>): this(){
+    var items: List<VacancyCard> = emptyList()
+    constructor(_items: List<VacancyCard>): this(){
         items = sorting.sort(_items)
     }
 
@@ -57,17 +57,10 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
         var text4: Button = itemView.findViewById(R.id.tag4)
         var text5: Button = itemView.findViewById(R.id.tag5)
         var text6: Button = itemView.findViewById(R.id.tag6)
-        fun setData(data: ItemModel) {
-            Picasso.get()
-                .load(data.image)
-                .fit()
-                .centerCrop()
-//                .into(image);
-            type.text = data.type
-            name.text = data.name
-            vacancy.text = data.vacancy
-//            requirements.setText(data.requirements)
-            leader.text = data.leader
+        fun setData(data: VacancyCard) {
+            type.text = data.project_id
+            name.text = data.project_name_rus
+            vacancy.text = data.vacancy_role
 
             val buttons = arrayListOf(text1, text2, text3, text4, text5, text6)
             buttons.forEach {

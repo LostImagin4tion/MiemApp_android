@@ -13,7 +13,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.ItemModel
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     private var adapter: CardStackAdapter = CardStackAdapter()
-    private var items: ArrayList<ItemModel> = arrayListOf()
+    private var items: ArrayList<VacancyCard> = arrayListOf()
     private val listener = CardStackCallback()
     private lateinit var manager: CardStackLayoutManager
     private val sorting = Sorting()
@@ -55,22 +55,18 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     override fun setupVacancies(projects: List<Vacancies>) {
         if (items.size == 0) {
             items.add(
-                ItemModel(
-                    R.drawable.sample2,
+                VacancyCard(
                     "",
                     "Добро пожаловать в проектный тиндер\n\nСвайп вправо, если понравилась вакансия",
                     "Свайп влево - нет",
-                    "",
                     ""
                 )
             )
             items.add(
-                ItemModel(
-                    R.drawable.sample2,
+                VacancyCard(
                     "",
                     "На данный момент Вы просмотрели\n" +
                             "все доступные вакансии",
-                    "",
                     "",
                     ""
                 )
@@ -79,13 +75,11 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
 
         for (item in projects){
             items.add(items.size - 1,
-                ItemModel(
-                    R.drawable.sample1,
+                VacancyCard(
                     "#" + item.project_id,
                     item.project_name_rus,
                     item.vacancy_role,
-                    item.vacancy_disciplines.toString() + item.vacancy_additionally,
-                    ""
+                    item.vacancy_disciplines.toString() + item.vacancy_additionally
                 )
             )
         }
@@ -118,10 +112,15 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     }
 
     private fun save(){
+        for (i in Sorting.likeIndexes) {
+            if (items[i].project_id != ""){
+                Sorting.likeVacancies.add(items[i])
+            }
+        }
         dbManager.openDb()
-        for (item in CardStackCallback.likeVacancy){
+        for (item in Sorting.likeIndexes){
             if (item < items.size) {
-                sorting.add(items[item].vacancy)
+                sorting.add(items[item].vacancy_role)
             }else{
                 break
             }
@@ -129,7 +128,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         Log.d("tinderLogs", "Save: " + sorting.getRoles().toString())
 
         Log.d("tinderLogs", "SaveCat: " + Sorting.categories.toString())
-        CardStackCallback.likeVacancy.clear()
+        Sorting.likeIndexes.clear()
         for (item in Sorting.roles){
             dbManager.insertDb(item.key, item.value)
         }

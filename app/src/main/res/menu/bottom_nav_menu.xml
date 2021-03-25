@@ -20,8 +20,4 @@
         android:icon="@drawable/ic_settings"
         android:title=""/>
 
-    <item
-        android:id="@+id/tinder"
-        android:icon="@drawable/ic_computer"
-        android:title=""/>
 </menu>

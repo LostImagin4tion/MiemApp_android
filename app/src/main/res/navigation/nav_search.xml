@@ -104,13 +104,13 @@
     <fragment
         android:id="@+id/fragmentVacancies"
         android:name="ru.hse.miem.miemapp.presentation.vacancies.VacanciesFragment"
-        android:label="ViewAll fragment"
+        android:label="Vacancies fragment"
         tools:layout="@layout/fragment_vacancies">
 
         <action
-            android:id="@+id/action_fragmentSearch_to_fragmentProject"
+            android:id="@+id/action_fragmentVacancies_to_fragmentProject"
             app:destination="@id/fragmentProject">
-
+m
             <argument
                 android:name="projectId"
                 app:argType="long"
