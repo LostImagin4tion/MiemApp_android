@@ -1,5 +1,4 @@
-package ru.hse.miem.miemapp.presentation.tinder
-
+package ru.hse.miem.miemapp.presentation.vacancies
 
 
 import android.util.Log
@@ -11,10 +10,11 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
 import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
+import ru.hse.miem.miemapp.presentation.tinder.ViewAllView
 import javax.inject.Inject
 
 @InjectViewState
-class ViewAllPresenter @Inject constructor(
+class VacanciesPresenter@Inject constructor(
     private val vacancyRepository: IVacancyRepository
 ) : MvpPresenter<ViewAllView>() {
 

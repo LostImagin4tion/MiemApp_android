@@ -36,13 +36,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     @ProvidePresenter
     fun provideTinderPresenter() = presenter
 
-
-    // TO-DO
-//    private val viewAllAdapter = ViewAllAdapter {
-//        val action = TinderFragmentDirections.actionFragmentSearchToFragmentVacancies(it)
-//        findNavController().navigate(action)
-//    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)

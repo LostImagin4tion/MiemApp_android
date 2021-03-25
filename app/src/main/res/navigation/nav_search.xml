@@ -103,9 +103,20 @@
 
     <fragment
         android:id="@+id/fragmentVacancies"
-        android:name="ru.hse.miem.miemapp.presentation.tinder.ViewAllFragment"
+        android:name="ru.hse.miem.miemapp.presentation.vacancies.VacanciesFragment"
         android:label="ViewAll fragment"
-        tools:layout="@layout/fragment_viewall">
+        tools:layout="@layout/fragment_vacancies">
+
+        <action
+            android:id="@+id/action_fragmentSearch_to_fragmentProject"
+            app:destination="@id/fragmentProject">
+
+            <argument
+                android:name="projectId"
+                app:argType="long"
+                app:nullable="false"/>
+
+        </action>
     </fragment>
 
 </navigation>

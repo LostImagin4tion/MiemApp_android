@@ -1,26 +1,19 @@
-package ru.hse.miem.miemapp.presentation.tinder
-
-import ru.hse.miem.miemapp.presentation.search.SearchFilters
-
+package ru.hse.miem.miemapp.presentation.vacancies
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_project_in_search.view.*
-import kotlinx.android.synthetic.main.item_project_in_search.view.projectName
 import kotlinx.android.synthetic.main.item_vacancy_in_viewall.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.tagsList
-import java.util.*
+import java.util.ArrayList
 
-class ViewAllAdapter(
+class VacanciesAdapter (
     private val navigateToProject: (Long) -> Unit
-) : RecyclerView.Adapter<ViewAllAdapter.VacancyViewHolder>() {
+) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
     private var vacancies: List<Vacancies> = emptyList()
     private var displayedVacancies = vacancies
@@ -50,7 +43,7 @@ class ViewAllAdapter(
     class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(vacancy: Vacancies, navigateToProject: (Long) -> Unit) = itemView.apply {
             projectId.text = vacancy.project_id.toString()
-            projectName.text = vacancy.project_name_rus
+            projectTitle.text = vacancy.project_name_rus
             vacancyName.text = vacancy.vacancy_role
 
             val buttons = arrayListOf(tag1, tag2, tag3)
@@ -80,4 +73,5 @@ class ViewAllAdapter(
             }
         }
     }
+
 }
