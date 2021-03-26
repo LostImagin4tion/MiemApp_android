@@ -14,7 +14,7 @@ import java.util.ArrayList
 
 class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
-    private var sorting = Sorting()
+//    private var sorting = Sorting()
 
     var items: List<VacancyCard> = emptyList()
     constructor(_items: List<VacancyCard>): this(){
@@ -42,13 +42,11 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var sorting: Sorting = Sorting()
+//        var sorting: Sorting = Sorting()
 
-//        var image: ImageView = itemView.findViewById(R.id.item_image)
         var type: TextView = itemView.findViewById(R.id.item_type)
         var name: TextView = itemView.findViewById(R.id.item_name)
         var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
-//        var requirements: TextView = itemView.findViewById(R.id.item_requirements)
         var leader: TextView = itemView.findViewById(R.id.item_leader)
         var text1: Button = itemView.findViewById(R.id.tag1)
         var text2: Button = itemView.findViewById(R.id.tag2)

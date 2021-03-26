@@ -22,8 +22,10 @@ class VacanciesAdapter (
 
     val hasData get() = vacancies.isNotEmpty()
 
-    fun update(projects: List<VacancyCard>) {
-        this.vacancies = projects
+    fun update(vacancies: List<VacancyCard>) {
+        Log.d("seara", "msg:" + vacancies.toString())
+        Log.d("seara", "sortingVA:" + Sorting.likeIndexes)
+        this.vacancies = vacancies
         notifyDataSetChanged()
     }
 

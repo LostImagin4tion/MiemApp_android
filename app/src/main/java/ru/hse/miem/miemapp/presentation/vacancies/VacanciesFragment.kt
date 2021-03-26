@@ -13,8 +13,10 @@ import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.tinder.Sorting
+import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
 import java.util.ArrayList
 import javax.inject.Inject
 
@@ -22,12 +24,10 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView
     @Inject
     @InjectPresenter
     lateinit var vacanciesPresenter: VacanciesPresenter
+    private lateinit var dbManager: DbManager
 
     @ProvidePresenter
     fun provideVacanciesPresenter() = vacanciesPresenter
-
-    // TO-DO
-//    private val args: TinderFragmentArgs by navArgs()
 
     private val vacanciesAdapter = VacanciesAdapter {
         val action = VacanciesFragmentDirections.actionFragmentVacanciesToFragmentProject(it)
@@ -37,6 +37,7 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
+        dbManager = DbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,24 +46,20 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView
             viewAllLoader.visibility = View.GONE
             vacancyList.visibility = View.VISIBLE
         }
-
         vacanciesPresenter.onCreate()
     }
 
     override fun setupLovedVacancies(vacancies: List<Vacancies>) {
-
-//        for (vacancy_id in lovedVacancies) {
-//            val lol : List<String> = listOf("lol")
-//            var temp = Vacancies(vacancy_id.toLong(),2131,"fdg","dsf",lol,lol)
-//
-//            trueVacancies.add(temp)
-//        }
-
-        Log.d("vacancy", Sorting.likeVacancies.toString())
-
-        vacanciesAdapter.update(Sorting.likeVacancies)
-
-
+        var temp: ArrayList<VacancyCard> = arrayListOf()
+//        var dbManager: DbManager
+        dbManager.openDb()
+//        Log.d("slava roles", "Load: ")
+        for (item in dbManager.readDb()){
+            temp.add(item)
+        }
+        dbManager.closeDb()
+//        Log.d("seara temp", temp.toString())
+        vacanciesAdapter.update(temp)
         viewAllLoader.visibility = View.GONE
         vacancyList.visibility = View.VISIBLE
     }

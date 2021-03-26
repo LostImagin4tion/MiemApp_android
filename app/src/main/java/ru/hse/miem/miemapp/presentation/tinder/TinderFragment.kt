@@ -46,7 +46,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         load()
 
         viewAll.setOnClickListener {
-            save()
+            Log.d("seara", "SortingTF" + Sorting.likeVacancies.toString())
             findNavController().navigate(R.id.fragmentVacancies)
         }
 
@@ -96,7 +96,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         manager.setSwipeableMethod(SwipeableMethod.Manual)
         manager.setOverlayInterpolator(LinearInterpolator())
 //        items.drop(Sorting.count)
-        items = sorting.sort(items)
+//        items = Sorting.sort(items)
         adapter = CardStackAdapter(items)
         val cardStackView: CardStackView = card_stack_view
         cardStackView.layoutManager = manager
@@ -105,15 +105,18 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     }
 
     private fun load(){
-        sorting.clear()
+        Sorting.clear()
         dbManager.openDb()
+        Log.d("slava roles", "Load: ")
         for (item in dbManager.readDb()){
             Sorting.likeVacancies.add(item)
-            sorting.add(item.vacancy_role)
+            Sorting.add(item.vacancy_role)
+            Log.d("slava roles", "Load: "+ item.vacancy_role)
         }
         dbManager.closeDb()
-        Log.d("tinderLogs", "Load: " + sorting.getRoles().toString())
-        Log.d("tinderLogs", "LoadCat: " + Sorting.categories.toString())
+        Log.d("slava roles", "End: ")
+        Log.d("slava", "Load: " + Sorting.roles.toString())
+        Log.d("slava", "LoadCat: " + Sorting.categories.toString())
     }
 
     private fun save(){
@@ -123,21 +126,22 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             }
         }
         dbManager.openDb()
-        for (item in Sorting.likeIndexes){
-            if (item < items.size) {
-                sorting.add(items[item].vacancy_role)
-            }else{
-                break
-            }
-        }
-        Log.d("tinderLogs", "Save: " + sorting.getRoles().toString())
+//        for (item in Sorting.likeIndexes){
+//            if (item < items.size) {
+//                Sorting.add(items[item].vacancy_role)
+//            }else{
+//                break
+//            }
+//        }
+        Log.d("tinderLogs", "Save: " + Sorting.roles.toString())
 
         Log.d("tinderLogs", "SaveCat: " + Sorting.categories.toString())
-        Sorting.likeIndexes.clear()
+//        Sorting.likeIndexes.clear()
         for (item in Sorting.likeVacancies){
             dbManager.insertDb(item.project_id, item.project_name_rus, item.vacancy_role, item.requirements)
         }
         dbManager.closeDb()
+        Sorting.clear()
     }
 
     override fun onStop() {
@@ -147,7 +151,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         Log.d("tinderLogs", "onStop: " + Sorting.roles.toString())
         Log.d("tinderLogs", "StopVac: " + Sorting.likeVacancies)
         save()
-        sorting.clear()
+        Sorting.clear()
     }
 
     override fun showError() {}
