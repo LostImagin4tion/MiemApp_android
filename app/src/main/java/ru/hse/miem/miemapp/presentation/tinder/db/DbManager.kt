@@ -3,7 +3,9 @@ package ru.hse.miem.miemapp.presentation.tinder.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import java.lang.Exception
+import java.util.ArrayList
 
 class DbManager(context: Context) {
     private val dbHelper = DbHelper(context)
@@ -13,23 +15,27 @@ class DbManager(context: Context) {
         db = dbHelper.writableDatabase
     }
 
-    fun insertDb(role: String, amount: Int){
+    fun insertDb(project_id: String, project_name_rus: String, vacancy_role: String, requirements: String){
         val values = ContentValues().apply {
-            put(TinderDbClass.COLUMN_NAME_TITLE, role)
-            put(TinderDbClass.COLUMN_NAME_COUNT, amount)
+            put(TinderDbClass.COLUMN_NAME_ROLE, vacancy_role)
+            put(TinderDbClass.COLUMN_NAME_REQUIREMENTS, requirements)
+            put(TinderDbClass.COLUMN_NAME_PROJECT_ID, project_id)
+            put(TinderDbClass.COLUMN_NAME_PROJECT_NAME, project_name_rus)
         }
 
         db?.insert(TinderDbClass.TABLE_NAME, null, values)
     }
 
-    fun readDb(): MutableMap<String, Int>{
-        val data: MutableMap<String, Int> = mutableMapOf()
+    fun readDb(): ArrayList<VacancyCard>{
+        val data: ArrayList<VacancyCard> = arrayListOf()
         val cursor = db?.query(TinderDbClass.TABLE_NAME, null, null, null, null, null, null)
 
         while (cursor?.moveToNext()!!){
-            val role = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_TITLE))
-            val amount = cursor.getInt(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_COUNT))
-            data[role] = amount
+            val project_id = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_PROJECT_ID))
+            val name = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_PROJECT_NAME))
+            val role = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_ROLE))
+            val requirements = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_REQUIREMENTS))
+            data.add(VacancyCard(project_id, name, role, requirements))
         }
         cursor.close()
         try {

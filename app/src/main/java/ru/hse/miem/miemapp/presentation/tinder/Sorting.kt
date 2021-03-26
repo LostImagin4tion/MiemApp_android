@@ -5,6 +5,8 @@ import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
+// TO-DO написать метод для добавления понравившихся вакансий или посмотреть SET
+
 class Sorting {
     companion object {
         var roles: MutableMap<String, Int> = mutableMapOf()
@@ -76,6 +78,9 @@ class Sorting {
             c = 1
         }
         for (i in c..items.size-2){
+            if (items[i] in likeVacancies){
+                continue
+            }
             if (!roles.keys.contains(items[i].vacancy_role)){
                 sortItems.add(items[i])
             }else{

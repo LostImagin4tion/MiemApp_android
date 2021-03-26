@@ -108,7 +108,8 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         sorting.clear()
         dbManager.openDb()
         for (item in dbManager.readDb()){
-            sorting.add(item.key, item.value)
+            Sorting.likeVacancies.add(item)
+            sorting.add(item.vacancy_role)
         }
         dbManager.closeDb()
         Log.d("tinderLogs", "Load: " + sorting.getRoles().toString())
@@ -133,11 +134,8 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
 
         Log.d("tinderLogs", "SaveCat: " + Sorting.categories.toString())
         Sorting.likeIndexes.clear()
-        for (item in Sorting.roles){
-            dbManager.insertDb(item.key, item.value)
-        }
-        for (item in Sorting.categories){
-            dbManager.insertDb(item.key, item.value)
+        for (item in Sorting.likeVacancies){
+            dbManager.insertDb(item.project_id, item.project_name_rus, item.vacancy_role, item.requirements)
         }
         dbManager.closeDb()
     }
@@ -147,7 +145,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         Log.d("tinder", "Stop")
         Sorting.position = listener.pos
         Log.d("tinderLogs", "onStop: " + Sorting.roles.toString())
-        Log.d("tinderLogs", "StopCat: " + Sorting.categories.toString())
+        Log.d("tinderLogs", "StopVac: " + Sorting.likeVacancies)
         save()
         sorting.clear()
     }

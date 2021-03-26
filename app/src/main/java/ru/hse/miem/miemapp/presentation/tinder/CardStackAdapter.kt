@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button
 import android.widget.TextView
-import com.squareup.picasso.Picasso
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList

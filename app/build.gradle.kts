@@ -109,8 +109,4 @@ dependencies {
     // CardStackView
     val cardVersion = "2.3.4"
     implementation("com.yuyakaido.android:card-stack-view:${cardVersion}")
-
-    // Picasso(Удалить)
-
-    implementation ("com.squareup.picasso:picasso:2.71828")
 }
