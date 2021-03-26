@@ -2,7 +2,6 @@ package ru.hse.miem.miemapp.presentation.tinder
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
 import androidx.navigation.fragment.findNavController
@@ -26,7 +25,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     private var items: ArrayList<VacancyCard> = arrayListOf()
     private val listener = CardStackCallback()
     private lateinit var manager: CardStackLayoutManager
-    private val sorting = Sorting()
     private lateinit var dbManager: DbManager
 
     @Inject
@@ -45,8 +43,11 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         load()
 
+        if (adapter.hadData){
+            tinderLoader.visibility = View.GONE
+        }
+
         viewAll.setOnClickListener {
-            Log.d("seara", "SortingTF" + Sorting.likeVacancies.toString())
             findNavController().navigate(R.id.fragmentVacancies)
         }
 
@@ -95,8 +96,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         manager.setCanScrollHorizontal(true)
         manager.setSwipeableMethod(SwipeableMethod.Manual)
         manager.setOverlayInterpolator(LinearInterpolator())
-//        items.drop(Sorting.count)
-//        items = Sorting.sort(items)
+        items = Sorting.sort(items)
         adapter = CardStackAdapter(items)
         val cardStackView: CardStackView = card_stack_view
         cardStackView.layoutManager = manager
@@ -105,54 +105,32 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     }
 
     private fun load(){
-        Sorting.clear()
         dbManager.openDb()
-        Log.d("slava roles", "Load: ")
+
         for (item in dbManager.readDb()){
             Sorting.likeVacancies.add(item)
-            Sorting.add(item.vacancy_role)
-            Log.d("slava roles", "Load: "+ item.vacancy_role)
+            Sorting.addRole(item.vacancy_role)
+            Sorting.addCategory(item.requirements)
         }
+
         dbManager.closeDb()
-        Log.d("slava roles", "End: ")
-        Log.d("slava", "Load: " + Sorting.roles.toString())
-        Log.d("slava", "LoadCat: " + Sorting.categories.toString())
     }
 
     private fun save(){
+        dbManager.openDb()
         for (i in Sorting.likeIndexes) {
             if (items[i].project_id != ""){
                 Sorting.likeVacancies.add(items[i])
+                dbManager.insertDb(items[i].project_id, items[i].project_name_rus, items[i].vacancy_role, items[i].requirements)
             }
         }
-        dbManager.openDb()
-//        for (item in Sorting.likeIndexes){
-//            if (item < items.size) {
-//                Sorting.add(items[item].vacancy_role)
-//            }else{
-//                break
-//            }
-//        }
-        Log.d("tinderLogs", "Save: " + Sorting.roles.toString())
-
-        Log.d("tinderLogs", "SaveCat: " + Sorting.categories.toString())
-//        Sorting.likeIndexes.clear()
-        for (item in Sorting.likeVacancies){
-            dbManager.insertDb(item.project_id, item.project_name_rus, item.vacancy_role, item.requirements)
-        }
         dbManager.closeDb()
-        Sorting.clear()
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d("tinder", "Stop")
         Sorting.position = listener.pos
-        Log.d("tinderLogs", "onStop: " + Sorting.roles.toString())
-        Log.d("tinderLogs", "StopVac: " + Sorting.likeVacancies)
         save()
         Sorting.clear()
     }
-
-    override fun showError() {}
 }

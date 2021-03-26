@@ -50,16 +50,7 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView
     }
 
     override fun setupLovedVacancies(vacancies: List<Vacancies>) {
-        var temp: ArrayList<VacancyCard> = arrayListOf()
-//        var dbManager: DbManager
-        dbManager.openDb()
-//        Log.d("slava roles", "Load: ")
-        for (item in dbManager.readDb()){
-            temp.add(item)
-        }
-        dbManager.closeDb()
-//        Log.d("seara temp", temp.toString())
-        vacanciesAdapter.update(temp)
+        vacanciesAdapter.update(Sorting.likeVacancies.toList())
         viewAllLoader.visibility = View.GONE
         vacancyList.visibility = View.VISIBLE
     }

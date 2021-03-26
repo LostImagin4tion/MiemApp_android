@@ -5,8 +5,6 @@ import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
-// TO-DO написать метод для добавления понравившихся вакансий или посмотреть SET
-
 class Sorting {
     companion object {
         var roles: MutableMap<String, Int> = mutableMapOf()
@@ -14,62 +12,44 @@ class Sorting {
         var position: Int = 0
         var count: Int = 0
         var likeIndexes: ArrayList<Int> = arrayListOf()
-        var likeVacancies: ArrayList<VacancyCard> = arrayListOf()
+        var likeVacancies: MutableSet<VacancyCard> = mutableSetOf()
+
         fun plus() {
             count++
         }
-
 
         private fun getAmount(role: String): Int = roles[role]!!
 
         private fun getCount(category: String): Int = categories[category]!!
 
-        fun add(role: String, amount: Int) {
-            if (role in tagsList) {
-                categories[role] = amount
-            }
-            roles[role] = amount
-        }
-
-        fun add(role: String) {
-            if (role == "") {
-
-            } else if (roles.contains(role)) {
-                roles[role] = getAmount(role) + 1
-            } else {
-                roles[role] = 1
+        fun addCategory(category: String) {
+            for (temp_tag in tagsList) {
+                if (category.indexOf(temp_tag, ignoreCase = true) != -1) {
+                    if (categories.contains(temp_tag)){
+                        categories[temp_tag] = getCount(temp_tag) + 1
+                    }else{
+                        categories[temp_tag] = 1
+                    }
+                }
             }
         }
 
-//    fun add(item: VacancyCard){
-//        if (roles.contains(item.vacancy)){
-//            roles[item.vacancy] = getAmount(item.vacancy) + 1
-//        }else{
-//            roles[item.vacancy] = 1
-//        }
-//
-//        for (temp_tag in tagsList) {
-//            if (item.requirements.indexOf(temp_tag, ignoreCase = true) != -1) {
-//                if (categories.contains(temp_tag)){
-//                    categories[temp_tag] = getCount(temp_tag) + 1
-//                }else{
-//                    categories[temp_tag] = 1
-//                }
-//            }
-//        }
-//    }
-//
-//        fun getRoles(): MutableMap<String, Int> {
-//            return roles
-//        }
+        fun addRole(role: String) {
+            when {
+                role == "" -> {}
+                roles.contains(role) -> {
+                    roles[role] = getAmount(role) + 1
+                }
+                else -> {
+                    roles[role] = 1
+                }
+            }
+        }
 
         fun clear() {
             roles.clear()
             categories.clear()
             likeIndexes.clear()
-            position = 0
-            count = 0
-            likeVacancies.clear()
         }
 
         fun sort(items: List<VacancyCard>): ArrayList<VacancyCard> {
@@ -85,10 +65,12 @@ class Sorting {
                 }
                 if (!roles.keys.contains(items[i].vacancy_role)) {
                     sortItems.add(items[i])
-                } else {
+                }
+                else {
                     val size = sortItems.size
                     for (j in sortItems.indices) {
-                        if (roles.keys.contains(sortItems[j].vacancy_role) && roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!) {
+                        if (roles.keys.contains(sortItems[j].vacancy_role) &&
+                            roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!) {
                             sortItems.add(j, items[i])
                             break
                         }

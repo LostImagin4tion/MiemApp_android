@@ -18,7 +18,7 @@ class VacanciesAdapter (
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
-    private var vacancies: List<VacancyCard> = Sorting.likeVacancies
+    private var vacancies: List<VacancyCard> = emptyList()
 
     val hasData get() = vacancies.isNotEmpty()
 
