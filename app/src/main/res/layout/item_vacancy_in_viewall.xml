@@ -39,7 +39,7 @@
             android:maxLines="1"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            tools:text="Приложекние миэм дада" />
+            tools:text="Приложекние миэм" />
 
         <TextView
             android:id="@+id/vacancyTitle"
