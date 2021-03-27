@@ -6,16 +6,14 @@ import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 
 
-class CardStackCallback: CardStackListener {
+class CardStackCallback : CardStackListener {
 
     var pos: Int = 0
-//    private var sorting = Sorting()
-
 
     override fun onCardDragging(direction: Direction, ratio: Float) {}
 
     override fun onCardSwiped(direction: Direction) {
-        if (direction == Direction.Right){
+        if (direction == Direction.Right) {
             Sorting.likeIndexes.add(pos)
         }
         Sorting.plus()

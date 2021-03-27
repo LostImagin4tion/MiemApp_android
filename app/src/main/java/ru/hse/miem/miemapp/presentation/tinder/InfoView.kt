@@ -9,7 +9,7 @@ import ru.hse.miem.miemapp.presentation.base.BaseView
 import ru.hse.miem.miemapp.presentation.project.ProjectView
 import ru.hse.miem.miemapp.presentation.search.SearchView
 
-interface InfoView: BaseView {
+interface InfoView : BaseView {
     @OneExecution
     fun setupVacancies(projects: List<Vacancies>)
 }

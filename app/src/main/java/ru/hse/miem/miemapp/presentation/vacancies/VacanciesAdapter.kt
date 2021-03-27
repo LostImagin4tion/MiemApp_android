@@ -14,7 +14,7 @@ import ru.hse.miem.miemapp.domain.entities.tagsList
 import ru.hse.miem.miemapp.presentation.tinder.Sorting
 import java.util.ArrayList
 
-class VacanciesAdapter (
+class VacanciesAdapter(
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
@@ -23,8 +23,6 @@ class VacanciesAdapter (
     val hasData get() = vacancies.isNotEmpty()
 
     fun update(vacancies: List<VacancyCard>) {
-        Log.d("seara", "msg:" + vacancies.toString())
-        Log.d("seara", "sortingVA:" + Sorting.likeIndexes)
         this.vacancies = vacancies
         notifyDataSetChanged()
     }
@@ -43,7 +41,6 @@ class VacanciesAdapter (
 
     class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(vacancy: VacancyCard, navigateToProject: (Long) -> Unit) = itemView.apply {
-            Log.d("vacancy","bind " + vacancy.project_id)
             projectId.text = vacancy.project_id
             projectTitle.text = vacancy.project_name_rus
             vacancyTitle.text = vacancy.vacancy_role

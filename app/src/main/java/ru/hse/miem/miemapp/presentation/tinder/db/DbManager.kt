@@ -11,11 +11,16 @@ class DbManager(context: Context) {
     private val dbHelper = DbHelper(context)
     var db: SQLiteDatabase? = null
 
-    fun openDb(){
+    fun openDb() {
         db = dbHelper.writableDatabase
     }
 
-    fun insertDb(project_id: String, project_name_rus: String, vacancy_role: String, requirements: String){
+    fun insertDb(
+        project_id: String,
+        project_name_rus: String,
+        vacancy_role: String,
+        requirements: String
+    ) {
         val values = ContentValues().apply {
             put(TinderDbClass.COLUMN_NAME_ROLE, vacancy_role)
             put(TinderDbClass.COLUMN_NAME_REQUIREMENTS, requirements)
@@ -26,25 +31,29 @@ class DbManager(context: Context) {
         db?.insert(TinderDbClass.TABLE_NAME, null, values)
     }
 
-    fun readDb(): ArrayList<VacancyCard>{
+    fun readDb(): ArrayList<VacancyCard> {
         val data: ArrayList<VacancyCard> = arrayListOf()
         val cursor = db?.query(TinderDbClass.TABLE_NAME, null, null, null, null, null, null)
 
-        while (cursor?.moveToNext()!!){
-            val project_id = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_PROJECT_ID))
-            val name = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_PROJECT_NAME))
+        while (cursor?.moveToNext()!!) {
+            val project_id =
+                cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_PROJECT_ID))
+            val name =
+                cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_PROJECT_NAME))
             val role = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_ROLE))
-            val requirements = cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_REQUIREMENTS))
+            val requirements =
+                cursor.getString(cursor.getColumnIndex(TinderDbClass.COLUMN_NAME_REQUIREMENTS))
             data.add(VacancyCard(project_id, name, role, requirements))
         }
         cursor.close()
         try {
             dbHelper.onUpgrade(db, 1, 1)
-        }catch (exception: Exception){}
+        } catch (exception: Exception) {
+        }
         return data
     }
 
-    fun closeDb(){
+    fun closeDb() {
         dbHelper.close()
     }
 }

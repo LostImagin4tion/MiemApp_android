@@ -10,7 +10,7 @@ import ru.hse.miem.miemapp.presentation.project.ProjectView
 import ru.hse.miem.miemapp.presentation.search.SearchView
 import java.util.ArrayList
 
-interface ViewAllView: BaseView {
+interface ViewAllView : BaseView {
     @OneExecution
     fun setupLovedVacancies(vacancies: List<Vacancies>)
 }

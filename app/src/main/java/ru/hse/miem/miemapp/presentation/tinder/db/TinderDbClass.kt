@@ -2,7 +2,7 @@ package ru.hse.miem.miemapp.presentation.tinder.db
 
 import android.provider.BaseColumns
 
-object TinderDbClass: BaseColumns{
+object TinderDbClass : BaseColumns {
     const val TABLE_NAME = "tinderDb"
     const val COLUMN_NAME_PROJECT_ID = "project_id"
     const val COLUMN_NAME_PROJECT_NAME = "project_name_rus"

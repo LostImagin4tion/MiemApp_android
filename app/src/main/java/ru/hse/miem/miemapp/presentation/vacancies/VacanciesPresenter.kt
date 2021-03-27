@@ -12,14 +12,13 @@ import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
 import javax.inject.Inject
 
 @InjectViewState
-class VacanciesPresenter@Inject constructor(
+class VacanciesPresenter @Inject constructor(
     private val vacancyRepository: IVacancyRepository
 ) : MvpPresenter<ViewAllView>() {
 
     private val compositeDisposable = CompositeDisposable()
 
     fun onCreate() {
-        Log.d("ViewAllLogs", "Create")
         val disposable = vacancyRepository.getAllVacancies()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -32,6 +31,7 @@ class VacanciesPresenter@Inject constructor(
             )
         compositeDisposable.add(disposable)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()

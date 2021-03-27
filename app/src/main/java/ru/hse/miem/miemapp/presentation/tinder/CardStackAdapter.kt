@@ -12,12 +12,11 @@ import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
-class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
-
-//    private var sorting = Sorting()
+class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     var items: List<VacancyCard> = emptyList()
-    constructor(_items: List<VacancyCard>): this(){
+
+    constructor(_items: List<VacancyCard>) : this() {
         items = _items
     }
 
@@ -42,7 +41,6 @@ class CardStackAdapter(): RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        var sorting: Sorting = Sorting()
 
         var type: TextView = itemView.findViewById(R.id.item_type)
         var name: TextView = itemView.findViewById(R.id.item_name)

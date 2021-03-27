@@ -93,13 +93,16 @@ data class Vacancies(
     val vacancy_disciplines: List<String>,
     val vacancy_additionally: List<String>
 )
-data class VacancyCard (
+
+data class VacancyCard(
     var project_id: String,
     var project_name_rus: String,
     var vacancy_role: String,
     var requirements: String
 )
 
-val tagsList = listOf("c++","python","kotlin","java","arduino", "quartus", "html",
-    "PHP", "android", "design", "git", "linux", "js", "c/c++","c#", "sql", "sqlite","docker",
-    "css", "js", "ux", "ui", "raspberry", "backend","frontend")
+val tagsList = listOf(
+    "c++", "python", "kotlin", "java", "arduino", "quartus", "html",
+    "PHP", "android", "design", "git", "linux", "js", "c/c++", "c#", "sql", "sqlite", "docker",
+    "css", "js", "ux", "ui", "raspberry", "backend", "frontend"
+)

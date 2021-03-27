@@ -16,7 +16,6 @@ class TinderPresenter @Inject constructor(
     private val compositeDisposable = CompositeDisposable()
 
     fun onCreate() {
-        Log.d("TinderMyLogs", "Create")
         val disposable = vacancyRepository.getAllVacancies()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

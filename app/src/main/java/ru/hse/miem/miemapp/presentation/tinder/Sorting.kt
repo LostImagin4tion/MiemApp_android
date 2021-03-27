@@ -25,9 +25,9 @@ class Sorting {
         fun addCategory(category: String) {
             for (temp_tag in tagsList) {
                 if (category.indexOf(temp_tag, ignoreCase = true) != -1) {
-                    if (categories.contains(temp_tag)){
+                    if (categories.contains(temp_tag)) {
                         categories[temp_tag] = getCount(temp_tag) + 1
-                    }else{
+                    } else {
                         categories[temp_tag] = 1
                     }
                 }
@@ -36,7 +36,8 @@ class Sorting {
 
         fun addRole(role: String) {
             when {
-                role == "" -> {}
+                role == "" -> {
+                }
                 roles.contains(role) -> {
                     roles[role] = getAmount(role) + 1
                 }
@@ -65,12 +66,12 @@ class Sorting {
                 }
                 if (!roles.keys.contains(items[i].vacancy_role)) {
                     sortItems.add(items[i])
-                }
-                else {
+                } else {
                     val size = sortItems.size
                     for (j in sortItems.indices) {
                         if (roles.keys.contains(sortItems[j].vacancy_role) &&
-                            roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!) {
+                            roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!
+                        ) {
                             sortItems.add(j, items[i])
                             break
                         }
