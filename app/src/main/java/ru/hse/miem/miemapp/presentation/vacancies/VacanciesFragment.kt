@@ -32,7 +32,6 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
-        dbManager = DbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +47,9 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
         vacanciesAdapter.update(Sorting.likeVacancies.toList())
         vacanciesLoader.visibility = View.GONE
         vacancyList.visibility = View.VISIBLE
+        if (Sorting.likeVacancies.toList().isEmpty()){
+            noVacancies.visibility = View.VISIBLE
+        }
     }
 
     override fun showError() {}
