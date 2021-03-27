@@ -103,6 +103,9 @@ data class VacancyCard(
 
 val tagsList = listOf(
     "c++", "python", "kotlin", "java", "arduino", "quartus", "html",
-    "PHP", "android", "design", "git", "linux", "js", "c/c++", "c#", "sql", "sqlite", "docker",
-    "css", "js", "ux", "ui", "raspberry", "backend", "frontend"
+    "php", "android", "design", "git", "linux", "js", "c/c++", "c#", "sql", "sqlite", "docker",
+    "css", "js", "ux", "ui", "rspbrry", "backend", "frontend", "front-end", "back-end", "http",
+    "oracle", "pgsql", "бд", "dns", "dshp", "gpo", "hfss", "awr de", "matlab", "verilog",
+    "плис", "autocad", "cst", "физика", "электроника", "api", "google", "labview",
+    "bstrap", "go", "сети", "3d", "ios", "swift"
 )

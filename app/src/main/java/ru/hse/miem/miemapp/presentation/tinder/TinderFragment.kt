@@ -47,7 +47,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             tinderLoader.visibility = View.GONE
         }
 
-        viewAll.setOnClickListener {
+        viewLiked.setOnClickListener {
             findNavController().navigate(R.id.fragmentVacancies)
         }
 
@@ -59,8 +59,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             items.add(
                 VacancyCard(
                     "",
-                    "Добро пожаловать в проектный тиндер\n\nСвайп вправо, если понравилась вакансия\n" +
-                            "Свайп влево - нет",
+                    getResources().getString(R.string.tinder_welcome),
                     "",
                     ""
                 )

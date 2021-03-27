@@ -8,10 +8,18 @@
     android:layout_height="match_parent">
 
     <ProgressBar
-        android:id="@+id/viewAllLoader"
+        android:id="@+id/vacanciesLoader"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="No data"
+        app:layout_anchorGravity="center" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vacancyList"
@@ -22,7 +30,7 @@
         android:orientation="vertical"
         android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_vacancy_in_viewall"
+        tools:listitem="@layout/item_vacancy_in_tinder"
         tools:visibility="visible" />
 
 

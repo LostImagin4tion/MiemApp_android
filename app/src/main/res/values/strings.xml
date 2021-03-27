@@ -49,10 +49,10 @@
     <string name="search_filters_show_results">Show results</string>
 
     <string name="logout">Log out</string>
-    <string name="title_tinder">Проектный тиндер</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="tinder_button_back">BACK</string>
-    <string name="tinder_button_view_all">VIEW ALL</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tinder_button_rewind">Rewind card</string>
+    <string name="tinder_button_reset">Rewind all</string>
+    <string name="tinder_button_view_liked">View liked</string>
+    <string name="tinder_end">Gratz! You\'ve viewed all the vacancies!!</string>
+    <string name="tinder_use">Use Tinder</string>
+    <string name="tinder_welcome">Welcome to Project\'s Tinder.\n\nSwipe right if you like vacancy, swipe left if not</string>
 </resources>

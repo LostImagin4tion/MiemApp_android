@@ -38,7 +38,7 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         vacancyList.adapter = vacanciesAdapter
         if (vacanciesAdapter.hasData) {
-            viewAllLoader.visibility = View.GONE
+            vacanciesLoader.visibility = View.GONE
             vacancyList.visibility = View.VISIBLE
         }
         vacanciesPresenter.onCreate()
@@ -46,7 +46,7 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
 
     override fun setupLovedVacancies(vacancies: List<Vacancies>) {
         vacanciesAdapter.update(Sorting.likeVacancies.toList())
-        viewAllLoader.visibility = View.GONE
+        vacanciesLoader.visibility = View.GONE
         vacancyList.visibility = View.VISIBLE
     }
 

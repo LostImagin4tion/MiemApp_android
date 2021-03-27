@@ -1,17 +1,13 @@
 package ru.hse.miem.miemapp.presentation.vacancies
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_project_in_search.view.*
-import kotlinx.android.synthetic.main.item_vacancy_in_viewall.view.*
+import kotlinx.android.synthetic.main.item_vacancy_in_tinder.view.*
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
-import ru.hse.miem.miemapp.presentation.tinder.Sorting
 import java.util.ArrayList
 
 class VacanciesAdapter(
@@ -29,7 +25,7 @@ class VacanciesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_vacancy_in_viewall, parent, false)
+            .inflate(R.layout.item_vacancy_in_tinder, parent, false)
         return VacancyViewHolder(view)
     }
 

@@ -42,39 +42,40 @@ class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        var type: TextView = itemView.findViewById(R.id.item_type)
-        var name: TextView = itemView.findViewById(R.id.item_name)
-        var vacancy: TextView = itemView.findViewById(R.id.item_vacancy)
-        var leader: TextView = itemView.findViewById(R.id.item_leader)
-        var text1: Button = itemView.findViewById(R.id.tag1)
-        var text2: Button = itemView.findViewById(R.id.tag2)
-        var text3: Button = itemView.findViewById(R.id.tag3)
-        var text4: Button = itemView.findViewById(R.id.tag4)
-        var text5: Button = itemView.findViewById(R.id.tag5)
-        var text6: Button = itemView.findViewById(R.id.tag6)
+        var type: TextView = itemView.findViewById(R.id.projectId)
+        var name: TextView = itemView.findViewById(R.id.projectTitle)
+        var vacancy: TextView = itemView.findViewById(R.id.vacancyTitle)
+        var tag1: Button = itemView.findViewById(R.id.t1)
+        var tag2: Button = itemView.findViewById(R.id.t2)
+        var tag3: Button = itemView.findViewById(R.id.t3)
+        var tag4: Button = itemView.findViewById(R.id.t4)
+        var tag5: Button = itemView.findViewById(R.id.t5)
+        var tag6: Button = itemView.findViewById(R.id.t6)
         fun setData(data: VacancyCard) {
             type.text = data.project_id
             name.text = data.project_name_rus
             vacancy.text = data.vacancy_role
 
-            val buttons = arrayListOf(text1, text2, text3, text4, text5, text6)
+            val buttons = arrayListOf(tag1, tag2, tag3, tag4, tag5, tag6)
             buttons.forEach {
                 it.visibility = View.GONE
             }
 
-            var tags: ArrayList<String> = arrayListOf()
+            var tags: MutableSet<String> = mutableSetOf()
             for (temp_tag in tagsList) {
                 if (data.requirements.indexOf(temp_tag, ignoreCase = true) != -1) {
+                    tags.add(temp_tag)
+                }
+                if (data.vacancy_role.indexOf(temp_tag, ignoreCase = true) != -1) {
                     tags.add(temp_tag)
                 }
                 if (tags.size == 6) {
                     break
                 }
             }
-
-            for (i in tags.indices) {
+            tags.forEachIndexed { i, element ->
                 buttons[i].visibility = View.VISIBLE
-                buttons[i].text = tags[i]
+                buttons[i].text = element
             }
         }
     }
