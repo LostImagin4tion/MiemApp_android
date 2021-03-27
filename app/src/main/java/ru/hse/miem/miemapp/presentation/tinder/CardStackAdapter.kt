@@ -69,6 +69,9 @@ class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
                 if (data.vacancy_role.indexOf(temp_tag, ignoreCase = true) != -1) {
                     tags.add(temp_tag)
                 }
+                if (data.project_name_rus.indexOf(temp_tag, ignoreCase = true) != -1) {
+                    tags.add(temp_tag)
+                }
                 if (tags.size == 6) {
                     break
                 }

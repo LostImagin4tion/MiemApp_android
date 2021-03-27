@@ -2,7 +2,9 @@ package ru.hse.miem.miemapp.presentation.tinder
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -20,7 +22,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
+class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
     private var adapter: CardStackAdapter = CardStackAdapter()
     private var items: ArrayList<VacancyCard> = arrayListOf()
     private val listener = CardStackCallback()
@@ -35,15 +37,18 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
     fun provideTinderPresenter() = presenter
 
     override fun onAttach(context: Context) {
+        Log.d("seara", "on attach")
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
         dbManager = DbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        Log.d("seara", "onviewcreated")
         load()
 
-        if (adapter.hadData){
+        if (adapter.hadData) {
             tinderLoader.visibility = View.GONE
         }
 
@@ -51,10 +56,15 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             findNavController().navigate(R.id.fragmentVacancies)
         }
 
+        rewind.setOnClickListener {
+//            cardStackView.swipe()
+            Log.d("seara", "rewind")
+        }
         presenter.onCreate()
     }
 
     override fun setupVacancies(projects: List<Vacancies>) {
+        Log.d("seara", "setup")
         if (items.size == 0) {
             items.add(
                 VacancyCard(
@@ -75,8 +85,9 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
             )
         }
 
-        for (item in projects){
-            items.add(items.size - 1,
+        for (item in projects) {
+            items.add(
+                items.size - 1,
                 VacancyCard(
                     "#" + item.project_id,
                     item.project_name_rus,
@@ -88,7 +99,9 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         filling()
     }
 
-    private fun filling(){
+    private fun filling() {
+        Log.d("seara", "filling")
+
         manager = CardStackLayoutManager(this.requireContext(), listener)
         manager.setStackFrom(StackFrom.None)
         manager.setDirections(Direction.HORIZONTAL)
@@ -97,16 +110,19 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         manager.setOverlayInterpolator(LinearInterpolator())
         items = Sorting.sort(items)
         adapter = CardStackAdapter(items)
-        val cardStackView: CardStackView = card_stack_view
+        val cardStackView : CardStackView = card_stack_view
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator()
+
+        Log.d("seara", "filling end")
+
     }
 
-    private fun load(){
+    private fun load() {
         dbManager.openDb()
 
-        for (item in dbManager.readDb()){
+        for (item in dbManager.readDb()) {
             Sorting.likeVacancies.add(item)
             Sorting.addRole(item.vacancy_role)
             Sorting.addCategory(item.requirements)
@@ -115,18 +131,24 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView{
         dbManager.closeDb()
     }
 
-    private fun save(){
+    private fun save() {
         dbManager.openDb()
         for (i in Sorting.likeIndexes) {
-            if (items[i].project_id != ""){
+            if (items[i].project_id != "") {
                 Sorting.likeVacancies.add(items[i])
-                dbManager.insertDb(items[i].project_id, items[i].project_name_rus, items[i].vacancy_role, items[i].requirements)
+                dbManager.insertDb(
+                    items[i].project_id,
+                    items[i].project_name_rus,
+                    items[i].vacancy_role,
+                    items[i].requirements
+                )
             }
         }
         dbManager.closeDb()
     }
 
     override fun onStop() {
+        Log.d("seara", "on stop")
         super.onStop()
         Sorting.position = listener.pos
         save()
