@@ -2,25 +2,20 @@ package ru.hse.miem.miemapp.presentation.vacancies
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_vacancies.*
-import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
-import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.tinder.Sorting
 import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
-import java.util.ArrayList
 import javax.inject.Inject
 
-class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), ViewAllView {
+class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesView {
     @Inject
     @InjectPresenter
     lateinit var vacanciesPresenter: VacanciesPresenter

@@ -14,7 +14,7 @@ import javax.inject.Inject
 @InjectViewState
 class VacanciesPresenter @Inject constructor(
     private val vacancyRepository: IVacancyRepository
-) : MvpPresenter<ViewAllView>() {
+) : MvpPresenter<VacanciesView>() {
 
     private val compositeDisposable = CompositeDisposable()
 
