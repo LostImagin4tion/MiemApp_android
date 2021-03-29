@@ -42,15 +42,12 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
     fun provideTinderPresenter() = presenter
 
     override fun onAttach(context: Context) {
-        Log.d("seara", "on attach")
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
         dbManager = DbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        Log.d("seara", "onviewcreated")
         load()
 
         if (adapter.hadData) {
@@ -66,18 +63,16 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
             dbManager.deleteDb()
             findNavController().popBackStack(R.id.fragmentTinder, true)
             findNavController().navigate(R.id.fragmentTinder)
-            Log.d("seara", "rewind")
         }
         presenter.onCreate()
     }
 
     override fun setupVacancies(projects: List<Vacancies>) {
-        Log.d("seara", "setup")
         if (items.size == 0) {
             items.add(
                 VacancyCard(
                     "",
-                    getResources().getString(R.string.tinder_welcome),
+                    resources.getString(R.string.tinder_welcome),
                     "",
                     ""
                 )
@@ -108,8 +103,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
     }
 
     private fun filling() {
-        Log.d("seara", "filling")
-
         manager = CardStackLayoutManager(this.requireContext(), listener)
         manager.setStackFrom(StackFrom.None)
         manager.setDirections(Direction.HORIZONTAL)
@@ -122,8 +115,8 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator()
-        Log.d("seara", "filling end")
-
+        tinderEnd.visibility = View.VISIBLE
+        tinderLoader.visibility = View.INVISIBLE
     }
 
     private fun load() {
@@ -155,7 +148,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
     }
 
     override fun onStop() {
-        Log.d("seara", "on stop")
         super.onStop()
         Sorting.position = listener.pos
         save()

@@ -14,9 +14,9 @@ import java.util.ArrayList
 
 class CardStackAdapter() : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
 
-    var items: List<VacancyCard> = emptyList()
+    var items: ArrayList<VacancyCard> = arrayListOf()
 
-    constructor(_items: List<VacancyCard>) : this() {
+    constructor(_items: ArrayList<VacancyCard>) : this() {
         items = _items
     }
 

@@ -77,9 +77,11 @@ class Sorting {
                     val size = sortItems.size
                     for (j in sortItems.indices) {
                         if (roles.keys.contains(sortItems[j].vacancy_role) &&
-                            roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!
-                        ) {
+                            roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!){
                             sortItems.add(j, items[i])
+                            break
+                        }else if(!roles.keys.contains(sortItems[j].vacancy_role)){
+                            sortItems.add(0, items[i])
                             break
                         }
                     }

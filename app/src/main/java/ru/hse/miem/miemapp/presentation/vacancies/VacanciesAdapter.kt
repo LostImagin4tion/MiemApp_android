@@ -8,18 +8,23 @@ import kotlinx.android.synthetic.main.item_vacancy_in_tinder.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
+import ru.hse.miem.miemapp.presentation.tinder.Sorting
 import java.util.ArrayList
 
 class VacanciesAdapter(
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
-    private var vacancies: List<VacancyCard> = emptyList()
+    private var vacancies: ArrayList<VacancyCard> = arrayListOf()
 
     val hasData get() = vacancies.isNotEmpty()
 
     fun update(vacancies: List<VacancyCard>) {
-        this.vacancies = vacancies
+        for (item in Sorting.likeVacancies){
+            if (item in vacancies){
+                this.vacancies.add(item)
+            }
+        }
         notifyDataSetChanged()
     }
 

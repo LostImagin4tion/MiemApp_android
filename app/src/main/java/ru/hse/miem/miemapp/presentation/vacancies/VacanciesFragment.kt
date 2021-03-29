@@ -10,9 +10,11 @@ import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Vacancies
+import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.tinder.Sorting
 import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
+import java.util.ArrayList
 import javax.inject.Inject
 
 class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesView {
@@ -43,7 +45,18 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
     }
 
     override fun setupLovedVacancies(vacancies: List<Vacancies>) {
-        vacanciesAdapter.update(Sorting.likeVacancies.toList())
+        val items: ArrayList<VacancyCard> = arrayListOf()
+        for (item in vacancies) {
+            items.add(
+                VacancyCard(
+                    "#" + item.project_id,
+                    item.project_name_rus,
+                    item.vacancy_role,
+                    item.vacancy_disciplines.toString() + item.vacancy_additionally
+                )
+            )
+        }
+        vacanciesAdapter.update(items)
         vacanciesLoader.visibility = View.GONE
         vacancyList.visibility = View.VISIBLE
         if (Sorting.likeVacancies.toList().isEmpty()){
