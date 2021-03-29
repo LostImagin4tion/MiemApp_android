@@ -53,6 +53,13 @@ class Sorting {
             likeIndexes.clear()
         }
 
+        fun reset(){
+            clear()
+            likeVacancies.clear()
+            position = 0
+            count = 0
+        }
+
         fun sort(items: List<VacancyCard>): ArrayList<VacancyCard> {
             val sortItems: ArrayList<VacancyCard> = arrayListOf()
             var c = count

@@ -6,9 +6,13 @@ import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.yuyakaido.android.cardstackview.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_tinder.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -17,6 +21,7 @@ import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
+import ru.hse.miem.miemapp.presentation.search.SearchFragment
 import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
 import java.util.*
 import javax.inject.Inject
@@ -56,8 +61,11 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
             findNavController().navigate(R.id.fragmentVacancies)
         }
 
-        rewind.setOnClickListener {
-//            cardStackView.swipe()
+        reset.setOnClickListener {
+            Sorting.reset()
+            dbManager.deleteDb()
+            findNavController().popBackStack(R.id.fragmentTinder, true)
+            findNavController().navigate(R.id.fragmentTinder)
             Log.d("seara", "rewind")
         }
         presenter.onCreate()
@@ -114,7 +122,6 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator()
-
         Log.d("seara", "filling end")
 
     }

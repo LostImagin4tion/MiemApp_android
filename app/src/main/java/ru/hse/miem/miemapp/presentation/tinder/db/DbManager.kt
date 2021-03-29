@@ -56,4 +56,10 @@ class DbManager(context: Context) {
     fun closeDb() {
         dbHelper.close()
     }
+
+    fun deleteDb(){
+        db = dbHelper.writableDatabase
+        dbHelper.onUpgrade(db, 2, 2)
+        dbHelper.close()
+    }
 }

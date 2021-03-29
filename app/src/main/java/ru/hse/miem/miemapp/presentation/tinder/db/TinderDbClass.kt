@@ -17,5 +17,5 @@ object TinderDbClass : BaseColumns {
             "$COLUMN_NAME_PROJECT_ID TEXT, $COLUMN_NAME_PROJECT_NAME TEXT," +
             "$COLUMN_NAME_ROLE TEXT, $COLUMN_NAME_REQUIREMENTS TEXT)"
 
-    const val DELETE_TABLE = "delete table if exists $TABLE_NAME"
+    const val DELETE_TABLE = "drop table if exists $TABLE_NAME"
 }

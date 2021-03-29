@@ -19,7 +19,6 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
     @Inject
     @InjectPresenter
     lateinit var vacanciesPresenter: VacanciesPresenter
-    private lateinit var dbManager: DbManager
 
     @ProvidePresenter
     fun provideVacanciesPresenter() = vacanciesPresenter
