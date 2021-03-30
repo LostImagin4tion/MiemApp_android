@@ -16,13 +16,10 @@ class CardStackCallback : CardStackListener {
         if (direction == Direction.Right) {
             Sorting.likeIndexes.add(pos)
         }
-        Log.d("seara", "added:" + Sorting.likeIndexes.toString())
         Sorting.plus()
     }
 
     override fun onCardRewound() {
-        Log.d("seara", "removed:" + Sorting.likeIndexes.toString())
-        Sorting.likeIndexes.removeLast()
     }
 
     override fun onCardCanceled() {}

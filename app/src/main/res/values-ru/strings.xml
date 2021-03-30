@@ -54,4 +54,6 @@
     <string name="tinder_use">Воспользоваться тиндером</string>
     <string name="tinder_welcome">Добро пожаловать в Проектный Тиндер\n\nСвайп вправо если понравилась вакансия, влево если нет</string>
     <string name="vacancies_no_vacancies">Вам ещё не понравилась ни одна вакансия</string>
+    <string name="tinder_end_1">На данный момент Вы просмотрели\n все доступные вакансии</string>
+
 </resources>

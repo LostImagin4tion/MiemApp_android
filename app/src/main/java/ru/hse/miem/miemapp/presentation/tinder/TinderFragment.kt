@@ -80,8 +80,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
             items.add(
                 VacancyCard(
                     "",
-                    "На данный момент Вы просмотрели\n" +
-                            "все доступные вакансии",
+                    resources.getString(R.string.tinder_end_1),
                     "",
                     ""
                 )
