@@ -1,42 +1,52 @@
 package ru.hse.miem.miemapp.presentation.login
 
-import android.util.Log
 import moxy.InjectViewState
-import moxy.MvpPresenter
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.tasks.RuntimeExecutionException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
+import ru.hse.miem.miemapp.presentation.base.BasePresenter
+import timber.log.Timber
 import javax.inject.Inject
 
 @InjectViewState
 class LoginPresenter @Inject constructor(
-    private val authRepository: IAuthRepository
-) : MvpPresenter<LoginView>() {
+    private val authRepository: IAuthRepository,
+    private val signInClient: GoogleSignInClient,
+    private val session: Session
+) : BasePresenter<LoginView>(), CoroutineScope {
+    override val coroutineContext = Dispatchers.Main
 
-    private val compositeDisposable = CompositeDisposable()
+    fun onCreate() {
+        if (session.token.isNotEmpty()) {
+            viewState.afterLogin()
+        } else {
+            signInClient.silentSignIn().addOnCompleteListener {
+                try {
+                    it.result?.serverAuthCode?.also(::onLogged) ?: viewState.showLoginForm()
+                } catch (e: RuntimeExecutionException) { // api exception
+                    Timber.w(e.stackTraceToString())
+                    viewState.showLoginForm()
+                }
+            }
+        }
+    }
 
     fun onClickLoginButton() {
-        viewState.hideLoginButton()
-        viewState.login()
+        viewState.hideLoginButtons()
+        viewState.login(signInClient.signInIntent)
     }
 
-    fun onLogged(googleSignInAccount: GoogleSignInAccount) {
-        val disposable = authRepository.auth(googleSignInAccount.serverAuthCode!!)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onComplete = viewState::afterLogin,
-                onError = { Log.e("Auth", it.stackTraceToString()) }
-            )
-        compositeDisposable.add(disposable)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
+    fun onLogged(authCode: String) = launch {
+        try {
+            authRepository.auth(authCode)
+            viewState.afterLogin()
+        } catch (e: Exception) {
+            Timber.e(e.stackTraceToString())
+        }
     }
 
 }

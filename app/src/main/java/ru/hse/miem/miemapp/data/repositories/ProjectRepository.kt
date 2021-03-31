@@ -1,51 +1,75 @@
 package ru.hse.miem.miemapp.data.repositories
 
+import kotlinx.coroutines.async
 import ru.hse.miem.miemapp.data.api.CabinetApi
+import ru.hse.miem.miemapp.data.api.VacancyApplyRequest
 import ru.hse.miem.miemapp.domain.entities.ProjectExtended
 import ru.hse.miem.miemapp.domain.repositories.IProjectRepository
+import java.lang.Exception
 import javax.inject.Inject
 
 class ProjectRepository @Inject constructor(
     private val cabinetApi: CabinetApi
 ) : IProjectRepository {
 
-    override fun getProjectById(id: Long) = cabinetApi.projectHeader(id)
-        .map {
+    override suspend fun getProjectById(id: Long) = withIO {
+        cabinetApi.projectHeader(id).let {
             val header = it.data
-            val body = cabinetApi.projectBody(id).blockingGet().data
-            val members = cabinetApi.projectMembers(id)
-                .blockingGet()
-                .data
-                .let { it.leaders + it.activeMembers }
-                .map {
-                    ProjectExtended.Member(
-                        id = it.id,
-                        firstName = it.first_name ?: it.name,
-                        lastName = it.last_name ?: "",
-                        isTeacher = it.dep?.isNotEmpty() ?: false,
-                        role = it.role,
-                        avatarUrl = CabinetApi.getAvatarUrl(it.id)
-                    )
+            val body = async { cabinetApi.projectBody(id).data }
+
+            val members = async {
+                cabinetApi.projectMembers(id)
+                    .data
+                    .let { it.leaders + it.activeMembers }
+                    .map {
+                        ProjectExtended.Member(
+                            id = it.id,
+                            firstName = it.first_name ?: it.name,
+                            lastName = it.last_name ?: "",
+                            isTeacher = it.dep?.isNotEmpty() ?: false,
+                            role = it.role,
+                            avatarUrl = CabinetApi.getAvatarUrl(it.id)
+                        )
+                    }
+            }
+
+            val vacancies = async {
+                try {
+                    cabinetApi.projectVacancies(id).also {
+                        /*
+                    If error was occurred with response we want to see an exception.
+                    However, api returns code 200 even for invalid requests (of course, it's very stupid).
+                    So here's a workaround for detecting error response
+                     */
+                        it.data!!
+                    }
+                } catch (e: Exception) {
+                    cabinetApi.projectVacanciesPublic(id)
                 }
-            val vacancies = cabinetApi.projectVacancies(id)
-                .blockingGet()
                 .data
                 .filter { !it.booked } // if vacancy is active
-                .map{
+                .map {
                     ProjectExtended.Vacancy(
                         id = it.vacancy_id,
                         role = it.role,
                         required = it.disciplines.joinToString(separator = "\n"),
                         recommended = it.additionally.joinToString(separator = "\n"),
-                        count = it.count
+                        count = it.count,
+                        isApplied = it.applied
                     )
                 }
-            val gitRepositories = cabinetApi.gitStatistics(id)
-                .blockingGet()
-                .data.getOrNull(0)
-                ?.summary
-                ?.map { ProjectExtended.Link(name = it.project, url = it.link) } ?: emptyList()
+            }
 
+            val gitRepositories = async {
+                cabinetApi.gitStatistics(id)
+                    .data
+                    .getOrNull(0)
+                    ?.summary
+                    ?.map { ProjectExtended.Link(name = it.project, url = it.link) } ?: emptyList()
+
+            }
+
+            val bodyResult = body.await()
             ProjectExtended(
                 id = header.id,
                 number = header.number.toString().toLongOrNull() ?: header.id,
@@ -55,13 +79,17 @@ class ProjectRepository @Inject constructor(
                 name = header.nameRus,
                 state = header.statusLabel,
                 email = header.googleGroup ?: "$id@miem.hse.ru",
-                objective = body.target ?: "",
-                annotation = body.annotation ?: "",
-                members = members,
-                links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories,
-                vacancies = vacancies,
+                objective = bodyResult.target ?: "",
+                annotation = bodyResult.annotation ?: "",
+                members = members.await(),
+                links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories.await(),
+                vacancies = vacancies.await(),
                 url = CabinetApi.getProjectUrl(id)
             )
-        }
+            }
+    }
 
+    override suspend fun applyForVacancy(vacancyId: Long, aboutMe: String) = withIO {
+        cabinetApi.applyForVacancy(VacancyApplyRequest(aboutMe, vacancyId))
+    }
 }

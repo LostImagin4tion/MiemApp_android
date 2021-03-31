@@ -16,6 +16,7 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import ru.hse.miem.miemcam.R
 import kotlinx.android.synthetic.main.webrtc_player.*
+import timber.log.Timber
 
 class WebRTCPlayer: Fragment() {
 
@@ -46,14 +47,16 @@ class WebRTCPlayer: Fragment() {
     webRtcDisplay.loadUrl("file:///android_asset/index.html")
   }
 
-  fun openVideoUrl(url: String) {
-    webRtcDisplay.loadUrl("javascript:start('$url')")
+  fun openVideoUrl(url: String): Unit = webRtcDisplay.let {
+    it.onResume()
+    it.loadUrl("javascript:start('$url')")
   }
 
-  fun stopVideo() {
-    webRtcDisplay.loadUrl("javascript:stop()")
-    webRtcDisplay.visibility = View.INVISIBLE
+  fun stopVideo(): Unit = webRtcDisplay.let {
+    it.loadUrl("javascript:stop()")
+    it.visibility = View.INVISIBLE
     webRtcLoadingProgress.visibility = View.INVISIBLE
+    it.onPause()
   }
 }
 
@@ -81,9 +84,10 @@ class JSInterface(
 
   @JavascriptInterface
   fun log(lvl: String, log: String) {
+    Timber.tag("WebRTCPlayer")
     when (lvl) {
-      "i" -> Log.i("WebRTCPlayer", log)
-      "e" -> Log.e("WebRTCPlayer", log)
+      "i" -> Timber.i(log)
+      "e" -> Timber.e(log)
     }
   }
 
@@ -99,7 +103,8 @@ private class WebChromeClientCustomPoster : WebChromeClient() {
   }
 
   override fun onConsoleMessage(consoleMessage: ConsoleMessage): Boolean {
-    Log.d("WebView", consoleMessage.message())
+    Timber.tag("WebView")
+    Timber.d(consoleMessage.message())
     return true
   }
 }

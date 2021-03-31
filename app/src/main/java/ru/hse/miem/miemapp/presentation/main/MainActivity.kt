@@ -1,92 +1,63 @@
 package ru.hse.miem.miemapp.presentation.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.tasks.RuntimeExecutionException
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import androidx.navigation.fragment.NavHostFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.repositories.IAuthRepository
-import ru.hse.miem.miemapp.presentation.login.LoginFragment
+import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.setupWithNavController
-import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var signInClient: GoogleSignInClient
-    @Inject
-    lateinit var authRepository: IAuthRepository
-
-    private var authDisposable: Disposable? = null
-    private val loginFragment = LoginFragment()
+    private lateinit var originalIntent: Intent
+    val intentUri get() = originalIntent.data
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MiemApplication).appComponent.inject(this)
         setTheme(R.style.Theme_MIEMApp)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        window.setBackgroundDrawableResource(R.drawable.splash_screen)
+
+        // because default behaviour not suits us, we want to login first in all cases
+        originalIntent = intent.clone() as Intent
+        intent.data = null
 
         if (savedInstanceState == null) { // not screen rotation or something like this
-            signInClient.silentSignIn().addOnCompleteListener {
-                try {
-                    it.result?.serverAuthCode?.also { silentLogin(it) } ?: startLogin()
-                } catch (e: RuntimeExecutionException) { // api exception
-                    Log.w(javaClass.simpleName, e.stackTraceToString())
-                    startLogin()
-                }
+            bottomNavigation.setupWithNavController(
+                navGraphIds = listOf(
+                    R.navigation.nav_profile, // keep first!!
+                    R.navigation.nav_search,
+                    R.navigation.nav_settings,
+                    R.navigation.nav_apps,
+                ),
+                fragmentManager = supportFragmentManager,
+                containerId = R.id.navHost,
+                intent = intent,
+                fragmentsBarGone = listOf(R.id.fragmentLogin)
+            )
+
+            bottomNavigation.post {
+                bottomNavigation.visibility = View.GONE
             }
-        } else {
-            afterLogin()
+        }
+    }
+
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager.fragments.find { it is NavHostFragment } as NavHostFragment?
+        navHostFragment?.childFragmentManager?.fragments?.first()?.let {
+            if (it is OnBackPressListener) {
+                if (!it.onBackPressed()) super.onBackPressed()
+            } else {
+                super.onBackPressed()
+            }
+        } ?: run {
+            super.onBackPressed()
         }
 
     }
 
-    private fun startLogin() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.navHost, loginFragment)
-            .commit()
-    }
-
-    private fun silentLogin(authCode: String) {
-        authDisposable = authRepository.auth(authCode)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeBy(
-                onError = {
-                    Log.w("Auth", it.stackTraceToString())
-                    startLogin()
-                },
-                onComplete = ::afterLogin
-            )
-    }
-
-    fun afterLogin() {
-        window.setBackgroundDrawableResource(R.drawable.solid_color_primary)
-
-        supportFragmentManager.beginTransaction()
-            .remove(loginFragment)
-            .commit()
-
-        bottomNavigation.visibility = View.VISIBLE
-        bottomNavigation.setupWithNavController(
-            navGraphIds = listOf(R.navigation.nav_profile, R.navigation.nav_search, R.navigation.nav_settings, R.navigation.nav_apps),
-            fragmentManager = supportFragmentManager,
-            containerId = R.id.navHost,
-            intent = intent,
-        )
-    }
-
-    override fun onStop() {
-        super.onStop()
-        authDisposable?.dispose()
-    }
 }

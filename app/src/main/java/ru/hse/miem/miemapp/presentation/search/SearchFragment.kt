@@ -14,11 +14,12 @@ import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
+import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import java.util.*
 import javax.inject.Inject
 
-class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
+class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBackPressListener {
 
     @Inject
     @InjectPresenter
@@ -81,6 +82,15 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView {
         }
 
         searchPresenter.onCreate()
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        return false
+
     }
 
     private fun filterResults() {

@@ -28,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="4"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/text_accent_color"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="16sp"
                 tools:text="Android developer" />
@@ -42,7 +42,7 @@
                 android:id="@+id/vacancyCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/text_accent_color"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 tools:text="1" />
@@ -67,9 +67,9 @@
                 android:id="@+id/vacancyRequired"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:textSize="15sp"
-                android:textColor="@android:color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Write code"/>
 
             <TextView
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:textSize="15sp"
-                android:textColor="@android:color/black"
+                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Write code"/>
 
             <Button
@@ -97,6 +97,80 @@
                 android:text="@string/project_vacancy_apply"
                 android:textAllCaps="false"
                 android:backgroundTint="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/vacancyApplied"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/project_vacancy_applied"
+                android:textColor="@color/green"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="16sp"
+                android:drawablePadding="2dp"
+                app:drawableStartCompat="@drawable/ic_check_circle"
+                app:drawableTint="@color/green"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <ProgressBar
+                android:id="@+id/vacancySubmitLoader"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <LinearLayout
+                android:id="@+id/vacancyApplicationForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <EditText
+                    android:id="@+id/vacancyApplicationAboutMe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:minLines="4"
+                    android:maxLines="8"
+                    android:textSize="16sp"
+                    android:background="@drawable/edit_text_background"
+                    android:hint="@string/project_vacancy_about_me_hint"
+                    android:gravity="start|top"
+                    android:padding="6dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/vacancySubmit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:text="@string/project_vacancy_submit"
+                        android:textAllCaps="false"/>
+
+                    <Button
+                        android:id="@+id/vacancyCancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_vacancy_cancel"
+                        android:textColor="@color/colorAccent"
+                        android:textAllCaps="false"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/colorAccent"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

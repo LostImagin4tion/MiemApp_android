@@ -3,18 +3,21 @@
     <string name="app_name">MIEM App</string>
     <string name="title_camerascontrol">Управление камерами</string>
 
-    <string name="common_error_message">Произошла ошибка. Проверьте соединение или попробуйте позже</string>
+    <string name="common_error_message">Произошла ошибка. Проверьте, что вы авторизованы и соединение стабильно</string>
 
     <string name="no_data">Нет информации</string>
 
     <string name="send_mail_dialog_title">Отправить письмо</string>
 
     <string name="login_button_text">Войти через Google</string>
+    <string name="login_without_auth_button_text">Продолжить без авторизации</string>
     <string name="login_error">Произошла ошибка при логине</string>
 
     <string name="student_badge">Студент</string>
     <string name="teacher_badge">Преподаватель</string>
-    <string name="profile_go_to_chat">Перейти в чат</string>
+    <string name="unauthorized_badge">Неавторизован</string>
+    <string name="unauthorized_name">Аноним</string>
+    <string name="profile_go_to_chat">Чат</string>
     <string name="projects_title">Проекты</string>
     <string name="project_members">Участники:</string>
     <string name="project_type">Тип:</string>
@@ -22,6 +25,15 @@
     <string name="project_role">Роль:</string>
     <string name="project_hours">Часы:</string>
     <string name="project_head">Руководитель:</string>
+
+    <string name="applications_title">Заявки</string>
+    <string name="application_state_waiting">Ожидает подтверждения</string>
+    <string name="application_state_approved">Подтверждена</string>
+    <string name="application_state_declined">Отклонена</string>
+    <string name="application_head_comment">Комментарий руководителя:</string>
+    <string name="application_my_comment">Мой комментарий:</string>
+    <string name="application_withdraw">Отозвать</string>
+    <string name="application_approve">Подтвердить</string>
 
     <string name="project_type_and_number">Проект #%d, %s (%s)</string>
     <string name="project_team">Команда</string>
@@ -34,8 +46,11 @@
     <string name="project_vacancy_required">Обязательно</string>
     <string name="project_vacancy_recommended">Желательно</string>
     <string name="project_vacancy_apply">Записаться</string>
+    <string name="project_vacancy_applied">Заявка отправлена</string>
+    <string name="project_vacancy_about_me_hint">Расскажите о себе</string>
+    <string name="project_vacancy_submit">Отправить</string>
+    <string name="project_vacancy_cancel">Закрыть</string>
     <string name="project_open_in_browser">Открыть в браузере</string>
-    <string name="projected_embedded_image_error">(Встроенные картинки не поддерживаются!)</string>
 
     <string name="project_vacancies">%d вакансий(я)</string>
     <string name="search_hint">Поиск по названию, номеру, руководителю</string>
@@ -47,6 +62,13 @@
     <string name="search_filters_show_results">Показать результаты</string>
 
     <string name="logout">Выйти</string>
+    <string name="settings_theme">Тема</string>
+    <string-array name="available_themes">
+        <item>Светлая</item>
+        <item>Темная</item>
+        <item>Системная</item>
+    </string-array>
+    <string name="submit_report">Рассказать о проблеме</string>
     <string name="tinder_button_rewind">Вернуть плошлую</string>
     <string name="tinder_button_reset">Начать сначала</string>
     <string name="tinder_button_view_liked">Понравившиеся</string>

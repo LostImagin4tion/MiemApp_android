@@ -56,8 +56,8 @@ class ControlPanelFragment(
     setUpActions()
   }
 
-  override fun onStop() {
-    super.onStop()
+  override fun onPause() {
+    super.onPause()
     controlPanelPresenter.viewDestroyed()
   }
 

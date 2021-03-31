@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MIEM App</string>
-    <string name="title_camerascontrol">Camera\'s control</string>
+    <string name="title_camerascontrol">Cameras control</string>
 
     <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
 
-    <string name="common_error_message">An error was occurred. Check connection or try again later</string>
+    <string name="common_error_message">An error was occurred. Check if you are authorized and connection is stable</string>
 
     <string name="no_data">No data</string>
 
     <string name="send_mail_dialog_title">Send email</string>
 
     <string name="login_button_text">Login with Google</string>
+    <string name="login_without_auth_button_text">Continue without authorization</string>
     <string name="login_error">An error occurred during login</string>
 
     <string name="student_badge">Student</string>
     <string name="teacher_badge">Teacher</string>
-    <string name="profile_go_to_chat">Go to chat</string>
+    <string name="unauthorized_badge">Unauthorized</string>
+    <string name="unauthorized_name">Anon</string>
+    <string name="profile_go_to_chat">Chat</string>
     <string name="projects_title">Projects</string>
     <string name="project_members">Members:</string>
     <string name="project_type">Type:</string>
@@ -24,6 +27,15 @@
     <string name="project_role">Role:</string>
     <string name="project_hours">Hours:</string>
     <string name="project_head">Head:</string>
+
+    <string name="applications_title">Applications</string>
+    <string name="application_state_waiting">Waiting for approval</string>
+    <string name="application_state_approved">Approved</string>
+    <string name="application_state_declined">Declined</string>
+    <string name="application_head_comment">Head comment:</string>
+    <string name="application_my_comment">My comment:</string>
+    <string name="application_withdraw">Withdraw</string>
+    <string name="application_approve">Approve</string>
 
     <string name="project_type_and_number">Project #%d, %s (%s)</string>
     <string name="project_team">Team</string>
@@ -36,8 +48,11 @@
     <string name="project_vacancy_required">Required</string>
     <string name="project_vacancy_recommended">Recommended</string>
     <string name="project_vacancy_apply">Apply</string>
+    <string name="project_vacancy_applied">Applied</string>
+    <string name="project_vacancy_about_me_hint">Describe yourself</string>
+    <string name="project_vacancy_submit">Submit</string>
+    <string name="project_vacancy_cancel">Cancel</string>
     <string name="project_open_in_browser">Open in browser</string>
-    <string name="projected_embedded_image_error">(Embedded images are not supported!)</string>
 
     <string name="project_vacancies">%d vacancy(s)</string>
     <string name="search_hint">Search by name, number or head</string>
@@ -49,6 +64,13 @@
     <string name="search_filters_show_results">Show results</string>
 
     <string name="logout">Log out</string>
+    <string name="settings_theme">Theme</string>
+    <string-array name="available_themes">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System</item>
+    </string-array>
+    <string name="submit_report">Report problem</string>
     <string name="tinder_button_rewind">Rewind card</string>
     <string name="tinder_button_reset">Rewind all</string>
     <string name="tinder_button_view_liked">View liked</string>

@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             android:fontFamily="sans-serif-medium"
             tools:text="Андроид приложение МИЭМ"/>
 
@@ -45,10 +45,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/text_accent_color"
             tools:text="Рабочий"
-            tools:background="@drawable/project_badge_active_bg"/>
+            tools:background="@drawable/badge_active_bg"/>
 
         <TextView
             android:id="@+id/projectType"
@@ -56,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Тип: Прогр."/>
 
         <TextView
@@ -65,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Руководитель: Королев Королев Королев"/>
 
         <TextView
@@ -74,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Роль: Разработчик"/>
 
         <TextView
@@ -83,7 +82,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Участников: 3"/>
 
         <TextView
@@ -92,7 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="6dp"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Часы: 42"/>
 
     </LinearLayout>

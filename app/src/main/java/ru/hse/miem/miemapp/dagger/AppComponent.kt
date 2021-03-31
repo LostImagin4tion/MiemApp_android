@@ -3,7 +3,7 @@ package ru.hse.miem.miemapp.dagger
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragment
@@ -15,7 +15,7 @@ import ru.hse.miem.miemapp.presentation.vacancies.VacanciesFragment
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [GoogleModule::class, RepositoryModule::class, DataModule::class])
+@Component(modules = [GoogleModule::class, RepositoryModule::class, DataModule::class, MiscModule::class])
 interface AppComponent {
 
     @Component.Builder

@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_project_my.view.*
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.MyProjectBasic
+import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.presentation.TextViewUtils.makeNameValueString
 
 class MyProjectsAdapter(
-    private val projects: List<MyProjectBasic>,
+    private val projects: List<MyProjectsAndApplications.MyProjectBasic>,
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<MyProjectsAdapter.MyProjectViewHolder>() {
 
@@ -26,14 +26,14 @@ class MyProjectsAdapter(
     override fun getItemCount() = projects.size
 
     class MyProjectViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(project: MyProjectBasic, navigateToProject: (Long) -> Unit) = itemView.apply {
+        fun bind(project: MyProjectsAndApplications.MyProjectBasic, navigateToProject: (Long) -> Unit) = itemView.apply {
             projectNumber.text = project.number.toString()
 
             // because name for my project contains its number
             projectName.text = project.name.replace(project.number.toString(), "").trim()
 
             projectState.text = project.state
-            projectState.setBackgroundResource(if (project.isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
+            projectState.setBackgroundResource(if (project.isActive) R.drawable.badge_active_bg else R.drawable.badge_inactive_bg)
 
             projectType.text = makeNameValueString(R.string.project_type, project.type)
             projectHead.text = makeNameValueString(R.string.project_head, project.head)

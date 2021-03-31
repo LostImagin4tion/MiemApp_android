@@ -20,18 +20,47 @@ data class ProjectBasic(
 )
 
 // displayed in my profile
-data class MyProjectBasic(
-    val id: Long,
-    val number: Long,
-    val name: String,
-    val members: Int,
-    val hours: Int,
-    val head: String,
-    val type: String,
-    val role: String,
-    val state: String,
-    val isActive: Boolean
-)
+data class MyProjectsAndApplications(
+    val projects: List<MyProjectBasic>,
+    val applications: List<MyApplication>
+) {
+    data class MyProjectBasic(
+        val id: Long,
+        val number: Long,
+        val name: String,
+        val members: Int,
+        val hours: Int,
+        val head: String,
+        val type: String,
+        val role: String,
+        val state: String,
+        val isActive: Boolean
+    )
+
+    data class MyApplication(
+        val id: Long,
+        val projectId: Long,
+        val projectNumber: Long,
+        val projectName: String,
+        val projectType: String,
+        val role: String,
+        val head: String,
+        val status: Status,
+        val studentComment: String?,
+        val headComment: String?
+    ) {
+        enum class Status(val status: Int) {
+            WAITING(0),
+            APPROVED(1),
+            DECLINED(2);
+
+            companion object {
+                fun valueOf(status: Int) = values().find { it.status == status }
+                    ?: throw IllegalArgumentException("Unknown status")
+            }
+        }
+    }
+}
 
 // displayed in project screen
 data class ProjectExtended(
@@ -69,7 +98,8 @@ data class ProjectExtended(
         val role: String,
         val required: String,
         val recommended: String,
-        val count: Int
+        val count: Int,
+        val isApplied: Boolean
     )
 }
 

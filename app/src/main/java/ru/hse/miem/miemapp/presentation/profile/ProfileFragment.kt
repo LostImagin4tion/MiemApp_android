@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.fragment_profile.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.MyProjectBasic
+import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
@@ -38,11 +38,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (isMyProfile) {
-            profilePresenter.onCreate()
-        } else {
-            profilePresenter.onCreate(args.userId, args.isTeacher)
-        }
+        initProfile()
         userEmail.setOnClickListener {
             startActivity(
                 Intent.createChooser(
@@ -50,6 +46,17 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                     getString(R.string.send_mail_dialog_title)
                 )
             )
+        }
+        profileSwipeRefreshLayout.setColorSchemeColors(resources.getColor(R.color.colorAccent))
+        profileSwipeRefreshLayout.setOnRefreshListener(::initProfile)
+    }
+
+    private fun initProfile() {
+        if (isMyProfile) {
+            profilePresenter.onCreate()
+        } else {
+            userApplications.visibility = View.GONE
+            profilePresenter.onCreate(args.userId, args.isTeacher)
         }
     }
 
@@ -68,8 +75,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
         }
 
+        if (isTeacher) {
+            userApplications.visibility = View.GONE
+        }
+
         profileLoader.visibility = View.GONE
         profileContent.visibility = View.VISIBLE
+        profileInfo.visibility = View.VISIBLE
+
+        profileSwipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun showUnauthorizedProfile() {
+        profileLoader.visibility = View.GONE
+        profileContent.visibility = View.VISIBLE
+        profileInfo.visibility = View.GONE
     }
 
     override fun setupProjects(projects: List<ProjectBasic>) {
@@ -80,12 +100,13 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
             }
+            userNoProjectInfo.visibility = View.GONE
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
         }
     }
 
-    override fun setupMyProjects(projects: List<MyProjectBasic>) {
+    override fun setupMyProjects(projects: List<MyProjectsAndApplications.MyProjectBasic>) {
         userProjectsLoader.visibility = View.GONE
 
         if (projects.isNotEmpty()) {
@@ -93,8 +114,28 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
                 val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
                 findNavController().navigate(action)
             }
+            userNoProjectInfo.visibility = View.GONE
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
+        }
+    }
+
+    override fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>) {
+        userApplicationsLoader.visibility = View.GONE
+
+        applicationsList.adapter = MyApplicationsAdapter(
+            applications,
+            navigateToProject = {
+                val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
+                findNavController().navigate(action)
+            },
+            withdrawApplication = profilePresenter::onWithdrawApplication,
+            approveApplication = profilePresenter::onApproveApplication
+        )
+        if (applications.isNotEmpty()) {
+            userNoApplicationsInfo.visibility = View.GONE
+        } else {
+            userNoApplicationsInfo.visibility = View.VISIBLE
         }
     }
 }

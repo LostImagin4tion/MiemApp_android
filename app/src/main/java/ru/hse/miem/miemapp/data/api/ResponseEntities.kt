@@ -68,7 +68,9 @@ data class MyStatisticResponse(
     val data: Data
 ) {
     data class Data(
-        val projects: Projects
+        val projects: Projects,
+        val applications: Applications,
+        val approved_applications: Applications
     ) {
         data class Projects(
             val data: List<ProjectData>
@@ -84,6 +86,22 @@ data class MyStatisticResponse(
                 val role: String,
                 val userHours: Int,
                 val statusId: Int
+            )
+        }
+
+        data class Applications(
+            val data: List<ApplicationData>
+        ) {
+            data class ApplicationData(
+                val id: Long,
+                val leader: String,
+                val leaderComment: String?,
+                val studentComment: String?,
+                val type: String,
+                val project_id: Long,
+                val project_name: String,
+                val role: String,
+                val status: Int
             )
         }
     }
@@ -138,13 +156,15 @@ data class ProjectMembersResponse(
 }
 
 data class ProjectVacanciesResponse(
-    val data: List<Data>
+    val data: List<Data>,
+    val code: Int
 ) {
     data class Data(
         val vacancy_id: Long,
         val role: String,
         val count: Int,
         val booked: Boolean,
+        val applied: Boolean,
         val disciplines: List<String>,
         val additionally: List<String>
     )

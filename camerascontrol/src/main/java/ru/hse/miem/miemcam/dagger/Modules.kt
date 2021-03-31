@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.dagger.NetworkUtils
-import ru.hse.miem.miemapp.data.Session
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemcam.CameraSession
 import ru.hse.miem.miemcam.data.api.*
 import ru.hse.miem.miemcam.data.repositories.*
@@ -24,13 +24,20 @@ class DataModule {
 
   @CamerasScope
   @Provides
-  fun providesMainApi(session: Session): MainApi
-      = createApi(NetworkUtils.createOkHttpClient { addHeader("key", session.token) }, CameraSession.basicAdress, MainApi::class.java)
+  fun providesMainApi(session: Session): MainApi = createApi(
+    NetworkUtils.createOkHttpClient({ addHeader("key", session.token) }),
+    CameraSession.basicAdress,
+    MainApi::class.java
+  )
 
   @CamerasScope
   @Provides
-  fun providesNvrApi(cameraSession: CameraSession): NvrApi
-      = createApi(NetworkUtils.createOkHttpClient { addHeader("key", cameraSession.key) } , CameraSession.basicAdressNvr, NvrApi::class.java)
+  fun providesNvrApi(cameraSession: CameraSession): NvrApi =
+    createApi(
+      NetworkUtils.createOkHttpClient({ addHeader("key", cameraSession.key) }),
+      CameraSession.basicAdressNvr,
+      NvrApi::class.java
+    )
 
   private fun <T : Api> createApi(client: OkHttpClient, baseUrl: String, apiClass: Class<T>): T = Retrofit.Builder()
     .baseUrl(baseUrl)

@@ -5,8 +5,11 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import io.noties.markwon.Markwon
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_project.*
@@ -28,6 +31,9 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
 
     private val args: ProjectFragmentArgs by navArgs()
 
+    @Inject
+    lateinit var markwon: Markwon
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
@@ -45,16 +51,36 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.apply {
+            // yep, deprecated, but alternative requires API 30
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        activity?.apply {
+            hideKeyboard()
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
+        }
+    }
+
+    private fun hideKeyboard() {
+        val inputManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(requireView().windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
     override fun setupProject(project: ProjectExtended) = project.run {
         projectType.text = getString(R.string.project_type_and_number).format(number, type, source)
         projectName.text = name
         projectState.text = state
-        projectState.setBackgroundResource(if (isActive) R.drawable.project_badge_active_bg else R.drawable.project_badge_inactive_bg)
+        projectState.setBackgroundResource(if (isActive) R.drawable.badge_active_bg else R.drawable.badge_inactive_bg)
         projectEmail.text = email
 
-        val imageRegex = Regex("!\\[.+]\\(data:image/.+\\)")
-        projectObjective.text = objective.replace(imageRegex, getString(R.string.projected_embedded_image_error))
-        projectAnnotation.text = annotation.replace(imageRegex, getString(R.string.projected_embedded_image_error))
+        markwon.setMarkdown(projectObjective, objective)
+        markwon.setMarkdown(projectAnnotation, annotation)
 
         membersList.adapter = MembersAdapter(members) { id, isTeacher ->
             val action = ProjectFragmentDirections.actionFragmentProjectToFragmentProfile(id, isTeacher)
@@ -68,7 +94,11 @@ class ProjectFragment : BaseFragment(R.layout.fragment_project), ProjectView {
         }
 
         if (vacancies.isNotEmpty()) {
-            vacanciesList.adapter = VacanciesAdapter(vacancies)
+            vacanciesList.adapter = VacanciesAdapter(
+                vacancies,
+                hideKeyboard = ::hideKeyboard,
+                submitVacancy = projectPresenter::onSubmitVacancyApplication
+            )
             vacanciesNoData.visibility = View.GONE
             vacanciesList.visibility = View.VISIBLE
         }

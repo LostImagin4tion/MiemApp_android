@@ -5,16 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.net.toUri
+import androidx.navigation.fragment.findNavController
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import kotlinx.android.synthetic.main.fragment_login.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
@@ -30,9 +32,6 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
     @ProvidePresenter
     fun provideLoginPresenter() = loginPresenter
 
-    @Inject
-    lateinit var signInClient: GoogleSignInClient
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
@@ -40,31 +39,40 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requireActivity().window.setBackgroundDrawableResource(R.drawable.solid_color_accent)
 
+        googleSignInButton.setOnClickListener { loginPresenter.onClickLoginButton() }
+        withoutAuthButton.setOnClickListener { afterLogin() }
+        loginPresenter.onCreate()
+    }
+
+    override fun showLoginForm() {
         loginProgress.visibility = View.INVISIBLE
-        googleSignInButton.visibility = View.VISIBLE
-        googleSignInButton.setOnClickListener {
-            loginPresenter.onClickLoginButton()
-        }
+        loginButtons.visibility = View.VISIBLE
     }
 
     override fun afterLogin() {
-        (activity as MainActivity).afterLogin()
+        (requireActivity() as MainActivity).let {
+            findNavController().apply {
+                it.intentUri?.also(::navigate) ?: navigate(R.id.action_fragmentLogin_to_fragmentProfile)
+                it.window.setBackgroundDrawableResource(R.drawable.solid_color_primary)
+                graph.startDestination = R.id.fragmentProfile
+            }
+        }
     }
 
-    override fun login() {
-        val intent = signInClient.signInIntent
-        startActivityForResult(intent, REQUEST_CODE_SIGN_IN)
+    override fun login(signInIntent: Intent) {
+        startActivityForResult(signInIntent, REQUEST_CODE_SIGN_IN)
     }
 
-    override fun showLoginButton() {
+    override fun showLoginButtons() {
         loginProgress.visibility = View.INVISIBLE
-        googleSignInButton.visibility = View.VISIBLE
+        loginButtons.visibility = View.VISIBLE
         loginErrorText.visibility = View.VISIBLE
     }
 
-    override fun hideLoginButton() {
-        googleSignInButton.visibility = View.INVISIBLE
+    override fun hideLoginButtons() {
+        loginButtons.visibility = View.INVISIBLE
         loginErrorText.visibility = View.INVISIBLE
         loginProgress.visibility = View.VISIBLE
     }
@@ -75,11 +83,11 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
         if (requestCode == REQUEST_CODE_SIGN_IN) {
             try {
                 GoogleSignIn.getSignedInAccountFromIntent(data).getResult(ApiException::class.java)?.let {
-                    loginPresenter.onLogged(it)
+                    loginPresenter.onLogged(it.serverAuthCode!!)
                 }
             } catch (e: ApiException) {
-                Log.e("Login", e.message.toString())
-                showLoginButton()
+                Timber.e(e.message.toString())
+                showLoginButtons()
             }
         }
     }

@@ -1,5 +1,6 @@
 package ru.hse.miem.miemcam.presentation.cameras
 
+import android.util.Log
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import moxy.MvpView
@@ -65,20 +66,16 @@ class CamerasListPresenter @Inject constructor(
   }
 
   private fun onCameraPicked(camera: Camera) {
+    cameraSession.apply {
+      pickedRoom = camera.room
+      pickedCamera = camera.rtsp
+    }
+    viewState.setToolbarLabel(camera.name)
     val disposable = cameraServices.chooseCam(camera.uid)
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeBy(
-        onComplete = {
-          cameraSession.apply {
-            pickedRoom = camera.room
-            pickedCamera = camera.rtsp
-          }
-          viewState.apply {
-            setToolbarLabel(camera.name)
-            setLoadingVisibility(false)
-          }
-        },
+        onComplete = {  },
         onError = { viewState.showError() }
       )
     compositeDisposable.add(disposable)
