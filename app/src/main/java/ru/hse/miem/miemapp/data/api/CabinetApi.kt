@@ -76,6 +76,6 @@ interface CabinetApi {
     suspend fun allProjects(): ProjectsAllResponse
 
     @GET("$publicApi/vacancy/list")
-    fun allVacancies():Single<VacanciesAllResponse>
+    suspend fun allVacancies(): VacanciesAllResponse
 
 }
