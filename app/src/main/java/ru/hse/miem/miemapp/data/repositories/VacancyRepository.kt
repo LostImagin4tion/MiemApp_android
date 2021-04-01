@@ -13,12 +13,12 @@ class VacancyRepository @Inject constructor(
         cabinetApi.allVacancies().let{
                 it.data.map {
                     Vacancies(
-                        vacancy_id = it.vacancy_id?: 0,
-                        project_id = it.project_id?: 0,
-                        project_name_rus = it.project_name_rus?: "",
-                        vacancy_role = it.vacancy_role?: "",
-                        vacancy_disciplines = it.vacancy_disciplines?: emptyList(),
-                        vacancy_additionally = it.vacancy_disciplines?: emptyList()
+                        vacancyId = it.vacancy_id?: 0,
+                        projectId = it.project_id?: 0,
+                        projectNameRus = it.project_name_rus?: "",
+                        vacancyRole = it.vacancy_role?: "",
+                        vacancyDisciplines = it.vacancy_disciplines?: emptyList(),
+                        vacancyAdditionally = it.vacancy_disciplines?: emptyList()
                     )
                 }
             }

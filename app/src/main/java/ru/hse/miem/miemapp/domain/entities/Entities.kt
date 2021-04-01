@@ -116,18 +116,18 @@ data class ProjectInSearch(
 )
 
 data class Vacancies(
-    val vacancy_id: Long,
-    val project_id: Long,
-    val project_name_rus: String,
-    val vacancy_role: String,
-    val vacancy_disciplines: List<String>,
-    val vacancy_additionally: List<String>
+    val vacancyId: Long,
+    val projectId: Long,
+    val projectNameRus: String,
+    val vacancyRole: String,
+    val vacancyDisciplines: List<String>,
+    val vacancyAdditionally: List<String>
 )
 
 data class VacancyCard(
-    var project_id: String,
-    var project_name_rus: String,
-    var vacancy_role: String,
+    var projectId: String,
+    var projectNameRus: String,
+    var vacancyRole: String,
     var requirements: String
 )
 

@@ -49,17 +49,17 @@ class VacanciesFragment : BaseFragment(R.layout.fragment_vacancies), VacanciesVi
         for (item in vacancies) {
             items.add(
                 VacancyCard(
-                    "#" + item.project_id,
-                    item.project_name_rus,
-                    item.vacancy_role,
-                    item.vacancy_disciplines.toString() + item.vacancy_additionally
+                    "#" + item.projectId,
+                    item.projectNameRus,
+                    item.vacancyRole,
+                    item.vacancyDisciplines.toString() + item.vacancyAdditionally
                 )
             )
         }
         vacanciesAdapter.update(items)
         vacanciesLoader.visibility = View.GONE
         vacancyList.visibility = View.VISIBLE
-        if (Sorting.likeVacancies.toList().isEmpty()){
+        if (Sorting.likeVacancies.toList().isEmpty()) {
             noVacancies.visibility = View.VISIBLE
         }
     }

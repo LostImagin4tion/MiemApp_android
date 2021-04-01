@@ -42,9 +42,9 @@ class VacanciesAdapter(
 
     class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(vacancy: VacancyCard, navigateToProject: (Long) -> Unit) = itemView.apply {
-            projectId.text = vacancy.project_id
-            projectTitle.text = vacancy.project_name_rus
-            vacancyTitle.text = vacancy.vacancy_role
+            projectId.text = vacancy.projectId
+            projectTitle.text = vacancy.projectNameRus
+            vacancyTitle.text = vacancy.vacancyRole
 
             val buttons = arrayListOf(t1, t2, t3)
             buttons.forEach {
@@ -66,7 +66,7 @@ class VacanciesAdapter(
                 buttons[i].text = tags[i]
 
             }
-            setOnClickListener { navigateToProject(vacancy.project_id.drop(1).toLong()) }
+            setOnClickListener { navigateToProject(vacancy.projectId.drop(1).toLong()) }
         }
     }
 }

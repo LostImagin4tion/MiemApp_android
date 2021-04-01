@@ -11,6 +11,6 @@ import ru.hse.miem.miemapp.presentation.search.SearchView
 import java.util.ArrayList
 
 interface VacanciesView : BaseView {
-    @OneExecution
+    @AddToEndSingle
     fun setupLovedVacancies(vacancies: List<Vacancies>)
 }

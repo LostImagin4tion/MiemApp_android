@@ -16,9 +16,10 @@ class VacanciesPresenter @Inject constructor(
 ) : BasePresenter<VacanciesView>() {
 
     fun onCreate() = launch {
-        try{
+        try {
             vacancyRepository.getAllVacancies().let(viewState::setupLovedVacancies)
-        }catch (e: Exception){}
+        } catch (e: Exception) {
+        }
     }
 
 }

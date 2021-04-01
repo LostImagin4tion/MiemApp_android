@@ -28,8 +28,8 @@ import javax.inject.Inject
 
 
 class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
-    private var adapter: CardStackAdapter = CardStackAdapter()
     private var items: ArrayList<VacancyCard> = arrayListOf()
+    private var adapter: CardStackAdapter = CardStackAdapter(items)
     private val listener = CardStackCallback()
     private lateinit var manager: CardStackLayoutManager
     private lateinit var dbManager: DbManager
@@ -87,14 +87,14 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
             )
         }
 
-        for (item in projects) {
+        projects.forEach {
             items.add(
                 items.size - 1,
                 VacancyCard(
-                    "#" + item.project_id,
-                    item.project_name_rus,
-                    item.vacancy_role,
-                    item.vacancy_disciplines.toString() + item.vacancy_additionally
+                    "#" + it.projectId,
+                    it.projectNameRus,
+                    it.vacancyRole,
+                    it.vacancyDisciplines.toString() + it.vacancyAdditionally
                 )
             )
         }
@@ -110,7 +110,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
         manager.setOverlayInterpolator(LinearInterpolator())
         items = Sorting.sort(items)
         adapter = CardStackAdapter(items)
-        val cardStackView : CardStackView = card_stack_view
+        val cardStackView: CardStackView = card_stack_view
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator()
@@ -123,7 +123,7 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
 
         for (item in dbManager.readDb()) {
             Sorting.likeVacancies.add(item)
-            Sorting.addRole(item.vacancy_role)
+            Sorting.addRole(item.vacancyRole)
             Sorting.addCategory(item.requirements)
         }
 
@@ -133,12 +133,12 @@ class TinderFragment : BaseFragment(R.layout.fragment_tinder), InfoView {
     private fun save() {
         dbManager.openDb()
         for (i in Sorting.likeIndexes) {
-            if (items[i].project_id != "") {
+            if (items[i].projectId != "") {
                 Sorting.likeVacancies.add(items[i])
                 dbManager.insertDb(
-                    items[i].project_id,
-                    items[i].project_name_rus,
-                    items[i].vacancy_role,
+                    items[i].projectId,
+                    items[i].projectNameRus,
+                    items[i].vacancyRole,
                     items[i].requirements
                 )
             }

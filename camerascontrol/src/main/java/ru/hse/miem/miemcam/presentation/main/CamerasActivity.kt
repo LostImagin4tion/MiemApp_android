@@ -61,7 +61,6 @@ class CamerasActivity : MvpAppCompatActivity(), CamerasView {
 
         camerasComponent.inject(this)
         setTheme(R.style.CamerasControlTheme)
-        Log.d("MyLogs", "ok")
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_cameras)

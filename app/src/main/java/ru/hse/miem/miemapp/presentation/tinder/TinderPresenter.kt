@@ -13,9 +13,10 @@ class TinderPresenter @Inject constructor(
 ) : BasePresenter<InfoView>() {
 
     fun onCreate() = launch {
-        try{
+        try {
             vacancyRepository.getAllVacancies().let(viewState::setupVacancies)
-        }catch (e: Exception){}
+        } catch (e: Exception) {
+        }
     }
 
 }

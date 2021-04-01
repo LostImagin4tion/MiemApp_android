@@ -53,7 +53,7 @@ class Sorting {
             likeIndexes.clear()
         }
 
-        fun reset(){
+        fun reset() {
             clear()
             likeVacancies.clear()
             position = 0
@@ -61,7 +61,7 @@ class Sorting {
         }
 
         fun sort(items: List<VacancyCard>): ArrayList<VacancyCard> {
-            val sortItems: ArrayList<VacancyCard> = arrayListOf()
+            val sortItems = arrayListOf<VacancyCard>()
             var c = count
 
             if (c == 0) {
@@ -71,16 +71,17 @@ class Sorting {
                 if (items[i] in likeVacancies) {
                     continue
                 }
-                if (!roles.keys.contains(items[i].vacancy_role)) {
+                if (!roles.keys.contains(items[i].vacancyRole)) {
                     sortItems.add(items[i])
                 } else {
                     val size = sortItems.size
                     for (j in sortItems.indices) {
-                        if (roles.keys.contains(sortItems[j].vacancy_role) &&
-                            roles[items[i].vacancy_role]!! > roles[sortItems[j].vacancy_role]!!){
+                        if (roles.keys.contains(sortItems[j].vacancyRole) &&
+                            roles[items[i].vacancyRole]!! > roles[sortItems[j].vacancyRole]!!
+                        ) {
                             sortItems.add(j, items[i])
                             break
-                        }else if(!roles.keys.contains(sortItems[j].vacancy_role)){
+                        } else if (!roles.keys.contains(sortItems[j].vacancyRole)) {
                             sortItems.add(0, items[i])
                             break
                         }
