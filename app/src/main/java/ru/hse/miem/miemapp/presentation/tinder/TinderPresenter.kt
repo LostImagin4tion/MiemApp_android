@@ -14,6 +14,7 @@ class TinderPresenter @Inject constructor(
         try {
             vacancyRepository.getAllVacancies().let(viewState::setupVacancies)
         } catch (e: Exception) {
+            proceedError(e)
         }
     }
 

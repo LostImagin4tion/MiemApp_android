@@ -17,6 +17,7 @@ class VacanciesPresenter @Inject constructor(
         try {
             vacancyRepository.getAllVacancies().let(viewState::setupLovedVacancies)
         } catch (e: Exception) {
+            proceedError(e)
         }
     }
 
