@@ -1,7 +1,6 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
-import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import java.util.ArrayList
 
@@ -60,8 +59,8 @@ class Sorting {
             count = 0
         }
 
-        fun sort(items: List<VacancyCard>): ArrayList<VacancyCard> {
-            val sortItems = arrayListOf<VacancyCard>()
+        fun sort(items: List<VacancyCard>): MutableList<VacancyCard> {
+            val sortItems = mutableListOf<VacancyCard>()
             var c = count
 
             if (c == 0) {

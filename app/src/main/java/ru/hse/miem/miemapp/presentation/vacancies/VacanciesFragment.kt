@@ -13,7 +13,6 @@ import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.tinder.Sorting
-import ru.hse.miem.miemapp.presentation.tinder.db.DbManager
 import java.util.ArrayList
 import javax.inject.Inject
 

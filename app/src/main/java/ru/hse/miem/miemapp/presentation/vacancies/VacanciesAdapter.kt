@@ -51,7 +51,7 @@ class VacanciesAdapter(
                 it.visibility = View.GONE
             }
 
-            val tags: ArrayList<String> = arrayListOf()
+            val tags = mutableListOf<String>()
             for (temp_tag in tagsList) {
                 if ((vacancy.requirements).indexOf(temp_tag, ignoreCase = true) != -1) {
                     tags.add(temp_tag)

@@ -1,8 +1,6 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import android.util.Log
 import kotlinx.coroutines.launch
-import moxy.MvpPresenter
 import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
 import ru.hse.miem.miemapp.presentation.base.BasePresenter
 import java.lang.Exception

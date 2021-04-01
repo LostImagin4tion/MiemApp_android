@@ -1,6 +1,5 @@
 package ru.hse.miem.miemapp.presentation.tinder
 
-import android.util.Log
 import android.view.View
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction

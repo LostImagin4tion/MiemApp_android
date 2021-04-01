@@ -23,7 +23,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="@color/light_gray"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -33,7 +32,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="7"
-            android:textColor="#000000"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -44,7 +43,7 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textColor="@android:color/widget_edittext_dark"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -66,10 +65,7 @@
                     android:textColor="@color/colorAccent"
                     app:cornerRadius="8dp"
                     app:strokeColor="@color/colorAccent"
-                    app:strokeWidth="2dp"
-                    android:textColorHint="@color/red"
-                    android:textColorHighlight="@color/red"
-                    android:textColorLink="@color/red"/>
+                    app:strokeWidth="2dp" />
 
                 <Button
                     android:id="@+id/t2"
@@ -154,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_forward_black_24dp" />
+            android:src="@drawable/ic_arrow_forward_black" />
 
     </FrameLayout>
 
@@ -168,7 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
+            android:src="@drawable/ic_arrow_back_black" />
 
     </FrameLayout>
 
