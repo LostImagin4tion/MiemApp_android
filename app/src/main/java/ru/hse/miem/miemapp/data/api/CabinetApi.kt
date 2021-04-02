@@ -75,4 +75,7 @@ interface CabinetApi {
     @GET("$publicApi/projects")
     suspend fun allProjects(): ProjectsAllResponse
 
+    @GET("$publicApi/vacancy/list")
+    suspend fun allVacancies(): VacanciesAllResponse
+
 }

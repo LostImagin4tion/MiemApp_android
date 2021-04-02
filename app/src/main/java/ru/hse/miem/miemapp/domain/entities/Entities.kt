@@ -114,3 +114,29 @@ data class ProjectInSearch(
     val vacancies: Int,
     val head: String
 )
+
+data class Vacancies(
+    val vacancyId: Long,
+    val projectId: Long,
+    val projectNameRus: String,
+    val vacancyRole: String,
+    val vacancyDisciplines: List<String>,
+    val vacancyAdditionally: List<String>
+)
+
+data class VacancyCard(
+    var projectId: String,
+    var projectNameRus: String,
+    var vacancyRole: String,
+    var requirements: String
+)
+
+val tagsList = listOf(
+    "c++", "python", "kotlin", "java", "arduino", "quartus", "html",
+    "php", "android", "design", "git", "linux", "js", "c/c++", "c#", "sql", "sqlite", "docker",
+    "css", "ux", "ui", "raspberry", "backend", "frontend", "front-end", "back-end", "http",
+    "oracle", "pgsql", "бд", "dns", "dshp", "gpo", "hfss", "awr de", "matlab", "verilog",
+    "плис", "autocad", "cst", "физика", "электроника", "api", "google", "labview",
+    "bstrap", "go", "сети", "3d", "ios", "swift", "электротехника", "fullstack",
+    "full-stack", "delphi"
+)

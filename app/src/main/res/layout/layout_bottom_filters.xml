@@ -96,4 +96,15 @@
         android:textAllCaps="false"
         android:text="@string/search_filters_show_results"/>
 
+    <Button
+        android:id="@+id/tinderButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/tinder_use"
+        android:textAllCaps="false"
+        android:textSize="16sp" />
+
 </LinearLayout>

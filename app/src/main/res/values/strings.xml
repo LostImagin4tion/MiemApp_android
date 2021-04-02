@@ -71,4 +71,12 @@
         <item>System</item>
     </string-array>
     <string name="submit_report">Report problem</string>
+    <string name="tinder_button_rewind">Rewind card</string>
+    <string name="tinder_button_reset">Rewind all</string>
+    <string name="tinder_button_view_liked">View liked</string>
+    <string name="tinder_end">Gratz! You\'ve viewed all the vacancies!!</string>
+    <string name="tinder_use">Use Tinder</string>
+    <string name="tinder_welcome">Welcome to Project\'s Tinder.\n\nSwipe right if you like vacancy, swipe left if not</string>
+    <string name="vacancies_no_vacancies">You haven\'t liked any vacancies</string>
+    <string name="tinder_end_1">For now, you\'ve viewed\n all available vacancies</string>
 </resources>

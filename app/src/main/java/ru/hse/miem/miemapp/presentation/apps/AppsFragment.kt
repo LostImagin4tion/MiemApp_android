@@ -27,16 +27,22 @@ class AppsFragment : Fragment() {
             it.flexDirection = FlexDirection.ROW
         }
 
-        appsList.adapter = AppsAdapter(listOf(
-            AppItem(
-                icon = ContextCompat.getDrawable(
-                    requireContext(),
-                    resources.getIdentifier("app_icon_cameras_control", "drawable", BuildConfig.APPLICATION_ID + ".camerascontrol")
-                )!!,
-                name = getString(R.string.title_camerascontrol),
-                activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
+        appsList.adapter = AppsAdapter(
+            listOf(
+                AppItem(
+                    icon = ContextCompat.getDrawable(
+                        requireContext(),
+                        resources.getIdentifier(
+                            "app_icon_cameras_control",
+                            "drawable",
+                            BuildConfig.APPLICATION_ID + ".camerascontrol"
+                        )
+                    )!!,
+                    name = getString(R.string.title_camerascontrol),
+                    activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
+                )
             )
-        ))
+        )
     }
 
 }
