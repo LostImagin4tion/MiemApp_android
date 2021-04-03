@@ -25,7 +25,6 @@ class VacanciesAdapter(
                 this.vacancies.add(item)
             }
         }
-//        this.vacancies = this.vacancies.toSet().toMutableList()
         notifyDataSetChanged()
     }
 
