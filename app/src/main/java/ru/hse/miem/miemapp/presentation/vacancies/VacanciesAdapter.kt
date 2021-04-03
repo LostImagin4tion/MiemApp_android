@@ -15,16 +15,17 @@ class VacanciesAdapter(
     private val navigateToProject: (Long) -> Unit
 ) : RecyclerView.Adapter<VacanciesAdapter.VacancyViewHolder>() {
 
-    private var vacancies: ArrayList<VacancyCard> = arrayListOf()
+    private var vacancies: MutableList<VacancyCard> = mutableListOf()
 
     val hasData get() = vacancies.isNotEmpty()
 
     fun update(vacancies: List<VacancyCard>) {
         for (item in Sorting.likeVacancies){
-            if (item in vacancies){
+            if (item in vacancies && item !in this.vacancies){
                 this.vacancies.add(item)
             }
         }
+//        this.vacancies = this.vacancies.toSet().toMutableList()
         notifyDataSetChanged()
     }
 
