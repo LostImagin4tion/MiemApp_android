@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:fadeScrollbars="false"
     android:fadingEdge="none"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="@color/colorPrimary"
     app:cardCornerRadius="8dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
