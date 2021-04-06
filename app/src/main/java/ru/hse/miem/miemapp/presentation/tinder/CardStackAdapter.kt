@@ -43,13 +43,13 @@ class CardStackAdapter(private var items: List<VacancyCard>) :
 
             var tags = mutableSetOf<String>()
             tagsList.takeWhile { tags.size < 6 }.forEach {
-                if (data.requirements.indexOf(it, ignoreCase = true) != -1) {
+                if (data.requirements.indexOf(it, ignoreCase = true) != -1 && tags.size < 6) {
                     tags.add(it)
                 }
-                if (data.vacancyRole.indexOf(it, ignoreCase = true) != -1) {
+                if (data.vacancyRole.indexOf(it, ignoreCase = true) != -1 && tags.size < 6) {
                     tags.add(it)
                 }
-                if (data.projectNameRus.indexOf(it, ignoreCase = true) != -1) {
+                if (data.projectNameRus.indexOf(it, ignoreCase = true) != -1 && tags.size < 6) {
                     tags.add(it)
                 }
             }

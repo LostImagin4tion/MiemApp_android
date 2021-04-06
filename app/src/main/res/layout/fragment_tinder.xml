@@ -51,13 +51,15 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="10dp"
         android:backgroundTint="@color/colorPrimary"
-        android:maxLines="1"
+        android:minLines="2"
         android:text="@string/tinder_button_reset"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/viewLiked"
         app:layout_constraintEnd_toStartOf="@+id/viewLiked"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -68,12 +70,12 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
         android:backgroundTint="@color/colorPrimary"
-        android:maxLines="1"
+        android:minLines="2"
         android:text="@string/tinder_button_view_liked"
         android:textColor="@color/colorAccent"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reset" />
+        app:layout_constraintStart_toEndOf="@+id/reset"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

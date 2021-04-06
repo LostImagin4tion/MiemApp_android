@@ -70,8 +70,8 @@
     </string-array>
     <string name="submit_report">Рассказать о проблеме</string>
     <string name="tinder_button_rewind">Вернуть плошлую</string>
-    <string name="tinder_button_reset">Начать сначала</string>
-    <string name="tinder_button_view_liked">Понравившиеся</string>
+    <string name="tinder_button_reset">Сбросить все данные</string>
+    <string name="tinder_button_view_liked">Интересные вакансии</string>
     <string name="tinder_end">Поздравляем! Вы просмотрели все вакансии!!</string>
     <string name="tinder_use">Воспользоваться тиндером</string>
     <string name="tinder_welcome">Добро пожаловать в Проектный Тиндер\n\nСвайп вправо если понравилась вакансия, влево если нет</string>
