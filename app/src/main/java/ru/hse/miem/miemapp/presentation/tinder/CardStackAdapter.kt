@@ -5,6 +5,7 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View;
 import android.view.ViewGroup;
+import kotlinx.android.synthetic.main.item_cards.*
 import kotlinx.android.synthetic.main.item_cards.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
@@ -34,6 +35,13 @@ class CardStackAdapter(private var items: List<VacancyCard>) :
         fun bind(data: VacancyCard) = itemView.apply {
             projectId.text = data.projectId
             projectTitle.text = data.projectNameRus
+            if (resources.displayMetrics.widthPixels < 720
+                    && data.projectNameRus != resources.getString(R.string.tinder_welcome)){
+                projectTitle.maxLines = 2
+            }else if (resources.displayMetrics.widthPixels < 1000
+                    && data.projectNameRus != resources.getString(R.string.tinder_welcome)){
+                projectTitle.maxLines = 4
+            }
             vacancyTitle.text = data.vacancyRole
 
             val buttons = listOf(t1, t2, t3, t4, t5, t6)
