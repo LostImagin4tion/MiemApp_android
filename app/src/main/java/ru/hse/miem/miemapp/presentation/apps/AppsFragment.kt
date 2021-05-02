@@ -40,6 +40,22 @@ class AppsFragment : Fragment() {
                     )!!,
                     name = getString(R.string.title_camerascontrol),
                     activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
+                ),
+                AppItem(
+                    // тут иконка такая же, как и у модуля с камерами
+                    // в дальнейшем сделаю иконку для модуля навигации
+                    // и тебе отправлю
+                    icon = ContextCompat.getDrawable(
+                        requireContext(),
+                        resources.getIdentifier(
+                            "app_icon_cameras_control",
+                            "drawable",
+                            BuildConfig.APPLICATION_ID + ".camerascontrol"
+                        )
+                    )!!,
+                    // наверн лучше в ресурсы вынести
+                    name = "Навигация",
+                    activityClassName = "ru.hse.miem.miemapp.presentation.indoor.IndoorActivity"
                 )
             )
         )
