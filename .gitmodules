@@ -1,0 +1,3 @@
+[submodule "indoor_navigation"]
+	path = indoor_navigation
+	url = https://git.miem.hse.ru/19469/indoormoduleandroid.git
