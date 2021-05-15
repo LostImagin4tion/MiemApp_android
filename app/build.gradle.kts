@@ -49,7 +49,7 @@ android {
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
-    dynamicFeatures = mutableSetOf(":camerascontrol")
+    dynamicFeatures = mutableSetOf(":camerascontrol", ":indoor_dynamicfeature")
 }
 
 dependencies {

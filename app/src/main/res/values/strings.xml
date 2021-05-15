@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MIEM App</string>
     <string name="title_camerascontrol">Cameras control</string>
+    <string name="title_indoor">Indoor navigation</string>
 
     <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
 

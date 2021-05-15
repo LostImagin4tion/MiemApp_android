@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MIEM App</string>
     <string name="title_camerascontrol">Управление камерами</string>
+    <string name="title_indoor">Навигация в здании</string>
 
     <string name="common_error_message">Произошла ошибка. Проверьте, что вы авторизованы и соединение стабильно</string>
 
