@@ -79,4 +79,5 @@
     <string name="tinder_welcome">Welcome to Project\'s Tinder.\n\nSwipe right if you like vacancy, swipe left if not</string>
     <string name="vacancies_no_vacancies">You haven\'t liked any vacancies</string>
     <string name="tinder_end_1">For now, you\'ve viewed\n all available vacancies</string>
+    <string name="title_indoor_dynamicfeature" translatable="false">Indoor</string>
 </resources>

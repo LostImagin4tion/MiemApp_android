@@ -32,7 +32,6 @@
 
             <nav-graph android:value="@navigation/nav_profile" />
         </activity>
-        <activity android:name="ru.hse.miem.miemapp.presentation.indoor.IndoorActivity" />
     </application>
 
 </manifest>

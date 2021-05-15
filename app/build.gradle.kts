@@ -49,7 +49,7 @@ android {
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
-    dynamicFeatures = mutableSetOf(":camerascontrol")
+    dynamicFeatures = mutableSetOf(":camerascontrol", ":indoor_dynamicfeature")
 }
 
 dependencies {
@@ -79,6 +79,4 @@ dependencies {
 // CardStackView
     val cardVersion = "2.3.4"
     implementation("com.yuyakaido.android:card-stack-view:${cardVersion}")
-
-    implementation(project(":indoor:sdk"))
 }

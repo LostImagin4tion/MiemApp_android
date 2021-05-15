@@ -55,7 +55,7 @@ class AppsFragment : Fragment() {
                     )!!,
                     // наверн лучше в ресурсы вынести
                     name = "Навигация",
-                    activityClassName = "ru.hse.miem.miemapp.presentation.indoor.IndoorActivity"
+                    activityClassName = "ru.miem.indoor_dynamicfeature.IndoorActivity"
                 )
             )
         )
