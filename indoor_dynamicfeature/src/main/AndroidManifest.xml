@@ -5,16 +5,16 @@
 
     <dist:module
         dist:instant="false"
-        dist:title="@string/title_indoor_dynamicfeature">
+        dist:title="">
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>
 
-        <dist:fusing dist:include="true" />
+        <dist:fusing dist:include="true"/>
     </dist:module>
 
     <application>
-        <activity android:name=".IndoorActivity"></activity>
+        <activity android:name=".IndoorActivity" />
     </application>
 
 </manifest>
