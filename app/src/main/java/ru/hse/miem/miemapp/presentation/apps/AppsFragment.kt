@@ -42,13 +42,12 @@ class AppsFragment : Fragment() {
                     activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
                 ),
                 AppItem(
-                    // TODO navigation icon
                     icon = ContextCompat.getDrawable(
                         requireContext(),
                         resources.getIdentifier(
-                            "app_icon_cameras_control",
+                            "app_icon_indoor",
                             "drawable",
-                            BuildConfig.APPLICATION_ID + ".camerascontrol"
+                            BuildConfig.APPLICATION_ID + ".indoor_dynamicfeature"
                         )
                     )!!,
                     name = getString(R.string.title_indoor),
