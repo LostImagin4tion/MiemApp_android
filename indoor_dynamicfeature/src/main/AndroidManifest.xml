@@ -5,7 +5,7 @@
 
     <dist:module
         dist:instant="false"
-        dist:title="">
+        dist:title="@string/title_indoor">
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>

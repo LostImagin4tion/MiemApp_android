@@ -10,7 +10,7 @@ class IndoorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_indoor)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_layout, indoorManager.getIndoorFragment(), null)

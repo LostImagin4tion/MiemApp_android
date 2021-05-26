@@ -16,8 +16,8 @@ android {
         applicationId = "ru.hse.miem.miemapp"
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
-        versionCode(5)
-        versionName = "1.2.1"
+        versionCode(6)
+        versionName = "1.3.0"
         project.base.archivesBaseName = "MiemApp-$versionName"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
