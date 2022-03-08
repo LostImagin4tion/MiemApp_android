@@ -4,13 +4,13 @@ import org.gradle.api.JavaVersion
 
 object Versions {
     // languages
-    const val kotlin = "1.4.10"
+    const val kotlin = "1.6.10"
     val javaVersion = JavaVersion.VERSION_1_8
     const val jvmTarget = "1.8"
 
     // sdk
     const val targetSdk = 30
-    const val minSdk = 22
+    const val minSdk = 24
     const val buildTools = "30.0.3"
 
     // libraries

@@ -29,30 +29,19 @@ class AppsFragment : Fragment() {
 
         appsList.adapter = AppsAdapter(
             listOf(
-                AppItem(
-                    icon = ContextCompat.getDrawable(
-                        requireContext(),
-                        resources.getIdentifier(
-                            "app_icon_cameras_control",
-                            "drawable",
-                            BuildConfig.APPLICATION_ID + ".camerascontrol"
-                        )
-                    )!!,
-                    name = getString(R.string.title_camerascontrol),
-                    activityClassName = "ru.hse.miem.miemcam.presentation.main.CamerasActivity"
-                ),
-                AppItem(
-                    icon = ContextCompat.getDrawable(
-                        requireContext(),
-                        resources.getIdentifier(
-                            "app_icon_indoor",
-                            "drawable",
-                            BuildConfig.APPLICATION_ID + ".indoor_dynamicfeature"
-                        )
-                    )!!,
-                    name = getString(R.string.title_indoor),
-                    activityClassName = "ru.miem.indoor_dynamicfeature.IndoorActivity"
-                )
+                /* Uncomment when building the final app */
+//                AppItem(
+//                    icon = ContextCompat.getDrawable(
+//                        requireContext(),
+//                        resources.getIdentifier(
+//                            "app_icon_indoor",
+//                            "drawable",
+//                            BuildConfig.APPLICATION_ID + ".indoor_dynamicfeature"
+//                        )
+//                    )!!,
+//                    name = getString(R.string.title_indoor),
+//                    activityClassName = "ru.miem.indoor_dynamicfeature.IndoorActivity"
+//                )
             )
         )
     }
