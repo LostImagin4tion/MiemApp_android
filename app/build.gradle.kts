@@ -77,6 +77,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:${Versions.playServices}")
     implementation("com.squareup.okhttp3:okhttp:${Versions.okHttp}")
 
+    implementation("androidx.cardview:cardview:1.0.0")
+
 // CardStackView
     val cardVersion = "2.3.4"
     implementation("com.yuyakaido.android:card-stack-view:${cardVersion}")
