@@ -1,5 +1,7 @@
 package ru.hse.miem.miemapp.domain.entities
 
+import ru.hse.miem.miemapp.data.api.ScheduleResponse
+
 data class Profile(
     val id: Long,
     val isTeacher: Boolean,
@@ -139,4 +141,11 @@ val tagsList = listOf(
     "плис", "autocad", "cst", "физика", "электроника", "api", "google", "labview",
     "bstrap", "go", "сети", "3d", "ios", "swift", "электротехника", "fullstack",
     "full-stack", "delphi"
+)
+
+//displayed in schedule
+data class ScheduleDay(
+    val date: String,
+    val dayOfWeek: String,
+    val lessons: MutableList<ScheduleResponse.Data>
 )

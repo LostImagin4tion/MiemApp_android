@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 navGraphIds = listOf(
                     R.navigation.nav_profile, // keep first!!
                     R.navigation.nav_search,
-                    R.navigation.nav_settings,
+                    R.navigation.nav_schedule,
                     R.navigation.nav_apps,
                 ),
                 fragmentManager = supportFragmentManager,

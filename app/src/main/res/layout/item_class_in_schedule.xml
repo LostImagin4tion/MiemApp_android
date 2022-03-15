@@ -13,7 +13,7 @@
             android:id="@+id/classStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="14:40"
+            android:text="@string/start_time"
             android:textColor="@color/black" />
 
         <TextView
@@ -21,26 +21,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/classStart"
-            android:text="16:00"
+            android:text="@string/finish_time"
             android:textColor="@color/black"/>
-        
+
         <TextView
             android:id="@+id/classNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/classFinish"
-            android:text="4 пара"
-            android:textSize="12sp"
-            android:textColor="@color/grey"/>
+            android:text="@string/class_number"
+            android:textColor="@color/grey"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/className"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@id/classStart"
             android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/classStart"
-            android:layout_alignBottom="@id/classFinish"
-            android:text="Академическое письмо на английском языке"
+            android:layout_toEndOf="@id/classNumber"
+            android:text="@string/class_name"
             android:textColor="@color/colorAccent"
             android:textSize="16sp" />
 
@@ -49,23 +49,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/className"
-            android:layout_alignBottom="@id/classNumber"
-            android:text="Практическое занятие"
-            android:textStyle="bold"
-            android:textSize="13sp"
             android:layout_alignStart="@id/className"
-            android:textColor="@color/black" />
+            android:text="@string/class_type"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/classAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/classType"
-            android:layout_margin="2dp"
             android:layout_alignStart="@id/className"
-            android:text="311 (Таллинская ул., д. 34)"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="@string/class_adress"
             android:textColor="@color/black"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
         
         <TextView
             android:id="@+id/classTeacher"
@@ -73,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/classAddress"
             android:layout_alignStart="@id/className"
-            android:text="Тьютор Катасонова Наталья Владимировна"
+            android:text="@string/class_teacher"
             android:textColor="@color/grey"
             android:textSize="13sp"/>
 

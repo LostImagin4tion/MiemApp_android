@@ -54,9 +54,9 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginView {
     override fun afterLogin() {
         (requireActivity() as MainActivity).let {
             findNavController().apply {
-                it.intentUri?.also(::navigate) ?: navigate(R.id.action_fragmentLogin_to_fragmentProfile)
+                it.intentUri?.also(::navigate) ?: navigate(R.id.action_fragmentLogin_to_fragmentSchedule)
                 it.window.setBackgroundDrawableResource(R.drawable.solid_color_primary)
-                graph.startDestination = R.id.fragmentProfile
+                graph.startDestination = R.id.fragmentSchedule
             }
         }
     }

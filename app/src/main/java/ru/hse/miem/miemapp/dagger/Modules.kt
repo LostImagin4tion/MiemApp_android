@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.data.api.CabinetApi
+import ru.hse.miem.miemapp.data.api.RuzApi
 import ru.hse.miem.miemapp.data.repositories.*
 import ru.hse.miem.miemapp.domain.repositories.*
 import timber.log.Timber
@@ -70,6 +71,10 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindIVacancyRepository(vacancyRepository: VacancyRepository): IVacancyRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindIScheduleRepository(vacancyRepository: ScheduleRepository): IScheduleRepository
 }
 
 @Module(includes = [GoogleModule::class])
@@ -88,6 +93,14 @@ class DataModule {
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
         .create(CabinetApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideRuzApi(session: Session, gson: Gson): RuzApi = Retrofit.Builder()
+        .baseUrl(RuzApi.RUZ_BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .build()
+        .create(RuzApi::class.java)
 
     @Provides
     @Singleton

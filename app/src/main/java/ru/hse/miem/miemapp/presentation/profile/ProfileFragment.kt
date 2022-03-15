@@ -11,7 +11,10 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
@@ -28,6 +31,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
 
     @ProvidePresenter
     fun provideProfilePresenter() = profilePresenter
+
+    private lateinit var settingsButtonBehavior: BottomSheetBehavior<View>
 
     private val args: ProfileFragmentArgs by navArgs()
     private val isMyProfile by lazy { args.userId < 0 }
@@ -49,6 +54,18 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         }
         profileSwipeRefreshLayout.setColorSchemeColors(resources.getColor(R.color.colorAccent))
         profileSwipeRefreshLayout.setOnRefreshListener(::initProfile)
+
+        settingsButtonBehavior = BottomSheetBehavior.from(settingsLayout)
+        settingsButtonBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        settingsButtonBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+        })
+
+        settingsButton.setOnClickListener {
+            settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
     }
 
     private fun initProfile() {

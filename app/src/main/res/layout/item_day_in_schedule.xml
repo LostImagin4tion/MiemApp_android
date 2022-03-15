@@ -14,17 +14,17 @@
         android:padding="10dp">
 
         <TextView
+            android:id="@+id/dayInSchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monday, 7 March"
+            android:text="@string/class_date"
             android:layout_marginBottom="10dp"/>
 
         <GridView
+            android:id="@+id/scheduleGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_class_in_schedule" >
-
-        </GridView>
+            tools:listitem="@layout/item_class_in_schedule" />
 
     </LinearLayout>
 

@@ -45,7 +45,6 @@ class ProfileRepository @Inject constructor(
         }
     }
 
-
     override suspend fun getMyProjectsAndApplications() = withIO {
         cabinetApi.myUserStatistic().let {
             val projects = async {

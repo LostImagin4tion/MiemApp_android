@@ -4,20 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/profile"
-    app:startDestination="@id/fragmentLogin">
+    app:startDestination="@id/fragmentProfile">
     <!-- nav graph id must be same as bottom menu item id-->
-
-    <fragment
-        android:id="@+id/fragmentLogin"
-        android:name="ru.hse.miem.miemapp.presentation.login.LoginFragment"
-        android:label="Login fragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_fragmentLogin_to_fragmentProfile"
-            app:destination="@id/fragmentProfile"
-            app:popUpTo="@id/fragmentLogin"
-            app:popUpToInclusive="true"/>
-    </fragment>
 
     <fragment
         android:id="@+id/fragmentProfile"
@@ -47,6 +35,11 @@
                 app:nullable="false"/>
 
         </action>
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentSettings"
+            app:destination="@id/fragmentSettings" />
+
     </fragment>
 
     <fragment
@@ -80,6 +73,18 @@
                 android:defaultValue="false"/>
 
         </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="ru.hse.miem.miemapp.presentation.settings.SettingsFragment"
+        android:label="Settings fragment"
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/action_fragmentSettings_to_fragmentProfile"
+            app:destination="@id/fragmentProfile" />
 
     </fragment>
 </navigation>

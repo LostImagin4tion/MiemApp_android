@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_profile"
-        android:title=""/>
 
     <item
-        android:id="@+id/apps"
-        android:icon="@drawable/ic_apps"
+        android:id="@+id/schedule"
+        android:icon="@drawable/ic_schedule"
         android:title=""/>
 
     <item
@@ -16,8 +12,13 @@
         android:title=""/>
 
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_settings"
+        android:id="@+id/apps"
+        android:icon="@drawable/ic_apps"
+        android:title=""/>
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_profile"
         android:title=""/>
 
 </menu>

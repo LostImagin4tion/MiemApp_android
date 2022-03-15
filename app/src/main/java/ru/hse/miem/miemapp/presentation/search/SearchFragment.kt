@@ -117,7 +117,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         withVacanciesCheckbox.isChecked = filters.isAvailableVacancies
     }
 
-
     override fun setupProjects(projects: List<ProjectInSearch>) {
         projectsAdapter.update(projects)
 

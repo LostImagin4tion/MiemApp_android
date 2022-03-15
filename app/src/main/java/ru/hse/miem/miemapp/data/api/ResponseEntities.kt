@@ -213,3 +213,25 @@ data class VacanciesAllResponse(
         val vacancy_additionally: List<String>?
     )
 }
+
+/**
+ * Schedule related
+ */
+data class ScheduleResponse (
+    val data: List<Data>
+) {
+    data class Data(
+        val auditorium: String?,
+        val beginLesson: String,
+        val endLesson: String,
+        val lessonNumberStart: String,
+        val building: String?,
+        val date: String,
+        val dayOfWeek: Int,
+        val dayOfWeekString: String,
+        val discipline: String,
+        val group: String?,
+        val kindOfWork: String,
+        val lecturer: String?
+    )
+}
