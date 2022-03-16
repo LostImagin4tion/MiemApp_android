@@ -38,24 +38,24 @@
 
                 <Button
                     android:id="@+id/dateSelector"
+                    style="?android:calendarViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/date_selector"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="18sp"
-                    android:textAllCaps="false"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
-                    android:background="@android:color/transparent"
-                    style="?android:calendarViewStyle"/>
+                    android:text="@string/date_selector"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="18sp" />
 
                 <ImageButton
                     android:id="@+id/scheduleSettingsButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_schedule_settings"
-                    android:background="@android:color/transparent"
-                    android:layout_marginStart="160dp"/>
+                    android:layout_marginStart="105dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_schedule_settings" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -83,5 +83,7 @@
     </LinearLayout>
 
     <include layout="@layout/layout_bottom_calendar" />
+
+    <include layout="@layout/layout_bottom_schedule_settings" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

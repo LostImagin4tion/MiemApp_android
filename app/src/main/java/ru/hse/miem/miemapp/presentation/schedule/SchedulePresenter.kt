@@ -13,10 +13,10 @@ class SchedulePresenter @Inject constructor(
 ): BasePresenter<ScheduleView>() {
 
     fun onCreate(
-        userId: String? = null,
+        userId: String,
         startDate: String,
         finishDate: String,
-        isTeacher: Boolean? = null
+        isTeacher: Boolean
     ) = launch {
         try {
             scheduleRepository.getSchedule(
@@ -42,7 +42,7 @@ class SchedulePresenter @Inject constructor(
                 startDate,
                 finishDate,
                 isTeacher
-            ).let(viewState::updateScheduleDays)
+            ).let(viewState::updateSchedule)
         } catch (e: Exception) {
             proceedError(e)
         }

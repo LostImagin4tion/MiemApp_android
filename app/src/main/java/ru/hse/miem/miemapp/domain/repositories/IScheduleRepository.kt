@@ -4,9 +4,9 @@ import ru.hse.miem.miemapp.domain.entities.ScheduleDay
 
 interface IScheduleRepository {
     suspend fun getSchedule(
-        userId: String?,
+        userId: String,
         startDate: String,
         finishDate: String,
-        isTeacher: Boolean?
+        isTeacher: Boolean
     ): List<ScheduleDay>
 }

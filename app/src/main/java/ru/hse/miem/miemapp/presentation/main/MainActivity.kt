@@ -30,9 +30,9 @@ class MainActivity : AppCompatActivity() {
             bottomNavigation.setupWithNavController(
                 navGraphIds = listOf(
                     R.navigation.nav_profile, // keep first!!
-                    R.navigation.nav_search,
                     R.navigation.nav_schedule,
-                    R.navigation.nav_apps,
+                    R.navigation.nav_search,
+                    R.navigation.nav_apps
                 ),
                 fragmentManager = supportFragmentManager,
                 containerId = R.id.navHost,

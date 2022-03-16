@@ -3,23 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/schedule"
-    app:startDestination="@id/fragmentLogin">
+    app:startDestination="@id/fragmentSchedule"
+    android:id="@+id/schedule">
     <!-- nav graph id must be same as bottom menu item id-->
-
-    <fragment
-        android:id="@+id/fragmentLogin"
-        android:name="ru.hse.miem.miemapp.presentation.login.LoginFragment"
-        android:label="Login fragment"
-        tools:layout="@layout/fragment_login" >
-
-        <action
-            android:id="@+id/action_fragmentLogin_to_fragmentSchedule"
-            app:destination="@+id/fragmentSchedule"
-            app:popUpTo="@layout/fragment_login"
-            app:popUpToInclusive="true" />
-
-    </fragment>
 
     <fragment
         android:id="@+id/fragmentSchedule"

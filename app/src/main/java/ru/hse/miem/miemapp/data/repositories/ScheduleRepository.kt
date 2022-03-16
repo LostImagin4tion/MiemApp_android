@@ -16,13 +16,13 @@ class ScheduleRepository @Inject constructor(
     private val calendar = CalendarHelper()
 
     override suspend fun getSchedule(
-        userId: String?,
+        userId: String,
         startDate: String,
         finishDate: String,
-        isTeacher: Boolean?
+        isTeacher: Boolean
     ) = withIO {
 
-        if(userId == null || isTeacher == false) {
+        if(userId.toLong() < 0) {
             listOf<ScheduleDay>()
         }
 

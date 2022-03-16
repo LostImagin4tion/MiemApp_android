@@ -28,6 +28,10 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     private var startDate = defaultDate
     private var finishDate = calendar.getLastDate(defaultDate)
 
+    private var defaultDateRu = calendar.getDateRuFormat(defaultDate)
+    private var startDateRu = defaultDateRu
+    private var finishDateRu = calendar.getDateRuFormat(finishDate)
+
     @Inject
     @InjectPresenter
     lateinit var schedulePresenter: SchedulePresenter
@@ -55,8 +59,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             scheduleList.visibility = View.VISIBLE
         }
 
-
-        dateSelector.text = "$defaultDate + $finishDate"
+        dateSelector.text = "$defaultDateRu - $finishDateRu"
 
         calendarBehaviour = BottomSheetBehavior.from(scheduleFilterLayout)
         calendarBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
@@ -87,11 +90,14 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         }
 
         scheduleCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            startDate = "$year.$month.$dayOfMonth"
+            startDate = calendar.getApiFormattedDate(year, month + 1, dayOfMonth)
             finishDate = calendar.getLastDate(startDate)
 
-            dateSelector.text = "$startDate - $finishDate"
-            scheduleCalendar.date = startDate.toLong()
+            startDateRu = calendar.getDateRuFormat(startDate)
+            finishDateRu = calendar.getDateRuFormat(finishDate)
+
+            dateSelector.text = "$startDateRu - $finishDateRu"
+            scheduleCalendar.date = startDate.toLong() //TODO is this necessary?
 
             schedulePresenter.onCreate(
                 userId = args.userId.toString(),
@@ -120,10 +126,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                     bottomScheduleLoader.visibility = View.GONE
                 }
             }
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-            }
         })
 
         schedulePresenter.onCreate(
@@ -134,15 +136,32 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         )
     }
 
-    override fun onBackPressed(): Boolean {
-        if (calendarBehaviour.state != BottomSheetBehavior.STATE_COLLAPSED) {
+    override fun onBackPressed(): Boolean { //FIXME investigate how to make this code nice
+
+        if(scheduleSettingsBehavior.state == BottomSheetBehavior.STATE_HIDDEN &&
+            calendarBehaviour.state != BottomSheetBehavior.STATE_COLLAPSED) {
+
+            calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        else if(calendarBehaviour.state == BottomSheetBehavior.STATE_HIDDEN &&
+            scheduleSettingsBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+
+            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        else if(scheduleSettingsBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        else if (calendarBehaviour.state != BottomSheetBehavior.STATE_COLLAPSED) {
             calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
         return false
     }
 
-    override fun updateScheduleDays(newDaysLesson: List<ScheduleDay>) {
+    override fun updateSchedule(newDaysLesson: List<ScheduleDay>) {
         (scheduleList as ScheduleAdapter?)?.updateWhenScrolledDown(newDaysLesson)
     }
 
@@ -152,7 +171,5 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
     override fun setupSchedule(lessons: List<ScheduleDay>) {
         scheduleAdapter.update(lessons)
-
-        scheduleCalendar.date = startDate.toLong()
     }
 }

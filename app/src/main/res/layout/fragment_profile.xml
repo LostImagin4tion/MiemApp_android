@@ -108,9 +108,10 @@
                         android:id="@+id/settingsButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="80dp"
+                        android:layout_marginStart="40sp"
+                        android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/userInfo"
-                        android:background="@android:color/transparent"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/ic_settings" />
 
                 </RelativeLayout>
@@ -227,5 +228,7 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include layout = "@layout/fragment_settings" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

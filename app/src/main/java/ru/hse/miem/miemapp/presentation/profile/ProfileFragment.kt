@@ -15,15 +15,17 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
+import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, OnBackPressListener {
 
     @Inject
     @InjectPresenter
@@ -66,6 +68,14 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         settingsButton.setOnClickListener {
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (settingsButtonBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            settingsButtonBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        return false
     }
 
     private fun initProfile() {
