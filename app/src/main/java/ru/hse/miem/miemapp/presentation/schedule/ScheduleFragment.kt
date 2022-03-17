@@ -16,11 +16,12 @@ import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ScheduleDay
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
+import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
 import javax.inject.Inject
 
 class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, OnBackPressListener {
 
-    private val args: ScheduleFragmentArgs by navArgs()
+    private val args: ProfileFragmentArgs by navArgs()
 
     private val calendar = CalendarHelper()
 
@@ -97,7 +98,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             finishDateRu = calendar.getDateRuFormat(finishDate)
 
             dateSelector.text = "$startDateRu - $finishDateRu"
-            scheduleCalendar.date = startDate.toLong() //TODO is this necessary?
+            scheduleCalendar.date = startDate.split(".").joinToString("").toLong() //TODO is this necessary?
 
             schedulePresenter.onCreate(
                 userId = args.userId.toString(),

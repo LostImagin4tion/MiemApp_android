@@ -21,27 +21,24 @@ class ScheduleRepository @Inject constructor(
         finishDate: String,
         isTeacher: Boolean
     ) = withIO {
+        if (!isTeacher) {
 
-        if(userId.toLong() < 0) {
-            listOf<ScheduleDay>()
-        }
+            val googleEmail = cabinetApi.myStudentProfile().data[0].main.email
+            val eduEmail = cabinetApi.userInfoByEmail(googleEmail).data.emailsList[0]
 
-        else if (!isTeacher!!) {
-
-            val userEmail = cabinetApi.myStudentProfile().data[0].main.email
-
-            ruzApi.getStudentSchedule(
-                userEmail,
+            ruzApi.studentSchedule(
+                eduEmail,
                 startDate,
                 finishDate
             ).lessonsToDay()
         }
         else {
 
-            val userEmail = cabinetApi.myTeacherProfile().data[0].main.email
+            val googleEmail = cabinetApi.myTeacherProfile().data[0].main.email
+            val eduEmail = cabinetApi.userInfoByEmail(googleEmail).data.emailsList[0]
 
-            ruzApi.getStaffSchedule(
-                userEmail,
+            ruzApi.staffSchedule(
+                eduEmail,
                 startDate,
                 finishDate
             ).lessonsToDay()

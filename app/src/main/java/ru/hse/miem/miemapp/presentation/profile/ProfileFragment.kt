@@ -23,6 +23,7 @@ import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
+import ru.hse.miem.miemapp.presentation.schedule.ScheduleFragmentArgs
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, OnBackPressListener {
@@ -36,8 +37,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
 
     private lateinit var settingsButtonBehavior: BottomSheetBehavior<View>
 
-    private val args: ProfileFragmentArgs by navArgs()
-    private val isMyProfile by lazy { args.userId < 0 }
+    private val profileArgs: ProfileFragmentArgs by navArgs()
+    private val scheduleArgs: ScheduleFragmentArgs by navArgs()
+
+    private val isMyProfile by lazy { profileArgs.userId < 0 }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -83,7 +86,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
             profilePresenter.onCreate()
         } else {
             userApplications.visibility = View.GONE
-            profilePresenter.onCreate(args.userId, args.isTeacher)
+            profilePresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
         }
     }
 

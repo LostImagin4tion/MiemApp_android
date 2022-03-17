@@ -25,7 +25,13 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ProjectViewHolder>()
     }
 
     fun update(days: List<ScheduleDay>) {
-        this.lessonDays = days as MutableList<ScheduleDay>
+
+        this.lessonDays = if (days.isEmpty()) {
+            mutableListOf()
+        } else {
+            days as MutableList<ScheduleDay>
+        }
+
         if (displayedDays.isEmpty()) {
            displayedDays = this.lessonDays
            notifyDataSetChanged()

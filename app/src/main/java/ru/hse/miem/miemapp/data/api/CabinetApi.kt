@@ -78,4 +78,10 @@ interface CabinetApi {
     @GET("$publicApi/vacancy/list")
     suspend fun allVacancies(): VacanciesAllResponse
 
+    /**
+     * Schedule related endpoints
+     */
+    @GET("$publicApi/user/email/{email}")
+    suspend fun userInfoByEmail(@Path("email") email: String): UserInfoResponse
+
 }

@@ -14,10 +14,10 @@
         tools:layout="@layout/fragment_schedule" >
 
         <argument
-            android:name="userId"
-            app:argType="long"
+            android:name="userEmail"
+            app:argType="string"
             app:nullable="false"
-            android:defaultValue="-1L" />
+            android:defaultValue="" />
 
         <argument
             android:name="isTeacher"

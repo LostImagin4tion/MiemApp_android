@@ -227,11 +227,20 @@ data class ScheduleResponse (
         val lessonNumberStart: String,
         val building: String?,
         val date: String,
-        val dayOfWeek: Int,
-        val dayOfWeekString: String,
         val discipline: String,
         val group: String?,
         val kindOfWork: String,
         val lecturer: String?
+    )
+}
+
+data class UserInfoResponse (
+    val data: Data
+) {
+    data class Data(
+        val userId: Int,
+        val fullName: String,
+        val emailsList: List<String>,
+        val isTeacher: Boolean
     )
 }
