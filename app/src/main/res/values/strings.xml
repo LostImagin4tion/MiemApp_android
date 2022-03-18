@@ -82,10 +82,10 @@
 
     <string name="start_time">9:30</string>
     <string name="finish_time">10:50</string>
-    <string name="class_number">%d lesson</string>
+    <string name="class_number">%s lesson</string>
     <string name="class_name">Calculus</string>
     <string name="class_type">Seminar</string>
-    <string name="class_adress">311 (Таллинская ул., д. 34)</string>
+    <string name="class_adress">311 (Tallinskaya st., 34)</string>
     <string name="class_teacher">Tutor Katasonova Natalya Vladimirovna</string>
     <string name="class_date">Monday, 7 March</string>
     <string name="date_selector">07.03.2022 - 13.03.2022</string>

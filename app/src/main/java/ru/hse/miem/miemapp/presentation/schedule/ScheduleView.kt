@@ -8,5 +8,5 @@ import ru.hse.miem.miemapp.presentation.base.BaseView
 interface ScheduleView : BaseView {
     @OneExecution fun setupSchedule(lessons: List<ScheduleDay>)
 
-    @Skip fun updateSchedule(newDaysLesson: List<ScheduleDay>)
+    @OneExecution fun updateSchedule(newDaysLesson: List<ScheduleDay>)
 }

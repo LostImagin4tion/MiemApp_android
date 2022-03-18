@@ -45,33 +45,31 @@ class ScheduleRepository @Inject constructor(
         }
     }
 
-    private fun ScheduleResponse.lessonsToDay(): List<ScheduleDay> {
+    private fun List<ScheduleResponse>.lessonsToDay(): List<ScheduleDay> {
 
         val scheduleDays: MutableList<ScheduleDay> = mutableListOf()
 
         scheduleDays.add(0, ScheduleDay(
-            date = data[0].date,
-            dayOfWeek = calendar.getDayOfWeek(data[0].date),
+            date = this[0].date,
+            dayOfWeek = calendar.getDayOfWeek(this[0].date),
             lessons = mutableListOf()
         ))
 
-        scheduleDays[0].lessons.add(data[0])
-
-        for(i in data.indices) {
+        for(i in this.indices) {
 
             val lastIndex = scheduleDays.lastIndex
 
-            if (data[i].date == scheduleDays[lastIndex].date && i != 0) {
-                scheduleDays[lastIndex].lessons.add(data[i])
+            if (this[i].date == scheduleDays[lastIndex].date) {
+                scheduleDays[lastIndex].lessons.add(this[i])
             }
             else {
                 scheduleDays.add(lastIndex + 1, ScheduleDay(
-                    date = data[i].date,
-                    dayOfWeek = calendar.getDayOfWeek(data[i].date),
+                    date = this[i].date,
+                    dayOfWeek = calendar.getDayOfWeek(this[i].date),
                     lessons = mutableListOf()
                 ))
 
-                scheduleDays[lastIndex + 1].lessons.add(data[i])
+                scheduleDays[lastIndex + 1].lessons.add(this[i])
             }
         }
 

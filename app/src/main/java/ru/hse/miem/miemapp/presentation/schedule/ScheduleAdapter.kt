@@ -3,7 +3,7 @@ package ru.hse.miem.miemapp.presentation.schedule
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_class_in_schedule.view.*
 import kotlinx.android.synthetic.main.item_day_in_schedule.view.*
@@ -32,10 +32,9 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ProjectViewHolder>()
             days as MutableList<ScheduleDay>
         }
 
-        if (displayedDays.isEmpty()) {
-           displayedDays = this.lessonDays
-           notifyDataSetChanged()
-        }
+        displayedDays = this.lessonDays
+
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
@@ -56,21 +55,19 @@ class ScheduleAdapter: RecyclerView.Adapter<ScheduleAdapter.ProjectViewHolder>()
 
         fun bind(lessonDay: ScheduleDay) = itemView.apply {
 
-            scheduleGrid.dayInSchedule.text = lessonDay.dayOfWeek
+            dayInSchedule.text = lessonDay.dayOfWeek
 
             val lessons = lessonDay.lessons
 
             for (i in lessons.indices) {
 
-                val currentLesson = scheduleGrid[i]
-
-                currentLesson.classStart.text = lessons[i].beginLesson
-                currentLesson.classFinish.text = lessons[i].endLesson
-                currentLesson.classNumber.text = context.getString(R.string.class_number).format(lessons[i].lessonNumberStart)
-                currentLesson.className.text = lessons[i].discipline
-                currentLesson.classType.text = lessons[i].kindOfWork
-                currentLesson.classAddress.text = lessons[i].building
-                currentLesson.classTeacher.text = lessons[i].lecturer
+                scheduleGrid.classStart.text = lessons[i].beginLesson
+                scheduleGrid.classFinish.text = lessons[i].endLesson
+                scheduleGrid.classNumber.text = context.getString(R.string.class_number).format(lessons[i].lessonNumberStart)
+                scheduleGrid.className.text = lessons[i].discipline
+                scheduleGrid.classType.text = lessons[i].kindOfWork
+                scheduleGrid.classAddress.text = lessons[i].building
+                scheduleGrid.classTeacher.text = lessons[i].lecturer
             }
         }
     }

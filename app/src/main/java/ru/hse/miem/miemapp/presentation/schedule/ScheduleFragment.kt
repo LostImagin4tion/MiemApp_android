@@ -4,11 +4,13 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_bottom_calendar.*
 import kotlinx.android.synthetic.main.layout_bottom_schedule_settings.*
+import kotlinx.coroutines.delay
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
@@ -17,6 +19,8 @@ import ru.hse.miem.miemapp.domain.entities.ScheduleDay
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, OnBackPressListener {
@@ -29,9 +33,9 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     private var startDate = defaultDate
     private var finishDate = calendar.getLastDate(defaultDate)
 
-    private var defaultDateRu = calendar.getDateRuFormat(defaultDate)
+    private var defaultDateRu = calendar.getRuFormattedDate(defaultDate)
     private var startDateRu = defaultDateRu
-    private var finishDateRu = calendar.getDateRuFormat(finishDate)
+    private var finishDateRu = calendar.getRuFormattedDate(finishDate)
 
     @Inject
     @InjectPresenter
@@ -64,15 +68,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
         calendarBehaviour = BottomSheetBehavior.from(scheduleFilterLayout)
         calendarBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
-        calendarBehaviour.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
-                    restoreDate()
-                }
-            }
-        })
 
         scheduleSettingsBehavior = BottomSheetBehavior.from(scheduleSettingsLayout)
         scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_HIDDEN
@@ -90,15 +85,23 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
+        scheduleSettingsCheckbox.setOnCheckedChangeListener { compoundButton, b ->
+            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
         scheduleCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+
+            val selectedDate = "$dayOfMonth/${month+1}/$year"
+
+            scheduleCalendar.date = SimpleDateFormat("dd/MM/yyyy").parse(selectedDate).time
+
             startDate = calendar.getApiFormattedDate(year, month + 1, dayOfMonth)
             finishDate = calendar.getLastDate(startDate)
 
-            startDateRu = calendar.getDateRuFormat(startDate)
-            finishDateRu = calendar.getDateRuFormat(finishDate)
+            startDateRu = calendar.getRuFormattedDate(startDate)
+            finishDateRu = calendar.getRuFormattedDate(finishDate)
 
             dateSelector.text = "$startDateRu - $finishDateRu"
-            scheduleCalendar.date = startDate.split(".").joinToString("").toLong() //TODO is this necessary?
 
             schedulePresenter.onCreate(
                 userId = args.userId.toString(),
@@ -106,13 +109,17 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                 finishDate = finishDate,
                 isTeacher = args.isTeacher
             )
+
+            scheduleList.smoothScrollToPosition(0)
+
+            calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         
         scheduleList.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                if(scheduleList.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                if(!scheduleList.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
                     bottomScheduleLoader.visibility = View.VISIBLE
 
                     schedulePresenter.onScrolledDown(
@@ -124,7 +131,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
                     finishDate = calendar.getLastDate(finishDate)
 
-                    bottomScheduleLoader.visibility = View.GONE
                 }
             }
         })
@@ -163,14 +169,23 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     }
 
     override fun updateSchedule(newDaysLesson: List<ScheduleDay>) {
-        (scheduleList as ScheduleAdapter?)?.updateWhenScrolledDown(newDaysLesson)
-    }
-
-    private fun restoreDate() {
-        scheduleCalendar.date = defaultDate.toLong()
+        (scheduleList.adapter as ScheduleAdapter?)?.updateWhenScrolledDown(newDaysLesson)
+        bottomScheduleLoader.visibility = View.GONE
     }
 
     override fun setupSchedule(lessons: List<ScheduleDay>) {
         scheduleAdapter.update(lessons)
+
+        scheduleLoader.visibility = View.GONE
+        scheduleList.visibility = View.VISIBLE
     }
+}
+
+fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {
+    val smoothScroller = object : LinearSmoothScroller(this.context) {
+        override fun getVerticalSnapPreference(): Int = snapMode
+        override fun getHorizontalSnapPreference(): Int = snapMode
+    }
+    smoothScroller.targetPosition = position
+    layoutManager?.startSmoothScroll(smoothScroller)
 }

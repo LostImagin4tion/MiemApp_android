@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp">
 
     <LinearLayout
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/dayInSchedule"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/class_date"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_marginBottom="5dp"/>
 
-        <GridView
+        <GridLayout
             android:id="@+id/scheduleGrid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_class_in_schedule" />
+            android:orientation="vertical">
+
+            <include layout="@layout/item_class_in_schedule" />
+
+        </GridLayout>
 
     </LinearLayout>
 

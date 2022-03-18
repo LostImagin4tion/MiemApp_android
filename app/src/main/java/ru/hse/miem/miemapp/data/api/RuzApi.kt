@@ -18,12 +18,12 @@ interface RuzApi {
         @Query("email") userEmail: String,
         @Query("start") startDate: String,
         @Query("finish") finishDate: String
-    ): ScheduleResponse
+    ): List<ScheduleResponse>
 
     @GET("$api/schedule/person/?lng=1")
     suspend fun staffSchedule(
         @Query("email") userEmail: String,
         @Query("start") startDate: String,
         @Query("finish") finishDate: String,
-    ): ScheduleResponse
+    ): List<ScheduleResponse>
 }

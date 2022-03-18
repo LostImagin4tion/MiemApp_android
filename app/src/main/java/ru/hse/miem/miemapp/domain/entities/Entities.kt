@@ -147,5 +147,5 @@ val tagsList = listOf(
 data class ScheduleDay(
     val date: String,
     val dayOfWeek: String,
-    val lessons: MutableList<ScheduleResponse.Data>
+    val lessons: MutableList<ScheduleResponse>
 )

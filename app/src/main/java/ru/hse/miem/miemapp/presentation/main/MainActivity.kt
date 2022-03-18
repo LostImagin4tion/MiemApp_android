@@ -4,10 +4,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.NavHostFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_day_in_schedule.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.domain.entities.ScheduleDay
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.setupWithNavController
 

@@ -10,6 +10,7 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     app:behavior_peekHeight="0dp"
     app:behavior_hideable="true"
+    android:background="@drawable/bottom_sheet_background"
     android:elevation="8dp">
 
     <CalendarView

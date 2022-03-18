@@ -35,7 +35,7 @@ class CalendarHelper {
         return getApiFormattedDate(year, month, day)
     }
 
-    fun getDateRuFormat(date: String): String {
+    fun getRuFormattedDate(date: String): String {
 
         val dateList = date.split(".")
 
@@ -69,27 +69,28 @@ class CalendarHelper {
         val monthName: String
         val dayName: String
 
-        val month = tempCalendar.get(Calendar.MONTH) + 1
-        val day = tempCalendar.get(Calendar.DAY_OF_WEEK)
+        val month = tempCalendar.get(Calendar.MONTH)
+        val dayOfWeek = tempCalendar.get(Calendar.DAY_OF_WEEK)
+        val dayOfMonth = tempCalendar.get(Calendar.DAY_OF_MONTH)
 
         if (systemLanguage == "Russian") {
-            monthName = MONTHS_RU[month-1]
-            dayName = DAYS_RU[day-1]
+            monthName = MONTHS_RU[month]
+            dayName = DAYS_RU[dayOfWeek - 1]
         }
         else {
-            monthName = MONTHS_EN[month-1]
-            dayName = DAYS_EN[day-1]
+            monthName = MONTHS_EN[month]
+            dayName = DAYS_EN[dayOfWeek - 1]
         }
 
-        return "$dayName, $day $monthName"
+        return "$dayName, $dayOfMonth $monthName"
     }
 
     companion object {
         val MONTHS_RU = listOf("Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря")
         val MONTHS_EN = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 
-        val DAYS_RU = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
-        val DAYS_EN = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+        val DAYS_RU = listOf("Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб")
+        val DAYS_EN = listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     }
 
 }
