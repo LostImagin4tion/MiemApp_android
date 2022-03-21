@@ -10,17 +10,15 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import kotlinx.android.synthetic.main.layout_bottom_calendar.*
 import kotlinx.android.synthetic.main.layout_bottom_schedule_settings.*
-import kotlinx.coroutines.delay
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.ScheduleDay
+import ru.hse.miem.miemapp.domain.entities.IScheduleItem
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
 import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, OnBackPressListener {
@@ -110,7 +108,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                 isTeacher = args.isTeacher
             )
 
-            scheduleList.smoothScrollToPosition(0)
+            scheduleList.smoothSnapToPosition(0)
 
             calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
@@ -130,7 +128,8 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                     )
 
                     finishDate = calendar.getLastDate(finishDate)
-
+                    finishDateRu = calendar.getRuFormattedDate(finishDate)
+                    dateSelector.text = "$startDateRu - $finishDateRu"
                 }
             }
         })
@@ -168,13 +167,13 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         return false
     }
 
-    override fun updateSchedule(newDaysLesson: List<ScheduleDay>) {
-        (scheduleList.adapter as ScheduleAdapter?)?.updateWhenScrolledDown(newDaysLesson)
+    override fun updateSchedule(newItems: List<IScheduleItem>) {
+        (scheduleList.adapter as ScheduleAdapter?)?.updateWhenScrolledDown(newItems)
         bottomScheduleLoader.visibility = View.GONE
     }
 
-    override fun setupSchedule(lessons: List<ScheduleDay>) {
-        scheduleAdapter.update(lessons)
+    override fun setupSchedule(items: List<IScheduleItem>) {
+        scheduleAdapter.update(items)
 
         scheduleLoader.visibility = View.GONE
         scheduleList.visibility = View.VISIBLE

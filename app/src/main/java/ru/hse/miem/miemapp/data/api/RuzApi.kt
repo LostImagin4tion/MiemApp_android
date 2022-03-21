@@ -13,17 +13,19 @@ interface RuzApi {
         private const val api = "api"
     }
 
-    @GET("$api/schedule/student/?lng=1")
+    @GET("$api/schedule/student/?")
     suspend fun studentSchedule(
         @Query("email") userEmail: String,
         @Query("start") startDate: String,
-        @Query("finish") finishDate: String
+        @Query("finish") finishDate: String,
+        @Query("lng") lng: String
     ): List<ScheduleResponse>
 
-    @GET("$api/schedule/person/?lng=1")
+    @GET("$api/schedule/person/?")
     suspend fun staffSchedule(
         @Query("email") userEmail: String,
         @Query("start") startDate: String,
         @Query("finish") finishDate: String,
+        @Query("lng") lng: String
     ): List<ScheduleResponse>
 }

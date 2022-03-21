@@ -1,12 +1,11 @@
 package ru.hse.miem.miemapp.presentation.schedule
 
 import moxy.viewstate.strategy.alias.OneExecution
-import moxy.viewstate.strategy.alias.Skip
-import ru.hse.miem.miemapp.domain.entities.ScheduleDay
+import ru.hse.miem.miemapp.domain.entities.IScheduleItem
 import ru.hse.miem.miemapp.presentation.base.BaseView
 
 interface ScheduleView : BaseView {
-    @OneExecution fun setupSchedule(lessons: List<ScheduleDay>)
+    @OneExecution fun setupSchedule(items: List<IScheduleItem>)
 
-    @OneExecution fun updateSchedule(newDaysLesson: List<ScheduleDay>)
+    @OneExecution fun updateSchedule(newItems: List<IScheduleItem>)
 }

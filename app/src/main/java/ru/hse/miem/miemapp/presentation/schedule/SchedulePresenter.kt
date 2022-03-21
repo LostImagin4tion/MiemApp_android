@@ -2,7 +2,6 @@ package ru.hse.miem.miemapp.presentation.schedule
 
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
-import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.domain.repositories.IScheduleRepository
 import ru.hse.miem.miemapp.presentation.base.BasePresenter
 import javax.inject.Inject

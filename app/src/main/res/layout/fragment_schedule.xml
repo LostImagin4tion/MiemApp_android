@@ -12,6 +12,7 @@
         android:layout_width="@dimen/loader_size"
         android:layout_height="@dimen/loader_size"
         android:layout_gravity="center"
+        android:elevation="1dp"
         android:background="@drawable/ic_loader_circle"/>
 
     <ProgressBar
@@ -65,7 +66,8 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-19dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/scheduleList"

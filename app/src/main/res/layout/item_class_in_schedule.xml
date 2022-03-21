@@ -1,86 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="-20dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    android:elevation="4dp"
+    app:cardCornerRadius="0dp"
     android:id="@+id/classInSchedule">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:layout_marginTop="-7dp"
+        app:cardCornerRadius="8dp">
 
-        <TextView
-            android:id="@+id/classStart"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/start_time"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp">
 
-        <TextView
-            android:id="@+id/classFinish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/classStart"
-            android:text="@string/finish_time"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/classStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_time"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/classNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/classFinish"
-            android:text="@string/class_number"
-            android:textColor="@color/colorAccent"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/classFinish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classStart"
+                android:text="@string/finish_time"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/className"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/classStart"
-            android:layout_marginStart="20dp"
-            android:layout_toEndOf="@id/classNumber"
-            android:text="@string/class_name"
-            android:textColor="@color/colorAccent"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/classNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classFinish"
+                android:text="@string/class_number"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/classType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/className"
-            android:layout_alignStart="@id/className"
-            android:text="@string/class_type"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/className"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/classStart"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@id/classNumber"
+                android:text="@string/class_name"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/classAddress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/classType"
-            android:layout_alignStart="@id/className"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="2dp"
-            android:text="@string/class_adress"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/classType"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/className"
+                android:layout_alignStart="@id/className"
+                android:text="@string/class_type"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/classTeacher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/classAddress"
-            android:layout_alignStart="@id/className"
-            android:text="@string/class_teacher"
-            android:textColor="@color/grey"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/classAddress"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classType"
+                android:layout_alignStart="@id/className"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:text="@string/class_adress"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="14sp" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/classTeacher"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classAddress"
+                android:layout_alignStart="@id/className"
+                android:text="@string/class_teacher"
+                android:textColor="@color/grey"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.cardview.widget.CardView>

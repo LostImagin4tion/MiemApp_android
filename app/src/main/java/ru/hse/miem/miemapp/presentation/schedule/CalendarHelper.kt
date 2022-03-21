@@ -26,7 +26,7 @@ class CalendarHelper {
 
         tempCalendar.time = dateFormat.parse(currentDate)
 
-        tempCalendar.add(Calendar.DATE, 21)
+        tempCalendar.add(Calendar.DATE, 6)
 
         val year = tempCalendar.get(Calendar.YEAR)
         val month = tempCalendar.get(Calendar.MONTH) + 1

@@ -1,6 +1,6 @@
 package ru.hse.miem.miemapp.domain.repositories
 
-import ru.hse.miem.miemapp.domain.entities.ScheduleDay
+import ru.hse.miem.miemapp.domain.entities.IScheduleItem
 
 interface IScheduleRepository {
     suspend fun getSchedule(
@@ -8,5 +8,5 @@ interface IScheduleRepository {
         startDate: String,
         finishDate: String,
         isTeacher: Boolean
-    ): List<ScheduleDay>
+    ): List<IScheduleItem>
 }

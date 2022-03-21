@@ -1,6 +1,8 @@
 package ru.hse.miem.miemapp.domain.entities
 
+import androidx.recyclerview.widget.RecyclerView
 import ru.hse.miem.miemapp.data.api.ScheduleResponse
+import ru.hse.miem.miemapp.presentation.schedule.ScheduleViewHolderFactory
 
 data class Profile(
     val id: Long,
@@ -144,8 +146,47 @@ val tagsList = listOf(
 )
 
 //displayed in schedule
-data class ScheduleDay(
+interface IScheduleItem {
+
+    fun getItemViewType(): Int
+
+    fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder)
+
+    companion object {
+        const val DAY_CARD_TYPE = 0
+        const val LESSON_CARD_TYPE = 1
+    }
+}
+
+sealed class ScheduleItem
+
+class ScheduleDayName(
+    val date: String,
+    val dayOfWeek: String
+): ScheduleItem(), IScheduleItem {
+
+    override fun getItemViewType(): Int {
+        return IScheduleItem.DAY_CARD_TYPE
+    }
+
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
+        (viewHolder as ScheduleViewHolderFactory.DayViewHolder).bind(dayOfWeek)
+    }
+}
+
+class ScheduleDayLesson(
     val date: String,
     val dayOfWeek: String,
-    val lessons: MutableList<ScheduleResponse>
-)
+    val lesson: ScheduleResponse
+): ScheduleItem(), IScheduleItem {
+
+    override fun getItemViewType(): Int {
+        return IScheduleItem.LESSON_CARD_TYPE
+    }
+
+    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder) {
+        val lessonsHolder = viewHolder as ScheduleViewHolderFactory.LessonViewHolder
+
+        lessonsHolder.bind(lesson)
+    }
+}

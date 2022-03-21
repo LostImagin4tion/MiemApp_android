@@ -3,9 +3,10 @@ package ru.hse.miem.miemapp.data.repositories
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.RuzApi
 import ru.hse.miem.miemapp.data.api.ScheduleResponse
-import ru.hse.miem.miemapp.domain.entities.ScheduleDay
+import ru.hse.miem.miemapp.domain.entities.*
 import ru.hse.miem.miemapp.domain.repositories.IScheduleRepository
 import ru.hse.miem.miemapp.presentation.schedule.CalendarHelper
+import java.util.*
 import javax.inject.Inject
 
 class ScheduleRepository @Inject constructor(
@@ -21,6 +22,12 @@ class ScheduleRepository @Inject constructor(
         finishDate: String,
         isTeacher: Boolean
     ) = withIO {
+
+        val systemLang = when(Locale.getDefault().displayLanguage) {
+            "Russian" -> "1"
+            else -> "2"
+        }
+
         if (!isTeacher) {
 
             val googleEmail = cabinetApi.myStudentProfile().data[0].main.email
@@ -29,8 +36,9 @@ class ScheduleRepository @Inject constructor(
             ruzApi.studentSchedule(
                 eduEmail,
                 startDate,
-                finishDate
-            ).lessonsToDay()
+                finishDate,
+                systemLang
+            ).sorted().lessonsToDay()
         }
         else {
 
@@ -40,39 +48,72 @@ class ScheduleRepository @Inject constructor(
             ruzApi.staffSchedule(
                 eduEmail,
                 startDate,
-                finishDate
-            ).lessonsToDay()
+                finishDate,
+                systemLang
+            ).sorted().lessonsToDay()
         }
     }
 
-    private fun List<ScheduleResponse>.lessonsToDay(): List<ScheduleDay> {
+    private fun List<ScheduleResponse>.sorted(): List<ScheduleResponse> {
 
-        val scheduleDays: MutableList<ScheduleDay> = mutableListOf()
+        if(this.size < 2) {
+            return this
+        }
+        val pivot = this[this.size/2]
 
-        scheduleDays.add(0, ScheduleDay(
+        val equalElements = this.filter { it.date == pivot.date }
+        val lessElements = this.filter { it.date < pivot.date }
+        val greaterElements = this.filter { it.date > pivot.date }
+
+        return lessElements.sorted() + equalElements + greaterElements.sorted()
+    }
+
+    private fun List<ScheduleResponse>.lessonsToDay(): MutableList<IScheduleItem> {
+
+        val scheduleItems: MutableList<IScheduleItem> = mutableListOf()
+
+        scheduleItems.add(0, ScheduleDayName(
             date = this[0].date,
-            dayOfWeek = calendar.getDayOfWeek(this[0].date),
-            lessons = mutableListOf()
+            dayOfWeek = calendar.getDayOfWeek(this[0].date)
         ))
 
         for(i in this.indices) {
 
-            val lastIndex = scheduleDays.lastIndex
+            val lastIndex = scheduleItems.lastIndex
+            val dayOfWeek = calendar.getDayOfWeek(this[i].date)
 
-            if (this[i].date == scheduleDays[lastIndex].date) {
-                scheduleDays[lastIndex].lessons.add(this[i])
+            if(scheduleItems[lastIndex] is ScheduleDayName) {
+
+                scheduleItems.add(ScheduleDayLesson(
+                    date = this[i].date,
+                    dayOfWeek = dayOfWeek,
+                    lesson = this[i]
+                ))
             }
             else {
-                scheduleDays.add(lastIndex + 1, ScheduleDay(
-                    date = this[i].date,
-                    dayOfWeek = calendar.getDayOfWeek(this[i].date),
-                    lessons = mutableListOf()
-                ))
+                if((scheduleItems[lastIndex] as ScheduleDayLesson).date == this[i].date) {
 
-                scheduleDays[lastIndex + 1].lessons.add(this[i])
+                    scheduleItems.add(ScheduleDayLesson(
+                        date = this[i].date,
+                        dayOfWeek = dayOfWeek,
+                        lesson = this[i]
+                    ))
+                }
+                else {
+
+                    scheduleItems.add(ScheduleDayName(
+                        date = this[i].date,
+                        dayOfWeek = dayOfWeek,
+                    ))
+                    scheduleItems.add(ScheduleDayLesson(
+                        date = this[i].date,
+                        dayOfWeek = dayOfWeek,
+                        lesson = this[i]
+                    ))
+                }
             }
         }
 
-        return scheduleDays
+        return scheduleItems
     }
 }
