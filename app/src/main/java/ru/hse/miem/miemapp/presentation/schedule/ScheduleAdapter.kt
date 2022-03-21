@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import ru.hse.miem.miemapp.domain.entities.IScheduleItem
-import ru.hse.miem.miemapp.domain.entities.ScheduleDayName
 
 class ScheduleAdapter: RecyclerView.Adapter<ViewHolder>() {
 

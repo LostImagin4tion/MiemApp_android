@@ -1,7 +1,6 @@
 package ru.hse.miem.miemapp.presentation.schedule
 
 import java.text.SimpleDateFormat
-import java.time.Year
 import java.util.*
 
 class CalendarHelper {

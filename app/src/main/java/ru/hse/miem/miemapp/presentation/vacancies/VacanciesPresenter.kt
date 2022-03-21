@@ -1,6 +1,5 @@
 package ru.hse.miem.miemapp.presentation.vacancies
 
-
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository

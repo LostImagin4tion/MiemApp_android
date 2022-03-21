@@ -1,7 +1,5 @@
 package ru.hse.miem.miemapp.data.api
 
-import java.time.DayOfWeek
-
 /**
  * Auth
  */

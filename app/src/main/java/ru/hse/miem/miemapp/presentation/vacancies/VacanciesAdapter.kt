@@ -9,7 +9,6 @@ import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
 import ru.hse.miem.miemapp.domain.entities.tagsList
 import ru.hse.miem.miemapp.presentation.tinder.Sorting
-import java.util.ArrayList
 
 class VacanciesAdapter(
     private val navigateToProject: (Long) -> Unit

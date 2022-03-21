@@ -1,7 +1,6 @@
 package ru.hse.miem.miemapp.data.repositories
 
 import ru.hse.miem.miemapp.data.api.CabinetApi
-import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
 import ru.hse.miem.miemapp.domain.entities.Vacancies
 import ru.hse.miem.miemapp.domain.repositories.IVacancyRepository
 import javax.inject.Inject

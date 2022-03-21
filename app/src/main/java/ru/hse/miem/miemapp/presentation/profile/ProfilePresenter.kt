@@ -1,12 +1,10 @@
 package ru.hse.miem.miemapp.presentation.profile
 
-import androidx.navigation.NavArgs
 import moxy.InjectViewState
 import kotlinx.coroutines.launch
 import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
 import ru.hse.miem.miemapp.presentation.base.BasePresenter
-import ru.hse.miem.miemapp.presentation.schedule.ScheduleFragmentArgs
 import javax.inject.Inject
 
 @InjectViewState

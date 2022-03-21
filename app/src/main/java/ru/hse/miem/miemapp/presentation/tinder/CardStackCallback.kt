@@ -4,7 +4,6 @@ import android.view.View
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
 
-
 class CardStackCallback : CardStackListener {
 
     var pos: Int = 0

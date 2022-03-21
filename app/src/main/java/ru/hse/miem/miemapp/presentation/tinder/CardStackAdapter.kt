@@ -5,7 +5,6 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View;
 import android.view.ViewGroup;
-import kotlinx.android.synthetic.main.item_cards.*
 import kotlinx.android.synthetic.main.item_cards.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.VacancyCard
