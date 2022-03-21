@@ -35,8 +35,8 @@
                 android:orientation="vertical"
                 android:paddingTop="@dimen/common_fragment_margin">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:gravity="center_vertical">
@@ -49,10 +49,12 @@
                         android:src="@drawable/default_profile_avatar" />
 
                     <LinearLayout
+                        android:id="@+id/userInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="start"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_toEndOf="@id/userAvatar">
 
                         <TextView
                             android:id="@+id/userRole"
@@ -102,7 +104,17 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
+                    <ImageButton
+                        android:id="@+id/settingsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toEndOf="@id/userInfo"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_settings" />
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/profileInfo"
@@ -216,5 +228,7 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <include layout = "@layout/fragment_settings" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

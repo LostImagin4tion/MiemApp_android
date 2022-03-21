@@ -55,7 +55,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
                 false
             }
         }
-
         bottomSheetBehavior = BottomSheetBehavior.from(filtersLayout)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -116,7 +115,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         projectStateSelector.setSelection(filters.projectState)
         withVacanciesCheckbox.isChecked = filters.isAvailableVacancies
     }
-
 
     override fun setupProjects(projects: List<ProjectInSearch>) {
         projectsAdapter.update(projects)

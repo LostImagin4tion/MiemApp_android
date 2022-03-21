@@ -32,12 +32,18 @@ android {
         }
     }
 
-
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("release")
+        }
+        getByName("debug") {
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -76,6 +82,8 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-auth:${Versions.playServices}")
     implementation("com.squareup.okhttp3:okhttp:${Versions.okHttp}")
+
+    implementation("androidx.cardview:cardview:1.0.0")
 
 // CardStackView
     val cardVersion = "2.3.4"

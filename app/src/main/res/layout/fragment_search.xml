@@ -76,6 +76,6 @@
 
     </LinearLayout>
 
-    <include layout="@layout/layout_bottom_filters"/>
+    <include layout="@layout/layout_bottom_filters" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

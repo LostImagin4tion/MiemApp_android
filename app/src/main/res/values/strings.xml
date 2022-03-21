@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MIEM App</string>
-    <string name="title_camerascontrol">Cameras control</string>
     <string name="title_indoor">Indoor navigation</string>
 
     <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
@@ -80,4 +79,17 @@
     <string name="tinder_welcome">Welcome to Project\'s Tinder.\n\nSwipe right if you like vacancy, swipe left if not</string>
     <string name="vacancies_no_vacancies">You haven\'t liked any vacancies</string>
     <string name="tinder_end_1">For now, you\'ve viewed\n all available vacancies</string>
+
+    <string name="start_time">9:30</string>
+    <string name="finish_time">10:50</string>
+    <string name="class_number">%s lesson</string>
+    <string name="class_name">Calculus</string>
+    <string name="class_type">Seminar</string>
+    <string name="class_adress">311 (Tallinskaya st., 34)</string>
+    <string name="class_teacher">Tutor Katasonova Natalya Vladimirovna</string>
+    <string name="class_date">Monday, 7 March</string>
+    <string name="date_selector">07.03.2022 - 13.03.2022</string>
+
+    <string name="show_days_schedule">Do not show days with no classes</string>
+
 </resources>

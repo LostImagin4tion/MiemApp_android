@@ -1,5 +1,7 @@
 package ru.hse.miem.miemapp.data.api
 
+import java.time.DayOfWeek
+
 /**
  * Auth
  */
@@ -211,5 +213,32 @@ data class VacanciesAllResponse(
         val vacancy_role: String?,
         val vacancy_disciplines: List<String>?,
         val vacancy_additionally: List<String>?
+    )
+}
+
+/**
+ * Schedule related
+ */
+data class ScheduleResponse (
+    val auditorium: String?,
+    val beginLesson: String,
+    val endLesson: String,
+    val lessonNumberStart: String,
+    val building: String?,
+    val date: String,
+    val discipline: String,
+    val group: String?,
+    val kindOfWork: String,
+    val lecturer: String?
+)
+
+data class UserInfoResponse (
+    val data: Data
+) {
+    data class Data(
+        val userId: Int,
+        val fullName: String,
+        val emailsList: List<String>,
+        val isTeacher: Boolean
     )
 }

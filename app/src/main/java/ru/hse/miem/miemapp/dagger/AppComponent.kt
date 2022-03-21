@@ -8,6 +8,7 @@ import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragment
 import ru.hse.miem.miemapp.presentation.project.ProjectFragment
+import ru.hse.miem.miemapp.presentation.schedule.ScheduleFragment
 import ru.hse.miem.miemapp.presentation.search.SearchFragment
 import ru.hse.miem.miemapp.presentation.settings.SettingsFragment
 import ru.hse.miem.miemapp.presentation.tinder.TinderFragment
@@ -33,5 +34,6 @@ interface AppComponent {
     fun inject(settingsFragment: SettingsFragment)
     fun inject(tinderFragment: TinderFragment)
     fun inject(vacanciesFragment: VacanciesFragment)
+    fun inject(scheduleFragment: ScheduleFragment)
     fun session(): Session // used in submodules
 }

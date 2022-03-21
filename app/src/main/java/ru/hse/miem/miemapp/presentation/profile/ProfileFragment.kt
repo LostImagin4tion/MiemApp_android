@@ -11,16 +11,22 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.domain.entities.Profile
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
+import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
+import ru.hse.miem.miemapp.presentation.schedule.ScheduleFragmentArgs
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, OnBackPressListener {
 
     @Inject
     @InjectPresenter
@@ -29,8 +35,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
     @ProvidePresenter
     fun provideProfilePresenter() = profilePresenter
 
-    private val args: ProfileFragmentArgs by navArgs()
-    private val isMyProfile by lazy { args.userId < 0 }
+    private lateinit var settingsButtonBehavior: BottomSheetBehavior<View>
+
+    private val profileArgs: ProfileFragmentArgs by navArgs()
+    private val scheduleArgs: ScheduleFragmentArgs by navArgs()
+
+    private val isMyProfile by lazy { profileArgs.userId < 0 }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,6 +59,26 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
         }
         profileSwipeRefreshLayout.setColorSchemeColors(resources.getColor(R.color.colorAccent))
         profileSwipeRefreshLayout.setOnRefreshListener(::initProfile)
+
+        settingsButtonBehavior = BottomSheetBehavior.from(settingsLayout)
+        settingsButtonBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        settingsButtonBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+        })
+
+        settingsButton.setOnClickListener {
+            settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (settingsButtonBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            settingsButtonBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            return true
+        }
+        return false
     }
 
     private fun initProfile() {
@@ -56,7 +86,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView {
             profilePresenter.onCreate()
         } else {
             userApplications.visibility = View.GONE
-            profilePresenter.onCreate(args.userId, args.isTeacher)
+            profilePresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
         }
     }
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/fragmentSchedule"
+    android:id="@+id/schedule">
+    <!-- nav graph id must be same as bottom menu item id-->
+
+    <fragment
+        android:id="@+id/fragmentSchedule"
+        android:name="ru.hse.miem.miemapp.presentation.schedule.ScheduleFragment"
+        android:label="Schedule Fragment"
+        tools:layout="@layout/fragment_schedule" >
+
+        <argument
+            android:name="userEmail"
+            app:argType="string"
+            app:nullable="false"
+            android:defaultValue="" />
+
+        <argument
+            android:name="isTeacher"
+            app:argType="boolean"
+            app:nullable="false"
+            android:defaultValue="false" />
+
+    </fragment>
+
+</navigation>
