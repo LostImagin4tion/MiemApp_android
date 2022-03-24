@@ -240,3 +240,20 @@ data class UserInfoResponse (
         val isTeacher: Boolean
     )
 }
+
+/**
+ * Sandbox related
+ */
+data class SandboxResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val id: Long,
+        val statusId: Int,
+        val statusDesc: String,
+        val nameRus: String,
+        val head: String,
+        val typeDesc: String,
+        val vacancies: Int,
+    )
+}

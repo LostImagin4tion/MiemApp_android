@@ -74,7 +74,11 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindIScheduleRepository(vacancyRepository: ScheduleRepository): IScheduleRepository
+    abstract fun bindIScheduleRepository(scheduleRepository: ScheduleRepository): IScheduleRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindISandboxRepository(sandboxRepository: SandboxRepository): ISandboxRepository
 }
 
 @Module(includes = [GoogleModule::class])

@@ -81,6 +81,9 @@ class ProfileRepository @Inject constructor(
                 }
             }
 
+            println(projects)
+            println(applications)
+
             MyProjectsAndApplications(projects.await(), applications.await())
         }
     }

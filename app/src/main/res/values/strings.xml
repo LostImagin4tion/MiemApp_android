@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MIEM App</string>
     <string name="title_indoor">Indoor navigation</string>
+    <string name="title_sandbox">Project Sandbox</string>
 
     <string name="cabinet_client_id" translatable="false">861005331877-0r79ua1cm5osvqpvt07i831eapgl2b9a.apps.googleusercontent.com</string>
 
@@ -56,6 +57,7 @@
 
     <string name="project_vacancies">%d vacancy(s)</string>
     <string name="search_hint">Search by name, number or head</string>
+    <string name="sandbox_search_hint">Search by name or head</string>
     <string name="search_filters_title">Filters</string>
     <string name="search_filters_pr_type">Project type</string>
     <string name="search_filters_pr_state">Project state</string>

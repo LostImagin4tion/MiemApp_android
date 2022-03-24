@@ -84,4 +84,10 @@ interface CabinetApi {
     @GET("$publicApi/user/email/{email}")
     suspend fun userInfoByEmail(@Path("email") email: String): UserInfoResponse
 
+    /**
+     * Sandbox related endpoints
+     */
+
+    @GET("$publicApi/sandbox")
+    suspend fun projectSandbox(): SandboxResponse
 }
