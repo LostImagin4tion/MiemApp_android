@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
+    android:layout_marginTop="10dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/projectName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="16sp"
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="Za warudo toki wo tomare"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                android:id="@+id/projectState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/text_accent_color"
+                tools:background="@drawable/badge_active_bg"
+                tools:text="Рабочий"/>
+
+            <TextView
+                android:id="@+id/projectVacancies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_accent_color"
+                android:visibility="gone"
+                android:background="@drawable/project_badge_vacancies"
+                tools:text="3 вакансии"
+                tools:visibility="visible"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/projectHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="Руководитель: ДИО"/>
+
+        <TextView
+            android:id="@+id/projectType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="Тип: Прогр-аппарат."/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

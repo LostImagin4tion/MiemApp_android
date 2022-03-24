@@ -10,6 +10,110 @@
         android:id="@+id/fragmentApps"
         android:name="ru.hse.miem.miemapp.presentation.apps.AppsFragment"
         android:label="Apps fragment"
-        tools:layout="@layout/fragment_apps"/>
+        tools:layout="@layout/fragment_apps" >
+
+        <action
+            android:id="@+id/action_fragmentApps_to_fragmentSandbox"
+            app:destination="@+id/fragmentSandbox" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSandbox"
+        android:name="ru.hse.miem.miemapp.presentation.sandbox.SandboxFragment"
+        android:label="Sandbox fragment"
+        tools:layout="@layout/fragment_sandbox">
+
+        <action
+            android:id="@+id/action_fragmentSandbox_to_fragmentProject"
+            app:destination="@id/fragmentProject">
+
+            <argument
+                android:name="projectId"
+                app:argType="long"
+                app:nullable="false"/>
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="ru.hse.miem.miemapp.presentation.profile.ProfileFragment"
+        android:label="Profile fragment"
+        tools:layout="@layout/fragment_profile">
+
+        <argument
+            android:name="userId"
+            app:argType="long"
+            app:nullable="false"
+            android:defaultValue="-1L"/>
+
+        <argument
+            android:name="isTeacher"
+            app:argType="boolean"
+            app:nullable="false"
+            android:defaultValue="false"/>
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProject"
+            app:destination="@id/fragmentProject">
+
+            <argument
+                android:name="projectId"
+                app:argType="long"
+                app:nullable="false"/>
+
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProject"
+        android:name="ru.hse.miem.miemapp.presentation.project.ProjectFragment"
+        android:label="Project fragment"
+        tools:layout="@layout/fragment_project">
+
+        <argument
+            android:name="projectId"
+            app:argType="long"
+            app:nullable="false"/>
+
+        <action
+            android:id="@+id/action_fragmentProject_to_fragmentProfile"
+            app:destination="@id/fragmentProfile">
+
+            <argument
+                android:name="userId"
+                app:argType="long"
+                app:nullable="false"
+                android:defaultValue="-1L"/>
+
+            <argument
+                android:name="isTeacher"
+                app:argType="boolean"
+                app:nullable="false"
+                android:defaultValue="false"/>
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentVacancies"
+        android:name="ru.hse.miem.miemapp.presentation.vacancies.VacanciesFragment"
+        android:label="Vacancies fragment"
+        tools:layout="@layout/fragment_vacancies">
+
+        <action
+            android:id="@+id/action_fragmentVacancies_to_fragmentProject"
+            app:destination="@id/fragmentProject">
+
+            <argument
+                android:name="projectId"
+                app:argType="long"
+                app:nullable="false"/>
+
+        </action>
+    </fragment>
 
 </navigation>

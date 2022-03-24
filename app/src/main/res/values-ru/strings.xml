@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">MIEM App</string>
     <string name="title_indoor">Навигация в здании</string>
+    <string name="title_sandbox">Песочница проектов</string>
 
     <string name="common_error_message">Произошла ошибка. Проверьте, что вы авторизованы и соединение стабильно</string>
 
@@ -54,6 +55,7 @@
 
     <string name="project_vacancies">%d вакансий(я)</string>
     <string name="search_hint">Поиск по названию, номеру, руководителю</string>
+    <string name="sandbox_search_hint">Поиск по названию или руководителю</string>
     <string name="search_filters_title">Фильтры</string>
     <string name="search_filters_pr_type">Тип проекта</string>
     <string name="search_filters_pr_state">Статус проекта</string>

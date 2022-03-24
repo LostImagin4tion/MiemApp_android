@@ -61,6 +61,7 @@ class ScheduleViewHolderFactory {
             lessonName.text = lesson.discipline
             lessonType.text = lesson.kindOfWork
             lessonAddress.text = lesson.building
+            lessonTeacher.text = lesson.lecturer
             lessonTeacher.text = when(Locale.getDefault().displayLanguage) {
                 "Russian" -> lesson.lecturer
                 else -> {

@@ -190,3 +190,14 @@ class ScheduleDayLesson(
         lessonsHolder.bind(lesson)
     }
 }
+
+//displayed in sandbox
+data class ProjectInSandbox(
+    val id: Long,
+    val stateId: Int,
+    val state: String,
+    val name: String,
+    val head: String,
+    val type: String,
+    val vacancies: Int
+)

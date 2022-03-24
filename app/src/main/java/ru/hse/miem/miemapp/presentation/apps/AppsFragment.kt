@@ -11,6 +11,8 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_apps.*
 import ru.hse.miem.miemapp.BuildConfig
 import ru.hse.miem.miemapp.R
+import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragment
+import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragmentDirections
 
 class AppsFragment : Fragment() {
 
@@ -29,7 +31,21 @@ class AppsFragment : Fragment() {
 
         appsList.adapter = AppsAdapter(
             listOf(
-                /* Uncomment when building the final app */
+                AppItem(
+                    icon = ContextCompat.getDrawable(
+                        requireContext(),
+                        resources.getIdentifier(
+                            "app_icon_sandbox",
+                            "drawable",
+                            BuildConfig.APPLICATION_ID
+                        )
+                    )!!,
+                    name = getString(R.string.title_sandbox),
+                    isExternal = false,
+                    navigateAction = AppsFragmentDirections.actionFragmentAppsToFragmentSandbox(),
+                ),
+                //TODO
+                // Uncomment when building the final app
 //                AppItem(
 //                    icon = ContextCompat.getDrawable(
 //                        requireContext(),
@@ -45,5 +61,4 @@ class AppsFragment : Fragment() {
             )
         )
     }
-
 }

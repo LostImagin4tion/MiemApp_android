@@ -104,7 +104,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         (projectsList.adapter as ProjectsAdapter?)?.performSearch(
             searchInput.text
                 .toString()
-                .toLowerCase(Locale.getDefault())
+                .lowercase(Locale.getDefault())
                 .trim(),
             filters
         )

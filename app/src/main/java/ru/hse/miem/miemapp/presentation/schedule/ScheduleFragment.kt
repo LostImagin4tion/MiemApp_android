@@ -89,6 +89,8 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
         scheduleCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
 
+            bottomScheduleLoader.visibility = View.VISIBLE
+
             val selectedDate = "$dayOfMonth/${month+1}/$year"
 
             scheduleCalendar.date = SimpleDateFormat("dd/MM/yyyy").parse(selectedDate).time
@@ -117,7 +119,10 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
-                if(!scheduleList.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                if(!scheduleList.canScrollVertically(1) &&
+                    newState == RecyclerView.SCROLL_STATE_IDLE &&
+                    bottomScheduleLoader.visibility != View.VISIBLE) {
+
                     bottomScheduleLoader.visibility = View.VISIBLE
 
                     schedulePresenter.onScrolledDown(
@@ -176,15 +181,16 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         scheduleAdapter.update(items)
 
         scheduleLoader.visibility = View.GONE
+        bottomScheduleLoader.visibility = View.GONE
         scheduleList.visibility = View.VISIBLE
     }
-}
 
-fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {
-    val smoothScroller = object : LinearSmoothScroller(this.context) {
-        override fun getVerticalSnapPreference(): Int = snapMode
-        override fun getHorizontalSnapPreference(): Int = snapMode
+    private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {
+        val smoothScroller = object : LinearSmoothScroller(this.context) {
+            override fun getVerticalSnapPreference(): Int = snapMode
+            override fun getHorizontalSnapPreference(): Int = snapMode
+        }
+        smoothScroller.targetPosition = position
+        layoutManager?.startSmoothScroll(smoothScroller)
     }
-    smoothScroller.targetPosition = position
-    layoutManager?.startSmoothScroll(smoothScroller)
 }

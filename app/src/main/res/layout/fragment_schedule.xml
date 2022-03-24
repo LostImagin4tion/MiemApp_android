@@ -12,8 +12,7 @@
         android:layout_width="@dimen/loader_size"
         android:layout_height="@dimen/loader_size"
         android:layout_gravity="center"
-        android:elevation="1dp"
-        android:background="@drawable/ic_loader_circle"/>
+        android:elevation="1dp"/>
 
     <ProgressBar
         android:id="@+id/bottomScheduleLoader"

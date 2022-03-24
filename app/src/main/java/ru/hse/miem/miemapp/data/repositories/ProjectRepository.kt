@@ -82,7 +82,12 @@ class ProjectRepository @Inject constructor(
                 objective = bodyResult.target ?: "",
                 annotation = bodyResult.annotation ?: "",
                 members = members.await(),
-                links = listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories.await(),
+                links = if (header.trello != null) {
+                    listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories.await()
+                }
+                else {
+                     emptyList()
+                     },
                 vacancies = vacancies.await(),
                 url = CabinetApi.getProjectUrl(id)
             )

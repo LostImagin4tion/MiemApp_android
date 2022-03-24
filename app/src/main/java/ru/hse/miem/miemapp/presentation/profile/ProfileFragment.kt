@@ -36,7 +36,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
     private lateinit var settingsButtonBehavior: BottomSheetBehavior<View>
 
     private val profileArgs: ProfileFragmentArgs by navArgs()
-    private val scheduleArgs: ScheduleFragmentArgs by navArgs()
 
     private val isMyProfile by lazy { profileArgs.userId < 0 }
 
