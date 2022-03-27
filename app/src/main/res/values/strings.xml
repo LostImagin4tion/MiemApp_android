@@ -22,6 +22,7 @@
     <string name="unauthorized_name">Anon</string>
     <string name="profile_go_to_chat">Chat</string>
     <string name="projects_title">Projects</string>
+    <string name="my_projects_title">My Projects</string>
     <string name="project_members">Members:</string>
     <string name="project_type">Type:</string>
     <string name="project_state">Status:</string>
@@ -37,6 +38,15 @@
     <string name="application_my_comment">My comment:</string>
     <string name="application_withdraw">Withdraw</string>
     <string name="application_approve">Approve</string>
+
+    <string name="statistics_title">Statistics</string>
+    <string name="achievements_title">Achievements</string>
+    <string name="git_title">Git Statistics</string>
+
+    <string name="app_title">App</string>
+    <string name="settings_title">Settings</string>
+    <string name="report_title">Report problem</string>
+    <string name="exit_title">Log out</string>
 
     <string name="project_type_and_number">Project #%d, %s (%s)</string>
     <string name="project_team">Team</string>

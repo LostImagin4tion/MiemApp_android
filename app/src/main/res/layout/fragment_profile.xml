@@ -112,7 +112,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_toEndOf="@id/userInfo"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_settings" />
+                        android:src="@drawable/ic_profile_settings" />
 
                 </RelativeLayout>
 
@@ -146,7 +146,6 @@
                         android:textSize="16sp"
                         app:drawableStartCompat="@drawable/ic_school_hat"
                         tools:text="Department of Computer Engineering" />
-
 
                     <TextView
                         android:layout_width="wrap_content"
