@@ -104,16 +104,6 @@
 
                     </LinearLayout>
 
-                    <ImageButton
-                        android:id="@+id/settingsButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="40sp"
-                        android:layout_marginTop="10dp"
-                        android:layout_toEndOf="@id/userInfo"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_profile_settings" />
-
                 </RelativeLayout>
 
                 <LinearLayout
@@ -150,75 +140,119 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
+                        android:layout_marginBottom="12dp"
                         android:text="@string/projects_title"
                         android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:visibility="visible"/>
 
-                    <TextView
-                        android:id="@+id/userNoProjectInfo"
+                    <Button
+                        android:id="@+id/projectsButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:text="@string/no_data"
-                        android:visibility="gone"
-                        tools:visibility="visible" />
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/my_projects_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_projects"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"/>
 
-                    <ProgressBar
-                        android:id="@+id/userProjectsLoader"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center_horizontal" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/projectsList"
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/applicationButton"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_project" />
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/applications_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_applications"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"
+                        android:visibility="visible"/>
 
-                    <LinearLayout
-                        android:id="@+id/userApplications"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:orientation="vertical">
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/statistics_title"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:visibility="visible"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:text="@string/applications_title"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/achievementsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/achievements_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_achievements"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"/>
 
-                        <TextView
-                            android:id="@+id/userNoApplicationsInfo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="12dp"
-                            android:text="@string/no_data"
-                            android:visibility="gone"
-                            tools:visibility="visible" />
+                    <Button
+                        android:id="@+id/gitButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/git_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_git"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"/>
 
-                        <ProgressBar
-                            android:id="@+id/userApplicationsLoader"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="center_horizontal" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:text="@string/app_title"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:visibility="visible"/>
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/applicationsList"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_application" />
+                    <Button
+                        android:id="@+id/settingsButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/settings_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_settings"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"/>
 
-                    </LinearLayout>
+                    <Button
+                        android:id="@+id/reportButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/report_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_report"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"/>
+
+                    <Button
+                        android:id="@+id/exitButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:textColor="@color/red_dark"
+                        android:text="@string/exit_title"
+                        android:textAllCaps="false"
+                        app:icon="@drawable/ic_profile_exit"
+                        app:iconTintMode="add"
+                        app:iconTint="@android:color/transparent"/>
 
                 </LinearLayout>
 
@@ -228,6 +262,6 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <include layout = "@layout/fragment_settings" />
+    <include layout="@layout/fragment_settings"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

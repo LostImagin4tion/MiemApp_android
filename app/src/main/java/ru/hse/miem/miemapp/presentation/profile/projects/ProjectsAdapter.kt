@@ -1,4 +1,4 @@
-package ru.hse.miem.miemapp.presentation.profile
+package ru.hse.miem.miemapp.presentation.profile.projects
 
 import android.view.LayoutInflater
 import android.view.View

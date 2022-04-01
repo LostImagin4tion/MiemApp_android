@@ -3,6 +3,7 @@ package ru.hse.miem.miemapp.presentation.profile
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -11,17 +12,18 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import ru.hse.miem.miemapp.BuildConfig
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
+import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.domain.entities.Profile
-import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
-import ru.hse.miem.miemapp.presentation.schedule.ScheduleFragmentArgs
+import ru.hse.miem.miemapp.presentation.main.MainActivity
 import javax.inject.Inject
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, OnBackPressListener {
@@ -32,6 +34,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
 
     @ProvidePresenter
     fun provideProfilePresenter() = profilePresenter
+
+    @Inject
+    lateinit var signInClient: GoogleSignInClient
+
+    @Inject
+    lateinit var session: Session
 
     private lateinit var settingsButtonBehavior: BottomSheetBehavior<View>
 
@@ -46,6 +54,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initProfile()
+
         userEmail.setOnClickListener {
             startActivity(
                 Intent.createChooser(
@@ -65,9 +74,21 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
             override fun onStateChanged(bottomSheet: View, newState: Int) {}
         })
 
+        projectsButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileProjects())
+        }
+
+        applicationButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileApplications())
+        }
+
         settingsButton.setOnClickListener {
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
+
+        reportButton.setOnClickListener { submitReport() }
+
+        exitButton.setOnClickListener { logout() }
     }
 
     override fun onBackPressed(): Boolean {
@@ -82,7 +103,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         if (isMyProfile) {
             profilePresenter.onCreate()
         } else {
-            userApplications.visibility = View.GONE
+            applicationButton.visibility = View.GONE
             profilePresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
         }
     }
@@ -103,7 +124,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         }
 
         if (isTeacher) {
-            userApplications.visibility = View.GONE
+            applicationButton.visibility = View.GONE
         }
 
         profileLoader.visibility = View.GONE
@@ -119,50 +140,28 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         profileInfo.visibility = View.GONE
     }
 
-    override fun setupProjects(projects: List<ProjectBasic>) {
-        userProjectsLoader.visibility = View.GONE
-
-        if (projects.isNotEmpty()) {
-            projectsList.adapter = ProjectsAdapter(projects) {
-                val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
-                findNavController().navigate(action)
-            }
-            userNoProjectInfo.visibility = View.GONE
-        } else {
-            userNoProjectInfo.visibility = View.VISIBLE
-        }
-    }
-
-    override fun setupMyProjects(projects: List<MyProjectsAndApplications.MyProjectBasic>) {
-        userProjectsLoader.visibility = View.GONE
-
-        if (projects.isNotEmpty()) {
-            projectsList.adapter = MyProjectsAdapter(projects) {
-                val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
-                findNavController().navigate(action)
-            }
-            userNoProjectInfo.visibility = View.GONE
-        } else {
-            userNoProjectInfo.visibility = View.VISIBLE
-        }
-    }
-
-    override fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>) {
-        userApplicationsLoader.visibility = View.GONE
-
-        applicationsList.adapter = MyApplicationsAdapter(
-            applications,
-            navigateToProject = {
-                val action = ProfileFragmentDirections.actionFragmentProfileToFragmentProject(it)
-                findNavController().navigate(action)
-            },
-            withdrawApplication = profilePresenter::onWithdrawApplication,
-            approveApplication = profilePresenter::onApproveApplication
+    private fun submitReport() {
+        startActivity(
+            Intent.createChooser(
+                Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")).also {
+                    it.putExtra(Intent.EXTRA_EMAIL, arrayOf(MiemApplication.DEVELOPER_MAIL))
+                    it.putExtra(Intent.EXTRA_STREAM, (requireActivity().application as MiemApplication).currentLogFileUri)
+                    it.putExtra(Intent.EXTRA_SUBJECT, "Report. Version ${BuildConfig.VERSION_NAME}")
+                    it.putExtra(Intent.EXTRA_TEXT, "Android: ${Build.VERSION.RELEASE}\nDevice: ${Build.MODEL}\nDescribe in details your problem:")
+                },
+                getString(R.string.send_mail_dialog_title)
+            )
         )
-        if (applications.isNotEmpty()) {
-            userNoApplicationsInfo.visibility = View.GONE
-        } else {
-            userNoApplicationsInfo.visibility = View.VISIBLE
+    }
+
+    private fun logout() {
+        signInClient.signOut().addOnCompleteListener {
+            session.reset()
+            (activity as MainActivity).apply {
+                val intent = intent
+                finish()
+                startActivity(intent)
+            }
         }
     }
 }
