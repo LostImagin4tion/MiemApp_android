@@ -43,7 +43,7 @@
                     style="?android:calendarViewStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:background="?attr/selectableItemBackground"
                     android:paddingStart="5dp"
                     android:paddingEnd="5dp"
                     android:text="@string/date_selector"

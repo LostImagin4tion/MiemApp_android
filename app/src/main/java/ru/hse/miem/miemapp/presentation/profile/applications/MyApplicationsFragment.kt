@@ -35,6 +35,8 @@ class MyApplicationsFragment: BaseFragment(R.layout.fragment_profile_application
     override fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>) {
         applicationsLoader.visibility = View.GONE
 
+        applications
+
         applicationsList.adapter = MyApplicationsAdapter(
             applications,
             navigateToProject = {
