@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/search"
     app:startDestination="@id/fragmentSearch">
+    <!-- nav graph id must be same as bottom menu item id-->
 
     <fragment
         android:id="@+id/fragmentSearch"
@@ -46,7 +47,23 @@
             android:defaultValue="false"/>
 
         <action
-            android:id="@+id/action_fragmentProfile_to_fragmentProject"
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileProjects"
+            app:destination="@id/fragmentProfileProjects"/>
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileApplications"
+            app:destination="@id/fragmentProfileApplications"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfileProjects"
+        android:name="ru.hse.miem.miemapp.presentation.profile.projects.ProjectsFragment"
+        android:label="Profile Projects Fragment"
+        tools:layout="@layout/fragment_profile_projects">
+
+        <action
+            android:id="@+id/action_fragmentProfileProjects_to_fragmentProject"
             app:destination="@id/fragmentProject">
 
             <argument
@@ -55,6 +72,15 @@
                 app:nullable="false"/>
 
         </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfileApplications"
+        android:name="ru.hse.miem.miemapp.presentation.profile.applications.MyApplicationsFragment"
+        android:label="Profile Applications Fragment"
+        tools:layout="@layout/fragment_profile_applications">
+
     </fragment>
 
     <fragment

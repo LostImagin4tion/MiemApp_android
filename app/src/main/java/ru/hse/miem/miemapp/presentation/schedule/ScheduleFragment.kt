@@ -29,7 +29,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
     private var defaultDate = calendar.getCurrentDate()
     private var startDate = defaultDate
-    private var finishDate = calendar.getLastDate(defaultDate)
+    private var finishDate = calendar.getNewDate(defaultDate, 6)
 
     private var defaultDateRu = calendar.getRuFormattedDate(defaultDate)
     private var startDateRu = defaultDateRu
@@ -96,7 +96,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             scheduleCalendar.date = SimpleDateFormat("dd/MM/yyyy").parse(selectedDate).time
 
             startDate = calendar.getApiFormattedDate(year, month + 1, dayOfMonth)
-            finishDate = calendar.getLastDate(startDate)
+            finishDate = calendar.getNewDate(startDate, 6)
 
             startDateRu = calendar.getRuFormattedDate(startDate)
             finishDateRu = calendar.getRuFormattedDate(finishDate)
@@ -127,12 +127,12 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
                     schedulePresenter.onScrolledDown(
                         userId = args.userId.toString(),
-                        startDate = finishDate,
-                        finishDate = calendar.getLastDate(finishDate),
+                        startDate = calendar.getNewDate(finishDate, 2),
+                        finishDate = calendar.getNewDate(finishDate, 7),
                         isTeacher = args.isTeacher
                     )
 
-                    finishDate = calendar.getLastDate(finishDate)
+                    finishDate = calendar.getNewDate(finishDate, 6)
                     finishDateRu = calendar.getRuFormattedDate(finishDate)
                     dateSelector.text = "$startDateRu - $finishDateRu"
                 }

@@ -40,7 +40,23 @@
             android:defaultValue="false"/>
 
         <action
-            android:id="@+id/action_fragmentProfile_to_fragmentProject"
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileProjects"
+            app:destination="@id/fragmentProfileProjects"/>
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileApplications"
+            app:destination="@id/fragmentProfileApplications"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfileProjects"
+        android:name="ru.hse.miem.miemapp.presentation.profile.projects.ProjectsFragment"
+        android:label="Profile Projects Fragment"
+        tools:layout="@layout/fragment_profile_projects">
+
+        <action
+            android:id="@+id/action_fragmentProfileProjects_to_fragmentProject"
             app:destination="@id/fragmentProject">
 
             <argument
@@ -50,9 +66,13 @@
 
         </action>
 
-        <action
-            android:id="@+id/action_fragmentProfile_to_fragmentSettings"
-            app:destination="@id/fragmentSettings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfileApplications"
+        android:name="ru.hse.miem.miemapp.presentation.profile.applications.MyApplicationsFragment"
+        android:label="Profile Applications Fragment"
+        tools:layout="@layout/fragment_profile_applications">
 
     </fragment>
 
@@ -90,15 +110,4 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/fragmentSettings"
-        android:name="ru.hse.miem.miemapp.presentation.settings.SettingsFragment"
-        android:label="Settings fragment"
-        tools:layout="@layout/fragment_settings">
-
-        <action
-            android:id="@+id/action_fragmentSettings_to_fragmentProfile"
-            app:destination="@id/fragmentProfile" />
-
-    </fragment>
 </navigation>

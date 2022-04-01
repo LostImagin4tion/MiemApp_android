@@ -20,6 +20,7 @@
     <string name="unauthorized_name">Аноним</string>
     <string name="profile_go_to_chat">Чат</string>
     <string name="projects_title">Проекты</string>
+    <string name="my_projects_title">Mои проекты</string>
     <string name="project_members">Участники:</string>
     <string name="project_type">Тип:</string>
     <string name="project_state">Статус:</string>
@@ -35,6 +36,15 @@
     <string name="application_my_comment">Мой комментарий:</string>
     <string name="application_withdraw">Отозвать</string>
     <string name="application_approve">Подтвердить</string>
+
+    <string name="statistics_title">Статистика</string>
+    <string name="achievements_title">Достижения</string>
+    <string name="git_title">Статистика Git</string>
+
+    <string name="app_title">Приложение</string>
+    <string name="settings_title">Настройки</string>
+    <string name="report_title">Сообщить о проблеме</string>
+    <string name="exit_title">Выйти</string>
 
     <string name="project_type_and_number">Проект #%d, %s (%s)</string>
     <string name="project_team">Команда</string>

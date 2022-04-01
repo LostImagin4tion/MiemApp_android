@@ -7,6 +7,8 @@ import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragment
+import ru.hse.miem.miemapp.presentation.profile.applications.MyApplicationsFragment
+import ru.hse.miem.miemapp.presentation.profile.projects.ProjectsFragment
 import ru.hse.miem.miemapp.presentation.project.ProjectFragment
 import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragment
 import ru.hse.miem.miemapp.presentation.schedule.ScheduleFragment
@@ -37,5 +39,7 @@ interface AppComponent {
     fun inject(vacanciesFragment: VacanciesFragment)
     fun inject(scheduleFragment: ScheduleFragment)
     fun inject(sandboxFragment: SandboxFragment)
+    fun inject(profileProjectsFragment: ProjectsFragment)
+    fun inject(profileApplicationsFragment: MyApplicationsFragment)
     fun session(): Session // used in submodules
 }

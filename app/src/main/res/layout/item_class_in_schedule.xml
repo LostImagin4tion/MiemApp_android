@@ -10,7 +10,8 @@
     android:layout_marginEnd="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="-20dp"
-    app:cardBackgroundColor="@android:color/transparent"
+    app:cardBackgroundColor="@color/colorPrimary"
+    tools:backgroundTint="@color/colorPrimary"
     android:elevation="4dp"
     app:cardCornerRadius="0dp"
     android:id="@+id/classInSchedule">
@@ -19,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-7dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="7dp">
 
         <RelativeLayout
             android:layout_width="wrap_content"

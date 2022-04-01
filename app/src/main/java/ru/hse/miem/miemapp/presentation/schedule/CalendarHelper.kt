@@ -19,13 +19,13 @@ class CalendarHelper {
         return getApiFormattedDate(year, month, day)
     }
 
-    fun getLastDate(currentDate: String): String {
+    fun getNewDate(currentDate: String, amountOfDays: Int): String {
 
         val tempCalendar = Calendar.getInstance()
 
         tempCalendar.time = dateFormat.parse(currentDate)
 
-        tempCalendar.add(Calendar.DATE, 6)
+        tempCalendar.add(Calendar.DATE, amountOfDays)
 
         val year = tempCalendar.get(Calendar.YEAR)
         val month = tempCalendar.get(Calendar.MONTH) + 1

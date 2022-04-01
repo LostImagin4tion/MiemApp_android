@@ -8,8 +8,5 @@ import ru.hse.miem.miemapp.presentation.base.BaseView
 
 interface ProfileView : BaseView {
     @AddToEndSingle fun setupProfile(profile: Profile)
-    @AddToEndSingle fun setupProjects(projects: List<ProjectBasic>)
-    @AddToEndSingle fun setupMyProjects(projects: List<MyProjectsAndApplications.MyProjectBasic>)
-    @AddToEndSingle fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>)
     @AddToEndSingle fun showUnauthorizedProfile()
 }

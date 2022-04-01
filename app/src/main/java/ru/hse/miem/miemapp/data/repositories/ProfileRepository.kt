@@ -48,7 +48,7 @@ class ProfileRepository @Inject constructor(
     override suspend fun getMyProjectsAndApplications() = withIO {
         cabinetApi.myUserStatistic().let {
             val projects = async {
-                it.data.projects.data.map {
+                it.data.projects.map {
                     MyProjectsAndApplications.MyProjectBasic(
                         id = it.project_id,
                         number = it.number,
@@ -65,24 +65,21 @@ class ProfileRepository @Inject constructor(
             }
 
             val applications = async {
-                (it.data.applications.data + it.data.approved_applications.data).map {
+                (it.data.applications + it.data.approved_applications).map {
                     MyProjectsAndApplications.MyApplication(
-                        id = it.id,
-                        projectId = it.project_id,
-                        projectNumber = it.project_name.split(" ")[0].toLong(),
-                        projectName = it.project_name,
+                        id = it.applId,
+                        projectId = it.id,
+                        projectNumber = it.nameRus.split(" ")[0].toLong(),
+                        projectName = it.nameRus,
                         projectType = it.type,
                         role = it.role,
-                        head = it.leader,
+                        head = it.head,
                         status = MyProjectsAndApplications.MyApplication.Status.valueOf(it.status),
                         studentComment = it.studentComment,
                         headComment = it.leaderComment
                     )
                 }
             }
-
-            println(projects)
-            println(applications)
 
             MyProjectsAndApplications(projects.await(), applications.await())
         }
