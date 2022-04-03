@@ -51,14 +51,6 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
-                <ImageButton
-                    android:id="@+id/scheduleSettingsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="105dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_schedule_settings" />
-
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -86,7 +78,5 @@
     </LinearLayout>
 
     <include layout="@layout/layout_bottom_calendar" />
-
-    <include layout="@layout/layout_bottom_schedule_settings" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

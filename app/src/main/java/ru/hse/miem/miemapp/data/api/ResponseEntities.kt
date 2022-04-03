@@ -99,6 +99,19 @@ data class MyStatisticResponse(
     }
 }
 
+data class AchievementsResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val id: Int,
+        val name: String,
+        val category_id: Int,
+        val award_condition_description: String,
+        val image: String,
+        val progress: Float
+    )
+}
+
 
 /**
  * Project related

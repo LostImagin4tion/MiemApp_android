@@ -38,7 +38,11 @@
     <string name="application_approve">Подтвердить</string>
 
     <string name="statistics_title">Статистика</string>
+
     <string name="achievements_title">Достижения</string>
+    <string name="tracking_section">Трекинг</string>
+    <string name="gitlab_section">Gitliab</string>
+
     <string name="git_title">Статистика Git</string>
 
     <string name="app_title">Приложение</string>

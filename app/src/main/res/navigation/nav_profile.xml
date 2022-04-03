@@ -47,6 +47,9 @@
             android:id="@+id/action_fragmentProfile_to_fragmentProfileApplications"
             app:destination="@id/fragmentProfileApplications"/>
 
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileAchievements"
+            app:destination="@+id/fragmentProfileAchievements" />
     </fragment>
 
     <fragment
@@ -74,6 +77,25 @@
         android:label="Profile Applications Fragment"
         tools:layout="@layout/fragment_profile_applications">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfileAchievements"
+        android:name="ru.hse.miem.miemapp.presentation.profile.achievements.AchievementsFragment"
+        android:label="Achievements fragment"
+        tools:layout="@layout/fragment_profile_achivements">
+
+        <argument
+            android:name="userId"
+            app:argType="long"
+            app:nullable="false"
+            android:defaultValue="-1L"/>
+
+        <argument
+            android:name="isTeacher"
+            app:argType="boolean"
+            app:nullable="false"
+            android:defaultValue="false"/>
     </fragment>
 
     <fragment

@@ -66,6 +66,39 @@ data class MyProjectsAndApplications(
     }
 }
 
+data class Achievements(
+    val tracker: List<Tracker>,
+    val gitlab: List<Gitlab>
+) {
+    data class Tracker(
+        val id: Int,
+        val name: String,
+        val categoryId: Int,
+        val awardCondition: String,
+        val image: String,
+        val progress: Int
+    )
+
+    data class Gitlab(
+        val id: Int,
+        val name: String,
+        val categoryId: Int,
+        val awardCondition: String,
+        val image: String,
+        val progress: Int
+    )
+
+    enum class Category(val categoryId: Int) {
+        TRACKER(1),
+        GITLAB(2);
+
+        companion object {
+            fun valueOf(category: Int) = values().find { it.categoryId == category }
+                ?: throw java.lang.IllegalArgumentException("Unknown category")
+        }
+    }
+}
+
 // displayed in project screen
 data class ProjectExtended(
     val id: Long,

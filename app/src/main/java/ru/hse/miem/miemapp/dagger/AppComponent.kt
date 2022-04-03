@@ -7,6 +7,7 @@ import ru.hse.miem.miemapp.Session
 import ru.hse.miem.miemapp.presentation.login.LoginFragment
 import ru.hse.miem.miemapp.presentation.main.MainActivity
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragment
+import ru.hse.miem.miemapp.presentation.profile.achievements.AchievementsFragment
 import ru.hse.miem.miemapp.presentation.profile.applications.MyApplicationsFragment
 import ru.hse.miem.miemapp.presentation.profile.projects.ProjectsFragment
 import ru.hse.miem.miemapp.presentation.project.ProjectFragment
@@ -41,5 +42,6 @@ interface AppComponent {
     fun inject(sandboxFragment: SandboxFragment)
     fun inject(profileProjectsFragment: ProjectsFragment)
     fun inject(profileApplicationsFragment: MyApplicationsFragment)
+    fun inject(achievementsFragment: AchievementsFragment)
     fun session(): Session // used in submodules
 }

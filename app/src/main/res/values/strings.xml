@@ -40,7 +40,11 @@
     <string name="application_approve">Approve</string>
 
     <string name="statistics_title">Statistics</string>
+
     <string name="achievements_title">Achievements</string>
+    <string name="tracking_section">Tracking</string>
+    <string name="gitlab_section">Gitlab</string>
+
     <string name="git_title">Git Statistics</string>
 
     <string name="app_title">App</string>

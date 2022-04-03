@@ -82,6 +82,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
             findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileApplications())
         }
 
+        achievementsButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileAchievements())
+        }
+
         settingsButton.setOnClickListener {
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
@@ -100,9 +104,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
     }
 
     private fun initProfile() {
+        println(profileArgs.userId)
+        println(profileArgs.isTeacher)
         if (isMyProfile) {
             profilePresenter.onCreate()
         } else {
+            profileAppSection.visibility = View.INVISIBLE
             applicationButton.visibility = View.GONE
             profilePresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
         }

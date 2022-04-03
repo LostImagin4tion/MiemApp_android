@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/achievement"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
+    android:layout_marginStart="10dp"
+    android:elevation="8dp"
+    app:cardBackgroundColor="@color/colorPrimaryCard"
+    tools:backgroundTint="@color/colorPrimaryCard"
+    app:cardCornerRadius="4dp" >
+
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="5dp">
+
+        <ImageView
+            android:id="@+id/achievementIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/default_profile_avatar" />
+
+        <TextView
+            android:id="@+id/achievementTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="Новобранец трекинга"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/achievementCondition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="15sp"
+            tools:text="Выполните первую задачу" />
+
+        <ProgressBar
+            android:id="@+id/achievementProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:max="100"
+            android:progress="10"
+            android:progressTint="@color/colorAccent"
+            android:visibility="visible"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

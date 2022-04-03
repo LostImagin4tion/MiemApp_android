@@ -60,6 +60,7 @@ android {
 }
 
 dependencies {
+    implementation("androidx.appcompat:appcompat:1.3.0")
     setupKotlin()
     setupAndroidCore()
     setupTimberLogging()

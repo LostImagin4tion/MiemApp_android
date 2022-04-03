@@ -46,6 +46,7 @@ class ProjectsFragment : BaseFragment(R.layout.fragment_profile_projects), Proje
     }
 
     override fun setupProjects(projects: List<ProjectBasic>) {
+        projectsLoader.visibility = View.GONE
 
         if (projects.isNotEmpty()) {
             projectsList.adapter = ProjectsAdapter(projects) {

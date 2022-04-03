@@ -43,7 +43,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     fun provideSchedulePresenter() = schedulePresenter
 
     private lateinit var calendarBehaviour: BottomSheetBehavior<View>
-    private lateinit var scheduleSettingsBehavior: BottomSheetBehavior<View>
 
     private val scheduleAdapter = ScheduleAdapter()
 
@@ -67,24 +66,8 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         calendarBehaviour = BottomSheetBehavior.from(scheduleFilterLayout)
         calendarBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
 
-        scheduleSettingsBehavior = BottomSheetBehavior.from(scheduleSettingsLayout)
-        scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        scheduleSettingsBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {}
-        })
-
         dateSelector.setOnClickListener {
             calendarBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
-        }
-
-        scheduleSettingsButton.setOnClickListener {
-            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        }
-
-        scheduleSettingsCheckbox.setOnCheckedChangeListener { compoundButton, b ->
-            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         scheduleCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -104,7 +87,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             dateSelector.text = "$startDateRu - $finishDateRu"
 
             schedulePresenter.onCreate(
-                userId = args.userId.toString(),
                 startDate = startDate,
                 finishDate = finishDate,
                 isTeacher = args.isTeacher
@@ -126,7 +108,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                     bottomScheduleLoader.visibility = View.VISIBLE
 
                     schedulePresenter.onScrolledDown(
-                        userId = args.userId.toString(),
                         startDate = calendar.getNewDate(finishDate, 2),
                         finishDate = calendar.getNewDate(finishDate, 7),
                         isTeacher = args.isTeacher
@@ -140,7 +121,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         })
 
         schedulePresenter.onCreate(
-            userId = args.userId.toString(),
             startDate = startDate,
             finishDate = finishDate,
             isTeacher = args.isTeacher
@@ -149,24 +129,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
     override fun onBackPressed(): Boolean { //FIXME investigate how to make this code nice
 
-        if(scheduleSettingsBehavior.state == BottomSheetBehavior.STATE_HIDDEN &&
-            calendarBehaviour.state != BottomSheetBehavior.STATE_COLLAPSED) {
-
-            calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
-            return true
-        }
-        else if(calendarBehaviour.state == BottomSheetBehavior.STATE_HIDDEN &&
-            scheduleSettingsBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
-
-            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            return true
-        }
-        else if(scheduleSettingsBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
-            scheduleSettingsBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            return true
-        }
-        else if (calendarBehaviour.state != BottomSheetBehavior.STATE_COLLAPSED) {
-            calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+        if (calendarBehaviour.state == BottomSheetBehavior.STATE_COLLAPSED) {
             return true
         }
         return false
