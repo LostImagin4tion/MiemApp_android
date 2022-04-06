@@ -86,6 +86,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
             findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileAchievements())
         }
 
+        gitButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileGitStats())
+        }
+
         settingsButton.setOnClickListener {
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
@@ -104,8 +108,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
     }
 
     private fun initProfile() {
+        println("USER PROFILE HELLLLLOOOO")
         println(profileArgs.userId)
-        println(profileArgs.isTeacher)
         if (isMyProfile) {
             profilePresenter.onCreate()
         } else {

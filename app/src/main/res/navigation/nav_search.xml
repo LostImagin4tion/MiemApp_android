@@ -56,7 +56,40 @@
 
         <action
             android:id="@+id/action_fragmentProfile_to_fragmentProfileAchievements"
-            app:destination="@+id/fragmentProfileAchievements" />
+            app:destination="@+id/fragmentProfileAchievements" >
+
+            <argument
+                android:name="userId"
+                app:argType="long"
+                app:nullable="false"
+                android:defaultValue="-1L"/>
+
+            <argument
+                android:name="isTeacher"
+                app:argType="boolean"
+                app:nullable="false"
+                android:defaultValue="false"/>
+
+        </action>
+
+        <action
+            android:id="@+id/action_fragmentProfile_to_fragmentProfileGitStats"
+            app:destination="@id/fragmentProfileGitStats" >
+
+            <argument
+                android:name="userId"
+                app:argType="long"
+                app:nullable="false"
+                android:defaultValue="-1L"/>
+
+            <argument
+                android:name="isTeacher"
+                app:argType="boolean"
+                app:nullable="false"
+                android:defaultValue="false"/>
+
+        </action>
+
     </fragment>
 
     <fragment
@@ -90,7 +123,7 @@
         android:id="@+id/fragmentProfileAchievements"
         android:name="ru.hse.miem.miemapp.presentation.profile.achievements.AchievementsFragment"
         android:label="Achievements fragment"
-        tools:layout="@layout/fragment_profile_achivements">
+        tools:layout="@layout/fragment_profile_achievements">
 
         <argument
             android:name="userId"
@@ -103,6 +136,26 @@
             app:argType="boolean"
             app:nullable="false"
             android:defaultValue="false"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentProfileGitStats"
+        android:name="ru.hse.miem.miemapp.presentation.profile.git_stats.GitStatsFragment"
+        android:label="Git Stats fragment"
+        tools:layout="@layout/fragment_profile_git_stats">
+
+        <argument
+            android:name="userId"
+            app:argType="long"
+            app:nullable="false"
+            android:defaultValue="-1L"/>
+
+        <argument
+            android:name="isTeacher"
+            app:argType="boolean"
+            app:nullable="false"
+            android:defaultValue="false"/>
+
     </fragment>
 
     <fragment

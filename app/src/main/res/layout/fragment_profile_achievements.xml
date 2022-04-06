@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/profileLayout"
+    android:id="@+id/profileAchievementsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -49,12 +49,15 @@
                 android:paddingTop="70dp">
 
                 <TextView
+                    android:id="@+id/trackingTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tracking_section"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    tools:visibility="visible"/>
 
                 <TextView
                     android:id="@+id/trackingNoInfo"
@@ -64,7 +67,7 @@
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     tools:visibility="visible"/>
 
                 <LinearLayout
@@ -73,7 +76,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
-                    android:visibility="visible">
+                    android:visibility="invisible"
+                    tools:visibility="visible">
 
                     <View
                         android:layout_width="3dp"
@@ -82,7 +86,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/trackingAchievementsList"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -91,13 +95,16 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/gitlabTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="@string/gitlab_section"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="invisible"
+                    tools:visibility="visible"/>
 
                 <TextView
                     android:id="@+id/gitlabNoInfo"
@@ -107,7 +114,7 @@
                     android:textSize="16sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
-                    android:visibility="gone"
+                    android:visibility="invisible"
                     tools:visibility="visible"/>
 
                 <LinearLayout
@@ -116,7 +123,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="10dp"
-                    android:visibility="visible">
+                    android:visibility="invisible"
+                    tools:visibility="visible" >
 
                     <View
                         android:id="@+id/sideLineGitlab"
@@ -126,7 +134,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/gitlabAchievementsList"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

@@ -49,6 +49,15 @@ interface CabinetApi {
     @GET("$publicApi/badge/user/{userId}/progress")
     suspend fun achievementsWithProgress(@Path("userId") id: Long): AchievementsResponse
 
+    @GET("$publicApi/git_statistics/student/{userId}")
+    suspend fun studentGitStatistics(@Path("userId") id: Long): UserGitStatisticsResponse
+
+    @GET("$publicApi/git_statistics/teacher/{userId}")
+    suspend fun teacherGitStatistics(@Path("userId") id: Long): UserGitStatisticsResponse
+
+    @GET("$api/student_statistics/git/my")
+    suspend fun myUserGitStatistics(): UserGitStatisticsResponse
+
     /**
      * Project related endpoints
      */

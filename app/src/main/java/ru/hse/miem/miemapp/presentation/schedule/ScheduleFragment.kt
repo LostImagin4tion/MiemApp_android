@@ -127,7 +127,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         )
     }
 
-    override fun onBackPressed(): Boolean { //FIXME investigate how to make this code nice
+    override fun onBackPressed(): Boolean {
 
         if (calendarBehaviour.state == BottomSheetBehavior.STATE_COLLAPSED) {
             return true

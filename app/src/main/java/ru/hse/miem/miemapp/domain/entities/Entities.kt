@@ -99,6 +99,14 @@ data class Achievements(
     }
 }
 
+data class UserGitStatistics(
+    val repoId: Long,
+    val name: String,
+    val commitCount: Int,
+    val stringsCount: Int,
+    val usedLanguages: List<String>
+)
+
 // displayed in project screen
 data class ProjectExtended(
     val id: Long,

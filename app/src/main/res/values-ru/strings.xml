@@ -20,7 +20,7 @@
     <string name="unauthorized_name">Аноним</string>
     <string name="profile_go_to_chat">Чат</string>
     <string name="projects_title">Проекты</string>
-    <string name="my_projects_title">Mои проекты</string>
+    <string name="my_projects_title">Проекты</string>
     <string name="project_members">Участники:</string>
     <string name="project_type">Тип:</string>
     <string name="project_state">Статус:</string>
@@ -44,6 +44,11 @@
     <string name="gitlab_section">Gitliab</string>
 
     <string name="git_title">Статистика Git</string>
+    <string name="total_commits">Коммитов</string>
+    <string name="total_strings">Строчек кода</string>
+    <string name="total_languages">Использованные языки</string>
+    <string name="total_repos">Количество репозиториев</string>
+    <string name="stats_choose_repo">Выберите репозиторий</string>
 
     <string name="app_title">Приложение</string>
     <string name="settings_title">Настройки</string>

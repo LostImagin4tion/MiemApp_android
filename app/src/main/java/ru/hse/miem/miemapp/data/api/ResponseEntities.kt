@@ -112,6 +112,18 @@ data class AchievementsResponse(
     )
 }
 
+data class UserGitStatisticsResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val id: Long,
+        val name: String,
+        val commitCount: Int,
+        val strings: Int,
+        val languages: List<String>,
+    )
+}
+
 
 /**
  * Project related

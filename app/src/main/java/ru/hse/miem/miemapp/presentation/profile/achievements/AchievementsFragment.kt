@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
-import kotlinx.android.synthetic.main.fragment_profile_achivements.*
+import kotlinx.android.synthetic.main.fragment_profile_achievements.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
@@ -14,7 +14,7 @@ import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
 import javax.inject.Inject
 
-class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achivements), AchievementsView {
+class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achievements), AchievementsView {
 
     @Inject
     @InjectPresenter
@@ -23,7 +23,9 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achivements),
     @ProvidePresenter
     fun provideAchievementsPresenter() = achievementsPresenter
 
-    private val profileArgs: ProfileFragmentArgs by navArgs()
+    private val profileArgs: AchievementsFragmentArgs by navArgs()
+
+    private val isMyProfile by lazy { profileArgs.userId < 0 }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,7 +33,15 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achivements),
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        achievementsPresenter.onCreate(profileArgs.userId)
+        initAchievements()
+    }
+
+    private fun initAchievements() {
+        if (isMyProfile) {
+            achievementsPresenter.onCreate()
+        } else {
+            achievementsPresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
+        }
     }
 
     override fun setupAchievements(achievements: Achievements) {
@@ -44,8 +54,12 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achivements),
             achievements.gitlab
         )
 
+        trackingTitle.visibility = View.VISIBLE
+        gitlabTitle.visibility = View.VISIBLE
+
         if (achievements.tracker.isNotEmpty()) {
             trackingNoInfo.visibility = View.GONE
+            trackingSection.visibility = View.VISIBLE
         }
         else {
             trackingNoInfo.visibility = View.VISIBLE
@@ -53,6 +67,7 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achivements),
 
         if (achievements.gitlab.isNotEmpty()) {
             gitlabNoInfo.visibility = View.GONE
+            gitlabSection.visibility = View.VISIBLE
         }
         else {
             gitlabNoInfo.visibility = View.VISIBLE

@@ -67,9 +67,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical"
-                android:visibility="invisible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_day_in_schedule"
+                android:visibility="invisible"
                 tools:visibility="visible"
                 android:background="@color/colorPrimary" />
 

@@ -9,15 +9,15 @@ class AchievementsPresenter @Inject constructor(
     private val profileRepository: IProfileRepository,
 ): BasePresenter<AchievementsView>() {
 
-    fun onCreate(userId: Long) = launch {
+    fun onCreate(userId: Long? = null, isTeacher: Boolean? = null) = launch {
         try {
             val email: String?
 
-            val profileId = if (userId == -1L) {
+            val profileId = if (userId == null) {
                 val profile = profileRepository.getMyProfile()
                 email = profile.email
 
-                profileRepository.getMyProfile().id
+                profile.id
             }
             else {
                 email = null
