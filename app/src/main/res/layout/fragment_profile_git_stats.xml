@@ -68,7 +68,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/spinner_background"
-                        android:gravity="center"
                         android:textAlignment="center" />
 
                 </LinearLayout>
@@ -183,7 +182,7 @@
 
                 <LinearLayout
                     android:id="@+id/languagesSection"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
@@ -210,6 +209,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="14dp"
                             android:orientation="vertical"
                             android:background="@color/colorPrimary"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

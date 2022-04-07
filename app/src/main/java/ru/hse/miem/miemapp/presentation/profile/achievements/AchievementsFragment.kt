@@ -23,7 +23,7 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achievements)
     @ProvidePresenter
     fun provideAchievementsPresenter() = achievementsPresenter
 
-    private val profileArgs: AchievementsFragmentArgs by navArgs()
+    private val profileArgs: ProfileFragmentArgs by navArgs()
 
     private val isMyProfile by lazy { profileArgs.userId < 0 }
 

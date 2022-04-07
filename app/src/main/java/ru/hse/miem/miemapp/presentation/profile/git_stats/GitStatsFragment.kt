@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_profile_git_stats.*
 import kotlinx.android.synthetic.main.fragment_schedule.*
 import moxy.presenter.InjectPresenter
@@ -29,7 +30,7 @@ class GitStatsFragment: BaseFragment(R.layout.fragment_profile_git_stats), GitSt
 
     private lateinit var repos: List<UserGitStatistics>
 
-    private val profileArgs: GitStatsFragmentArgs by navArgs()
+    private val profileArgs: ProfileFragmentArgs by navArgs()
 
     private val gitStatsAdapter = GitStatsAdapter()
 
@@ -84,6 +85,13 @@ class GitStatsFragment: BaseFragment(R.layout.fragment_profile_git_stats), GitSt
         else {
             reposSection.visibility = View.GONE
         }
+
+        val columnCount = when(gitStats.usedLanguages.size) {
+            1 -> 1
+            2 -> 2
+            else -> 3
+        }
+        languagesList.layoutManager = GridLayoutManager(activity, columnCount)
 
         gitStatsAdapter.update(gitStats.usedLanguages)
     }

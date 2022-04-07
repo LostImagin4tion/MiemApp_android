@@ -12,7 +12,7 @@ import ru.hse.miem.miemapp.domain.entities.UserGitStatistics
 
 class GitStatsAdapter: RecyclerView.Adapter<GitStatsAdapter.GitStatsViewHolder>() {
 
-    private var languagesList: MutableList<String> = mutableListOf<String>()
+    private var languagesList: MutableList<String> = mutableListOf()
     private var displayedLanguages = languagesList
 
     fun update(items: List<String>) {

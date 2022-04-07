@@ -11,9 +11,6 @@ class GitStatsPresenter @Inject constructor(
 
     fun onCreate(userId: Long, isTeacher: Boolean) = launch {
         try {
-            println("HEEEEEEEEEELLLLLLLLLLLLOOOOOOOOOOOOOOOO")
-            println(userId)
-
             val email: String?
 
             val profileId = if (userId == -1L) {
