@@ -99,6 +99,31 @@ data class MyStatisticResponse(
     }
 }
 
+data class AchievementsResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val id: Int,
+        val name: String,
+        val category_id: Int,
+        val award_condition_description: String,
+        val image: String,
+        val progress: Float
+    )
+}
+
+data class UserGitStatisticsResponse(
+    val data: List<Data>
+) {
+    data class Data(
+        val id: Long,
+        val name: String,
+        val commitCount: Int,
+        val strings: Int,
+        val languages: List<String>,
+    )
+}
+
 
 /**
  * Project related

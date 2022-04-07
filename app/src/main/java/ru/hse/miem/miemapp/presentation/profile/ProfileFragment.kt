@@ -82,6 +82,22 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
             findNavController().navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileApplications())
         }
 
+        achievementsButton.setOnClickListener {
+            findNavController()
+                .navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileAchievements(
+                    userId = profileArgs.userId,
+                    isTeacher = profileArgs.isTeacher
+                ))
+        }
+
+        gitButton.setOnClickListener {
+            findNavController()
+                .navigate(ProfileFragmentDirections.actionFragmentProfileToFragmentProfileGitStats(
+                    userId = profileArgs.userId,
+                    isTeacher = profileArgs.isTeacher
+            ))
+        }
+
         settingsButton.setOnClickListener {
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
@@ -103,6 +119,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         if (isMyProfile) {
             profilePresenter.onCreate()
         } else {
+            profileAppSection.visibility = View.INVISIBLE
             applicationButton.visibility = View.GONE
             profilePresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
         }

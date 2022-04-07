@@ -20,13 +20,11 @@ class ScheduleAdapter: RecyclerView.Adapter<ViewHolder>() {
     }
 
     fun update(items: List<IScheduleItem>) {
-
         this.scheduleItems = if (items.isEmpty()) {
             mutableListOf()
         } else {
             items as MutableList<IScheduleItem>
         }
-
         displayedItems = this.scheduleItems
 
         notifyDataSetChanged()

@@ -9,9 +9,11 @@ class MyApplicationsPresenter @Inject constructor(
     private val profileRepository: IProfileRepository,
 ): BasePresenter<MyApplicationsView>() {
 
-    fun onCreate() {
+    fun onCreate() = launch {
         try {
-            loadMyApplications()
+            profileRepository.getMyProjectsAndApplications().let {
+                viewState.setupMyApplications(it.applications)
+            }
         }
         catch (e: Exception) {
             proceedError(e)
@@ -31,17 +33,6 @@ class MyApplicationsPresenter @Inject constructor(
         try {
             profileRepository.applicationWithdraw(applicationId)
         } catch (e: Exception) {
-            proceedError(e)
-        }
-    }
-
-    private fun loadMyApplications() = launch {
-        try {
-            profileRepository.getMyProjectsAndApplications().let {
-                viewState.setupMyApplications(it.applications)
-            }
-        }
-        catch (e: Exception) {
             proceedError(e)
         }
     }

@@ -6,10 +6,9 @@ import ru.hse.miem.miemapp.data.api.ApplicationConfirmRequest
 import ru.hse.miem.miemapp.data.api.CabinetApi
 import ru.hse.miem.miemapp.data.api.StudentProfileResponse
 import ru.hse.miem.miemapp.data.api.TeacherProfileResponse
-import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
-import ru.hse.miem.miemapp.domain.entities.Profile
-import ru.hse.miem.miemapp.domain.entities.ProjectBasic
+import ru.hse.miem.miemapp.domain.entities.*
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
+import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(
@@ -82,6 +81,96 @@ class ProfileRepository @Inject constructor(
             }
 
             MyProjectsAndApplications(projects.await(), applications.await())
+        }
+    }
+
+    override suspend fun getAchievementsWithProgress(userId: Long, email: String?) = withIO {
+
+        val profileId = if (email != null) {
+            cabinetApi.userInfoByEmail(email).data.userId.toLong()
+        } else {
+            userId
+        }
+
+        cabinetApi.achievementsWithProgress(profileId).let {
+
+            val tracker: MutableList<Achievements.Tracker> = mutableListOf()
+            val gitlab: MutableList<Achievements.Gitlab> = mutableListOf()
+
+            it.data.map {
+                if (it.category_id == 1) {
+                    tracker.add(Achievements.Tracker(
+                        id = it.id,
+                        name = it.name,
+                        categoryId = it.category_id,
+                        awardCondition = it.award_condition_description,
+                        image = it.image,
+                        progress = it.progress.toInt()
+                    ))
+                }
+                else {
+                    gitlab.add(Achievements.Gitlab(
+                        id = it.id,
+                        name = it.name,
+                        categoryId = it.category_id,
+                        awardCondition = it.award_condition_description,
+                        image = it.image,
+                        progress = it.progress.toInt()
+                    ))
+                }
+            }
+
+            Achievements(tracker, gitlab)
+        }
+    }
+
+    override suspend fun getUserGitStatistics(userId: Long, email: String?, isTeacher: Boolean) = withIO {
+
+        val profileId = if(email != null) {
+            cabinetApi.userInfoByEmail(email).data.userId.toLong()
+        } else {
+            userId
+        }
+
+        if (isTeacher) {
+            cabinetApi.teacherGitStatistics(profileId).let {
+                it.data.map {
+                    UserGitStatistics(
+                        repoId = it.id,
+                        name = it.name,
+                        commitCount = it.commitCount,
+                        stringsCount = it.strings,
+                        usedLanguages = it.languages
+                    )
+                }
+            }
+        }
+        else {
+            cabinetApi.studentGitStatistics(profileId).let {
+                it.data.map {
+                    UserGitStatistics(
+                        repoId = it.id,
+                        name = it.name,
+                        commitCount = it.commitCount,
+                        stringsCount = it.strings,
+                        usedLanguages = it.languages
+                    )
+                }
+            }
+        }
+    }
+
+    override suspend fun getMyUserGitStatistics() = withIO {
+        cabinetApi.myUserGitStatistics().let {
+            it.data.map {
+                UserGitStatistics(
+                    repoId = it.id,
+                    name = it.name,
+                    commitCount = it.commitCount,
+                    stringsCount = it.strings,
+                    usedLanguages = it.languages
+                )
+            }
         }
     }
 

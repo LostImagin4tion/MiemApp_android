@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
+import ru.hse.miem.miemapp.domain.entities.UserGitStatistics
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import java.util.*
@@ -33,6 +34,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
         findNavController().navigate(action)
     }
+
     private val filters = SearchFilters()
 
     override fun onAttach(context: Context) {

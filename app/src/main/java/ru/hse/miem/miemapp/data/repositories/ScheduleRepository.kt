@@ -17,7 +17,6 @@ class ScheduleRepository @Inject constructor(
     private val calendar = CalendarHelper()
 
     override suspend fun getSchedule(
-        userId: String,
         startDate: String,
         finishDate: String,
         isTeacher: Boolean

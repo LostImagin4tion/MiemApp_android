@@ -13,6 +13,7 @@ interface CabinetApi {
         const val SUCCESS_CODE_PREFIX = 20
         private const val api = "api"
         private const val publicApi = "public-api"
+        private const val baseURL = "devcabinet.miem.vmnet.top"
 
         fun getAvatarUrl(userId: Long) = "$CABINET_BASE_URL$publicApi/user/$userId/avatar"
         fun getProjectUrl(projectId: Long) = "$CABINET_BASE_URL#/project/$projectId"
@@ -44,6 +45,18 @@ interface CabinetApi {
 
     @POST("$api/student/application/confirm")
     suspend fun applicationConfirm(@Body request: ApplicationConfirmRequest)
+
+    @GET("$publicApi/badge/user/{userId}/progress")
+    suspend fun achievementsWithProgress(@Path("userId") id: Long): AchievementsResponse
+
+    @GET("$publicApi/git_statistics/student/{userId}")
+    suspend fun studentGitStatistics(@Path("userId") id: Long): UserGitStatisticsResponse
+
+    @GET("$publicApi/git_statistics/teacher/{userId}")
+    suspend fun teacherGitStatistics(@Path("userId") id: Long): UserGitStatisticsResponse
+
+    @GET("$api/student_statistics/git/my")
+    suspend fun myUserGitStatistics(): UserGitStatisticsResponse
 
     /**
      * Project related endpoints

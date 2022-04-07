@@ -137,122 +137,146 @@
                         app:drawableStartCompat="@drawable/ic_school_hat"
                         tools:text="Department of Computer Engineering" />
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/profileProjectsSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:text="@string/projects_title"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:visibility="visible"/>
+                        android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/projectsButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:text="@string/my_projects_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_projects"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp"
+                            android:text="@string/projects_title"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:visibility="visible"/>
 
-                    <Button
-                        android:id="@+id/applicationButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:text="@string/applications_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_applications"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"
-                        android:visibility="visible"/>
+                        <Button
+                            android:id="@+id/projectsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="@string/my_projects_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_projects"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:text="@string/statistics_title"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:visibility="visible"/>
+                        <Button
+                            android:id="@+id/applicationButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="@string/applications_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_applications"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"
+                            android:visibility="visible"/>
 
-                    <Button
-                        android:id="@+id/achievementsButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:text="@string/achievements_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_achievements"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"/>
+                    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/gitButton"
+                    <LinearLayout
+                        android:id="@+id/profileStatisticsSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:text="@string/git_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_git"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"/>
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginBottom="12dp"
-                        android:text="@string/app_title"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:visibility="visible"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:text="@string/statistics_title"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:visibility="visible"/>
 
-                    <Button
-                        android:id="@+id/settingsButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:text="@string/settings_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_settings"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"/>
+                        <Button
+                            android:id="@+id/achievementsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="@string/achievements_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_achievements"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"/>
 
-                    <Button
-                        android:id="@+id/reportButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:text="@string/report_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_report"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"/>
+                        <Button
+                            android:id="@+id/gitButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="@string/git_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_git"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"/>
 
-                    <Button
-                        android:id="@+id/exitButton"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/profileAppSection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackground"
-                        android:textColor="@color/red_dark"
-                        android:text="@string/exit_title"
-                        android:textAllCaps="false"
-                        app:icon="@drawable/ic_profile_exit"
-                        app:iconTintMode="add"
-                        app:iconTint="@android:color/transparent"/>
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:text="@string/app_title"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:visibility="visible"/>
+
+                        <Button
+                            android:id="@+id/settingsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="@string/settings_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_settings"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"/>
+
+                        <Button
+                            android:id="@+id/reportButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:text="@string/report_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_report"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"/>
+
+                        <Button
+                            android:id="@+id/exitButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?attr/selectableItemBackground"
+                            android:textColor="@color/red_dark"
+                            android:text="@string/exit_title"
+                            android:textAllCaps="false"
+                            app:icon="@drawable/ic_profile_exit"
+                            app:iconTintMode="add"
+                            app:iconTint="@android:color/transparent"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

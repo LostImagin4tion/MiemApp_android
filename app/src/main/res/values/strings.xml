@@ -40,8 +40,17 @@
     <string name="application_approve">Approve</string>
 
     <string name="statistics_title">Statistics</string>
+
     <string name="achievements_title">Achievements</string>
+    <string name="tracking_section">Tracking</string>
+    <string name="gitlab_section">Gitlab</string>
+
     <string name="git_title">Git Statistics</string>
+    <string name="total_commits">Commits made</string>
+    <string name="total_strings">Strings written</string>
+    <string name="total_languages">Languages used</string>
+    <string name="total_repos">Repositories</string>
+    <string name="stats_choose_repo">Choose repository</string>
 
     <string name="app_title">App</string>
     <string name="settings_title">Settings</string>

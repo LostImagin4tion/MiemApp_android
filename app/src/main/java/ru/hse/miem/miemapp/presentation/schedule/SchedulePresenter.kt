@@ -12,14 +12,12 @@ class SchedulePresenter @Inject constructor(
 ): BasePresenter<ScheduleView>() {
 
     fun onCreate(
-        userId: String,
         startDate: String,
         finishDate: String,
         isTeacher: Boolean
     ) = launch {
         try {
             scheduleRepository.getSchedule(
-                userId,
                 startDate,
                 finishDate,
                 isTeacher
@@ -30,14 +28,12 @@ class SchedulePresenter @Inject constructor(
     }
 
     fun onScrolledDown(
-        userId: String,
         startDate: String,
         finishDate: String,
         isTeacher: Boolean
     ) = launch {
         try {
             scheduleRepository.getSchedule(
-                userId,
                 startDate,
                 finishDate,
                 isTeacher

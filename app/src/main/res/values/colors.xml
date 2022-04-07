@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorPrimaryCard">#FFFFFF</color>
     <color name="colorAccent">#2F80ED</color>
     <color name="colorAccentDark">#1565C0</color>
     <color name="semi_transparent">#33000000</color>

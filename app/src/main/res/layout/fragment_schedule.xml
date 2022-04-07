@@ -51,14 +51,6 @@
                     android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
-                <ImageButton
-                    android:id="@+id/scheduleSettingsButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="105dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_schedule_settings" />
-
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -75,9 +67,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical"
-                android:visibility="invisible"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_day_in_schedule"
+                android:visibility="invisible"
                 tools:visibility="visible"
                 android:background="@color/colorPrimary" />
 
@@ -86,7 +78,5 @@
     </LinearLayout>
 
     <include layout="@layout/layout_bottom_calendar" />
-
-    <include layout="@layout/layout_bottom_schedule_settings" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
