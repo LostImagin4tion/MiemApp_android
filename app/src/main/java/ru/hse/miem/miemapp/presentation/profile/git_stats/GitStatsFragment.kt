@@ -8,15 +8,12 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.fragment_profile_git_stats.*
-import kotlinx.android.synthetic.main.fragment_schedule.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.UserGitStatistics
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
-import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
-import ru.hse.miem.miemapp.presentation.schedule.ScheduleAdapter
 import javax.inject.Inject
 
 class GitStatsFragment: BaseFragment(R.layout.fragment_profile_git_stats), GitStatsView {
@@ -30,7 +27,7 @@ class GitStatsFragment: BaseFragment(R.layout.fragment_profile_git_stats), GitSt
 
     private lateinit var repos: List<UserGitStatistics>
 
-    private val profileArgs: ProfileFragmentArgs by navArgs()
+    private val profileArgs: GitStatsFragmentArgs by navArgs()
 
     private val gitStatsAdapter = GitStatsAdapter()
 
