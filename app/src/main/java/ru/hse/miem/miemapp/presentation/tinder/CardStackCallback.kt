@@ -11,7 +11,7 @@ class CardStackCallback : CardStackListener {
     override fun onCardDragging(direction: Direction, ratio: Float) {}
 
     override fun onCardSwiped(direction: Direction) {
-        if (direction == Direction.Right) {
+        if (direction == Direction.Left) {
             Sorting.likeIndexes.add(pos)
         }
         Sorting.plus()
