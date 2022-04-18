@@ -11,7 +11,9 @@
         android:id="@+id/projectLoader"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:elevation="1dp"
+        android:background="@drawable/ic_loader_circle"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/projectContent"

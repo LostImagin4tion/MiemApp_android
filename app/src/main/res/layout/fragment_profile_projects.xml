@@ -10,7 +10,9 @@
         android:id="@+id/projectsLoader"
         android:layout_width="@dimen/loader_size"
         android:layout_height="@dimen/loader_size"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:elevation="1dp"
+        android:background="@drawable/ic_loader_circle"/>
 
     <LinearLayout
         android:layout_width="match_parent"

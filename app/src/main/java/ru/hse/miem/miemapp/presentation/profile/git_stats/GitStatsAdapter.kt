@@ -36,7 +36,7 @@ class GitStatsAdapter: RecyclerView.Adapter<GitStatsAdapter.GitStatsViewHolder>(
 
     inner class GitStatsViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(language: String) = itemView.apply {
-            languageCard.text = language
+            languageCard.text = language.split(" ")[0] // cause api returns language and percent of using
         }
     }
 }

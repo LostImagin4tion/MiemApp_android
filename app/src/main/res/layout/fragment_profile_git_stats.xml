@@ -42,7 +42,7 @@
             tools:visibility="visible">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
@@ -68,6 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/spinner_background"
+                        style="@style/Widget.AppCompat.DropDownItem.Spinner"
                         android:textAlignment="center" />
 
                 </LinearLayout>
@@ -206,11 +207,11 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/languagesList"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:paddingStart="14dp"
-                            android:paddingEnd="14dp"
+                            android:paddingStart="9dp"
+                            android:paddingEnd="9dp"
                             android:orientation="vertical"
                             android:background="@color/colorPrimary"
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
