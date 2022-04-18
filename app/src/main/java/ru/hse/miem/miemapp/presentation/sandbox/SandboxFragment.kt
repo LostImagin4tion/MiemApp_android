@@ -49,6 +49,9 @@ class SandboxFragment: BaseFragment(R.layout.fragment_sandbox), SandboxView, OnB
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        searchInput.isEnabled = false
+        filterButton.isEnabled = false
+
         projectsList.adapter = projectsAdapter
         if(projectsAdapter.hasData) {
             searchLoader.visibility = View.GONE
@@ -159,5 +162,8 @@ class SandboxFragment: BaseFragment(R.layout.fragment_sandbox), SandboxView, OnB
         restoreFilters()
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
+
+        searchInput.isEnabled = true
+        filterButton.isEnabled = true
     }
 }

@@ -47,7 +47,7 @@
                         android:imeOptions="actionSearch"
                         android:inputType="text"
                         android:ellipsize="end"
-                        tools:ignore="RtlSymmetry" />
+                        tools:ignore="RtlSymmetry"/>
 
                     <ImageButton
                         android:id="@+id/filterButton"

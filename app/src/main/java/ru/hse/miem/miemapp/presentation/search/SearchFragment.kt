@@ -46,6 +46,9 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        searchInput.isEnabled = false
+        filterButton.isEnabled = false
+
         projectsList.adapter = projectsAdapter
         if (projectsAdapter.hasData) {
             searchLoader.visibility = View.GONE
@@ -163,5 +166,8 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         restoreFilters()
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
+
+        searchInput.isEnabled = true
+        filterButton.isEnabled = true
     }
 }
