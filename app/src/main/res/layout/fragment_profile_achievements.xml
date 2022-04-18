@@ -87,10 +87,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/trackingAchievementsList"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="165dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_achievement" />
+                        tools:listitem="@layout/item_achievement_tracking" />
 
                 </LinearLayout>
 
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_achievement"
+                        tools:listitem="@layout/item_achievement_gitlab"
                         android:visibility="visible" />
 
                 </LinearLayout>
