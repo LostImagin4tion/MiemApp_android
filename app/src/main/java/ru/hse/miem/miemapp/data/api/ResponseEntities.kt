@@ -30,7 +30,7 @@ data class StudentProfileResponse(
         val group: String,
         val email: String,
         val direction: String,
-        val chatLink: String
+        val chatLink: String?
     )
 }
 
@@ -140,7 +140,8 @@ data class ProjectHeaderResponse(
         val statusLabel: String,
         val statusValue: Int,
         val nameRus: String,
-        val trello: String
+        val chat: String?,
+        val wiki: String?,
     )
 }
 

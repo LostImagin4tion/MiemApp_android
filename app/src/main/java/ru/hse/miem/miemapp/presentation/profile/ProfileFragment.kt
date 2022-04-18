@@ -69,7 +69,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         profileSwipeRefreshLayout.setOnRefreshListener(::initProfile)
 
         settingsButtonBehavior = BottomSheetBehavior.from(settingsLayout)
-        settingsButtonBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        settingsButtonBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         settingsButtonBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
@@ -157,8 +157,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         userEmail.text = email
         userOccupation.text = occupation
 
-        goToChatButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
+        if (profile.chatUrl != null) {
+            goToChatButton.setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
+            }
+        } else {
+            goToChatButton.visibility = View.GONE
         }
 
         if (isTeacher) {
