@@ -10,7 +10,7 @@
     app:cardCornerRadius="8dp">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp">
@@ -24,13 +24,21 @@
             android:textStyle="bold"
             tools:text="617" />
 
-        <ImageButton
-            android:id="@+id/deleteButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="285dp"
-            android:background="?attr/selectableItemBackground"
-            android:src="@drawable/ic_delete" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/deleteButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-3dp"
+                android:layout_marginEnd="-3dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_delete" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/projectTitle"
@@ -40,9 +48,10 @@
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
+            android:gravity="start"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
-            tools:text="Приложекние миэм" />
+            tools:text="Приложение миэм" />
 
         <TextView
             android:id="@+id/vacancyTitle"

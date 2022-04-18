@@ -216,7 +216,7 @@
                             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                             app:spanCount="3"
                             app:stackFromEnd="false"
-                            tools:listitem="@layout/item_language"
+                            tools:listitem="@layout/item_tag"
                             android:visibility="invisible"
                             tools:visibility="visible" />
 

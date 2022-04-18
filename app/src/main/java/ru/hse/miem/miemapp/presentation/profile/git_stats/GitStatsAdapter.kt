@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_profile_git_stats.*
-import kotlinx.android.synthetic.main.fragment_profile_git_stats.view.*
-import kotlinx.android.synthetic.main.item_language.view.*
+import kotlinx.android.synthetic.main.item_tag.view.*
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.domain.entities.UserGitStatistics
 
 class GitStatsAdapter: RecyclerView.Adapter<GitStatsAdapter.GitStatsViewHolder>() {
 
@@ -27,7 +24,7 @@ class GitStatsAdapter: RecyclerView.Adapter<GitStatsAdapter.GitStatsViewHolder>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GitStatsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_language, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tag, parent, false)
         return GitStatsViewHolder(view)
     }
 
