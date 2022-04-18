@@ -15,6 +15,7 @@
         android:elevation="1dp"/>
 
     <LinearLayout
+        android:id="@+id/sandboxLayoutContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

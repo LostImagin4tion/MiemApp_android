@@ -1,6 +1,7 @@
 package ru.hse.miem.miemapp.presentation.schedule
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_schedule.*
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.layout_bottom_calendar.*
+import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import kotlinx.android.synthetic.main.layout_bottom_schedule_settings.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -65,9 +68,30 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
         calendarBehaviour = BottomSheetBehavior.from(scheduleFilterLayout)
         calendarBehaviour.state = BottomSheetBehavior.STATE_HIDDEN
+        calendarBehaviour.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    scheduleLayoutContent.foreground = ColorDrawable(
+                        resources.getColor(R.color.transparent)
+                    )
+                }
+            }
+        })
 
         dateSelector.setOnClickListener {
+            scheduleLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.semi_transparent)
+            )
             calendarBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        hideCalendarButton.setOnClickListener {
+            scheduleLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
+            calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         scheduleCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
@@ -94,6 +118,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
             scheduleList.smoothSnapToPosition(0)
 
+            scheduleLayoutContent.foreground = ColorDrawable(resources.getColor(R.color.transparent))
             calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
         
@@ -128,8 +153,9 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     }
 
     override fun onBackPressed(): Boolean {
-
-        if (calendarBehaviour.state == BottomSheetBehavior.STATE_COLLAPSED) {
+        if (calendarBehaviour.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            scheduleLayoutContent.foreground = ColorDrawable(resources.getColor(R.color.transparent))
+            calendarBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
         return false

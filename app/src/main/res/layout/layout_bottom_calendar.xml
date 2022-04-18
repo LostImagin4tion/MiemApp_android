@@ -13,6 +13,15 @@
     android:background="@drawable/bottom_sheet_background"
     android:elevation="8dp">
 
+    <ImageButton
+        android:id="@+id/hideCalendarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/ic_bottomsheet_arrow"/>
+
     <CalendarView
         android:id="@+id/scheduleCalendar"
         android:layout_width="match_parent"

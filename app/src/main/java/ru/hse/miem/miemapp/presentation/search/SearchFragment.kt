@@ -1,15 +1,18 @@
 package ru.hse.miem.miemapp.presentation.search
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.fragment_profile.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
@@ -66,19 +69,40 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
                     restoreFilters()
                 }
+                else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    searchLayoutContent.foreground = ColorDrawable(
+                        resources.getColor(R.color.transparent)
+                    )
+                }
             }
         })
 
         filterButton.setOnClickListener {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.semi_transparent)
+            )
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        hideFiltersButton.setOnClickListener {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         showResultsButton.setOnClickListener {
             filterResults()
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         tinderButton.setOnClickListener {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             findNavController().navigate(R.id.fragmentTinder)
         }
 
@@ -87,6 +111,9 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
 
     override fun onBackPressed(): Boolean {
         if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
