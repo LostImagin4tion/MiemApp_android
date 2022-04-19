@@ -2,6 +2,8 @@ package ru.hse.miem.miemapp.presentation.profile
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -67,11 +69,17 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         profileSwipeRefreshLayout.setOnRefreshListener(::initProfile)
 
         settingsButtonBehavior = BottomSheetBehavior.from(settingsLayout)
-        settingsButtonBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        settingsButtonBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         settingsButtonBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
-            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    profileSwipeRefreshLayout.foreground = ColorDrawable(
+                        resources.getColor(R.color.transparent)
+                    )
+                }
+            }
         })
 
         projectsButton.setOnClickListener {
@@ -99,7 +107,17 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         }
 
         settingsButton.setOnClickListener {
+            profileSwipeRefreshLayout.foreground = ColorDrawable(
+                resources.getColor(R.color.semi_transparent)
+            )
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        hideSettingsButton.setOnClickListener {
+            profileSwipeRefreshLayout.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
+            settingsButtonBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         reportButton.setOnClickListener { submitReport() }
@@ -109,6 +127,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
 
     override fun onBackPressed(): Boolean {
         if (settingsButtonBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            profileSwipeRefreshLayout.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             settingsButtonBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
@@ -136,8 +157,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), ProfileView, On
         userEmail.text = email
         userOccupation.text = occupation
 
-        goToChatButton.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
+        if (profile.chatUrl != null) {
+            goToChatButton.setOnClickListener {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(chatUrl)))
+            }
+        } else {
+            goToChatButton.visibility = View.GONE
         }
 
         if (isTeacher) {

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginStart="5dp">
 
         <Button
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:ellipsize="end"
+            android:maxLines="1"
             android:layoutDirection="inherit"
             android:textAllCaps="false"
             android:text="Kotlin"

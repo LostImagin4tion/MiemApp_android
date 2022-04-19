@@ -25,7 +25,6 @@ class ProjectsPresenter @Inject constructor(
             }
         } catch (e: Exception) {
             proceedError(e)
-            viewState.showNoDataFragment()
         }
     }
 
@@ -34,6 +33,7 @@ class ProjectsPresenter @Inject constructor(
             profileRepository.getProjects(userId).let(viewState::setupProjects)
         } catch (e: Exception) {
             proceedError(e)
+            viewState.showNoDataFragment()
         }
     }
 
@@ -44,6 +44,7 @@ class ProjectsPresenter @Inject constructor(
             }
         } catch (e: Exception) {
             proceedError(e)
+            viewState.showNoDataFragment()
         }
     }
 }

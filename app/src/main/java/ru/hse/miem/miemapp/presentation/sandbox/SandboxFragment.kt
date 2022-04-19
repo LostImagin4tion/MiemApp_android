@@ -1,13 +1,21 @@
 package ru.hse.miem.miemapp.presentation.sandbox
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_sandbox.*
+import kotlinx.android.synthetic.main.fragment_sandbox.filterButton
+import kotlinx.android.synthetic.main.fragment_sandbox.projectsList
+import kotlinx.android.synthetic.main.fragment_sandbox.searchInput
+import kotlinx.android.synthetic.main.fragment_sandbox.searchLoader
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import kotlinx.android.synthetic.main.layout_bottom_sandbox_filters.*
 import moxy.presenter.InjectPresenter
@@ -43,44 +51,60 @@ class SandboxFragment: BaseFragment(R.layout.fragment_sandbox), SandboxView, OnB
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        searchInput.isEnabled = false
+        filterButton.isEnabled = false
+
         projectsList.adapter = projectsAdapter
         if(projectsAdapter.hasData) {
             searchLoader.visibility = View.GONE
             projectsList.visibility = View.VISIBLE
         }
 
-        searchInput.setOnEditorActionListener { _, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+        searchInput.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
                 filterResults()
-                true
             }
-            else {
-                false
-            }
-        }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
         filtersSheetBehavior = BottomSheetBehavior.from(sandboxFiltersLayout)
         filtersSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         filtersSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if(newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
                     restoreFilters()
+                }
+                else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    sandboxLayoutContent.foreground = ColorDrawable(
+                        resources.getColor(R.color.transparent)
+                    )
                 }
             }
         })
 
         filterButton.setOnClickListener {
+            sandboxLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.semi_transparent)
+            )
             filtersSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
-        sandboxShowResultsButton.setOnClickListener {
-            filtersSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        hideSandboxFiltersButton.setOnClickListener {
+            sandboxLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
+            filtersSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         sandboxShowResultsButton.setOnClickListener {
             filterResults()
-            filtersSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            sandboxLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
+            filtersSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         sandboxPresenter.onCreate()
@@ -88,6 +112,9 @@ class SandboxFragment: BaseFragment(R.layout.fragment_sandbox), SandboxView, OnB
 
     override fun onBackPressed(): Boolean {
         if(filtersSheetBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            sandboxLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             filtersSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
@@ -136,5 +163,8 @@ class SandboxFragment: BaseFragment(R.layout.fragment_sandbox), SandboxView, OnB
         restoreFilters()
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
+
+        searchInput.isEnabled = true
+        filterButton.isEnabled = true
     }
 }

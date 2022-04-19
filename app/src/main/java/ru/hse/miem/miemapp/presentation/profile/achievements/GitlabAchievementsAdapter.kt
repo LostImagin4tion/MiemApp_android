@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.item_achievement.view.*
+import kotlinx.android.synthetic.main.item_achievement_gitlab.view.*
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.Achievements
 
@@ -15,8 +14,8 @@ class GitlabAchievementsAdapter(
 ): RecyclerView.Adapter<GitlabAchievementsAdapter.AchievementViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_achievement, parent, false)
-        return GitlabAchievementsAdapter.AchievementViewHolder(view)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_achievement_gitlab, parent, false)
+        return AchievementViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AchievementViewHolder, position: Int) {

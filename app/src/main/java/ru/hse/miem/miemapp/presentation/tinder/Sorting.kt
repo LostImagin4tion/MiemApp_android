@@ -35,8 +35,7 @@ class Sorting {
 
         fun addRole(role: String) {
             when {
-                role == "" -> {
-                }
+                role == "" -> {}
                 roles.contains(role) -> {
                     roles[role] = getAmount(role) + 1
                 }

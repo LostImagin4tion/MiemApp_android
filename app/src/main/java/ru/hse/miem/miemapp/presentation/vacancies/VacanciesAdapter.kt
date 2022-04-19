@@ -27,6 +27,12 @@ class VacanciesAdapter(
         notifyDataSetChanged()
     }
 
+    private fun removeItem(vacancy: VacancyCard) {
+        vacancies.remove(vacancy)
+
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_vacancy_in_tinder, parent, false)
@@ -39,7 +45,7 @@ class VacanciesAdapter(
 
     override fun getItemCount() = vacancies.size
 
-    class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class VacancyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(vacancy: VacancyCard, navigateToProject: (Long) -> Unit) = itemView.apply {
             projectId.text = vacancy.projectId
             projectTitle.text = vacancy.projectNameRus
@@ -66,6 +72,10 @@ class VacanciesAdapter(
 
             }
             setOnClickListener { navigateToProject(vacancy.projectId.drop(1).toLong()) }
+
+            deleteButton.setOnClickListener {
+                removeItem(vacancy)
+            }
         }
     }
 }

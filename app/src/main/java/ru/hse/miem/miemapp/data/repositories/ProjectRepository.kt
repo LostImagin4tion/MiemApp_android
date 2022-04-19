@@ -69,6 +69,14 @@ class ProjectRepository @Inject constructor(
 
             }
 
+            val links = mutableListOf<ProjectExtended.Link>()
+            if (header.chat != null) {
+                links.add(ProjectExtended.Link("Zulip", header.chat))
+            }
+            if (header.wiki != null) {
+                links.add(ProjectExtended.Link("Wiki", header.wiki))
+            }
+
             val bodyResult = body.await()
             ProjectExtended(
                 id = header.id,
@@ -82,12 +90,7 @@ class ProjectRepository @Inject constructor(
                 objective = bodyResult.target ?: "",
                 annotation = bodyResult.annotation ?: "",
                 members = members.await(),
-                links = if (header.trello != null) {
-                    listOf(ProjectExtended.Link("Trello", header.trello)) + gitRepositories.await()
-                }
-                else {
-                     emptyList()
-                     },
+                links =  links + gitRepositories.await(),
                 vacancies = vacancies.await(),
                 url = CabinetApi.getProjectUrl(id)
             )

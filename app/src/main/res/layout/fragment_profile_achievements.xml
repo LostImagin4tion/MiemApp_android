@@ -11,7 +11,9 @@
         android:id="@+id/achievementsLoader"
         android:layout_width="@dimen/loader_size"
         android:layout_height="@dimen/loader_size"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:elevation="1dp"
+        android:background="@drawable/ic_loader_circle"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,10 +89,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/trackingAchievementsList"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="165dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_achievement" />
+                        tools:listitem="@layout/item_achievement_tracking" />
 
                 </LinearLayout>
 
@@ -138,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        tools:listitem="@layout/item_achievement"
+                        tools:listitem="@layout/item_achievement_gitlab"
                         android:visibility="visible" />
 
                 </LinearLayout>

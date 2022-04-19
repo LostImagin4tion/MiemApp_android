@@ -27,7 +27,11 @@ class ProfileRepository @Inject constructor(
 
     override suspend fun getProfileById(id: Long, isTeacher: Boolean) = withIO {
         if (isTeacher) {
-            cabinetApi.teacherProfile(id).teacherToProfile()
+            try {
+                cabinetApi.teacherProfile(id).teacherToProfile()
+            } catch (e: Exception) {
+                cabinetApi.studentProfile(id).studentToProfile()
+            }
         } else {
             cabinetApi.studentProfile(id).studentToProfile()
         }
@@ -133,7 +137,7 @@ class ProfileRepository @Inject constructor(
         }
 
         if (isTeacher) {
-            cabinetApi.teacherGitStatistics(profileId).let {
+            val stats = cabinetApi.teacherGitStatistics(profileId).let {
                 it.data.map {
                     UserGitStatistics(
                         repoId = it.id,
@@ -142,6 +146,19 @@ class ProfileRepository @Inject constructor(
                         stringsCount = it.strings,
                         usedLanguages = it.languages
                     )
+                }
+            }
+            stats.ifEmpty {
+                cabinetApi.studentGitStatistics(profileId).let {
+                    it.data.map {
+                        UserGitStatistics(
+                            repoId = it.id,
+                            name = it.name,
+                            commitCount = it.commitCount,
+                            stringsCount = it.strings,
+                            usedLanguages = it.languages
+                        )
+                    }
                 }
             }
         }

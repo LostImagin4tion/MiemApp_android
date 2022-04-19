@@ -1,15 +1,21 @@
 package ru.hse.miem.miemapp.presentation.search
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.android.synthetic.main.fragment_profile.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.item_project_my.*
 import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
@@ -43,6 +49,9 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        searchInput.isEnabled = false
+        filterButton.isEnabled = false
+
         projectsList.adapter = projectsAdapter
         if (projectsAdapter.hasData) {
             searchLoader.visibility = View.GONE
@@ -50,13 +59,19 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         }
 
         searchInput.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                filterResults()
-                true
-            } else {
-                false
+            when(actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    filterResults()
+                    true
+                }
+                EditorInfo.IME_ACTION_UNSPECIFIED -> {
+                    filterResults()
+                    true
+                }
+                else -> false
             }
         }
+
         bottomSheetBehavior = BottomSheetBehavior.from(filtersLayout)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -66,19 +81,40 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
                     restoreFilters()
                 }
+                else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    searchLayoutContent.foreground = ColorDrawable(
+                        resources.getColor(R.color.transparent)
+                    )
+                }
             }
         })
 
         filterButton.setOnClickListener {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.semi_transparent)
+            )
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        hideFiltersButton.setOnClickListener {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         showResultsButton.setOnClickListener {
             filterResults()
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
 
         tinderButton.setOnClickListener {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             findNavController().navigate(R.id.fragmentTinder)
         }
 
@@ -87,6 +123,9 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
 
     override fun onBackPressed(): Boolean {
         if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_COLLAPSED) {
+            searchLayoutContent.foreground = ColorDrawable(
+                resources.getColor(R.color.transparent)
+            )
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             return true
         }
@@ -96,10 +135,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
 
     private fun filterResults() {
         filters.projectType = projectTypeSelector.selectedItemPosition
-        filters.projectTypeName = projectTypeSelector.selectedItem as String
+        filters.projectTypeName = (projectTypeSelector.selectedItem ?: "") as String
 
         filters.projectState = projectStateSelector.selectedItemPosition
-        filters.projectStateName = projectStateSelector.selectedItem as String
+        filters.projectStateName = (projectStateSelector.selectedItem ?: "") as String
 
         filters.isAvailableVacancies = withVacanciesCheckbox.isChecked
 
@@ -136,5 +175,8 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         restoreFilters()
         searchLoader.visibility = View.GONE
         projectsList.visibility = View.VISIBLE
+
+        searchInput.isEnabled = true
+        filterButton.isEnabled = true
     }
 }

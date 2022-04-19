@@ -5,15 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="6dp"
-    android:layout_marginStart="2dp"
-    android:layout_marginEnd="2dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="10dp"
     android:elevation="4dp"
     app:cardCornerRadius="8dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp">
@@ -23,27 +20,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="1dp"
-
             android:textSize="14sp"
             android:textStyle="bold"
             tools:text="617" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/deleteButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="-3dp"
+                android:layout_marginEnd="-3dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_delete" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/projectTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/projectId"
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
-            android:maxLines="1"
+            android:gravity="start"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
-            tools:text="Приложекние миэм" />
+            tools:text="Приложение миэм" />
 
         <TextView
             android:id="@+id/vacancyTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/projectTitle"
             android:layout_marginBottom="2dp"
             android:ellipsize="end"
             android:maxLines="1"
@@ -55,6 +69,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/vacancyTitle"
             android:orientation="horizontal"
             android:layout_marginBottom="4dp">
 
@@ -98,5 +113,5 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

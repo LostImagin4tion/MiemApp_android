@@ -12,7 +12,7 @@ data class Profile(
     val email: String,
     val occupation: String,
     val avatarUrl: String,
-    val chatUrl: String
+    val chatUrl: String?
 )
 
 // displayed in profile
