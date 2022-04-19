@@ -15,6 +15,7 @@ import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.item_project_my.*
 import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
@@ -128,10 +129,10 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
 
     private fun filterResults() {
         filters.projectType = projectTypeSelector.selectedItemPosition
-        filters.projectTypeName = projectTypeSelector.selectedItem as String
+        filters.projectTypeName = (projectTypeSelector.selectedItem ?: "") as String
 
         filters.projectState = projectStateSelector.selectedItemPosition
-        filters.projectStateName = projectStateSelector.selectedItem as String
+        filters.projectStateName = (projectStateSelector.selectedItem ?: "") as String
 
         filters.isAvailableVacancies = withVacanciesCheckbox.isChecked
 
