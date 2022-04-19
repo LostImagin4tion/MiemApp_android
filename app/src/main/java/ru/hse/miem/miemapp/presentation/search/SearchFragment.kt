@@ -58,13 +58,19 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
             projectsList.visibility = View.VISIBLE
         }
 
-        searchInput.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                filterResults()
+        searchInput.setOnEditorActionListener { _, actionId, _ ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    filterResults()
+                    true
+                }
+                EditorInfo.IME_ACTION_UNSPECIFIED -> {
+                    filterResults()
+                    true
+                }
+                else -> false
             }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-        })
+        }
 
         bottomSheetBehavior = BottomSheetBehavior.from(filtersLayout)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
