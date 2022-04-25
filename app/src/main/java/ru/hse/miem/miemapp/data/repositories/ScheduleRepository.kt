@@ -99,7 +99,6 @@ class ScheduleRepository @Inject constructor(
                     ))
                 }
                 else {
-
                     scheduleItems.add(ScheduleDayName(
                         date = this[i].date,
                         dayOfWeek = dayOfWeek,

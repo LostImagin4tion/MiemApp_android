@@ -243,7 +243,6 @@ data class ScheduleResponse (
     val building: String?,
     val date: String,
     val discipline: String,
-    val group: String?,
     val kindOfWork: String,
     val lecturer: String?
 )

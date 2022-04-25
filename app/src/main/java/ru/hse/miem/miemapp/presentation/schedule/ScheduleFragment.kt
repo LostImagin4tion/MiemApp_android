@@ -18,9 +18,12 @@ import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.IScheduleItem
+import ru.hse.miem.miemapp.domain.entities.ScheduleDayLesson
+import ru.hse.miem.miemapp.domain.entities.ScheduleDayName
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
+import ru.hse.miem.miemapp.presentation.schedule.db.ScheduleDbManager
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
@@ -46,12 +49,15 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     fun provideSchedulePresenter() = schedulePresenter
 
     private lateinit var calendarBehaviour: BottomSheetBehavior<View>
+    private lateinit var dbManager: ScheduleDbManager
+    private var cachedSchedule = mutableListOf<IScheduleItem>()
 
     private val scheduleAdapter = ScheduleAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
+        dbManager = ScheduleDbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -145,11 +151,55 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             }
         })
 
-        schedulePresenter.onCreate(
-            startDate = startDate,
-            finishDate = finishDate,
-            isTeacher = args.isTeacher
-        )
+        loadFromDb()
+
+        if (cachedSchedule.isEmpty()) {
+            schedulePresenter.onCreate(
+                startDate = startDate,
+                finishDate = finishDate,
+                isTeacher = args.isTeacher
+            )
+        } else {
+            setupSchedule(cachedSchedule)
+        }
+    }
+
+    private fun loadFromDb() {
+        dbManager.openDb()
+        cachedSchedule = dbManager.readDb()
+        dbManager.closeDb()
+    }
+
+    private fun saveToDb() {
+        dbManager.openDb()
+
+        for (i in cachedSchedule.indices) {
+            var item = cachedSchedule[i]
+
+            if(item is ScheduleDayName) {
+                dbManager.insertDb(
+                    type = "day",
+                    date = item.date,
+                    dayOfWeek = item.dayOfWeek
+                )
+            }
+            else if (item is ScheduleDayLesson) {
+                dbManager.insertDb(
+                    type = "lesson",
+                    date = item.date,
+                    dayOfWeek = item.dayOfWeek,
+                    auditorium = item.lesson.auditorium,
+                    beginLesson = item.lesson.beginLesson,
+                    endLesson = item.lesson.endLesson,
+                    lessonNumber = item.lesson.lessonNumberStart,
+                    address = item.lesson.building,
+                    discipline = item.lesson.discipline,
+                    kindOfLesson = item.lesson.kindOfWork,
+                    lecturer = item.lesson.lecturer
+                )
+            }
+        }
+        dbManager.closeDb()
     }
 
     override fun onBackPressed(): Boolean {
@@ -172,6 +222,9 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         scheduleLoader.visibility = View.GONE
         bottomScheduleLoader.visibility = View.GONE
         scheduleList.visibility = View.VISIBLE
+
+        cachedSchedule = items as MutableList<IScheduleItem>
+        saveToDb()
     }
 
     private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {

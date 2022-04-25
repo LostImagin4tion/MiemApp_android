@@ -5,9 +5,11 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -61,10 +63,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         searchInput.setOnEditorActionListener { _, actionId, _ ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-                    filterResults()
-                    true
-                }
-                EditorInfo.IME_ACTION_UNSPECIFIED -> {
                     filterResults()
                     true
                 }

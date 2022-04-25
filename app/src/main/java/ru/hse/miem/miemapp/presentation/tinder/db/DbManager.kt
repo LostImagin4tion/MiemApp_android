@@ -46,10 +46,11 @@ class DbManager(context: Context) {
             data.add(VacancyCard(project_id, name, role, requirements))
         }
         cursor.close()
+
         try {
             dbHelper.onUpgrade(db, 1, 1)
-        } catch (exception: Exception) {
-        }
+        } catch (exception: Exception) {}
+
         return data
     }
 
