@@ -33,9 +33,7 @@ class ScheduleDbManager(context: Context) {
         discipline: String? = null,
         kindOfLesson: String? = null,
         lecturer: String? = null
-    ) = CoroutineScope(SupervisorJob() + CoroutineExceptionHandler { _, e ->
-        println(e.message)
-    }).launch {
+    ) {
         val values = ContentValues().apply {
             put(ScheduleDbClass.COLUMN_NAME_TYPE, type)
             put(ScheduleDbClass.COLUMN_NAME_DATE, date)
