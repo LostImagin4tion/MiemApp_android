@@ -3,7 +3,12 @@ package ru.hse.miem.miemapp.presentation.schedule.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import ru.hse.miem.miemapp.data.api.ScheduleResponse
+import ru.hse.miem.miemapp.data.repositories.withIO
 import ru.hse.miem.miemapp.domain.entities.IScheduleItem
 import ru.hse.miem.miemapp.domain.entities.ScheduleDayLesson
 import ru.hse.miem.miemapp.domain.entities.ScheduleDayName
@@ -28,7 +33,9 @@ class ScheduleDbManager(context: Context) {
         discipline: String? = null,
         kindOfLesson: String? = null,
         lecturer: String? = null
-    ) {
+    ) = CoroutineScope(SupervisorJob() + CoroutineExceptionHandler { _, e ->
+        println(e.message)
+    }).launch {
         val values = ContentValues().apply {
             put(ScheduleDbClass.COLUMN_NAME_TYPE, type)
             put(ScheduleDbClass.COLUMN_NAME_DATE, date)
@@ -46,7 +53,7 @@ class ScheduleDbManager(context: Context) {
         db?.insert(ScheduleDbClass.TABLE_NAME, null, values)
     }
 
-    fun readDb(): List<IScheduleItem> {
+    suspend fun readDb() = withIO {
         val data: MutableList<IScheduleItem> = mutableListOf()
         val cursor = db?.query(ScheduleDbClass.TABLE_NAME, null, null, null, null, null, null)
 
@@ -104,7 +111,7 @@ class ScheduleDbManager(context: Context) {
             dbHelper.onUpgrade(db, 1, 1)
         } catch (e: Exception) {}
 
-        return data
+        data
     }
 
     fun closeDb() {

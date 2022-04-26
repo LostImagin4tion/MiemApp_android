@@ -9,10 +9,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_schedule.*
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.layout_bottom_calendar.*
-import kotlinx.android.synthetic.main.layout_bottom_filters.*
-import kotlinx.android.synthetic.main.layout_bottom_schedule_settings.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
@@ -50,7 +47,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
     private lateinit var calendarBehaviour: BottomSheetBehavior<View>
     private lateinit var dbManager: ScheduleDbManager
-    private var cachedSchedule: List<IScheduleItem> = listOf()
 
     private val scheduleAdapter = ScheduleAdapter()
 
@@ -151,31 +147,25 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             }
         })
 
-        loadFromDb()
-        if (cachedSchedule.isNotEmpty()) {
-            setupSchedule(cachedSchedule)
-            bottomScheduleLoader.visibility = View.VISIBLE
+        schedulePresenter.loadFromDb(dbManager)
+        scheduleLoader.visibility = View.GONE
+        bottomScheduleLoader.visibility = View.VISIBLE
+    }
+
+    override fun loadSchedule(items: List<IScheduleItem>) {
+        if (items.isNotEmpty()) {
+            setupSchedule(items)
         }
-        schedulePresenter.onCreate(
-            startDate = startDate,
-            finishDate = finishDate,
-            isTeacher = args.isTeacher
-        )
+        schedulePresenter.onCreate(startDate, finishDate, args.isTeacher)
     }
 
-    private fun loadFromDb() {
-        dbManager.openDb()
-        cachedSchedule = dbManager.readDb()
-        dbManager.closeDb()
-    }
-
-    private fun saveToDb() {
+    private fun saveToDb(items: List<IScheduleItem>) {
         dbManager.openDb()
         dbManager.deleteDb()
         dbManager.openDb()
 
-        for (i in cachedSchedule.indices) {
-            val item = cachedSchedule[i]
+        for (i in items.indices) {
+            val item = items[i]
 
             if(item is ScheduleDayName) {
                 dbManager.insertDb(
@@ -229,8 +219,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         bottomScheduleLoader.visibility = View.GONE
         scheduleList.visibility = View.VISIBLE
 
-        cachedSchedule = items
-        saveToDb()
+        saveToDb(items)
     }
 
     private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {

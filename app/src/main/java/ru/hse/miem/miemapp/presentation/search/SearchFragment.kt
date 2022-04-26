@@ -3,26 +3,18 @@ package ru.hse.miem.miemapp.presentation.search
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
-import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.fragment_profile.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.item_project_my.*
 import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
-import ru.hse.miem.miemapp.domain.entities.UserGitStatistics
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.search.db.SearchDbManager
@@ -39,7 +31,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     fun provideSearchPresenter() = searchPresenter
 
     private lateinit var dbManager: SearchDbManager
-    private var cachedProjects: List<ProjectInSearch> = listOf()
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private val projectsAdapter = ProjectsAdapter {
@@ -119,35 +110,32 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
             findNavController().navigate(R.id.fragmentTinder)
         }
 
-        loadFromDb()
-        if (cachedProjects.isEmpty()) {
-            searchPresenter.onCreate()
-        } else {
-            setupProjects(cachedProjects)
+        searchPresenter.loadFromDb(dbManager)
+        searchLoader.visibility = View.GONE
+    }
+
+    override fun loadProjects(projects: List<ProjectInSearch>) {
+        if (projects.isNotEmpty()) {
+            setupProjects(projects)
         }
+        searchPresenter.onCreate()
     }
 
-    private fun loadFromDb() {
-        dbManager.openDb()
-        cachedProjects = dbManager.readDb()
-        dbManager.closeDb()
-    }
-
-    private fun saveToDb() {
+    private fun saveToDb(projects: List<ProjectInSearch>) {
         dbManager.openDb()
         dbManager.deleteDb()
         dbManager.openDb()
 
-        for (i in cachedProjects.indices) {
+        for (i in projects.indices) {
             dbManager.insertDb(
-                id = cachedProjects[i].id,
-                number = cachedProjects[i].number,
-                name = cachedProjects[i].name,
-                type = cachedProjects[i].type,
-                state = cachedProjects[i].state,
-                isActive = cachedProjects[i].isActive,
-                vacancies = cachedProjects[i].vacancies,
-                head = cachedProjects[i].head
+                id = projects[i].id,
+                number = projects[i].number,
+                name = projects[i].name,
+                type = projects[i].type,
+                state = projects[i].state,
+                isActive = projects[i].isActive,
+                vacancies = projects[i].vacancies,
+                head = projects[i].head
             )
         }
         dbManager.closeDb()
@@ -211,7 +199,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         searchInput.isEnabled = true
         filterButton.isEnabled = true
 
-        cachedProjects = projects
-        saveToDb()
+        saveToDb(projects)
     }
 }

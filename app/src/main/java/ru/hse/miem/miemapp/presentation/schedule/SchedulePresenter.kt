@@ -4,6 +4,7 @@ import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import ru.hse.miem.miemapp.domain.repositories.IScheduleRepository
 import ru.hse.miem.miemapp.presentation.base.BasePresenter
+import ru.hse.miem.miemapp.presentation.schedule.db.ScheduleDbManager
 import javax.inject.Inject
 
 @InjectViewState
@@ -22,6 +23,15 @@ class SchedulePresenter @Inject constructor(
                 finishDate,
                 isTeacher
             ).let(viewState::setupSchedule)
+        } catch (e: Exception) {
+            proceedError(e)
+        }
+    }
+
+    fun loadFromDb(dbManager: ScheduleDbManager) = launch {
+        try {
+            dbManager.openDb()
+            dbManager.readDb().let(viewState::loadSchedule)
         } catch (e: Exception) {
             proceedError(e)
         }

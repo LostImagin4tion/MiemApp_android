@@ -3,6 +3,11 @@ package ru.hse.miem.miemapp.presentation.search.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import ru.hse.miem.miemapp.data.repositories.withIO
 import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
 
 class SearchDbManager(context: Context) {
@@ -22,7 +27,9 @@ class SearchDbManager(context: Context) {
         isActive: Boolean,
         vacancies: Int,
         head: String
-    ) {
+    ) = CoroutineScope(SupervisorJob() + CoroutineExceptionHandler { _, e ->
+        println(e.message)
+    }).launch {
         val values = ContentValues().apply {
             put(SearchDbClass.COLUMN_NAME_PROJECT_ID, id)
             put(SearchDbClass.COLUMN_NAME_NUMBER, number)
@@ -37,11 +44,11 @@ class SearchDbManager(context: Context) {
         db?.insert(SearchDbClass.TABLE_NAME, null, values)
     }
 
-    fun readDb(): List<ProjectInSearch> {
+    suspend fun readDb() = withIO {
         val data: MutableList<ProjectInSearch> = mutableListOf()
-        val cursor = db?.query(SearchDbClass.TABLE_NAME, null, null, null, null, null,null)
+        val cursor = db?.query(SearchDbClass.TABLE_NAME, null, null, null, null, null, null)
 
-        while(cursor?.moveToNext()!!) {
+        while (cursor?.moveToNext()!!) {
             val id =
                 cursor.getLong(cursor.getColumnIndex(SearchDbClass.COLUMN_NAME_PROJECT_ID))
             val number =
@@ -68,7 +75,8 @@ class SearchDbManager(context: Context) {
                     isActive = isActive == 1,
                     vacancies = vacancies,
                     head = head
-            ))
+                )
+            )
         }
         cursor.close()
 
@@ -76,7 +84,7 @@ class SearchDbManager(context: Context) {
             dbHelper.onUpgrade(db, 1, 1)
         } catch (e: Exception) {}
 
-        return data
+        data
     }
 
     fun closeDb() {

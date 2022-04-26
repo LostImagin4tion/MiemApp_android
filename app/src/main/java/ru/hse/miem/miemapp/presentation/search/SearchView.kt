@@ -6,4 +6,5 @@ import ru.hse.miem.miemapp.presentation.base.BaseView
 
 interface SearchView : BaseView {
     @OneExecution fun setupProjects(projects: List<ProjectInSearch>)
+    @OneExecution fun loadProjects(projects: List<ProjectInSearch>)
 }
