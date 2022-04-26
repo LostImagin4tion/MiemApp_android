@@ -19,10 +19,10 @@ object SearchDbClass: BaseColumns {
 
     const val CREATE_TABLE = "create table if not exists $TABLE_NAME(" +
             "${BaseColumns._ID} integer primary key," +
-            "$COLUMN_NAME_PROJECT_ID TEXT, $COLUMN_NAME_PROJECT_NAME TEXT," +
-            "$COLUMN_NAME_TYPE TEXT, $COLUMN_NAME_STATE TEXT," +
-            "$COLUMN_NAME_IS_ACTIVE TEXT, $COLUMN_NAME_VACANCIES TEXT" +
-            "$COLUMN_NAME_HEAD TEXT"
+            "$COLUMN_NAME_PROJECT_ID TEXT, $COLUMN_NAME_NUMBER TEXT," +
+            "$COLUMN_NAME_PROJECT_NAME TEXT, $COLUMN_NAME_TYPE TEXT," +
+            "$COLUMN_NAME_STATE TEXT, $COLUMN_NAME_IS_ACTIVE TEXT," +
+            "$COLUMN_NAME_VACANCIES TEXT, $COLUMN_NAME_HEAD TEXT)"
 
     const val DELETE_TABLE = "drop table if exists $TABLE_NAME"
 }

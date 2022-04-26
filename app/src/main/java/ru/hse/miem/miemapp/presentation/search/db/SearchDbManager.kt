@@ -88,4 +88,8 @@ class SearchDbManager(context: Context) {
         dbHelper.onUpgrade(db, 2, 2)
         dbHelper.close()
     }
+
+    fun upgradeDb() {
+        dbHelper.onUpgrade(db, 1, 1)
+    }
 }

@@ -17,6 +17,5 @@ class SearchPresenter @Inject constructor(
         } catch (e: Exception) {
             proceedError(e)
         }
-
     }
 }

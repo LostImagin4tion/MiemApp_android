@@ -56,8 +56,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        searchInput.isEnabled = false
-        filterButton.isEnabled = false
 
         projectsList.adapter = projectsAdapter
         if (projectsAdapter.hasData) {
@@ -138,6 +136,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     private fun saveToDb() {
         dbManager.openDb()
         dbManager.deleteDb()
+        dbManager.openDb()
 
         for (i in cachedProjects.indices) {
             dbManager.insertDb(
