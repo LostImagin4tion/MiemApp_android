@@ -25,6 +25,7 @@ import ru.hse.miem.miemapp.domain.entities.ProjectInSearch
 import ru.hse.miem.miemapp.domain.entities.UserGitStatistics
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
+import ru.hse.miem.miemapp.presentation.search.db.SearchDbManager
 import java.util.*
 import javax.inject.Inject
 
@@ -37,6 +38,9 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     @ProvidePresenter
     fun provideSearchPresenter() = searchPresenter
 
+    private lateinit var dbManager: SearchDbManager
+    private var cachedProjects: List<ProjectInSearch> = listOf()
+
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private val projectsAdapter = ProjectsAdapter {
         val action = SearchFragmentDirections.actionFragmentSearchToFragmentProject(it)
@@ -48,6 +52,7 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
+        dbManager = SearchDbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,7 +121,37 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
             findNavController().navigate(R.id.fragmentTinder)
         }
 
-        searchPresenter.onCreate()
+        loadFromDb()
+        if (cachedProjects.isEmpty()) {
+            searchPresenter.onCreate()
+        } else {
+            setupProjects(cachedProjects)
+        }
+    }
+
+    private fun loadFromDb() {
+        dbManager.openDb()
+        cachedProjects = dbManager.readDb()
+        dbManager.closeDb()
+    }
+
+    private fun saveToDb() {
+        dbManager.openDb()
+        dbManager.deleteDb()
+
+        for (i in cachedProjects.indices) {
+            dbManager.insertDb(
+                id = cachedProjects[i].id,
+                number = cachedProjects[i].number,
+                name = cachedProjects[i].name,
+                type = cachedProjects[i].type,
+                state = cachedProjects[i].state,
+                isActive = cachedProjects[i].isActive,
+                vacancies = cachedProjects[i].vacancies,
+                head = cachedProjects[i].head
+            )
+        }
+        dbManager.closeDb()
     }
 
     override fun onBackPressed(): Boolean {
@@ -176,5 +211,8 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
 
         searchInput.isEnabled = true
         filterButton.isEnabled = true
+
+        cachedProjects = projects
+        saveToDb()
     }
 }

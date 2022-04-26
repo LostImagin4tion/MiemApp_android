@@ -50,7 +50,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
     private lateinit var calendarBehaviour: BottomSheetBehavior<View>
     private lateinit var dbManager: ScheduleDbManager
-    private var cachedSchedule = mutableListOf<IScheduleItem>()
+    private var cachedSchedule: List<IScheduleItem> = listOf()
 
     private val scheduleAdapter = ScheduleAdapter()
 
@@ -152,7 +152,6 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         })
 
         loadFromDb()
-
         if (cachedSchedule.isEmpty()) {
             schedulePresenter.onCreate(
                 startDate = startDate,
@@ -172,9 +171,10 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
     private fun saveToDb() {
         dbManager.openDb()
+        dbManager.deleteDb()
 
         for (i in cachedSchedule.indices) {
-            var item = cachedSchedule[i]
+            val item = cachedSchedule[i]
 
             if(item is ScheduleDayName) {
                 dbManager.insertDb(
@@ -223,7 +223,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         bottomScheduleLoader.visibility = View.GONE
         scheduleList.visibility = View.VISIBLE
 
-        cachedSchedule = items as MutableList<IScheduleItem>
+        cachedSchedule = items
         saveToDb()
     }
 

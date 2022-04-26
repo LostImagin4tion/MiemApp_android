@@ -46,8 +46,8 @@ class ScheduleDbManager(context: Context) {
         db?.insert(ScheduleDbClass.TABLE_NAME, null, values)
     }
 
-    fun readDb(): MutableList<IScheduleItem> {
-        val data: MutableList<IScheduleItem> = arrayListOf()
+    fun readDb(): List<IScheduleItem> {
+        val data: MutableList<IScheduleItem> = mutableListOf()
         val cursor = db?.query(ScheduleDbClass.TABLE_NAME, null, null, null, null, null, null)
 
         while(cursor?.moveToNext()!!) {

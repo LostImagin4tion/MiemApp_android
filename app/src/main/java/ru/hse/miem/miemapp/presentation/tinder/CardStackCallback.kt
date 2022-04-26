@@ -17,8 +17,7 @@ class CardStackCallback : CardStackListener {
         Sorting.plus()
     }
 
-    override fun onCardRewound() {
-    }
+    override fun onCardRewound() {}
 
     override fun onCardCanceled() {}
 
