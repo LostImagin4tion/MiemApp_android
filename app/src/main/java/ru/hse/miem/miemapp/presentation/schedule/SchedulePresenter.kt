@@ -37,7 +37,23 @@ class SchedulePresenter @Inject constructor(
                 startDate,
                 finishDate,
                 isTeacher
-            ).let(viewState::updateSchedule)
+            ).let(viewState::updateScheduleWhenScrolledDown)
+        } catch (e: Exception) {
+            proceedError(e)
+        }
+    }
+
+    fun onNewDateSelected(
+        startDate: String,
+        finishDate: String,
+        isTeacher: Boolean
+    ) = launch {
+        try {
+            scheduleRepository.getSchedule(
+                startDate,
+                finishDate,
+                isTeacher
+            ).let(viewState::updateScheduleWhenNewDateSelected)
         } catch (e: Exception) {
             proceedError(e)
         }

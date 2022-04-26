@@ -6,6 +6,6 @@ import ru.hse.miem.miemapp.presentation.base.BaseView
 
 interface ScheduleView : BaseView {
     @OneExecution fun setupSchedule(items: List<IScheduleItem>)
-
-    @OneExecution fun updateSchedule(newItems: List<IScheduleItem>)
+    @OneExecution fun updateScheduleWhenScrolledDown(newItems: List<IScheduleItem>)
+    @OneExecution fun updateScheduleWhenNewDateSelected(newItems: List<IScheduleItem>)
 }

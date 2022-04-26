@@ -116,7 +116,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
             dateSelector.text = "$startDateRu - $finishDateRu"
 
-            schedulePresenter.onCreate(
+            schedulePresenter.onNewDateSelected(
                 startDate = startDate,
                 finishDate = finishDate,
                 isTeacher = args.isTeacher
@@ -139,7 +139,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                     bottomScheduleLoader.visibility = View.VISIBLE
 
                     schedulePresenter.onScrolledDown(
-                        startDate = calendar.getNewDate(finishDate, 2),
+                        startDate = calendar.getNewDate(finishDate, 1),
                         finishDate = calendar.getNewDate(finishDate, 7),
                         isTeacher = args.isTeacher
                     )
@@ -152,15 +152,15 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         })
 
         loadFromDb()
-        if (cachedSchedule.isEmpty()) {
-            schedulePresenter.onCreate(
-                startDate = startDate,
-                finishDate = finishDate,
-                isTeacher = args.isTeacher
-            )
-        } else {
+        if (cachedSchedule.isNotEmpty()) {
             setupSchedule(cachedSchedule)
+            bottomScheduleLoader.visibility = View.VISIBLE
         }
+        schedulePresenter.onCreate(
+            startDate = startDate,
+            finishDate = finishDate,
+            isTeacher = args.isTeacher
+        )
     }
 
     private fun loadFromDb() {
@@ -172,6 +172,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     private fun saveToDb() {
         dbManager.openDb()
         dbManager.deleteDb()
+        dbManager.openDb()
 
         for (i in cachedSchedule.indices) {
             val item = cachedSchedule[i]
@@ -211,8 +212,13 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         return false
     }
 
-    override fun updateSchedule(newItems: List<IScheduleItem>) {
+    override fun updateScheduleWhenScrolledDown(newItems: List<IScheduleItem>) {
         (scheduleList.adapter as ScheduleAdapter?)?.updateWhenScrolledDown(newItems)
+        bottomScheduleLoader.visibility = View.GONE
+    }
+
+    override fun updateScheduleWhenNewDateSelected(newItems: List<IScheduleItem>) {
+        (scheduleList.adapter as ScheduleAdapter?)?.update(newItems)
         bottomScheduleLoader.visibility = View.GONE
     }
 

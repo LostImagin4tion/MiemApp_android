@@ -85,15 +85,15 @@ class ScheduleDbManager(context: Context) {
                     date = date,
                     dayOfWeek = dayOfWeek,
                     lesson = ScheduleResponse(
-                        auditorium = auditorium,
-                        beginLesson = beginLesson,
-                        endLesson = endLesson,
-                        lessonNumberStart = lessonNumber,
-                        building = address,
-                        date = date,
-                        discipline = discipline,
-                        kindOfWork = kindOfLesson,
-                        lecturer = lecturer
+                        auditorium = auditorium ?: "",
+                        beginLesson = beginLesson ?: "",
+                        endLesson = endLesson ?: "",
+                        lessonNumberStart = lessonNumber ?: "",
+                        building = address ?: "",
+                        date = date ?: "",
+                        discipline = discipline ?: "",
+                        kindOfWork = kindOfLesson ?: "",
+                        lecturer = lecturer ?: ""
                     )
                 ))
             }
@@ -115,5 +115,9 @@ class ScheduleDbManager(context: Context) {
         db = dbHelper.writableDatabase
         dbHelper.onUpgrade(db, 2, 2)
         dbHelper.close()
+    }
+
+    fun upgradeDb() {
+        dbHelper.onUpgrade(db, 1, 1)
     }
 }
