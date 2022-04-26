@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_schedule.*
-import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.layout_bottom_calendar.*
-import kotlinx.android.synthetic.main.layout_bottom_filters.*
-import kotlinx.android.synthetic.main.layout_bottom_schedule_settings.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.IScheduleItem
+import ru.hse.miem.miemapp.domain.entities.ScheduleDayLesson
+import ru.hse.miem.miemapp.domain.entities.ScheduleDayName
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
+import ru.hse.miem.miemapp.presentation.schedule.db.ScheduleDbManager
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
@@ -46,12 +46,14 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     fun provideSchedulePresenter() = schedulePresenter
 
     private lateinit var calendarBehaviour: BottomSheetBehavior<View>
+    private lateinit var dbManager: ScheduleDbManager
 
     private val scheduleAdapter = ScheduleAdapter()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MiemApplication).appComponent.inject(this)
+        dbManager = ScheduleDbManager(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,7 +112,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
             dateSelector.text = "$startDateRu - $finishDateRu"
 
-            schedulePresenter.onCreate(
+            schedulePresenter.onNewDateSelected(
                 startDate = startDate,
                 finishDate = finishDate,
                 isTeacher = args.isTeacher
@@ -133,7 +135,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
                     bottomScheduleLoader.visibility = View.VISIBLE
 
                     schedulePresenter.onScrolledDown(
-                        startDate = calendar.getNewDate(finishDate, 2),
+                        startDate = calendar.getNewDate(finishDate, 1),
                         finishDate = calendar.getNewDate(finishDate, 7),
                         isTeacher = args.isTeacher
                     )
@@ -145,11 +147,50 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             }
         })
 
-        schedulePresenter.onCreate(
-            startDate = startDate,
-            finishDate = finishDate,
-            isTeacher = args.isTeacher
-        )
+        schedulePresenter.loadFromDb(dbManager)
+        scheduleLoader.visibility = View.GONE
+        bottomScheduleLoader.visibility = View.VISIBLE
+    }
+
+    override fun loadSchedule(items: List<IScheduleItem>) {
+        if (items.isNotEmpty()) {
+            setupSchedule(items)
+        }
+        schedulePresenter.onCreate(startDate, finishDate, args.isTeacher)
+    }
+
+    private fun saveToDb(items: List<IScheduleItem>) {
+        dbManager.openDb()
+        dbManager.deleteDb()
+        dbManager.openDb()
+
+        for (i in items.indices) {
+            val item = items[i]
+
+            if(item is ScheduleDayName) {
+                dbManager.insertDb(
+                    type = "day",
+                    date = item.date,
+                    dayOfWeek = item.dayOfWeek
+                )
+            }
+            else if (item is ScheduleDayLesson) {
+                dbManager.insertDb(
+                    type = "lesson",
+                    date = item.date,
+                    dayOfWeek = item.dayOfWeek,
+                    auditorium = item.lesson.auditorium,
+                    beginLesson = item.lesson.beginLesson,
+                    endLesson = item.lesson.endLesson,
+                    lessonNumber = item.lesson.lessonNumberStart,
+                    address = item.lesson.building,
+                    discipline = item.lesson.discipline,
+                    kindOfLesson = item.lesson.kindOfWork,
+                    lecturer = item.lesson.lecturer
+                )
+            }
+        }
+        dbManager.closeDb()
     }
 
     override fun onBackPressed(): Boolean {
@@ -161,8 +202,13 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         return false
     }
 
-    override fun updateSchedule(newItems: List<IScheduleItem>) {
+    override fun updateScheduleWhenScrolledDown(newItems: List<IScheduleItem>) {
         (scheduleList.adapter as ScheduleAdapter?)?.updateWhenScrolledDown(newItems)
+        bottomScheduleLoader.visibility = View.GONE
+    }
+
+    override fun updateScheduleWhenNewDateSelected(newItems: List<IScheduleItem>) {
+        (scheduleList.adapter as ScheduleAdapter?)?.update(newItems)
         bottomScheduleLoader.visibility = View.GONE
     }
 
@@ -172,6 +218,8 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
         scheduleLoader.visibility = View.GONE
         bottomScheduleLoader.visibility = View.GONE
         scheduleList.visibility = View.VISIBLE
+
+        saveToDb(items)
     }
 
     private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {

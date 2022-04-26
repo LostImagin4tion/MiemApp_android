@@ -68,6 +68,9 @@ class ScheduleRepository @Inject constructor(
     }
 
     private fun List<ScheduleResponse>.lessonsToDay(): MutableList<IScheduleItem> {
+        if(this.isEmpty()) {
+            return mutableListOf()
+        }
 
         val scheduleItems: MutableList<IScheduleItem> = mutableListOf()
 
@@ -99,7 +102,6 @@ class ScheduleRepository @Inject constructor(
                     ))
                 }
                 else {
-
                     scheduleItems.add(ScheduleDayName(
                         date = this[i].date,
                         dayOfWeek = dayOfWeek,
