@@ -58,25 +58,17 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/scheduleList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-19dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/scheduleList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_day_in_schedule"
-                android:visibility="invisible"
-                tools:visibility="visible"
-                android:background="@color/colorPrimary" />
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_marginTop="-19dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_day_in_schedule"
+            android:visibility="invisible"
+            tools:visibility="visible"
+            android:background="@color/colorPrimary" />
 
     </LinearLayout>
 

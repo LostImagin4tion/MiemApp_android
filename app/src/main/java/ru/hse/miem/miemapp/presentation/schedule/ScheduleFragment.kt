@@ -223,6 +223,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
             scheduleList.visibility = View.VISIBLE
             saveToDb(items)
         }
+
     }
 
     private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {

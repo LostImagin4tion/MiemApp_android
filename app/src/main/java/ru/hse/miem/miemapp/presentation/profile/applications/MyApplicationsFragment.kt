@@ -30,6 +30,7 @@ class MyApplicationsFragment: BaseFragment(R.layout.fragment_profile_application
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         applicationsPresenter.onCreate()
+        applicationsSwipeRefreshLayout.setOnRefreshListener { applicationsPresenter.onCreate() }
     }
 
     override fun setupMyApplications(applications: List<MyProjectsAndApplications.MyApplication>) {
@@ -49,6 +50,7 @@ class MyApplicationsFragment: BaseFragment(R.layout.fragment_profile_application
         } else {
             userNoApplicationsInfo.visibility = View.VISIBLE
         }
+        applicationsSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showNoDataFragment() {

@@ -43,7 +43,7 @@
         android:layout_gravity="center_horizontal"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/profileSwipeRefreshLayout"
+        android:id="@+id/applicationsSwipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -51,6 +51,10 @@ class GitStatsFragment: BaseFragment(R.layout.fragment_profile_git_stats), GitSt
             }
         }
 
+        gitStatsSwipeRefreshLayout.setOnRefreshListener {
+            gitStatsPresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
+        }
+
         gitStatsPresenter.onCreate(profileArgs.userId, profileArgs.isTeacher)
     }
 
@@ -115,5 +119,7 @@ class GitStatsFragment: BaseFragment(R.layout.fragment_profile_git_stats), GitSt
         reposSection.visibility = View.VISIBLE
         languagesSection.visibility = View.VISIBLE
         languagesList.visibility = View.VISIBLE
+
+        gitStatsSwipeRefreshLayout.isRefreshing = false
     }
 }

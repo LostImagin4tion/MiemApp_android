@@ -33,6 +33,8 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achievements)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initAchievements()
+
+        achievementsSwipeRefreshLayout.setOnRefreshListener { initAchievements() }
     }
 
     private fun initAchievements() {
@@ -71,6 +73,7 @@ class AchievementsFragment: BaseFragment(R.layout.fragment_profile_achievements)
         else {
             gitlabNoInfo.visibility = View.VISIBLE
         }
+        achievementsSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showNoDataTrackingSection() {

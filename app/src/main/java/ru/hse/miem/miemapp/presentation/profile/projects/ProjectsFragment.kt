@@ -39,8 +39,14 @@ class ProjectsFragment : BaseFragment(R.layout.fragment_profile_projects), Proje
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         if (isMyProfile) {
+            profileProjectsSwipeRefreshLayout.setOnRefreshListener { projectsPresenter.onCreate() }
+
             projectsPresenter.onCreate()
         } else {
+            profileProjectsSwipeRefreshLayout.setOnRefreshListener {
+                projectsPresenter.onCreate(profileArgs.userId)
+            }
+
             projectsPresenter.onCreate(profileArgs.userId)
         }
     }
@@ -57,6 +63,7 @@ class ProjectsFragment : BaseFragment(R.layout.fragment_profile_projects), Proje
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
         }
+        profileProjectsSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun setupMyProjects(projects: List<MyProjectsAndApplications.MyProjectBasic>) {
@@ -71,6 +78,7 @@ class ProjectsFragment : BaseFragment(R.layout.fragment_profile_projects), Proje
         } else {
             userNoProjectInfo.visibility = View.VISIBLE
         }
+        profileProjectsSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showNoDataFragment() {
