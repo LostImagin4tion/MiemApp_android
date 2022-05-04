@@ -112,11 +112,7 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
 
             dateSelector.text = "$startDateRu - $finishDateRu"
 
-            schedulePresenter.onNewDateSelected(
-                startDate = startDate,
-                finishDate = finishDate,
-                isTeacher = args.isTeacher
-            )
+            schedulePresenter.onNewDateSelected(startDate, finishDate, args.isTeacher)
 
             scheduleList.smoothSnapToPosition(0)
 
@@ -213,13 +209,20 @@ class ScheduleFragment: BaseFragment(R.layout.fragment_schedule), ScheduleView, 
     }
 
     override fun setupSchedule(items: List<IScheduleItem>) {
-        scheduleAdapter.update(items)
+        if (items.isEmpty()) {
+            finishDate = calendar.getNewDate(finishDate, 7)
+            finishDateRu = calendar.getRuFormattedDate(finishDate)
 
-        scheduleLoader.visibility = View.GONE
-        bottomScheduleLoader.visibility = View.GONE
-        scheduleList.visibility = View.VISIBLE
+            schedulePresenter.onCreate(startDate, finishDate, args.isTeacher)
+            dateSelector.text = "$startDateRu - $finishDateRu"
+        } else {
+            scheduleAdapter.update(items)
 
-        saveToDb(items)
+            scheduleLoader.visibility = View.GONE
+            bottomScheduleLoader.visibility = View.GONE
+            scheduleList.visibility = View.VISIBLE
+            saveToDb(items)
+        }
     }
 
     private fun RecyclerView.smoothSnapToPosition(position: Int, snapMode: Int = LinearSmoothScroller.SNAP_TO_START) {
