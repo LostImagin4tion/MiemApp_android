@@ -20,6 +20,7 @@ import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.search.db.SearchDbManager
 import java.util.*
 import javax.inject.Inject
+import kotlin.Exception
 
 class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBackPressListener {
 
@@ -111,7 +112,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
         }
 
         searchPresenter.loadFromDb(dbManager)
-        searchLoader.visibility = View.GONE
     }
 
     override fun loadProjects(projects: List<ProjectInSearch>) {
@@ -150,7 +150,6 @@ class SearchFragment : BaseFragment(R.layout.fragment_search), SearchView, OnBac
             return true
         }
         return false
-
     }
 
     private fun filterResults() {

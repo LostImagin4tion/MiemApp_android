@@ -25,7 +25,8 @@ class SearchPresenter @Inject constructor(
             dbManager.openDb()
             dbManager.readDb().let(viewState::loadProjects)
         } catch (e: Exception) {
-            proceedError(e)
+            dbManager.upgradeDb()
+            dbManager.readDb().let(viewState::loadProjects)
         }
     }
 }
