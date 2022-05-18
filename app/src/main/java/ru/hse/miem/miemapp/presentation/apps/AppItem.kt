@@ -6,8 +6,11 @@ import androidx.navigation.NavDirections
 data class AppItem(
     val icon: Drawable,
     val name: String,
-    val isExternal: Boolean, // set "true" here, if app was integrated from another project
+    val isExternal: Boolean, // set "true" here, if app was integrated from another module
     val navigateAction: NavDirections? = null, // set navigation method from AppsFragmentDirection here, if app is internal
                                                // (e.g AppsFragmentDirections.actionFragmentAppsToFragmentSandbox())
-    val activityClassName: String? = null // set full class name (with packages), if app is external (e.g com.some.example.ActivityName)
+    // for external apps:
+    val packageName: String? = null, // set name of the package containing target activity
+    val activityClassName: String? = null // set full activity class name
+                                          // (e.g. ru.hse.miem.miemapp.MainActivity)
 )

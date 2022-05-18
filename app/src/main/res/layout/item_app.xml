@@ -22,7 +22,7 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp"
         android:fontFamily="sans-serif-medium"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="10dp"
         tools:text="Sample name"/>
 
 </LinearLayout>

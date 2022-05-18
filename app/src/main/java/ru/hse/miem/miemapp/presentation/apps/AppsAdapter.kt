@@ -4,16 +4,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_app.view.*
 import ru.hse.miem.miemapp.BuildConfig
-import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragment
-import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragmentDirections
+import ru.hse.miem.miemapp.presentation.main.MainActivity
 
 class AppsAdapter(private val apps: List<AppItem>) : RecyclerView.Adapter<AppsAdapter.AppsViewHolder>() {
 
@@ -34,9 +30,10 @@ class AppsAdapter(private val apps: List<AppItem>) : RecyclerView.Adapter<AppsAd
             appName.text = app.name
 
             setOnClickListener {
-
                 if(app.isExternal) {
-                    context.startActivity(Intent().also { it.setClassName(BuildConfig.APPLICATION_ID, app.activityClassName!!) })
+                    context.startActivity(Intent().also {
+                        it.setClassName(BuildConfig.APPLICATION_ID, app.activityClassName!!)
+                    })
                 }
                 else {
                     findNavController().navigate(app.navigateAction!!)

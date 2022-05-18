@@ -44,20 +44,20 @@ class AppsFragment : Fragment() {
                     isExternal = false,
                     navigateAction = AppsFragmentDirections.actionFragmentAppsToFragmentSandbox(),
                 ),
-                //TODO
-                // Uncomment when building the final app
-//                AppItem(
-//                    icon = ContextCompat.getDrawable(
-//                        requireContext(),
-//                        resources.getIdentifier(
-//                            "app_icon_indoor",
-//                            "drawable",
-//                            BuildConfig.APPLICATION_ID + ".indoor_dynamicfeature"
-//                        )
-//                    )!!,
-//                    name = getString(R.string.title_indoor),
-//                    activityClassName = "ru.miem.indoor_dynamicfeature.IndoorActivity"
-//                )
+                AppItem(
+                    icon = ContextCompat.getDrawable(
+                        requireContext(),
+                        resources.getIdentifier(
+                            "app_icon_indoor",
+                            "drawable",
+                            BuildConfig.APPLICATION_ID
+                        )
+                    )!!,
+                    name = getString(R.string.title_indoor),
+                    packageName = "indoor_dynamicfeature.ru.miem.indoor_dynamicfeature",
+                    activityClassName = "ru.miem.indoor_dynamicfeature.IndoorActivity",
+                    isExternal = true
+                )
             )
         )
     }
