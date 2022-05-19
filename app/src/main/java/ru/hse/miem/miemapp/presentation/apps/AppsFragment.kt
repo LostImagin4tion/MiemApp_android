@@ -54,7 +54,6 @@ class AppsFragment : Fragment() {
                         )
                     )!!,
                     name = getString(R.string.title_indoor),
-                    packageName = "indoor_dynamicfeature.ru.miem.indoor_dynamicfeature",
                     activityClassName = "ru.miem.indoor_dynamicfeature.IndoorActivity",
                     isExternal = true
                 )

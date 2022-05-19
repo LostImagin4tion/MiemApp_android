@@ -35,6 +35,5 @@ dependencies {
 
     setupKotlin()
     setupAndroidCore()
-    
     implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}")
 }
