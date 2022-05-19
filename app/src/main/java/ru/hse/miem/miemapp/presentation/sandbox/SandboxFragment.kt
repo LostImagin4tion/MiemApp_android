@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -15,8 +14,6 @@ import kotlinx.android.synthetic.main.fragment_sandbox.filterButton
 import kotlinx.android.synthetic.main.fragment_sandbox.projectsList
 import kotlinx.android.synthetic.main.fragment_sandbox.searchInput
 import kotlinx.android.synthetic.main.fragment_sandbox.searchLoader
-import kotlinx.android.synthetic.main.fragment_search.*
-import kotlinx.android.synthetic.main.layout_bottom_filters.*
 import kotlinx.android.synthetic.main.layout_bottom_sandbox_filters.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -24,7 +21,6 @@ import ru.hse.miem.miemapp.MiemApplication
 import ru.hse.miem.miemapp.R
 import ru.hse.miem.miemapp.domain.entities.ProjectInSandbox
 import ru.hse.miem.miemapp.presentation.OnBackPressListener
-import ru.hse.miem.miemapp.presentation.apps.AppsFragmentDirections
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import java.util.*
 import javax.inject.Inject

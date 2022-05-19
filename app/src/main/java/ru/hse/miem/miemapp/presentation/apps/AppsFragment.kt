@@ -11,8 +11,6 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_apps.*
 import ru.hse.miem.miemapp.BuildConfig
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragment
-import ru.hse.miem.miemapp.presentation.sandbox.SandboxFragmentDirections
 
 class AppsFragment : Fragment() {
 

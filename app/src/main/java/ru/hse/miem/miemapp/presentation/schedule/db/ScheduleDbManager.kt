@@ -3,10 +3,6 @@ package ru.hse.miem.miemapp.presentation.schedule.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
 import ru.hse.miem.miemapp.data.api.ScheduleResponse
 import ru.hse.miem.miemapp.data.repositories.withIO
 import ru.hse.miem.miemapp.domain.entities.IScheduleItem

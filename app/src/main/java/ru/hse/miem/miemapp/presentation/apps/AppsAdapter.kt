@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_app.view.*
 import ru.hse.miem.miemapp.BuildConfig
 import ru.hse.miem.miemapp.R
-import ru.hse.miem.miemapp.presentation.main.MainActivity
 
 class AppsAdapter(private val apps: List<AppItem>) : RecyclerView.Adapter<AppsAdapter.AppsViewHolder>() {
 

@@ -8,7 +8,6 @@ import ru.hse.miem.miemapp.data.api.StudentProfileResponse
 import ru.hse.miem.miemapp.data.api.TeacherProfileResponse
 import ru.hse.miem.miemapp.domain.entities.*
 import ru.hse.miem.miemapp.domain.repositories.IProfileRepository
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 class ProfileRepository @Inject constructor(

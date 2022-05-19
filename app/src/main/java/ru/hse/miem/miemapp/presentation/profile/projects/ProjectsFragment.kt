@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_profile_projects.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
@@ -15,7 +14,6 @@ import ru.hse.miem.miemapp.domain.entities.MyProjectsAndApplications
 import ru.hse.miem.miemapp.domain.entities.ProjectBasic
 import ru.hse.miem.miemapp.presentation.base.BaseFragment
 import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentArgs
-import ru.hse.miem.miemapp.presentation.profile.ProfileFragmentDirections
 import javax.inject.Inject
 
 class ProjectsFragment : BaseFragment(R.layout.fragment_profile_projects), ProjectsView {
