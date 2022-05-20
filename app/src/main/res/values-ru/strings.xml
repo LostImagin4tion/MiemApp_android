@@ -95,7 +95,7 @@
     <string name="tinder_button_view_liked">Интересные вакансии</string>
     <string name="tinder_end">Поздравляем! Вы просмотрели все вакансии!!</string>
     <string name="tinder_use">Воспользоваться тиндером</string>
-    <string name="tinder_welcome">Добро пожаловать в Проектный Тиндер\n\nСвайп вправо если понравилась вакансия, влево если нет</string>
+    <string name="tinder_welcome">Добро пожаловать в Проектный Тиндер\n\nСвайпните вправо если Вам понравилась вакансия\nИли влево, если не понравилась</string>
     <string name="vacancies_no_vacancies">Вам ещё не понравилась ни одна вакансия</string>
     <string name="tinder_end_1">На данный момент Вы просмотрели\n все доступные вакансии</string>
 
