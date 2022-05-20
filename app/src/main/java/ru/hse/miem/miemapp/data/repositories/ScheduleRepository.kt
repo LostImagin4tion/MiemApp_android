@@ -22,8 +22,8 @@ class ScheduleRepository @Inject constructor(
         isTeacher: Boolean
     ) = withIO {
 
-        val systemLang = when(Locale.getDefault().displayLanguage) {
-            "Russian" -> "1"
+        val systemLang = when(Locale.getDefault().language) {
+            "ru" -> "1"
             else -> "2"
         }
 

@@ -5,7 +5,7 @@ import java.util.*
 
 class CalendarHelper {
 
-    private val systemLanguage = Locale.getDefault().displayLanguage
+    private val systemLanguage = Locale.getDefault().language
 
     private val calendar = Calendar.getInstance()
     private val dateFormat = SimpleDateFormat("yyyy.MM.dd")
@@ -72,7 +72,7 @@ class CalendarHelper {
         val dayOfWeek = tempCalendar.get(Calendar.DAY_OF_WEEK)
         val dayOfMonth = tempCalendar.get(Calendar.DAY_OF_MONTH)
 
-        if (systemLanguage == "Russian") {
+        if (systemLanguage == "ru") {
             monthName = MONTHS_RU[month]
             dayName = DAYS_RU[dayOfWeek - 1]
         }
@@ -88,7 +88,7 @@ class CalendarHelper {
         val MONTHS_RU = listOf("Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря")
         val MONTHS_EN = listOf("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
 
-        val DAYS_RU = listOf("Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб")
+        val DAYS_RU = listOf("Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота")
         val DAYS_EN = listOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
     }
 

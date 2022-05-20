@@ -62,8 +62,8 @@ class ScheduleViewHolderFactory {
             lessonType.text = lesson.kindOfWork
             lessonAddress.text = lesson.building
             lessonTeacher.text = lesson.lecturer
-            lessonTeacher.text = when(Locale.getDefault().displayLanguage) {
-                "Russian" -> lesson.lecturer
+            lessonTeacher.text = when(Locale.getDefault().language) {
+                "ru" -> lesson.lecturer
                 else -> {
                     val fullName: MutableList<String> = lesson.lecturer!!.split(" ").toMutableList()
 

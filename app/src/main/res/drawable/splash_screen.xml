@@ -8,5 +8,8 @@
 
     <item
         android:gravity="center"
-        android:drawable="@drawable/splash_screen_logo" />
+        android:drawable="@drawable/miem_logo_small_white"
+        android:width="100dp"
+        android:height="137dp"/>
+
 </layer-list>

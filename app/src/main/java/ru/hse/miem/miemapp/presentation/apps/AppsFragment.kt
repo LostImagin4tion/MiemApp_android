@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import kotlinx.android.synthetic.main.fragment_apps.*
@@ -23,9 +24,7 @@ class AppsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        appsList.layoutManager = FlexboxLayoutManager(requireContext()).also {
-            it.flexDirection = FlexDirection.ROW
-        }
+        appsList.layoutManager = GridLayoutManager(activity, 2)
 
         appsList.adapter = AppsAdapter(
             listOf(
