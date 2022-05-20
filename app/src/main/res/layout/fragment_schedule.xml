@@ -62,7 +62,7 @@
             android:id="@+id/scheduleList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-19dp"
+            android:layout_marginTop="-14dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_day_in_schedule"
