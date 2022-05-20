@@ -27,6 +27,11 @@ android {
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
+
+    lintOptions {
+        isCheckReleaseBuilds = false
+        isAbortOnError = false
+    }
 }
 
 dependencies {

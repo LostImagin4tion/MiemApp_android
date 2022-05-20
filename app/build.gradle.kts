@@ -16,8 +16,8 @@ android {
         applicationId = "ru.hse.miem.miemapp"
         minSdkVersion(Versions.minSdk)
         targetSdkVersion(Versions.targetSdk)
-        versionCode(8)
-        versionName = "1.4.0"
+        versionCode(9)
+        versionName = "1.4.1"
         project.base.archivesBaseName = "MiemApp-$versionName"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -54,6 +54,11 @@ android {
 
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
+    }
+
+    lintOptions {
+        isCheckReleaseBuilds = false
+        isAbortOnError = false
     }
 
     dynamicFeatures = mutableSetOf(":indoor_dynamicfeature")
