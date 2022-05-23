@@ -1,17 +1,11 @@
 # Андроид приложение МИЭМ  
 
-![google-play-badge](https://user-images.githubusercontent.com/63148392/169793416-beebc37b-89b0-4e54-9222-d9ec900e5dbd.png)
+![google-play-badge](<a href='https://play.google.com/store/apps/details?id=ru.hse.miem.miemapp&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>)
 
 This is the Android app that integrates the main MIEM services: User Cabinet, Schedule, Projects Search, Project Tinder. 
 
 ## Some screens
-![User Profile](https://user-images.githubusercontent.com/63148392/169794033-2bab2ba9-f6e8-42cc-bac0-ae3440a9abc4.png)
-![Schedule](https://user-images.githubusercontent.com/63148392/169794061-2d464113-4af9-4cef-bb80-8abfde7ace9c.png)
-![Projects info](https://user-images.githubusercontent.com/63148392/169794077-db6656e1-ccf8-4847-9610-5cf4ed970e99.png)
-![Projects search](https://user-images.githubusercontent.com/63148392/169794107-8118378d-a30a-4696-b06e-e99f6430a253.png)
-![Search filters](https://user-images.githubusercontent.com/63148392/169794122-6baaaf4b-4224-4dce-aceb-724a5fba6e4a.png)
-![Tinder](https://user-images.githubusercontent.com/63148392/169794143-1f0eab3b-33ea-46dd-83f8-75dce4a1e785.png)
-![Vacancies](https://user-images.githubusercontent.com/63148392/169794158-4038b630-151c-4be4-965a-d5c8d1e3927e.png)
+![User Profile](https://user-images.githubusercontent.com/63148392/169794033-2bab2ba9-f6e8-42cc-bac0-ae3440a9abc4.png) ![Schedule](https://user-images.githubusercontent.com/63148392/169794061-2d464113-4af9-4cef-bb80-8abfde7ace9c.png) ![Projects info](https://user-images.githubusercontent.com/63148392/169794077-db6656e1-ccf8-4847-9610-5cf4ed970e99.png) ![Projects search](https://user-images.githubusercontent.com/63148392/169794107-8118378d-a30a-4696-b06e-e99f6430a253.png) ![Search filters](https://user-images.githubusercontent.com/63148392/169794122-6baaaf4b-4224-4dce-aceb-724a5fba6e4a.png) ![Tinder](https://user-images.githubusercontent.com/63148392/169794143-1f0eab3b-33ea-46dd-83f8-75dce4a1e785.png) ![Vacancies](https://user-images.githubusercontent.com/63148392/169794158-4038b630-151c-4be4-965a-d5c8d1e3927e.png)
 
 ## Features
 * View your and others profiles
@@ -35,7 +29,7 @@ This is the Android app that integrates the main MIEM services: User Cabinet, Sc
 * Timber
 
 ## Contributors
-* [EugeneThe Dev](https://github.com/EugeneTheDev) - main developer
+* [EugeneThe Dev](https://github.com/EugeneTheDev)
 * [LostImagin4tion](https://github.com/LostImagin4tion)
 
 ## Support
