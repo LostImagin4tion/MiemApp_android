@@ -26,9 +26,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("./keystores/release.keystore")
-            storePassword = "d9ZDgA-K!8CHzamme%4Sm2=^sSxe7!B-"
+            storePassword = "brrrrrrrr"
             keyAlias = "release"
-            keyPassword = "d9ZDgA-K!8CHzamme%4Sm2=^sSxe7!B-"
+            keyPassword = "brrrrrrrrr"
         }
     }
 
@@ -60,8 +60,6 @@ android {
         isCheckReleaseBuilds = false
         isAbortOnError = false
     }
-
-    dynamicFeatures = mutableSetOf(":indoor_dynamicfeature")
 }
 
 dependencies {
