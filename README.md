@@ -1,6 +1,6 @@
 # Андроид приложение МИЭМ  
 
-![google-play-badge](<a href='https://play.google.com/store/apps/details?id=ru.hse.miem.miemapp&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>)
+<a href='https://play.google.com/store/apps/details?id=ru.hse.miem.miemapp&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width = 323 height = 125/></a>
 
 This is the Android app that integrates the main MIEM services: User Cabinet, Schedule, Projects Search, Project Tinder. 
 
