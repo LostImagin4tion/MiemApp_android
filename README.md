@@ -5,7 +5,7 @@
 This is the Android app that integrates the main MIEM services: User Cabinet, Schedule, Projects Search, Project Tinder. 
 
 ## Some Screens
-<img src="https://user-images.githubusercontent.com/63148392/169801653-2c88ea55-4c44-4c22-85d3-5c60f5459523.png" width=200/>
+<img src="https://user-images.githubusercontent.com/63148392/169801653-2c88ea55-4c44-4c22-85d3-5c60f5459523.png" width=360/>
 
 ## Features
 * View your and others profiles
