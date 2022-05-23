@@ -29,7 +29,7 @@ This is the Android app that integrates the main MIEM services: User Cabinet, Sc
 * Timber
 
 ## Contributors
-* [EugeneThe Dev](https://github.com/EugeneTheDev) - the main developer
+* [EugeneThe Dev](https://github.com/EugeneTheDev)
 * [LostImagin4tion](https://github.com/LostImagin4tion)
 
 ## Support
