@@ -29,9 +29,5 @@ This is the Android app that integrates the main MIEM services: User Cabinet, Sc
 * Retrofit
 * Timber
 
-## Contributors
-* [EugeneThe Dev](https://github.com/EugeneTheDev)
-* [LostImagin4tion](https://github.com/LostImagin4tion)
-
 ## Support
 Application is still under development, so new services will be added in future. Feel free to report any bugs or tell us about any suggestions you have
